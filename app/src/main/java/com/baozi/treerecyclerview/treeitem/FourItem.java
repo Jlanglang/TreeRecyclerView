@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.treeitem;
 
+import com.baozi.treerecyclerview.R;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
@@ -36,6 +37,5 @@ public class FourItem extends TreeAdapterItem<String> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-
     }
 }

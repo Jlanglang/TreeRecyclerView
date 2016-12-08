@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.treeitem;
 
+import com.baozi.treerecyclerview.R;
 import com.baozi.treerecyclerview.bean.CityBean;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
@@ -32,6 +33,6 @@ public class ThreeItem extends TreeAdapterItem<CityBean.CitysBean.AreasBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-
+        holder.setText(R.id.tv_content,data.getAreaName());
     }
 }

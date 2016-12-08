@@ -88,7 +88,7 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case 1:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.itme_recycler);
+                return ViewHolder.createViewHolder(mContext, parent, R.layout.itme_one);
             case 2:
                 return ViewHolder.createViewHolder(mContext, parent, R.layout.item_two);
             case 3:

@@ -55,7 +55,7 @@ public abstract class TreeAdapterItem<T> {
     /**
      * 展开
      *
-     * @return
+     * @return 子数据集
      */
     public List<TreeAdapterItem> onExpand() {
         return childs;
@@ -63,7 +63,8 @@ public abstract class TreeAdapterItem<T> {
 
     /**
      * 收拢,收缩
-     * @return 所有的子数据,包括孩子的子数据
+     *
+     * @return 所有的子数据, 包括孩子的子数据
      */
     public List<TreeAdapterItem> onGathered() {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
@@ -81,9 +82,11 @@ public abstract class TreeAdapterItem<T> {
     }
 
     /**
-     * 所占比例
+     * item在每行中的spansize
+     * 默认为0,如果为0则占满一行
+     * 不建议连续的两级,都设置该数值
      *
-     * @return
+     * @return 所占值
      */
     public int getSpansize() {
         return 0;
