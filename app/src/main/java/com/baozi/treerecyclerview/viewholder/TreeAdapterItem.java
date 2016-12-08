@@ -10,15 +10,23 @@ import java.util.List;
  * Created by baozi on 2016/12/7.
  */
 public abstract class TreeAdapterItem<T> {
+    /**
+     * 当前item的数据
+     */
     protected T data;
+    /**
+     * 持有的子数据
+     */
     protected List<TreeAdapterItem> childs;
+    /**
+     * 是否展开
+     */
     protected boolean isExpand;
 
     public TreeAdapterItem(T data) {
         this.data = data;
         childs = initChildsList(data);
     }
-
 
     public boolean isExpand() {
         return isExpand;
@@ -55,8 +63,7 @@ public abstract class TreeAdapterItem<T> {
 
     /**
      * 收拢,收缩
-     *
-     * @return
+     * @return 所有的子数据,包括孩子的子数据
      */
     public List<TreeAdapterItem> onGathered() {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
@@ -73,17 +80,41 @@ public abstract class TreeAdapterItem<T> {
         return treeAdapterItems;
     }
 
+    /**
+     * 所占比例
+     *
+     * @return
+     */
     public int getSpansize() {
         return 0;
     }
 
+    /**
+     * 是否持有子数据
+     *
+     * @return
+     */
     public boolean isParent() {
         return childs != null && childs.size() > 0;
     }
 
+    /**
+     * 初始化子数据
+     *
+     * @param data
+     * @return
+     */
     protected abstract List<TreeAdapterItem> initChildsList(T data);
 
+    /**
+     * @return 第几级
+     */
     public abstract int grade();
 
+    /**
+     * 由实现类实现具体holder的设置.
+     *
+     * @param holder ViewHolder
+     */
     public abstract void onBindViewHolder(ViewHolder holder);
 }

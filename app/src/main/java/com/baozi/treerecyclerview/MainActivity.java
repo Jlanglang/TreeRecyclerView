@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this,6));
-        //设置Item增加、移除动画
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 if (view.getLayoutParams() instanceof GridLayoutManager.LayoutParams) {
                     GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams) view.getLayoutParams();
                     int spanIndex = layoutParams.getSpanIndex();//在一行中所在的角标，第几列
-                    int spanSize = layoutParams.getSpanSize();//所占的比例
+//                    int spanSize = layoutParams.getSpanSize();//所占的比例
                     if (spanIndex == ((GridLayoutManager) parent.getLayoutManager()).getSpanCount() - 1) {
 
                     } else {
