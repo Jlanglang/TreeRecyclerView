@@ -32,9 +32,10 @@ public class OneItem extends TreeAdapterItem<CityBean> {
     }
 
     @Override
-    public int grade() {
-        return 1;
+    protected int initLayoutId() {
+        return R.layout.itme_one;
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {

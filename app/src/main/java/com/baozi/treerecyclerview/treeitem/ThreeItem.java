@@ -27,9 +27,10 @@ public class ThreeItem extends TreeAdapterItem<CityBean.CitysBean.AreasBean> {
     }
 
     @Override
-    public int grade() {
-        return 3;
+    protected int initLayoutId() {
+        return R.layout.item_three;
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {

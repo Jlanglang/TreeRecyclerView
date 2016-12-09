@@ -33,9 +33,10 @@ public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
     }
 
     @Override
-    public int grade() {
-        return 2;
+    protected int initLayoutId() {
+        return R.layout.item_two;
     }
+
 
     @Override
     public int getSpansize() {

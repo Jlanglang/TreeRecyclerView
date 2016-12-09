@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < cityBeen.size(); i++) {
             treeBeen1.add(new OneItem(cityBeen.get(i)));
         }
-        recyclerView.setAdapter(new TreeRecyclerViewAdapter(this, treeBeen1));
+        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1));
     }
 
 }

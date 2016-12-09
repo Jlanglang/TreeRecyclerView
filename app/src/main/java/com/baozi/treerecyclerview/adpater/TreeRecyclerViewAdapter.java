@@ -6,31 +6,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.R;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.List;
 
-public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends RecyclerView.Adapter<ViewHolder> {
 
     protected Context mContext;
     /**
      * 存储所有可见的Node
      */
-    protected List<TreeAdapterItem> mNodes;//处理后的展示数据
+    protected List<T> mNodes;//处理后的展示数据
 
     /**
-     * 点击的回调接口
+     * 点击item的回调接口
      */
-    private OnTreeNodeClickListener onTreeNodeClickListener;
+    private OnTreeItemClickListener onTreeItemClickListener;
 
-    public interface OnTreeNodeClickListener {
-        void onClick(TreeAdapterItem node, int position);
-    }
-
-    public void setOnTreeNodeClickListener(OnTreeNodeClickListener onTreeNodeClickListener) {
-        this.onTreeNodeClickListener = onTreeNodeClickListener;
+    public void setOnTreeItemClickListener(OnTreeItemClickListener onTreeItemClickListener) {
+        this.onTreeItemClickListener = onTreeItemClickListener;
     }
 
     /**
@@ -39,7 +34,7 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
      */
-    public TreeRecyclerViewAdapter(Context context, List<TreeAdapterItem> datas) {
+    public TreeRecyclerViewAdapter(Context context, List<T> datas) {
         mContext = context;
         mNodes = datas;
     }
@@ -47,21 +42,20 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
     /**
      * 相应ListView的点击事件 展开或关闭某节点
      *
-     * @param position
+     * @param position 触发的条目
      */
     public void expandOrCollapse(int position) {
         TreeAdapterItem treeAdapterItem = mNodes.get(position);
         if (!treeAdapterItem.isParent()) {
             return;
         }
-        if (treeAdapterItem.isExpand()) {
-            List list = treeAdapterItem.onGathered();
-            mNodes.removeAll(list);
+        boolean expand = treeAdapterItem.isExpand();
+        if (expand) {
+            mNodes.removeAll(treeAdapterItem.getAllChilds());
         } else {
-            List list = treeAdapterItem.onExpand();
-            mNodes.addAll(position + 1, list);
+            mNodes.addAll(position + 1, treeAdapterItem.getChilds());
         }
-        treeAdapterItem.setExpand(!treeAdapterItem.isExpand());
+        treeAdapterItem.setExpand(!expand);
         notifyDataSetChanged();
     }
 
@@ -84,21 +78,10 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
     }
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case 1:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.itme_one);
-            case 2:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.item_two);
-            case 3:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.item_three);
-            case 4:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.item_four);
-            case 5:
-                return ViewHolder.createViewHolder(mContext, parent, R.layout.item_five);
-        }
-        return null;
+        return ViewHolder.createViewHolder(mContext, parent, viewType);
     }
 
     @Override
@@ -108,8 +91,8 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
             @Override
             public void onClick(View v) {
                 expandOrCollapse(position);
-                if (onTreeNodeClickListener != null) {
-                    onTreeNodeClickListener.onClick(treeAdapterItem, position);
+                if (onTreeItemClickListener != null) {
+                    onTreeItemClickListener.onClick(treeAdapterItem, position);
                 }
             }
         });
@@ -118,16 +101,15 @@ public class TreeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return mNodes.get(position).grade();
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+        return mNodes.get(position).getLayoutId();
     }
 
     @Override
     public int getItemCount() {
         return mNodes == null ? 0 : mNodes.size();
+    }
+
+    public interface OnTreeItemClickListener {
+        void onClick(TreeAdapterItem node, int position);
     }
 }

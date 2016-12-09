@@ -1,7 +1,7 @@
 package com.baozi.treerecyclerview.viewholder;
 
-import android.content.Context;
-import android.view.View;
+import android.content.res.Resources;
+import android.support.annotation.LayoutRes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,26 +22,26 @@ public abstract class TreeAdapterItem<T> {
      * 是否展开
      */
     protected boolean isExpand;
+    /**
+     * 布局资源id
+     */
+    protected int layoutId;
 
     public TreeAdapterItem(T data) {
         this.data = data;
         childs = initChildsList(data);
+        layoutId = initLayoutId();
     }
 
-    public boolean isExpand() {
-        return isExpand;
+    public int getLayoutId() {
+        if (layoutId == 0) {
+            throw new Resources.NotFoundException("请设置布局Id");
+        }
+        return layoutId;
     }
 
-    public void setExpand(boolean expand) {
-        isExpand = expand;
-    }
-
-    public List<TreeAdapterItem> getChilds() {
-        return childs;
-    }
-
-    public void setChilds(List<TreeAdapterItem> childs) {
-        this.childs = childs;
+    public void setLayoutId(@LayoutRes int layoutId) {
+        this.layoutId = layoutId;
     }
 
     public T getData() {
@@ -52,27 +52,56 @@ public abstract class TreeAdapterItem<T> {
         this.data = data;
     }
 
-    /**
-     * 展开
-     *
-     * @return 子数据集
-     */
-    public List<TreeAdapterItem> onExpand() {
-        return childs;
+    public boolean isExpand() {
+        return isExpand;
+    }
+
+    public void setExpand(boolean expand) {
+        if (!isParent()) {
+            return;
+        }
+        if (expand) {
+            onExpand();
+        } else {
+            onCollapse();
+        }
+        isExpand = expand;
     }
 
     /**
-     * 收拢,收缩
-     *
-     * @return 所有的子数据, 包括孩子的子数据
+     * 展开
      */
-    public List<TreeAdapterItem> onGathered() {
+    public void onExpand() {
+
+    }
+
+    /**
+     * 折叠
+     */
+    public void onCollapse() {
+
+    }
+
+    public List<TreeAdapterItem> getChilds() {
+        return childs;
+    }
+
+    public void setChilds(List<TreeAdapterItem> childs) {
+        this.childs = childs;
+    }
+
+    /**
+     * 递归遍历所有的子数据，包括子数据的子数据
+     *
+     * @return List<TreeAdapterItem>
+     */
+    public List<TreeAdapterItem> getAllChilds() {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
         for (int i = 0; i < childs.size(); i++) {
             TreeAdapterItem treeAdapterItem = childs.get(i);
             treeAdapterItems.add(treeAdapterItem);
             if (treeAdapterItem.isParent()) {
-                List list = treeAdapterItem.onGathered();
+                List list = treeAdapterItem.getAllChilds();
                 if (list != null && list.size() > 0) {
                     treeAdapterItems.addAll(list);
                 }
@@ -110,14 +139,17 @@ public abstract class TreeAdapterItem<T> {
     protected abstract List<TreeAdapterItem> initChildsList(T data);
 
     /**
-     * @return 第几级
+     * 该条目的布局id
+     *
+     * @return 布局id
      */
-    public abstract int grade();
+    protected abstract int initLayoutId();
 
     /**
-     * 由实现类实现具体holder的设置.
+     * 抽象holder的绑定
      *
      * @param holder ViewHolder
      */
     public abstract void onBindViewHolder(ViewHolder holder);
+
 }

@@ -20,14 +20,17 @@ public class FourItem extends TreeAdapterItem<String> {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             FiveItem threeItem = new FiveItem("我是五级");
+            if (i % 2 == 0) {
+                threeItem.setLayoutId(R.layout.itme_one);
+            }
             treeAdapterItems.add(threeItem);
         }
         return treeAdapterItems;
     }
 
     @Override
-    public int grade() {
-        return 4;
+    protected int initLayoutId() {
+        return R.layout.item_four;
     }
 
     @Override
@@ -37,5 +40,6 @@ public class FourItem extends TreeAdapterItem<String> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
+
     }
 }
