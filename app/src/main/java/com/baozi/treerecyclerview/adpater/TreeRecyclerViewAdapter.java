@@ -52,10 +52,11 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
         boolean expand = treeAdapterItem.isExpand();
         if (expand) {
             mNodes.removeAll(treeAdapterItem.getAllChilds());
+            treeAdapterItem.onCollapse();
         } else {
             mNodes.addAll(position + 1, treeAdapterItem.getChilds());
+            treeAdapterItem.onExpand();
         }
-        treeAdapterItem.setExpand(!expand);
         notifyDataSetChanged();
     }
 
@@ -69,10 +70,10 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
                 @Override
                 public int getSpanSize(int position) {
                     TreeAdapterItem treeAdapterItem = mNodes.get(position);
-                    if (treeAdapterItem.getSpansize() == 0) {
+                    if (treeAdapterItem.getSpanSize() == 0) {
                         return gridLayoutManager.getSpanCount();
                     }
-                    return treeAdapterItem.getSpansize();
+                    return treeAdapterItem.getSpanSize();
                 }
             });
         }

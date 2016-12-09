@@ -39,7 +39,7 @@ public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
 
 
     @Override
-    public int getSpansize() {
+    public int initSpansize() {
         return 2;
     }
 

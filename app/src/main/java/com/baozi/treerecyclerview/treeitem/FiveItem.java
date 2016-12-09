@@ -23,7 +23,12 @@ public class FiveItem extends TreeAdapterItem<String> {
     protected int initLayoutId() {
         return R.layout.item_five;
     }
-    
+
+    @Override
+    public int initSpansize() {
+        return 2;
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         if (layoutId == R.layout.itme_one) {

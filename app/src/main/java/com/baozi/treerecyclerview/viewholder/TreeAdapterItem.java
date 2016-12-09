@@ -26,11 +26,13 @@ public abstract class TreeAdapterItem<T> {
      * 布局资源id
      */
     protected int layoutId;
+    protected int spanSize;
 
     public TreeAdapterItem(T data) {
         this.data = data;
         childs = initChildsList(data);
         layoutId = initLayoutId();
+        spanSize = initSpansize();
     }
 
     public int getLayoutId() {
@@ -42,6 +44,14 @@ public abstract class TreeAdapterItem<T> {
 
     public void setLayoutId(@LayoutRes int layoutId) {
         this.layoutId = layoutId;
+    }
+
+    public int getSpanSize() {
+        return spanSize;
+    }
+
+    public void setSpanSize(int spanSize) {
+        this.spanSize = spanSize;
     }
 
     public T getData() {
@@ -57,29 +67,7 @@ public abstract class TreeAdapterItem<T> {
     }
 
     public void setExpand(boolean expand) {
-        if (!isParent()) {
-            return;
-        }
-        if (expand) {
-            onExpand();
-        } else {
-            onCollapse();
-        }
         isExpand = expand;
-    }
-
-    /**
-     * 展开
-     */
-    public void onExpand() {
-
-    }
-
-    /**
-     * 折叠
-     */
-    public void onCollapse() {
-
     }
 
     public List<TreeAdapterItem> getChilds() {
@@ -88,6 +76,20 @@ public abstract class TreeAdapterItem<T> {
 
     public void setChilds(List<TreeAdapterItem> childs) {
         this.childs = childs;
+    }
+
+    /**
+     * 展开
+     */
+    public void onExpand() {
+        isExpand = true;
+    }
+
+    /**
+     * 折叠
+     */
+    public void onCollapse() {
+        isExpand = false;
     }
 
     /**
@@ -110,16 +112,6 @@ public abstract class TreeAdapterItem<T> {
         return treeAdapterItems;
     }
 
-    /**
-     * item在每行中的spansize
-     * 默认为0,如果为0则占满一行
-     * 不建议连续的两级,都设置该数值
-     *
-     * @return 所占值
-     */
-    public int getSpansize() {
-        return 0;
-    }
 
     /**
      * 是否持有子数据
@@ -137,6 +129,17 @@ public abstract class TreeAdapterItem<T> {
      * @return
      */
     protected abstract List<TreeAdapterItem> initChildsList(T data);
+
+    /**
+     * item在每行中的spansize
+     * 默认为0,如果为0则占满一行
+     * 不建议连续的两级,都设置该数值
+     *
+     * @return 所占值
+     */
+    public int initSpansize() {
+        return spanSize;
+    }
 
     /**
      * 该条目的布局id

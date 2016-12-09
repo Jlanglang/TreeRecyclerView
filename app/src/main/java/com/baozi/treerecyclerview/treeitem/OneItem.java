@@ -36,6 +36,11 @@ public class OneItem extends TreeAdapterItem<CityBean> {
         return R.layout.itme_one;
     }
 
+    @Override
+    public void onExpand() {
+        super.onExpand();
+
+    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {

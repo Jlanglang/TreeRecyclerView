@@ -20,8 +20,9 @@ public class FourItem extends TreeAdapterItem<String> {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             FiveItem threeItem = new FiveItem("我是五级");
-            if (i % 2 == 0) {
+            if (i % 4 == 0) {
                 threeItem.setLayoutId(R.layout.itme_one);
+                threeItem.setSpanSize(0);
             }
             treeAdapterItems.add(threeItem);
         }
@@ -34,7 +35,7 @@ public class FourItem extends TreeAdapterItem<String> {
     }
 
     @Override
-    public int getSpansize() {
+    public int initSpansize() {
         return 1;
     }
 
