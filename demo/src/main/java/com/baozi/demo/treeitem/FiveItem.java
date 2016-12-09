@@ -1,6 +1,6 @@
-package com.baozi.treerecyclerview.treeitem;
+package com.baozi.demo.treeitem;
 
-import com.baozi.treerecyclerview.R;
+import com.baozi.demo.R;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 

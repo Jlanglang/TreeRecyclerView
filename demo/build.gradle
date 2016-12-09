@@ -1,11 +1,11 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-//        applicationId "com.baozi.treerecyclerview"
+        applicationId "com.baozi.treerecyclerview"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -25,4 +25,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:recyclerview-v7:23.+'
     compile 'com.android.support:design:23.+'
+    compile 'com.jakewharton:butterknife:5.1.1'
+    compile files('libs/fastjson-1.2.9.jar')
+    compile project(':app')
 }

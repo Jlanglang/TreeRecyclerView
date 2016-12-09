@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.bean;
+package com.baozi.demo.bean;
 
 import java.util.List;
 

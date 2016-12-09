@@ -1,7 +1,7 @@
-package com.baozi.treerecyclerview.treeitem;
+package com.baozi.demo.treeitem;
 
-import com.baozi.treerecyclerview.R;
-import com.baozi.treerecyclerview.bean.CityBean;
+import com.baozi.demo.R;
+import com.baozi.demo.bean.CityBean;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
@@ -11,39 +11,40 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-public class OneItem extends TreeAdapterItem<CityBean> {
+public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
 
-    public OneItem(CityBean data) {
+    public TwoItem(CityBean.CitysBean data) {
         super(data);
     }
 
+
     @Override
-    protected List<TreeAdapterItem> initChildsList(CityBean data) {
+    protected List<TreeAdapterItem> initChildsList(CityBean.CitysBean data) {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
-        List<CityBean.CitysBean> citys = data.getCitys();
+        List<CityBean.CitysBean.AreasBean> citys = data.getAreas();
         if (citys == null) {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
-            TwoItem twoItem = new TwoItem(citys.get(i));
-            treeAdapterItems.add(twoItem);
+            ThreeItem threeItem = new ThreeItem(citys.get(i));
+            treeAdapterItems.add(threeItem);
         }
         return treeAdapterItems;
     }
 
     @Override
     protected int initLayoutId() {
-        return R.layout.itme_one;
+        return R.layout.item_two;
     }
 
-    @Override
-    public void onExpand() {
-        super.onExpand();
 
+    @Override
+    public int initSpansize() {
+        return 2;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setText(R.id.tv_content,data.getProvinceName());
+        holder.setText(R.id.tv_content, data.getCityName());
     }
 }
