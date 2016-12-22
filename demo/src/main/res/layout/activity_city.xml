@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baozi.demo.MainActivity">
+    tools:context="com.baozi.demo.activity.CityActivity">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rl_content"
+        android:overScrollMode="always"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>

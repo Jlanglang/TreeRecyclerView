@@ -1,31 +1,31 @@
-package com.baozi.demo;
+package com.baozi.demo.activity;
 
 import android.graphics.Rect;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
+import com.baozi.demo.R;
+import com.baozi.demo.viewholder.citytree.CityBean;
+import com.baozi.demo.viewholder.citytree.OneItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
-import com.baozi.demo.bean.CityBean;
-import com.baozi.demo.treeitem.OneItem;
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class CityActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_city);
         recyclerView = (RecyclerView) findViewById(R.id.rl_content);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,6));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        ArrayList<TreeAdapterItem> treeBeen1 = new ArrayList<>();//一级
+        ArrayList<OneItem> treeBeen1 = new ArrayList<>();//一级
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
         for (int i = 0; i < cityBeen.size(); i++) {
             treeBeen1.add(new OneItem(cityBeen.get(i)));

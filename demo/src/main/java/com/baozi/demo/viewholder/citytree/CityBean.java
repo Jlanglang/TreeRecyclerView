@@ -1,4 +1,4 @@
-package com.baozi.demo.bean;
+package com.baozi.demo.viewholder.citytree;
 
 import java.util.List;
 

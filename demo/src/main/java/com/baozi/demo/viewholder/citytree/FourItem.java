@@ -1,4 +1,4 @@
-package com.baozi.demo.treeitem;
+package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
@@ -20,9 +20,12 @@ public class FourItem extends TreeAdapterItem<String> {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             FiveItem threeItem = new FiveItem("我是五级");
-            if (i % 4 == 0) {
+            if (i % 4 == 0) {//偷个懒,不多写布局了.
                 threeItem.setLayoutId(R.layout.itme_one);
                 threeItem.setSpanSize(0);
+            } else if (i % 3 == 0) {
+                threeItem.setLayoutId(R.layout.item_two);
+                threeItem.setSpanSize(2);
             }
             treeAdapterItems.add(threeItem);
         }
@@ -35,9 +38,10 @@ public class FourItem extends TreeAdapterItem<String> {
     }
 
     @Override
-    public int initSpansize() {
-        return 1;
+    protected int initSpansize() {
+        return 2;
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {

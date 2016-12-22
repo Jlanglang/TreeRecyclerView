@@ -1,23 +1,27 @@
 package com.baozi.treerecyclerview.viewholder;
 
+import android.content.res.ObbInfo;
 import android.content.res.Resources;
 import android.support.annotation.LayoutRes;
 
+import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Created by baozi on 2016/12/7.
+ * 组合模式
  */
-public abstract class TreeAdapterItem<T> {
+public abstract class TreeAdapterItem<D> {
     /**
      * 当前item的数据
      */
-    protected T data;
+    protected D data;
     /**
-     * 持有的子数据
+     * 持有的子item
      */
-    protected List<TreeAdapterItem> childs;
+    protected List<TreeAdapterItem> childs = new ArrayList<>();
     /**
      * 是否展开
      */
@@ -26,14 +30,21 @@ public abstract class TreeAdapterItem<T> {
      * 布局资源id
      */
     protected int layoutId;
+    /**
+     * 每行所占比例
+     */
     protected int spanSize;
 
-    public TreeAdapterItem(T data) {
+    public TreeAdapterItem(D data) {
         this.data = data;
-        childs = initChildsList(data);
+        List<TreeAdapterItem> treeAdapterItems = initChildsList(data);
+        if (treeAdapterItems != null) {
+            childs.addAll(treeAdapterItems);
+        }
         layoutId = initLayoutId();
         spanSize = initSpansize();
     }
+
 
     public int getLayoutId() {
         if (layoutId == 0) {
@@ -54,13 +65,16 @@ public abstract class TreeAdapterItem<T> {
         this.spanSize = spanSize;
     }
 
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
+//    /**
+//     * 如果需要子类展开,重写该方法
+//     */
+//    public boolean isShowChild() {
+//        return isShowChild;
+//    }
+//
+//    public void setShowChild(boolean showChild) {
+//        this.isShowChild = showChild;
+//    }
 
     public boolean isExpand() {
         return isExpand;
@@ -70,12 +84,74 @@ public abstract class TreeAdapterItem<T> {
         isExpand = expand;
     }
 
-    public List<TreeAdapterItem> getChilds() {
-        return childs;
+    public D getData() {
+        return data;
+    }
+
+    public void setData(D data) {
+        this.data = data;
+    }
+
+
+    public List<TreeAdapterItem<D>> getChilds() {
+//        if (isShowChild()) {
+        ArrayList<TreeAdapterItem<D>> treeAdapterItems = new ArrayList<>();
+        for (int i = 0; i < childs.size(); i++) {
+            TreeAdapterItem treeAdapterItem = childs.get(i);//下级
+            treeAdapterItems.add(treeAdapterItem);//直接add
+            if (treeAdapterItem.isExpand()) {//判断是否还有下下级
+                List list = treeAdapterItem.getChilds();//调用下级的getAllChilds遍历,相当于递归遍历
+                if (list != null && list.size() > 0) {
+                    treeAdapterItems.addAll(list);
+                }
+            }
+        }
+        return treeAdapterItems;
+    }
+
+    /**
+     * 递归遍历所有的子数据，包括子数据的子数据
+     *
+     * @return List<TreeAdapterItem>
+     */
+    public List<TreeAdapterItem> getAllChilds() {
+        ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
+        for (int i = 0; i < childs.size(); i++) {
+            TreeAdapterItem treeAdapterItem = childs.get(i);//下级
+            treeAdapterItems.add(treeAdapterItem);//
+            if (treeAdapterItem.isParent()) {//判断是否还有下下级
+//                treeAdapterItem.onCollapse();
+                List list = treeAdapterItem.getAllChilds();//调用下级的getAllChilds遍历,相当于递归遍历
+                if (list != null && list.size() > 0) {
+                    treeAdapterItems.addAll(list);
+                }
+            }
+        }
+        return treeAdapterItems;
     }
 
     public void setChilds(List<TreeAdapterItem> childs) {
         this.childs = childs;
+    }
+
+    public void addChild(TreeAdapterItem treeAdapterItem) {
+        childs.add(treeAdapterItem);
+    }
+
+    public void addChild(TreeAdapterItem treeAdapterItem, int position) {
+        childs.add(treeAdapterItem);
+    }
+
+    public void removeChild(TreeAdapterItem treeAdapterItem) {
+        childs.remove(treeAdapterItem);
+    }
+
+    public void removeChild(int position) {
+        childs.remove(position);
+    }
+
+    public void cleanChild() {
+        childs.clear();
     }
 
     /**
@@ -90,26 +166,6 @@ public abstract class TreeAdapterItem<T> {
      */
     public void onCollapse() {
         isExpand = false;
-    }
-
-    /**
-     * 递归遍历所有的子数据，包括子数据的子数据
-     *
-     * @return List<TreeAdapterItem>
-     */
-    public List<TreeAdapterItem> getAllChilds() {
-        ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
-        for (int i = 0; i < childs.size(); i++) {
-            TreeAdapterItem treeAdapterItem = childs.get(i);
-            treeAdapterItems.add(treeAdapterItem);
-            if (treeAdapterItem.isParent()) {
-                List list = treeAdapterItem.getAllChilds();
-                if (list != null && list.size() > 0) {
-                    treeAdapterItems.addAll(list);
-                }
-            }
-        }
-        return treeAdapterItems;
     }
 
 
@@ -128,7 +184,7 @@ public abstract class TreeAdapterItem<T> {
      * @param data
      * @return
      */
-    protected abstract List<TreeAdapterItem> initChildsList(T data);
+    protected abstract List<TreeAdapterItem> initChildsList(D data);
 
     /**
      * item在每行中的spansize
@@ -137,8 +193,8 @@ public abstract class TreeAdapterItem<T> {
      *
      * @return 所占值
      */
-    public int initSpansize() {
-        return spanSize;
+    protected int initSpansize() {
+        return 0;
     }
 
     /**
@@ -154,5 +210,4 @@ public abstract class TreeAdapterItem<T> {
      * @param holder ViewHolder
      */
     public abstract void onBindViewHolder(ViewHolder holder);
-
 }

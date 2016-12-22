@@ -1,7 +1,6 @@
-package com.baozi.demo.treeitem;
+package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.CityBean;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
@@ -21,7 +20,7 @@ public class OneItem extends TreeAdapterItem<CityBean> {
     protected List<TreeAdapterItem> initChildsList(CityBean data) {
         ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
         List<CityBean.CitysBean> citys = data.getCitys();
-        if (citys == null) {
+        if (null == citys) {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
@@ -32,18 +31,14 @@ public class OneItem extends TreeAdapterItem<CityBean> {
     }
 
     @Override
-    protected int initLayoutId() {
+    public int initLayoutId() {
         return R.layout.itme_one;
     }
 
-    @Override
-    public void onExpand() {
-        super.onExpand();
 
-    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setText(R.id.tv_content,data.getProvinceName());
+        holder.setText(R.id.tv_content, data.getProvinceName());
     }
 }

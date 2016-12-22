@@ -1,7 +1,6 @@
-package com.baozi.demo.treeitem;
+package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.CityBean;
 import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
@@ -16,7 +15,6 @@ public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
     public TwoItem(CityBean.CitysBean data) {
         super(data);
     }
-
 
     @Override
     protected List<TreeAdapterItem> initChildsList(CityBean.CitysBean data) {
@@ -33,15 +31,11 @@ public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
     }
 
     @Override
-    protected int initLayoutId() {
+    public int initLayoutId() {
         return R.layout.item_two;
     }
 
 
-    @Override
-    public int initSpansize() {
-        return 2;
-    }
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
