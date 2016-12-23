@@ -13,8 +13,9 @@ import java.util.List;
  */
 public class TwoTreeParentItem extends TreeParentItem<CityBean.CitysBean> {
 
-    public TwoTreeParentItem(CityBean.CitysBean data) {
-        super(data);
+
+    public TwoTreeParentItem(CityBean.CitysBean data, TreeParentItem parentItem) {
+        super(data, parentItem);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class TwoTreeParentItem extends TreeParentItem<CityBean.CitysBean> {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
-            ThreeItem threeItem = new ThreeItem(citys.get(i));
+            ThreeItem threeItem = new ThreeItem(citys.get(i), this);
             treeItems.add(threeItem);
         }
         return treeItems;

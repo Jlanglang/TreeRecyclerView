@@ -2,19 +2,15 @@ package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 /**
- * Created by baozi on 2016/12/8.
  */
 public class FiveItem extends TreeItem<String> {
-
-
     public FiveItem(String data) {
         super(data);
     }
-
-
     @Override
     protected int initLayoutId() {
         return R.layout.item_five;

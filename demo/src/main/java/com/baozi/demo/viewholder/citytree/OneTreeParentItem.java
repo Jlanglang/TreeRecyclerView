@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class OneTreeParentItem extends TreeParentItem<CityBean> {
 
+
     public OneTreeParentItem(CityBean data) {
         super(data);
     }
@@ -25,7 +26,7 @@ public class OneTreeParentItem extends TreeParentItem<CityBean> {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
-            TwoTreeParentItem twoItem = new TwoTreeParentItem(citys.get(i));
+            TwoTreeParentItem twoItem = new TwoTreeParentItem(citys.get(i), this);
             treeItems.add(twoItem);
         }
         return treeItems;
@@ -37,9 +38,9 @@ public class OneTreeParentItem extends TreeParentItem<CityBean> {
     }
 
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getProvinceName());
+        mTreeItemManager.notifyDataSetChanged();
     }
 }

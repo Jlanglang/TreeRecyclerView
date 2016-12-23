@@ -7,8 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.viewholder.shopcart.ShopListBean;
 import com.baozi.demo.viewholder.shopcart.StoreBean;
@@ -17,6 +21,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -26,12 +31,21 @@ import java.util.List;
 public class ShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
+    private TreeRecyclerViewAdapter<TitleTreeParentItem> mTitleItemTreeRecyclerViewAdapter;
+    private TextView mTvNext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shopping_cart_activity);
         mRecyclerView = (RecyclerView) findViewById(R.id.rl_content);
+        mTvNext = (TextView) findViewById(R.id.tv_next);
+        mTvNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onNext();
+            }
+        });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -46,30 +60,32 @@ public class ShoppingCartActivity extends AppCompatActivity {
         for (int i = 0; i < storeBean.size(); i++) {
             titleItems.add(new TitleTreeParentItem(storeBean.get(i)));
         }
-        final TreeRecyclerViewAdapter<TitleTreeParentItem> titleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
-        mRecyclerView.setAdapter(titleItemTreeRecyclerViewAdapter);
-//        titleItemTreeRecyclerViewAdapter.setOnTreeItemClickListener(new TreeRecyclerViewAdapter.OnTreeItemClickListener() {
-//            @Override
-//            public void onClick(TreeItem node, ViewHolder holder, int position) {
-//                if (node instanceof TitleTreeParentItem) {
-//                    StoreBean data = ((TitleTreeParentItem) node).getData();
-//                    data.setCheck(!data.isCheck());
-//                    List childs = node.getChilds();
-//                    if (childs != null) {
-//                        for (int i = 0; i < childs.size(); i++) {
-//                            ContentItem contentItem = (ContentItem) childs.get(i);
-//                            ShopListBean data1 = contentItem.getData();
-//                            data1.setCheck(data.isCheck());
-//                        }
-//                    }
-//                } else if (node instanceof ContentItem) {
-//                    ContentItem contentItem = (ContentItem) node;
-//                    ShopListBean data1 = contentItem.getData();
-//                    data1.setCheck(!data1.isCheck());
-//                }
-//                titleItemTreeRecyclerViewAdapter.notifyDataSetChanged();
-//            }
-//        });
+        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
+        mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
+    }
+
+    public void onNext() {
+        List<TitleTreeParentItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
+        List<StoreBean> shopListBeen = new ArrayList<>();
+        for (int i = 0; i < datas.size(); i++) {
+            TitleTreeParentItem titleTreeParentItem = datas.get(i);
+            StoreBean data = titleTreeParentItem.getData();
+            if (data.isCheck()) {
+                ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
+                List<ShopListBean> shopListBeen1 = data.getShopListBeen();
+                for (int j = 0; j < shopListBeen1.size(); j++) {
+                    ShopListBean shopListBean = shopListBeen1.get(j);
+                    if (shopListBean.isCheck()) {
+                        shopListBeens.add(shopListBean);
+                    }
+                }
+                data.setShopListBeen(shopListBeens);
+                shopListBeen.add(data);
+            }
+        }
+        String s = JSON.toJSONString(shopListBeen);
+        Log.i("data", s);
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     private List<StoreBean> initData() {

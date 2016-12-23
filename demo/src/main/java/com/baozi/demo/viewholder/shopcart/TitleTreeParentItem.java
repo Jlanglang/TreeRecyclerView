@@ -14,17 +14,20 @@ import java.util.List;
 
 public class TitleTreeParentItem extends TreeParentItem<StoreBean> {
 
+
+    private List<ShopListBean> mShopListBeen;
+
     public TitleTreeParentItem(StoreBean data) {
         super(data);
     }
 
     @Override
     protected List<TreeItem> initChildsList(StoreBean data) {
-        List<ShopListBean> shopListBeen = data.getShopListBeen();
+        mShopListBeen = data.getShopListBeen();
         ArrayList<TreeItem> contentItems = new ArrayList<>();
-        for (int i = 0; i < shopListBeen.size(); i++) {
-            ShopListBean shopListBean = shopListBeen.get(i);
-            ContentItem contentItem = new ContentItem(shopListBean);
+        for (int i = 0; i < mShopListBeen.size(); i++) {
+            ShopListBean shopListBean = mShopListBeen.get(i);
+            ContentItem contentItem = new ContentItem(shopListBean, this);
             contentItems.add(contentItem);
         }
         return contentItems;
@@ -38,5 +41,25 @@ public class TitleTreeParentItem extends TreeParentItem<StoreBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setChecked(R.id.cb_ischeck, getData().isCheck());
+    }
+
+    @Override
+    public void onClickChange() {
+        boolean check = data.isCheck();
+        data.setCheck(!check);
+        for (int i = 0; i < mShopListBeen.size(); i++) {
+            mShopListBeen.get(i).setCheck(!check);
+        }
+        mTreeItemManager.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onUpdate() {
+        data.setCheck(false);
+        for (int i = 0; i < mShopListBeen.size(); i++) {
+            if (mShopListBeen.get(i).isCheck()) {
+                data.setCheck(true);
+            }
+        }
     }
 }

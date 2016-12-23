@@ -6,11 +6,11 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  */
 public class StoreBean {
-
     private List<ShopListBean> mShopListBeen;
     private String title;
     private int storeId;
     private String storeName;
+
     public boolean isCheck() {
         return isCheck;
     }

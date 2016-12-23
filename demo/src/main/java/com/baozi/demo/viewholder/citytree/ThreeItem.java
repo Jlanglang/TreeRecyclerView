@@ -2,15 +2,17 @@ package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 /**
  */
 public class ThreeItem extends TreeItem<CityBean.CitysBean.AreasBean> {
-    public ThreeItem(CityBean.CitysBean.AreasBean data) {
-        super(data);
-    }
 
+
+    public ThreeItem(CityBean.CitysBean.AreasBean data, TreeParentItem parentItem) {
+        super(data, parentItem);
+    }
 
     @Override
     public int initLayoutId() {

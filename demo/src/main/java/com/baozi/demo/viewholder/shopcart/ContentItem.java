@@ -2,6 +2,7 @@ package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 /**
@@ -10,8 +11,9 @@ import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 public class ContentItem extends TreeItem<ShopListBean> {
 
-    public ContentItem(ShopListBean data) {
-        super(data);
+
+    public ContentItem(ShopListBean data, TreeParentItem parentItem) {
+        super(data, parentItem);
     }
 
     @Override
@@ -22,5 +24,12 @@ public class ContentItem extends TreeItem<ShopListBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setChecked(R.id.cb_ischeck, getData().isCheck());
+    }
+
+    @Override
+    public void onClickChange() {
+        getData().setCheck(!getData().isCheck());
+        parentItem.onUpdate();
+        mTreeItemManager.notifyDataSetChanged();
     }
 }

@@ -11,19 +11,24 @@ import java.util.List;
  * //持有adapter,因为可以影响子集
  */
 
-public abstract class TreeParentItem<D> extends TreeItem implements ParentItem {
-
+public abstract class TreeParentItem<D> extends TreeItem<D>
+        implements ParentItem {
     /**
      * 持有的子item
      */
-    protected List<TreeItem> childs = new ArrayList<>();
+    protected List<TreeItem> childs;
     /**
      * 是否展开
      */
     protected boolean isExpand;
 
     public TreeParentItem(D data) {
-        super(data);
+        this(data, null);
+    }
+
+    public TreeParentItem(D data, TreeParentItem parentItem) {
+        super(data, parentItem);
+        childs = new ArrayList<>();
         List<TreeItem> treeItems = initChildsList(data);
         if (treeItems != null) {
             childs.addAll(treeItems);
@@ -44,7 +49,7 @@ public abstract class TreeParentItem<D> extends TreeItem implements ParentItem {
      */
     @Override
     public void onExpand() {
-        isExpand = true;
+
     }
 
     /**
@@ -52,7 +57,7 @@ public abstract class TreeParentItem<D> extends TreeItem implements ParentItem {
      */
     @Override
     public void onCollapse() {
-        isExpand = false;
+
     }
 
     @Override
@@ -119,8 +124,15 @@ public abstract class TreeParentItem<D> extends TreeItem implements ParentItem {
     /**
      * 初始化子数据
      *
-     * @param data
-     * @return
+     * @param data 父级数据
+     * @return 得到处理好的子集
      */
-    public abstract List<TreeItem> initChildsList(D data);
+    protected abstract List<TreeItem> initChildsList(D data);
+
+    /**
+     * 当子类发现变化时,父一级是否需要处理
+     */
+    public void onUpdate() {
+
+    }
 }

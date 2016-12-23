@@ -18,6 +18,4 @@ public interface ParentItem {
     List<TreeItem> getChilds();
 
     List<TreeItem> getAllChilds();
-
-
 }

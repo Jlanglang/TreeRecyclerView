@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
  * 组合模式
  */
 public abstract class TreeItem<D> {
+    protected TreeParentItem parentItem;
     /**
      * 当前item的数据
      */
@@ -20,7 +21,19 @@ public abstract class TreeItem<D> {
      */
     protected int spanSize;
 
+
+    public void setTreeItemManager(TreeItemManager treeItemManager) {
+        mTreeItemManager = treeItemManager;
+    }
+
+    protected TreeItemManager mTreeItemManager;
+
     public TreeItem(D data) {
+        this(data, null);
+    }
+
+    public TreeItem(D data, TreeParentItem parentItem) {
+        this.parentItem = parentItem;
         this.data = data;
         layoutId = initLayoutId();
         spanSize = initSpansize();
@@ -78,4 +91,10 @@ public abstract class TreeItem<D> {
      */
     public abstract void onBindViewHolder(ViewHolder holder);
 
+    /**
+     * 当adapter的昨天为
+     */
+    public void onClickChange() {
+
+    }
 }
