@@ -12,12 +12,12 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  */
 
-public class TitleTreeParentItem extends TreeParentItem<StoreBean> {
+public class TitletItem extends TreeParentItem<StoreBean> {
 
 
     private List<ShopListBean> mShopListBeen;
 
-    public TitleTreeParentItem(StoreBean data) {
+    public TitletItem(StoreBean data) {
         super(data);
     }
 

@@ -11,35 +11,36 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-public class TwoTreeParentItem extends TreeParentItem<CityBean.CitysBean> {
+public class OneItem extends TreeParentItem<CityBean> {
 
 
-    public TwoTreeParentItem(CityBean.CitysBean data, TreeParentItem parentItem) {
-        super(data, parentItem);
+    public OneItem(CityBean data) {
+        super(data);
     }
 
     @Override
-    protected List<TreeItem> initChildsList(CityBean.CitysBean data) {
+    protected List<TreeItem> initChildsList(CityBean data) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
-        List<CityBean.CitysBean.AreasBean> citys = data.getAreas();
-        if (citys == null) {
+        List<CityBean.CitysBean> citys = data.getCitys();
+        if (null == citys) {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
-            ThreeItem threeItem = new ThreeItem(citys.get(i), this);
-            treeItems.add(threeItem);
+            TwoItem twoItem = new TwoItem(citys.get(i), this);
+            treeItems.add(twoItem);
         }
         return treeItems;
     }
 
     @Override
     public int initLayoutId() {
-        return R.layout.item_two;
+        return R.layout.itme_one;
     }
 
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setText(R.id.tv_content, data.getCityName());
+        holder.setText(R.id.tv_content, data.getProvinceName());
+        mTreeItemManager.notifyDataSetChanged();
     }
 }

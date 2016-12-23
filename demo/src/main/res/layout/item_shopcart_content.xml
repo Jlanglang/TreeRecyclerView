@@ -11,6 +11,7 @@
         android:layout_height="48dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="32dp"
+        android:clickable="false"
         />
 
     <ImageView

@@ -92,7 +92,7 @@ public abstract class TreeItem<D> {
     public abstract void onBindViewHolder(ViewHolder holder);
 
     /**
-     * 当adapter的昨天为
+     * 当adapter的item被点击时
      */
     public void onClickChange() {
 

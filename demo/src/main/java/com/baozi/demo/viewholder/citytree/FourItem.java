@@ -11,9 +11,9 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-public class FourTreeParentItem extends TreeParentItem<String> {
+public class FourItem extends TreeParentItem<String> {
 
-    public FourTreeParentItem(TreeParentItem parentItem, String data) {
+    public FourItem(TreeParentItem parentItem, String data) {
         super(data, parentItem);
     }
 

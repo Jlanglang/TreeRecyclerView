@@ -16,12 +16,11 @@ import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.viewholder.shopcart.ShopListBean;
 import com.baozi.demo.viewholder.shopcart.StoreBean;
-import com.baozi.demo.viewholder.shopcart.TitleTreeParentItem;
+import com.baozi.demo.viewholder.shopcart.TitletItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ import java.util.List;
 public class ShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private TreeRecyclerViewAdapter<TitleTreeParentItem> mTitleItemTreeRecyclerViewAdapter;
+    private TreeRecyclerViewAdapter<TitletItem> mTitleItemTreeRecyclerViewAdapter;
     private TextView mTvNext;
 
     @Override
@@ -55,21 +54,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 outRect.top = 2;
             }
         });
-        ArrayList<TitleTreeParentItem> titleItems = new ArrayList<>();//一级
+        ArrayList<TitletItem> titleItems = new ArrayList<>();//一级
         List<StoreBean> storeBean = initData();
         for (int i = 0; i < storeBean.size(); i++) {
-            titleItems.add(new TitleTreeParentItem(storeBean.get(i)));
+            titleItems.add(new TitletItem(storeBean.get(i)));
         }
         mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
         mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
     }
 
     public void onNext() {
-        List<TitleTreeParentItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
         List<StoreBean> shopListBeen = new ArrayList<>();
+        List<TitletItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
         for (int i = 0; i < datas.size(); i++) {
-            TitleTreeParentItem titleTreeParentItem = datas.get(i);
-            StoreBean data = titleTreeParentItem.getData();
+            TitletItem titletItem = datas.get(i);
+            StoreBean data = titletItem.getData();
             if (data.isCheck()) {
                 ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
                 List<ShopListBean> shopListBeen1 = data.getShopListBeen();
