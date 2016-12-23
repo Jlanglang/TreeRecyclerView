@@ -1,25 +1,19 @@
 package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
+import com.baozi.treerecyclerview.viewholder.TreeItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
-
-import java.util.List;
 
 /**
  * Created by baozi on 2016/12/8.
  */
-public class FiveItem extends TreeAdapterItem<String> {
+public class FiveItem extends TreeItem<String> {
 
 
     public FiveItem(String data) {
         super(data);
     }
 
-    @Override
-    protected List<TreeAdapterItem> initChildsList(String data) {
-        return null;
-    }
 
     @Override
     protected int initLayoutId() {

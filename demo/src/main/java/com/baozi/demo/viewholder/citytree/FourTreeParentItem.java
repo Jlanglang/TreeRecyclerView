@@ -1,7 +1,8 @@
 package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
+import com.baozi.treerecyclerview.viewholder.TreeItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.ArrayList;
@@ -10,14 +11,14 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-public class FourItem extends TreeAdapterItem<String> {
-    public FourItem(String data) {
+public class FourTreeParentItem extends TreeParentItem<String> {
+    public FourTreeParentItem(String data) {
         super(data);
     }
 
     @Override
-    protected List<TreeAdapterItem> initChildsList(String data) {
-        ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
+    protected List<TreeItem> initChildsList(String data) {
+        ArrayList<TreeItem> treeItems = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             FiveItem threeItem = new FiveItem("我是五级");
             if (i % 4 == 0) {//偷个懒,不多写布局了.
@@ -27,9 +28,9 @@ public class FourItem extends TreeAdapterItem<String> {
                 threeItem.setLayoutId(R.layout.item_two);
                 threeItem.setSpanSize(2);
             }
-            treeAdapterItems.add(threeItem);
+            treeItems.add(threeItem);
         }
-        return treeAdapterItems;
+        return treeItems;
     }
 
     @Override

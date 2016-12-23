@@ -6,13 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
+import com.baozi.treerecyclerview.viewholder.TreeItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends RecyclerView.Adapter<ViewHolder> {
+public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Adapter<ViewHolder> {
 
     protected TreeRecyclerViewType type;
 
@@ -21,15 +22,6 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
      * 存储所有可见的Node
      */
     protected List<T> mDatas;//处理后的展示数据
-
-    /**
-     * 点击item的回调接口
-     */
-    private OnTreeItemClickListener onTreeItemClickListener;
-
-    public void setOnTreeItemClickListener(OnTreeItemClickListener onTreeItemClickListener) {
-        this.onTreeItemClickListener = onTreeItemClickListener;
-    }
 
     /**
      * @param context 上下文
@@ -52,8 +44,10 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
             for (int i = 0; i < datas.size(); i++) {
                 T t = datas.get(i);
                 mDatas.add(t);
-                List allChilds = t.getAllChilds();
-                mDatas.addAll(allChilds);
+                if (t instanceof TreeParentItem) {
+                    List allChilds = ((TreeParentItem) t).getAllChilds();
+                    mDatas.addAll(allChilds);
+                }
             }
         } else {
             mDatas = datas;
@@ -66,20 +60,20 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
      * @param position 触发的条目
      */
     private void expandOrCollapse(int position) {
-        TreeAdapterItem treeAdapterItem = mDatas.get(position);
-        if (!treeAdapterItem.isParent()) {
-            return;
+        TreeItem treeItem = mDatas.get(position);
+        if (treeItem instanceof TreeParentItem) {
+            TreeParentItem treeParentItem = (TreeParentItem) treeItem;
+            boolean expand = treeParentItem.isExpand();
+            List allChilds = treeParentItem.getChilds();
+            if (expand) {
+                mDatas.removeAll(allChilds);
+                treeParentItem.onCollapse();
+            } else {
+                mDatas.addAll(position + 1, allChilds);
+                treeParentItem.onExpand();
+            }
+            notifyDataSetChanged();
         }
-        boolean expand = treeAdapterItem.isExpand();
-        List allChilds = treeAdapterItem.getChilds();
-        if (expand) {
-            mDatas.removeAll(allChilds);
-            treeAdapterItem.onCollapse();
-        } else {
-            mDatas.addAll(position + 1, allChilds);
-            treeAdapterItem.onExpand();
-        }
-        notifyDataSetChanged();
     }
 
     @Override
@@ -91,11 +85,11 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    TreeAdapterItem treeAdapterItem = mDatas.get(position);
-                    if (treeAdapterItem.getSpanSize() == 0) {
+                    TreeItem treeItem = mDatas.get(position);
+                    if (treeItem.getSpanSize() == 0) {
                         return gridLayoutManager.getSpanCount();
                     }
-                    return treeAdapterItem.getSpanSize();
+                    return treeItem.getSpanSize();
                 }
             });
         }
@@ -109,19 +103,17 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final TreeAdapterItem treeAdapterItem = mDatas.get(position);
+        TreeItem treeItem = mDatas.get(position);
+        treeItem.onBindViewHolder(holder);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type != TreeRecyclerViewType.SHOW_ALL) {
                     expandOrCollapse(position);
                 }
-                if (onTreeItemClickListener != null) {
-                    onTreeItemClickListener.onClick(treeAdapterItem, holder, position);
-                }
+//                treeItem.onTreeItemClickListener.onClick(TreeRecyclerViewAdapter.this, holder, position);
             }
         });
-        treeAdapterItem.onBindViewHolder(holder);
     }
 
     @Override
@@ -134,7 +126,10 @@ public class TreeRecyclerViewAdapter<T extends TreeAdapterItem> extends Recycler
         return mDatas == null ? 0 : mDatas.size();
     }
 
-    public interface OnTreeItemClickListener {
-        void onClick(TreeAdapterItem node, ViewHolder holder, int position);
+
+    public interface OnTreeItemExpandListener {
+        void onCollapse();
+
+        void onExpand();
     }
 }

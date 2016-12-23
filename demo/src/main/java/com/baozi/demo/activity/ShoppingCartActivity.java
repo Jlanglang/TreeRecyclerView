@@ -10,14 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.viewholder.shopcart.ContentItem;
 import com.baozi.demo.viewholder.shopcart.ShopListBean;
 import com.baozi.demo.viewholder.shopcart.StoreBean;
-import com.baozi.demo.viewholder.shopcart.TitleItem;
+import com.baozi.demo.viewholder.shopcart.TitleTreeParentItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,18 +41,18 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 outRect.top = 2;
             }
         });
-        ArrayList<TitleItem> titleItems = new ArrayList<>();//一级
+        ArrayList<TitleTreeParentItem> titleItems = new ArrayList<>();//一级
         List<StoreBean> storeBean = initData();
         for (int i = 0; i < storeBean.size(); i++) {
-            titleItems.add(new TitleItem(storeBean.get(i)));
+            titleItems.add(new TitleTreeParentItem(storeBean.get(i)));
         }
-        final TreeRecyclerViewAdapter<TitleItem> titleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
+        final TreeRecyclerViewAdapter<TitleTreeParentItem> titleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
         mRecyclerView.setAdapter(titleItemTreeRecyclerViewAdapter);
 //        titleItemTreeRecyclerViewAdapter.setOnTreeItemClickListener(new TreeRecyclerViewAdapter.OnTreeItemClickListener() {
 //            @Override
-//            public void onClick(TreeAdapterItem node, ViewHolder holder, int position) {
-//                if (node instanceof TitleItem) {
-//                    StoreBean data = ((TitleItem) node).getData();
+//            public void onClick(TreeItem node, ViewHolder holder, int position) {
+//                if (node instanceof TitleTreeParentItem) {
+//                    StoreBean data = ((TitleTreeParentItem) node).getData();
 //                    data.setCheck(!data.isCheck());
 //                    List childs = node.getChilds();
 //                    if (childs != null) {

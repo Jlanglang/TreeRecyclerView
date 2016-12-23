@@ -1,8 +1,23 @@
 package com.baozi.treerecyclerview.viewholder;
 
-/**
- * Created by baozi on 2016/12/22.
- */
+import java.util.List;
 
-public class ParentItem {
+/**
+ * @author jlanglang  2016/12/23 17:04
+ * @版本 2.0
+ * @Change
+ */
+public interface ParentItem {
+
+    boolean isExpand();
+
+    void onExpand();
+
+    void onCollapse();
+
+    List<TreeItem> getChilds();
+
+    List<TreeItem> getAllChilds();
+
+
 }

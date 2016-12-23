@@ -1,7 +1,8 @@
 package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeAdapterItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
+import com.baozi.treerecyclerview.viewholder.TreeItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.ArrayList;
@@ -10,31 +11,30 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-public class TwoItem extends TreeAdapterItem<CityBean.CitysBean> {
+public class TwoTreeParentItem extends TreeParentItem<CityBean.CitysBean> {
 
-    public TwoItem(CityBean.CitysBean data) {
+    public TwoTreeParentItem(CityBean.CitysBean data) {
         super(data);
     }
 
     @Override
-    protected List<TreeAdapterItem> initChildsList(CityBean.CitysBean data) {
-        ArrayList<TreeAdapterItem> treeAdapterItems = new ArrayList<>();
+    protected List<TreeItem> initChildsList(CityBean.CitysBean data) {
+        ArrayList<TreeItem> treeItems = new ArrayList<>();
         List<CityBean.CitysBean.AreasBean> citys = data.getAreas();
         if (citys == null) {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
             ThreeItem threeItem = new ThreeItem(citys.get(i));
-            treeAdapterItems.add(threeItem);
+            treeItems.add(threeItem);
         }
-        return treeAdapterItems;
+        return treeItems;
     }
 
     @Override
     public int initLayoutId() {
         return R.layout.item_two;
     }
-
 
 
     @Override
