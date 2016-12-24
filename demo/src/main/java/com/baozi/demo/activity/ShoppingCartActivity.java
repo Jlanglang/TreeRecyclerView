@@ -36,7 +36,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shopping_cart_activity);
+        setContentView(R.layout.activity_shopping_cart);
         mRecyclerView = (RecyclerView) findViewById(R.id.rl_content);
         mTvNext = (TextView) findViewById(R.id.tv_next);
         mTvNext.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +45,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 onNext();
             }
         });
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {

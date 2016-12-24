@@ -27,6 +27,9 @@ public class OneItem extends TreeParentItem<CityBean> {
         }
         for (int i = 0; i < citys.size(); i++) {
             TwoItem twoItem = new TwoItem(citys.get(i), this);
+            if (citys.get(i).getCityName().equals("朝阳区")) {
+                twoItem.setCanChangeExpand(false, true);
+            }
             treeItems.add(twoItem);
         }
         return treeItems;
@@ -41,6 +44,5 @@ public class OneItem extends TreeParentItem<CityBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getProvinceName());
-        mTreeItemManager.notifyDataSetChanged();
     }
 }

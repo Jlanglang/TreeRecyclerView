@@ -7,6 +7,7 @@ import android.support.annotation.LayoutRes;
  * 组合模式
  */
 public abstract class TreeItem<D> {
+
     protected TreeParentItem parentItem;
     /**
      * 当前item的数据
@@ -22,9 +23,7 @@ public abstract class TreeItem<D> {
     protected int spanSize;
 
 
-    public void setTreeItemManager(TreeItemManager treeItemManager) {
-        mTreeItemManager = treeItemManager;
-    }
+    protected onClickChangeListener mOnClickChangeListener;
 
     protected TreeItemManager mTreeItemManager;
 
@@ -92,9 +91,32 @@ public abstract class TreeItem<D> {
     public abstract void onBindViewHolder(ViewHolder holder);
 
     /**
-     * 当adapter的item被点击时
+     * 当item被点击时
      */
-    public void onClickChange() {
+    public void onClickChange(TreeItem treeItem) {
+        if (mOnClickChangeListener != null) {
+            mOnClickChangeListener.onClickChange(treeItem);
+        }
+    }
 
+    public void setTreeItemManager(TreeItemManager treeItemManager) {
+        mTreeItemManager = treeItemManager;
+    }
+
+    public void setOnClickChangeListener(onClickChangeListener onClickChangeListener) {
+        mOnClickChangeListener = onClickChangeListener;
+    }
+
+    /**
+     * 获取当前item的父级
+     *
+     * @return
+     */
+    public TreeParentItem getParentItem() {
+        return parentItem;
+    }
+
+    public interface onClickChangeListener {
+        void onClickChange(TreeItem treeItem);
     }
 }

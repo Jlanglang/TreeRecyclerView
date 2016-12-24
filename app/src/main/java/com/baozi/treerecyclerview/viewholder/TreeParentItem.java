@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.viewholder;
 
+import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,10 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
      * 是否展开
      */
     protected boolean isExpand;
+    /**
+     * 能否展开
+     */
+    protected boolean isCanChangeExpand = true;
 
     public TreeParentItem(D data) {
         this(data, null);
@@ -41,8 +47,11 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
     }
 
     public void setExpand(boolean expand) {
-        isExpand = expand;
+        if (isCanChangeExpand) {
+            isExpand = expand;
+        }
     }
+
 
     /**
      * 展开
@@ -62,35 +71,22 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
 
     @Override
     public List<TreeItem> getChilds() {
+        return childs;
+    }
+
+    public List<TreeItem> getChilds(TreeRecyclerViewType treeRecyclerViewType) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
         for (int i = 0; i < childs.size(); i++) {
             TreeItem treeItem = childs.get(i);//下级
             treeItems.add(treeItem);//直接add
-            if (treeItem instanceof TreeParentItem) {//判断是否还有下下级
+            if (treeItem instanceof TreeParentItem && ((TreeParentItem) treeItem).isExpand()) {//判断是否还有下下级,并且处于expand的状态
                 List list = ((TreeParentItem) treeItem).getChilds();//调用下级的getAllChilds遍历,相当于递归遍历
                 if (list != null && list.size() > 0) {
                     treeItems.addAll(list);
                 }
-            }
-        }
-        return treeItems;
-    }
-
-    /**
-     * 递归遍历所有的子数据，包括子数据的子数据
-     *
-     * @return List<TreeItem>
-     */
-    @Override
-    public List<TreeItem> getAllChilds() {
-        ArrayList<TreeItem> treeItems = new ArrayList<>();
-        for (int i = 0; i < childs.size(); i++) {
-            TreeItem treeItem = childs.get(i);//下级
-            treeItems.add(treeItem);//
-            if (treeItem instanceof TreeParentItem) {//判断是否还有下下级
-                List list = ((TreeParentItem) treeItem).getAllChilds();//调用下级的getAllChilds遍历,相当于递归遍历
-                if (list != null && list.size() > 0) {
-                    treeItems.addAll(list);
+                if (treeRecyclerViewType == TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS) {
+                    ((TreeParentItem) treeItem).setExpand(false);
+                    ((TreeParentItem) treeItem).onCollapse();
                 }
             }
         }
@@ -119,6 +115,15 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
 
     public void cleanChild() {
         childs.clear();
+    }
+
+    public boolean isCanChangeExpand() {
+        return isCanChangeExpand;
+    }
+
+    public void setCanChangeExpand(boolean canChangeExpand, boolean defualtExpand) {
+        isCanChangeExpand = canChangeExpand;
+        this.isExpand = defualtExpand;
     }
 
     /**

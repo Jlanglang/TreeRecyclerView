@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by baozi on 2016/12/8.
  */
 public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
-
 
     public TwoItem(CityBean.CitysBean data, TreeParentItem parentItem) {
         super(data, parentItem);

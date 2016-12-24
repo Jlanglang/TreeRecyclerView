@@ -53,7 +53,7 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
                 T t = datas.get(i);
                 mShowDatas.add(t);
                 if (t instanceof TreeParentItem) {
-                    List allChilds = ((TreeParentItem) t).getAllChilds();
+                    List allChilds = ((TreeParentItem) t).getChilds(type);
                     mShowDatas.addAll(allChilds);
                 }
             }
@@ -69,10 +69,10 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
      */
     private void expandOrCollapse(int position) {
         TreeItem treeItem = mShowDatas.get(position);
-        if (treeItem instanceof TreeParentItem) {
+        if (treeItem instanceof TreeParentItem && ((TreeParentItem) treeItem).isCanChangeExpand()) {
             TreeParentItem treeParentItem = (TreeParentItem) treeItem;
             boolean expand = treeParentItem.isExpand();
-            List allChilds = treeParentItem.getChilds();
+            List allChilds = treeParentItem.getChilds(type);
             if (expand) {
                 mShowDatas.removeAll(allChilds);
                 treeParentItem.onCollapse();
@@ -114,6 +114,7 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final TreeItem treeItem = mShowDatas.get(position);
+        treeItem.setTreeItemManager(this);
         treeItem.onBindViewHolder(holder);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,10 +122,10 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
                 if (type != TreeRecyclerViewType.SHOW_ALL) {
                     expandOrCollapse(holder.getLayoutPosition());
                 }
-                treeItem.onClickChange();
+                treeItem.onClickChange(treeItem);
             }
         });
-        treeItem.setTreeItemManager(this);
+
     }
 
     @Override

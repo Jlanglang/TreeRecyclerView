@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_shopcart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="购物页面"/>
+
+    <Button
+        android:id="@+id/bt_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="城市列表"/>
+</LinearLayout>

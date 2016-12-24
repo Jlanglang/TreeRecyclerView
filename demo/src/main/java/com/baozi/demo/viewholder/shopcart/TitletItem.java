@@ -26,8 +26,7 @@ public class TitletItem extends TreeParentItem<StoreBean> {
         mShopListBeen = data.getShopListBeen();
         ArrayList<TreeItem> contentItems = new ArrayList<>();
         for (int i = 0; i < mShopListBeen.size(); i++) {
-            ShopListBean shopListBean = mShopListBeen.get(i);
-            ContentItem contentItem = new ContentItem(shopListBean, this);
+            ContentItem contentItem = new ContentItem(mShopListBeen.get(i), this);
             contentItems.add(contentItem);
         }
         return contentItems;
@@ -44,7 +43,7 @@ public class TitletItem extends TreeParentItem<StoreBean> {
     }
 
     @Override
-    public void onClickChange() {
+    public void onClickChange(TreeItem treeItem) {
         boolean check = data.isCheck();
         data.setCheck(!check);
         for (int i = 0; i < mShopListBeen.size(); i++) {

@@ -13,6 +13,7 @@ import com.baozi.demo.R;
 import com.baozi.demo.viewholder.citytree.CityBean;
 import com.baozi.demo.viewholder.citytree.OneItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class CityActivity extends AppCompatActivity {
         for (int i = 0; i < cityBeen.size(); i++) {
             treeBeen1.add(new OneItem(cityBeen.get(i)));
         }
-        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1));
+        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1, TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS));
     }
 
 }
