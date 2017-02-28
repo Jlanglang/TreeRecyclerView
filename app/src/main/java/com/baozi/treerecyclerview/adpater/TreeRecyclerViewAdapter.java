@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import com.baozi.treerecyclerview.viewholder.TreeItemManager;
 import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +23,13 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
     /**
      * 存储原始的items;
      */
-    private List<T> mDatas;//处理后的展示数据
+    private List<T> mDatas;
+
+
     /**
      * 存储可见的items
      */
-    protected List<T> mShowDatas;//处理后的展示数据
+    protected List<T> mShowDatas;
 
     /**
      * @param context 上下文
@@ -146,4 +147,7 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
         mDatas = datas;
     }
 
+    public List<T> getShowDatas() {
+        return mShowDatas;
+    }
 }

@@ -26,10 +26,10 @@ public interface ParentItem {
     void onCollapse();
 
     /**
-     * 获取孩子
+     * 获取子集
      *
      * @return
      */
-    List<TreeItem> getChilds();
+    List<? extends TreeItem> getChilds();
 
 }

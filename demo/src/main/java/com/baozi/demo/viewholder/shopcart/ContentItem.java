@@ -1,9 +1,8 @@
 package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
 /**
  * Created by baozi on 2016/12/22.
@@ -12,8 +11,8 @@ import com.baozi.treerecyclerview.viewholder.ViewHolder;
 public class ContentItem extends TreeItem<ShopListBean> {
 
 
-    public ContentItem(ShopListBean data, TreeParentItem parentItem) {
-        super(data, parentItem);
+    public ContentItem(ShopListBean data) {
+        super(data);
     }
 
     @Override

@@ -1,11 +1,9 @@
 package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.viewholder.TreeParentItem;
-import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,20 +17,20 @@ public class OneItem extends TreeParentItem<CityBean> {
     }
 
     @Override
-    protected List<TreeItem> initChildsList(CityBean data) {
-        ArrayList<TreeItem> treeItems = new ArrayList<>();
+    protected void initChildsList(CityBean data) {
+//        ArrayList<TreeItem> treeItems = new ArrayList<>();
         List<CityBean.CitysBean> citys = data.getCitys();
         if (null == citys) {
-            return null;
+            return ;
         }
         for (int i = 0; i < citys.size(); i++) {
-            TwoItem twoItem = new TwoItem(citys.get(i), this);
+            TwoItem twoItem = new TwoItem(citys.get(i));
             if (citys.get(i).getCityName().equals("朝阳区")) {
                 twoItem.setCanChangeExpand(false, true);
             }
-            treeItems.add(twoItem);
+            addView(twoItem);
         }
-        return treeItems;
+//        return treeItems;
     }
 
     @Override

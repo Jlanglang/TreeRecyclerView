@@ -19,13 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CityActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
-        recyclerView = (RecyclerView) findViewById(R.id.rl_content);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {

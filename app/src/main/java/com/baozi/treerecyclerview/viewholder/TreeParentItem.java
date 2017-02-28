@@ -29,16 +29,9 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
     protected boolean isCanChangeExpand = true;
 
     public TreeParentItem(D data) {
-        this(data, null);
-    }
-
-    public TreeParentItem(D data, TreeParentItem parentItem) {
-        super(data, parentItem);
+        super(data);
         childs = new ArrayList<>();
-        List<TreeItem> treeItems = initChildsList(data);
-        if (treeItems != null) {
-            childs.addAll(treeItems);
-        }
+        initChildsList(data);
     }
 
     @Override
@@ -132,12 +125,20 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
      * @param data 父级数据
      * @return 得到处理好的子集
      */
-    protected abstract List<TreeItem> initChildsList(D data);
+    protected abstract void initChildsList(D data);
 
     /**
      * 当子类发现变化时,父一级是否需要处理
      */
     public void onUpdate() {
 
+    }
+
+    /**
+     * 当子类发现变化时,父一级是否需要处理
+     */
+    public void addView(TreeItem treeItem) {
+        childs.add(treeItem);
+        treeItem.parentItem = this;
     }
 }

@@ -1,11 +1,10 @@
 package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,14 +21,14 @@ public class TitletItem extends TreeParentItem<StoreBean> {
     }
 
     @Override
-    protected List<TreeItem> initChildsList(StoreBean data) {
+    protected void initChildsList(StoreBean data) {
         mShopListBeen = data.getShopListBeen();
-        ArrayList<TreeItem> contentItems = new ArrayList<>();
+//        ArrayList<TreeItem> contentItems = new ArrayList<>();
         for (int i = 0; i < mShopListBeen.size(); i++) {
-            ContentItem contentItem = new ContentItem(mShopListBeen.get(i), this);
-            contentItems.add(contentItem);
+            ContentItem contentItem = new ContentItem(mShopListBeen.get(i));
+            addView(contentItem);
         }
-        return contentItems;
+//        return contentItems;
     }
 
     @Override

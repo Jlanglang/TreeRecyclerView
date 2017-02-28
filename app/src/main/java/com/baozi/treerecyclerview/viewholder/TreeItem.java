@@ -3,6 +3,8 @@ package com.baozi.treerecyclerview.viewholder;
 import android.content.res.Resources;
 import android.support.annotation.LayoutRes;
 
+import com.baozi.treerecyclerview.adpater.ViewHolder;
+
 /**
  * 组合模式
  */
@@ -20,19 +22,14 @@ public abstract class TreeItem<D> {
     /**
      * 每行所占比例
      */
-    protected int spanSize;
+    private int spanSize;
 
 
-    protected onClickChangeListener mOnClickChangeListener;
+    private onClickChangeListener mOnClickChangeListener;
 
     protected TreeItemManager mTreeItemManager;
 
     public TreeItem(D data) {
-        this(data, null);
-    }
-
-    public TreeItem(D data, TreeParentItem parentItem) {
-        this.parentItem = parentItem;
         this.data = data;
         layoutId = initLayoutId();
         spanSize = initSpansize();
@@ -116,7 +113,20 @@ public abstract class TreeItem<D> {
         return parentItem;
     }
 
+
     public interface onClickChangeListener {
         void onClickChange(TreeItem treeItem);
+    }
+
+    protected boolean dispathClickEvent() {
+        if (parentItem == null) {
+            return click();
+        } else {
+            return parentItem.dispathClickEvent();
+        }
+    }
+
+    protected boolean click() {
+        return false;
     }
 }
