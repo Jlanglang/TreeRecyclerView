@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.viewholder;
+package com.baozi.treerecyclerview.view;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 

@@ -2,7 +2,7 @@ package com.baozi.demo.viewholder.citytree;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.viewholder.TreeItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 /**
  */

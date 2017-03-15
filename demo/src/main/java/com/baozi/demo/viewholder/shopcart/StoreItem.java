@@ -2,7 +2,7 @@ package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
+import com.baozi.treerecyclerview.view.TreeParentItem;
 
 import java.util.List;
 
