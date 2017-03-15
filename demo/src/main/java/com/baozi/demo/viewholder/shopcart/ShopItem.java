@@ -8,15 +8,15 @@ import com.baozi.treerecyclerview.viewholder.TreeItem;
  * Created by baozi on 2016/12/22.
  */
 
-public class ContentItem extends TreeItem<ShopListBean> {
+public class ShopItem extends TreeItem<ShopListBean> {
 
 
-    public ContentItem(ShopListBean data) {
+    public ShopItem(ShopListBean data) {
         super(data);
     }
 
     @Override
-    protected int initLayoutId() {
+    public int getLayoutId() {
         return R.layout.item_shopcart_content;
     }
 
@@ -26,9 +26,8 @@ public class ContentItem extends TreeItem<ShopListBean> {
     }
 
     @Override
-    public void onClickChange(TreeItem treeItem) {
+    public void onClick() {
         getData().setCheck(!getData().isCheck());
-        parentItem.onUpdate();
-        mTreeItemManager.notifyDataSetChanged();
+        parentItem.updateView();
     }
 }

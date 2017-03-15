@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface ParentItem {
     /**
-     * 是否展开
+     * 是否允许展开
      *
      * @return
      */
-    boolean isExpand();
+    boolean canExpandOrCollapse();
 
     /**
      * 展开后的回调
@@ -30,6 +30,7 @@ public interface ParentItem {
      *
      * @return
      */
-    List<? extends TreeItem> getChilds();
+    List<TreeItem> getChilds();
+
 
 }

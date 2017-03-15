@@ -14,13 +14,15 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
+import com.baozi.demo.viewholder.shopcart.BrandBean;
+import com.baozi.demo.viewholder.shopcart.BrandItem;
 import com.baozi.demo.viewholder.shopcart.ShopListBean;
 import com.baozi.demo.viewholder.shopcart.StoreBean;
-import com.baozi.demo.viewholder.shopcart.TitletItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,7 +32,7 @@ import java.util.List;
 public class ShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private TreeRecyclerViewAdapter<TitletItem> mTitleItemTreeRecyclerViewAdapter;
+    private TreeRecyclerViewAdapter<BrandItem> mTitleItemTreeRecyclerViewAdapter;
     private TextView mTvNext;
 
     @Override
@@ -55,60 +57,80 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 outRect.top = 2;
             }
         });
-        ArrayList<TitletItem> titleItems = new ArrayList<>();//一级
-        List<StoreBean> storeBean = initData();
-        for (int i = 0; i < storeBean.size(); i++) {
-            titleItems.add(new TitletItem(storeBean.get(i)));
+        ArrayList<BrandItem> brandItems = new ArrayList<>();//一级
+        List<BrandBean> brandBeen = initData();
+        for (int i = 0; i < brandBeen.size(); i++) {
+            brandItems.add(new BrandItem(brandBeen.get(i)));
         }
-        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
+        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, brandItems, TreeRecyclerViewType.SHOW_ALL);
         mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
     }
 
     public void onNext() {
-        List<StoreBean> shopListBeen = new ArrayList<>();
-        List<TitletItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
-        for (int i = 0; i < datas.size(); i++) {
-            TitletItem titletItem = datas.get(i);
-            StoreBean data = titletItem.getData();
-            if (data.isCheck()) {
-                ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-                List<ShopListBean> shopListBeen1 = data.getShopListBeen();
-                for (int j = 0; j < shopListBeen1.size(); j++) {
-                    ShopListBean shopListBean = shopListBeen1.get(j);
-                    if (shopListBean.isCheck()) {
-                        shopListBeens.add(shopListBean);
+        List<BrandItem> fristDatas = mTitleItemTreeRecyclerViewAdapter.getFristDatas();
+        ArrayList<BrandBean> brandBeenList = new ArrayList<>();
+        for (int i = 0; i < fristDatas.size(); i++) {
+            BrandItem brandItem = fristDatas.get(i);
+            BrandBean data = brandItem.getData();
+            ArrayList<StoreBean> storeBeen = new ArrayList<>(data.getStoreBeens());
+            Iterator<StoreBean> iterator = storeBeen.iterator();
+            while (iterator.hasNext()) {
+                StoreBean next = iterator.next();
+                if (!next.isCheck()) {
+                    iterator.remove();
+                } else {
+                    ArrayList<ShopListBean> shopListBeen = new ArrayList<>(next.getShopListBeen());
+                    Iterator<ShopListBean> shopListBeanIterator = shopListBeen.iterator();
+                    while (shopListBeanIterator.hasNext()) {
+                        ShopListBean shopListBean = shopListBeanIterator.next();
+                        if (!shopListBean.isCheck()) {
+                            shopListBeanIterator.remove();
+                        }
                     }
+                    next.setShopListBeen(shopListBeen);
                 }
-                data.setShopListBeen(shopListBeens);
-                shopListBeen.add(data);
+            }
+            BrandBean brandBean = new BrandBean();
+            brandBean.setBrandId(data.getBrandId());
+            brandBean.setTitle(data.getTitle());
+            brandBean.setBrandName(data.getBrandName());
+            brandBean.setStoreBeens(storeBeen);
+            if (storeBeen.size() > 0) {
+                brandBeenList.add(brandBean);
             }
         }
-        String s = JSON.toJSONString(shopListBeen);
+        String s = JSON.toJSONString(brandBeenList);
         Log.i("data", s);
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
-    private List<StoreBean> initData() {
-        ArrayList<StoreBean> storeBeens = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            StoreBean storeBean = new StoreBean();
-            storeBean.setStoreId(i);
-            storeBean.setStoreName("商店" + i);
-            storeBean.setTitle("商店" + i);
-
-            ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-            for (int j = 0; j < 3; j++) {
-                ShopListBean shopListBean = new ShopListBean();
-                shopListBean.setShopName("豆腐渣");
-                shopListBean.setShopId(i);
-
-                shopListBeens.add(shopListBean);
+    private List<BrandBean> initData() {
+        ArrayList<BrandBean> brandBeens = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            ArrayList<StoreBean> storeBeens = new ArrayList<>();
+            for (int x = 0; x < 3; x++) {
+                ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
+                for (int y = 0; y < 3; y++) {
+                    ShopListBean shopListBean = new ShopListBean();
+                    shopListBean.setShopName("豆腐渣");
+                    shopListBean.setShopId(i);
+                    shopListBeens.add(shopListBean);
+                }
+                StoreBean storeBean = new StoreBean();
+                storeBean.setStoreId(i);
+                storeBean.setStoreName("商店" + i);
+                storeBean.setTitle("商店" + i);
+                storeBean.setShopListBeen(shopListBeens);
+                storeBeens.add(storeBean);
             }
-            storeBean.setShopListBeen(shopListBeens);
-
-            storeBeens.add(storeBean);
+            BrandBean brandBean = new BrandBean();
+            brandBean.setTitle("渣渣牌");
+            brandBean.setBrandId(0);
+            brandBean.setBrandName("渣渣牌");
+            brandBean.setStoreBeens(storeBeens);
+            brandBeens.add(brandBean);
         }
-        return storeBeens;
+        return brandBeens;
     }
 
 }

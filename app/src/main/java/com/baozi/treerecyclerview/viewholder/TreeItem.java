@@ -1,8 +1,6 @@
 package com.baozi.treerecyclerview.viewholder;
 
-import android.content.res.Resources;
-import android.support.annotation.LayoutRes;
-
+import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 
 /**
@@ -16,35 +14,21 @@ public abstract class TreeItem<D> {
      */
     protected D data;
     /**
-     * 布局资源id
-     */
-    protected int layoutId;
-    /**
      * 每行所占比例
      */
     private int spanSize;
 
-
-    private onClickChangeListener mOnClickChangeListener;
-
-    protected TreeItemManager mTreeItemManager;
+    TreeRecyclerViewAdapter adapter;
 
     public TreeItem(D data) {
         this.data = data;
-        layoutId = initLayoutId();
-        spanSize = initSpansize();
     }
 
-    public int getLayoutId() {
-        if (layoutId == 0) {
-            throw new Resources.NotFoundException("请设置布局Id");
-        }
-        return layoutId;
+    public void onAttchApater(TreeRecyclerViewAdapter adapter) {
+        this.adapter = adapter;
     }
 
-    public void setLayoutId(@LayoutRes int layoutId) {
-        this.layoutId = layoutId;
-    }
+    public abstract int getLayoutId();
 
     public int getSpanSize() {
         return spanSize;
@@ -62,23 +46,6 @@ public abstract class TreeItem<D> {
         this.data = data;
     }
 
-    /**
-     * item在每行中的spansize
-     * 默认为0,如果为0则占满一行
-     * 不建议连续的两级,都设置该数值
-     *
-     * @return 所占值
-     */
-    protected int initSpansize() {
-        return 0;
-    }
-
-    /**
-     * 该条目的布局id
-     *
-     * @return 布局id
-     */
-    protected abstract int initLayoutId();
 
     /**
      * 抽象holder的绑定
@@ -87,22 +54,6 @@ public abstract class TreeItem<D> {
      */
     public abstract void onBindViewHolder(ViewHolder holder);
 
-    /**
-     * 当item被点击时
-     */
-    public void onClickChange(TreeItem treeItem) {
-        if (mOnClickChangeListener != null) {
-            mOnClickChangeListener.onClickChange(treeItem);
-        }
-    }
-
-    public void setTreeItemManager(TreeItemManager treeItemManager) {
-        mTreeItemManager = treeItemManager;
-    }
-
-    public void setOnClickChangeListener(onClickChangeListener onClickChangeListener) {
-        mOnClickChangeListener = onClickChangeListener;
-    }
 
     /**
      * 获取当前item的父级
@@ -113,20 +64,8 @@ public abstract class TreeItem<D> {
         return parentItem;
     }
 
+    public void onClick() {
 
-    public interface onClickChangeListener {
-        void onClickChange(TreeItem treeItem);
     }
 
-    protected boolean dispathClickEvent() {
-        if (parentItem == null) {
-            return click();
-        } else {
-            return parentItem.dispathClickEvent();
-        }
-    }
-
-    protected boolean click() {
-        return false;
-    }
 }

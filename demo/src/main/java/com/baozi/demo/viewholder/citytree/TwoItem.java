@@ -16,7 +16,6 @@ public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
 
     @Override
     protected void initChildsList(CityBean.CitysBean data) {
-//        ArrayList<TreeItem> treeItems = new ArrayList<>();
         List<CityBean.CitysBean.AreasBean> citys = data.getAreas();
         if (citys == null) {
             return ;
@@ -25,11 +24,10 @@ public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
             ThreeItem threeItem = new ThreeItem(citys.get(i));
             addView(threeItem);
         }
-//        return treeItems;
     }
 
     @Override
-    public int initLayoutId() {
+    public int getLayoutId() {
         return R.layout.item_two;
     }
 
@@ -37,5 +35,10 @@ public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getCityName());
+    }
+
+    @Override
+    public boolean canExpandOrCollapse() {
+        return false;
     }
 }

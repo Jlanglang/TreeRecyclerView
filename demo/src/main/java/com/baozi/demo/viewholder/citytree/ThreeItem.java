@@ -14,7 +14,7 @@ public class ThreeItem extends TreeItem<CityBean.CitysBean.AreasBean> {
     }
 
     @Override
-    public int initLayoutId() {
+    public int getLayoutId() {
         return R.layout.item_three;
     }
 

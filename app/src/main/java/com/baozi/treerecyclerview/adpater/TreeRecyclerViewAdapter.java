@@ -6,30 +6,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.viewholder.TreeItemManager;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
+import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Adapter<ViewHolder>
-        implements TreeItemManager {
+public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Adapter<ViewHolder> {
+    //原始第一级数据
+    private List<T> mFristDatas;
+
     protected TreeRecyclerViewType type;
     /**
      * 上下文
      */
-    protected Context mContext;
+    private Context mContext;
     /**
-     * 存储原始的items;
+     * 展示的items
      */
-    private List<T> mDatas;
-
-
-    /**
-     * 存储可见的items
-     */
-    protected List<T> mShowDatas;
+    private List<T> mShowDatas;
 
     /**
      * @param context 上下文
@@ -45,8 +40,8 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
      */
     public TreeRecyclerViewAdapter(Context context, List<T> datas, TreeRecyclerViewType type) {
         this.type = type;
-        mContext = context;
-        mDatas = datas;
+        this.mContext = context;
+        this.mFristDatas = datas;
         datas = datas == null ? new ArrayList<T>() : datas;
         if (type == TreeRecyclerViewType.SHOW_ALL) {
             mShowDatas = new ArrayList<>();
@@ -59,7 +54,15 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
                 }
             }
         } else {
-            mShowDatas = datas;
+            mShowDatas = new ArrayList<>();
+            for (int i = 0; i < datas.size(); i++) {
+                T t = datas.get(i);
+                mShowDatas.add(t);
+                if (t instanceof TreeParentItem && !((TreeParentItem) t).canExpandOrCollapse()) {
+                    List allChilds = ((TreeParentItem) t).getChilds(type);
+                    mShowDatas.addAll(allChilds);
+                }
+            }
         }
     }
 
@@ -70,7 +73,7 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
      */
     private void expandOrCollapse(int position) {
         TreeItem treeItem = mShowDatas.get(position);
-        if (treeItem instanceof TreeParentItem && ((TreeParentItem) treeItem).isCanChangeExpand()) {
+        if (treeItem instanceof TreeParentItem && ((TreeParentItem) treeItem).canExpandOrCollapse()) {
             TreeParentItem treeParentItem = (TreeParentItem) treeItem;
             boolean expand = treeParentItem.isExpand();
             List allChilds = treeParentItem.getChilds(type);
@@ -114,8 +117,8 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final TreeItem treeItem = mShowDatas.get(position);
-        treeItem.setTreeItemManager(this);
+        final TreeItem treeItem = mShowDatas.get(holder.getLayoutPosition());
+        treeItem.onAttchApater(this);
         treeItem.onBindViewHolder(holder);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +126,7 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
                 if (type != TreeRecyclerViewType.SHOW_ALL) {
                     expandOrCollapse(holder.getLayoutPosition());
                 }
-                treeItem.onClickChange(treeItem);
+                treeItem.onClick();
             }
         });
 
@@ -139,15 +142,12 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
         return mShowDatas == null ? 0 : mShowDatas.size();
     }
 
-    public List<T> getDatas() {
-        return mDatas;
+    public List<T> getFristDatas() {
+        return mFristDatas;
     }
 
     public void setDatas(List<T> datas) {
-        mDatas = datas;
-    }
-
-    public List<T> getShowDatas() {
-        return mShowDatas;
+        mShowDatas = datas;
+        notifyDataSetChanged();
     }
 }

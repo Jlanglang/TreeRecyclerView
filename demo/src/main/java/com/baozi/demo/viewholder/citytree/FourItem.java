@@ -9,39 +9,36 @@ import com.baozi.treerecyclerview.viewholder.TreeParentItem;
  */
 public class FourItem extends TreeParentItem<String> {
 
-    public FourItem( String data) {
+    public FourItem(String data) {
         super(data);
     }
 
     @Override
-    protected void initChildsList(String data) {
-//                ArrayList<TreeItem> treeItems = new ArrayList<>();
-                for (int i = 0; i < 10; i++) {
-                    FiveItem threeItem = new FiveItem("我是五级");
-                    if (i % 4 == 0) {//偷个懒,不多写布局了.
-                        threeItem.setLayoutId(R.layout.itme_one);
-                        threeItem.setSpanSize(0);
-                    } else if (i % 3 == 0) {
-                        threeItem.setLayoutId(R.layout.item_two);
-                        threeItem.setSpanSize(2);
-                    }
-                   addView(threeItem);
-        }
-    }
-
-    @Override
-    protected int initLayoutId() {
+    public int getLayoutId() {
         return R.layout.item_four;
     }
 
     @Override
-    protected int initSpansize() {
-        return 2;
+    protected void initChildsList(String data) {
+        for (int i = 0; i < 10; i++) {
+            FiveItem threeItem = new FiveItem("我是五级");
+            if (i % 4 == 0) {//偷个懒,不多写布局了.
+                threeItem.setSpanSize(0);
+            } else if (i % 3 == 0) {
+                threeItem.setSpanSize(2);
+            }
+            addView(threeItem);
+        }
     }
 
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
 
+    }
+
+    @Override
+    public boolean canExpandOrCollapse() {
+        return false;
     }
 }
