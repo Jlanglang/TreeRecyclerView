@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.viewholder;
+package com.baozi.treerecyclerview.adpater;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

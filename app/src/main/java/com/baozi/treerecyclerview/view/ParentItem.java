@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.viewholder;
+package com.baozi.treerecyclerview.view;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import java.util.List;
  */
 public interface ParentItem {
     /**
-     * 是否展开
+     * 是否允许展开
      *
      * @return
      */
-    boolean isExpand();
+    boolean canExpandOrCollapse();
 
     /**
      * 展开后的回调
@@ -26,10 +26,11 @@ public interface ParentItem {
     void onCollapse();
 
     /**
-     * 获取孩子
+     * 获取子集
      *
      * @return
      */
     List<TreeItem> getChilds();
+
 
 }

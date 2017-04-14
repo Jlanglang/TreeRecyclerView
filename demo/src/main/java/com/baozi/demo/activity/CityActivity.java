@@ -13,19 +13,18 @@ import com.baozi.demo.R;
 import com.baozi.demo.viewholder.citytree.CityBean;
 import com.baozi.demo.viewholder.citytree.OneItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CityActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
-        recyclerView = (RecyclerView) findViewById(R.id.rl_content);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
@@ -52,7 +51,7 @@ public class CityActivity extends AppCompatActivity {
             oneItem.setData(cityBeen.get(i));
             treeBeen1.add(oneItem);
         }
-        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1, TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS));
+        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1));
     }
 
 }
