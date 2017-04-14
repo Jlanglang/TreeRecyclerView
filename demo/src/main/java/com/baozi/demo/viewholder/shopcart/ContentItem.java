@@ -1,11 +1,8 @@
 package com.baozi.demo.viewholder.shopcart;
 
-import android.view.View;
-
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 /**
  * Created by baozi on 2016/12/22.

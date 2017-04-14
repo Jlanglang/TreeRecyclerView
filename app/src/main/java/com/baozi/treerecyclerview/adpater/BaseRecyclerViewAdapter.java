@@ -3,13 +3,9 @@ package com.baozi.treerecyclerview.adpater;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
-import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;

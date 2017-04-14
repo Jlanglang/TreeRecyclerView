@@ -6,9 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
-import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
+import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.view.TreeParentItem;
 
 import java.util.ArrayList;
 import java.util.List;

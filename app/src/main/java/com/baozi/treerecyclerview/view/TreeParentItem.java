@@ -1,6 +1,7 @@
-package com.baozi.treerecyclerview.viewholder;
+package com.baozi.treerecyclerview.view;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.viewholder.ItemData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,6 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
         super(parentItem);
     }
 
-    @Override
     public boolean isExpand() {
         return isExpand;
     }

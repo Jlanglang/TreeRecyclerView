@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.viewholder;
 
+import com.baozi.treerecyclerview.view.TreeItem;
+
 import java.util.ArrayList;
 import java.util.List;
 

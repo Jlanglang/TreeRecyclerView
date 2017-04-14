@@ -1,9 +1,9 @@
 package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.viewholder.TreeParentItem;
-import com.baozi.treerecyclerview.viewholder.TreeItem;
-import com.baozi.treerecyclerview.viewholder.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.view.TreeParentItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,5 +56,10 @@ public class TitletItem extends TreeParentItem<StoreBean> {
                 data.setCheck(true);
             }
         }
+    }
+
+    @Override
+    public boolean canExpandOrCollapse() {
+        return false;
     }
 }
