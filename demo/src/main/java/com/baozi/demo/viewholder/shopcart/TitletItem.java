@@ -14,19 +14,16 @@ import java.util.List;
 
 public class TitletItem extends TreeParentItem<StoreBean> {
 
-
     private List<ShopListBean> mShopListBeen;
-
-    public TitletItem(StoreBean data) {
-        super(data);
-    }
 
     @Override
     protected List<TreeItem> initChildsList(StoreBean data) {
         mShopListBeen = data.getShopListBeen();
         ArrayList<TreeItem> contentItems = new ArrayList<>();
         for (int i = 0; i < mShopListBeen.size(); i++) {
-            ContentItem contentItem = new ContentItem(mShopListBeen.get(i), this);
+            ContentItem contentItem = new ContentItem();
+            contentItem.setData(mShopListBeen.get(i));
+            contentItem.setParentItem(this);
             contentItems.add(contentItem);
         }
         return contentItems;
@@ -49,7 +46,6 @@ public class TitletItem extends TreeParentItem<StoreBean> {
         for (int i = 0; i < mShopListBeen.size(); i++) {
             mShopListBeen.get(i).setCheck(!check);
         }
-        mTreeItemManager.notifyDataSetChanged();
     }
 
     @Override

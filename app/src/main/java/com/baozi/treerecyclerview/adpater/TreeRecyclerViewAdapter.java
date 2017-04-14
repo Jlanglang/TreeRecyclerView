@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.viewholder.TreeItemManager;
 import com.baozi.treerecyclerview.viewholder.TreeParentItem;
 import com.baozi.treerecyclerview.viewholder.TreeItem;
 import com.baozi.treerecyclerview.viewholder.ViewHolder;
@@ -14,8 +13,7 @@ import com.baozi.treerecyclerview.viewholder.ViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Adapter<ViewHolder>
-        implements TreeItemManager {
+public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Adapter<ViewHolder> {
     protected TreeRecyclerViewType type;
     /**
      * 上下文
@@ -45,12 +43,11 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
     public TreeRecyclerViewAdapter(Context context, List<T> datas, TreeRecyclerViewType type) {
         this.type = type;
         mContext = context;
-        mDatas = datas;
-        datas = datas == null ? new ArrayList<T>() : datas;
+        mDatas = datas == null ? new ArrayList<T>() : datas;
         if (type == TreeRecyclerViewType.SHOW_ALL) {
             mShowDatas = new ArrayList<>();
-            for (int i = 0; i < datas.size(); i++) {
-                T t = datas.get(i);
+            for (int i = 0; i < mDatas.size(); i++) {
+                T t = mDatas.get(i);
                 mShowDatas.add(t);
                 if (t instanceof TreeParentItem) {
                     List allChilds = ((TreeParentItem) t).getChilds(type);
@@ -58,12 +55,12 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
                 }
             }
         } else {
-            mShowDatas = datas;
+            mShowDatas = mDatas;
         }
     }
 
     /**
-     * 相应ListView的点击事件 展开或关闭某节点
+     * 相应RecyclerView的点击事件 展开或关闭某节点
      *
      * @param position 触发的条目
      */
@@ -108,24 +105,24 @@ public class TreeRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return ViewHolder.createViewHolder(mContext, parent, viewType);
+        ViewHolder viewHolder = ViewHolder.createViewHolder(mContext, parent, viewType);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final TreeItem treeItem = mShowDatas.get(position);
-        treeItem.setTreeItemManager(this);
         treeItem.onBindViewHolder(holder);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type != TreeRecyclerViewType.SHOW_ALL) {
                     expandOrCollapse(holder.getLayoutPosition());
+                } else {
+                    treeItem.onClickChange(treeItem);
                 }
-                treeItem.onClickChange(treeItem);
             }
         });
-
     }
 
     @Override

@@ -14,10 +14,6 @@ import java.util.List;
 public class OneItem extends TreeParentItem<CityBean> {
 
 
-    public OneItem(CityBean data) {
-        super(data);
-    }
-
     @Override
     protected List<TreeItem> initChildsList(CityBean data) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
@@ -26,7 +22,9 @@ public class OneItem extends TreeParentItem<CityBean> {
             return null;
         }
         for (int i = 0; i < citys.size(); i++) {
-            TwoItem twoItem = new TwoItem(citys.get(i), this);
+            TwoItem twoItem = new TwoItem();
+            twoItem.setData(citys.get(i));
+            twoItem.setParentItem(this);
             if (citys.get(i).getCityName().equals("朝阳区")) {
                 twoItem.setCanChangeExpand(false, true);
             }

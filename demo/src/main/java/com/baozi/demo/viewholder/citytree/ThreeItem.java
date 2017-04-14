@@ -10,10 +10,6 @@ import com.baozi.treerecyclerview.viewholder.ViewHolder;
 public class ThreeItem extends TreeItem<CityBean.CitysBean.AreasBean> {
 
 
-    public ThreeItem(CityBean.CitysBean.AreasBean data, TreeParentItem parentItem) {
-        super(data, parentItem);
-    }
-
     @Override
     public int initLayoutId() {
         return R.layout.item_three;

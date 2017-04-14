@@ -58,7 +58,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
         ArrayList<TitletItem> titleItems = new ArrayList<>();//一级
         List<StoreBean> storeBean = initData();
         for (int i = 0; i < storeBean.size(); i++) {
-            titleItems.add(new TitletItem(storeBean.get(i)));
+            TitletItem titletItem = new TitletItem();
+            titletItem.setData(storeBean.get(i));
+            titleItems.add(titletItem);
         }
         mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
         mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
@@ -101,11 +103,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 ShopListBean shopListBean = new ShopListBean();
                 shopListBean.setShopName("豆腐渣");
                 shopListBean.setShopId(i);
-
                 shopListBeens.add(shopListBean);
             }
             storeBean.setShopListBeen(shopListBeens);
-
             storeBeens.add(storeBean);
         }
         return storeBeens;

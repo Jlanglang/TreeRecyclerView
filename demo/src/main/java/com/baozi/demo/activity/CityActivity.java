@@ -48,7 +48,9 @@ public class CityActivity extends AppCompatActivity {
         ArrayList<OneItem> treeBeen1 = new ArrayList<>();//一级
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
         for (int i = 0; i < cityBeen.size(); i++) {
-            treeBeen1.add(new OneItem(cityBeen.get(i)));
+            OneItem oneItem = new OneItem();
+            oneItem.setData(cityBeen.get(i));
+            treeBeen1.add(oneItem);
         }
         recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1, TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS));
     }

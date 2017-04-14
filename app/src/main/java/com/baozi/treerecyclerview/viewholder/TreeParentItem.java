@@ -13,7 +13,7 @@ import java.util.List;
  * //持有adapter,因为可以影响子集
  */
 
-public abstract class TreeParentItem<D> extends TreeItem<D>
+public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
         implements ParentItem {
     /**
      * 持有的子item
@@ -28,17 +28,12 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
      */
     protected boolean isCanChangeExpand = true;
 
-    public TreeParentItem(D data) {
-        this(data, null);
+    public TreeParentItem() {
+
     }
 
-    public TreeParentItem(D data, TreeParentItem parentItem) {
-        super(data, parentItem);
-        childs = new ArrayList<>();
-        List<TreeItem> treeItems = initChildsList(data);
-        if (treeItems != null) {
-            childs.addAll(treeItems);
-        }
+    public TreeParentItem(TreeParentItem parentItem) {
+        super(parentItem);
     }
 
     @Override
@@ -52,6 +47,12 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
         }
     }
 
+    @Override
+    public void setData(D data) {
+        super.setData(data);
+        List<TreeItem> treeItems = initChildsList(data);
+        childs = treeItems == null ? new ArrayList<TreeItem>() : treeItems;
+    }
 
     /**
      * 展开
@@ -91,30 +92,6 @@ public abstract class TreeParentItem<D> extends TreeItem<D>
             }
         }
         return treeItems;
-    }
-
-    public void setChilds(List<TreeItem> childs) {
-        this.childs = childs;
-    }
-
-    public void addChild(TreeItem treeItem) {
-        childs.add(treeItem);
-    }
-
-    public void addChild(TreeItem treeItem, int position) {
-        childs.add(treeItem);
-    }
-
-    public void removeChild(TreeItem treeItem) {
-        childs.remove(treeItem);
-    }
-
-    public void removeChild(int position) {
-        childs.remove(position);
-    }
-
-    public void cleanChild() {
-        childs.clear();
     }
 
     public boolean isCanChangeExpand() {

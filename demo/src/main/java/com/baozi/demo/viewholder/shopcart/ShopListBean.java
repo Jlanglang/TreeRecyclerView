@@ -1,9 +1,11 @@
 package com.baozi.demo.viewholder.shopcart;
 
+import com.baozi.treerecyclerview.viewholder.ItemData;
+
 /**
  * Created by baozi on 2016/12/22.
  */
-public class ShopListBean {
+public class ShopListBean implements ItemData{
     private String imgUrl;
     private String shopName;
     private int shopId;
@@ -50,4 +52,8 @@ public class ShopListBean {
         this.shopId = shopId;
     }
 
+    @Override
+    public int getItemType() {
+        return 0;
+    }
 }

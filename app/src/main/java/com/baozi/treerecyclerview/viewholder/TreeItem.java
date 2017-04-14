@@ -6,7 +6,7 @@ import android.support.annotation.LayoutRes;
 /**
  * 组合模式
  */
-public abstract class TreeItem<D> {
+public abstract class TreeItem<D extends ItemData> {
 
     protected TreeParentItem parentItem;
     /**
@@ -25,28 +25,20 @@ public abstract class TreeItem<D> {
 
     protected onClickChangeListener mOnClickChangeListener;
 
-    protected TreeItemManager mTreeItemManager;
+    public TreeItem() {
 
-    public TreeItem(D data) {
-        this(data, null);
     }
 
-    public TreeItem(D data, TreeParentItem parentItem) {
+    public TreeItem(TreeParentItem parentItem) {
         this.parentItem = parentItem;
-        this.data = data;
-        layoutId = initLayoutId();
-        spanSize = initSpansize();
     }
 
     public int getLayoutId() {
+        layoutId = initLayoutId();
         if (layoutId == 0) {
             throw new Resources.NotFoundException("请设置布局Id");
         }
         return layoutId;
-    }
-
-    public void setLayoutId(@LayoutRes int layoutId) {
-        this.layoutId = layoutId;
     }
 
     public int getSpanSize() {
@@ -63,6 +55,14 @@ public abstract class TreeItem<D> {
 
     public void setData(D data) {
         this.data = data;
+    }
+
+    public void setParentItem(TreeParentItem parentItem) {
+        this.parentItem = parentItem;
+    }
+
+    public onClickChangeListener getOnClickChangeListener() {
+        return mOnClickChangeListener;
     }
 
     /**
@@ -99,9 +99,6 @@ public abstract class TreeItem<D> {
         }
     }
 
-    public void setTreeItemManager(TreeItemManager treeItemManager) {
-        mTreeItemManager = treeItemManager;
-    }
 
     public void setOnClickChangeListener(onClickChangeListener onClickChangeListener) {
         mOnClickChangeListener = onClickChangeListener;
