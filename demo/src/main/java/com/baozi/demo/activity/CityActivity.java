@@ -13,8 +13,8 @@ import com.baozi.demo.R;
 import com.baozi.demo.viewholder.citytree.CityBean;
 import com.baozi.demo.viewholder.citytree.OneItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
+import com.baozi.treerecyclerview.viewholder.ItemHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CityActivity extends AppCompatActivity {
@@ -35,23 +35,15 @@ public class CityActivity extends AppCompatActivity {
                 if (view.getLayoutParams() instanceof GridLayoutManager.LayoutParams) {
                     GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams) view.getLayoutParams();
                     int spanIndex = layoutParams.getSpanIndex();//在一行中所在的角标，第几列
-//                    int spanSize = layoutParams.getSpanSize();//所占的比例
-                    if (spanIndex == ((GridLayoutManager) parent.getLayoutManager()).getSpanCount() - 1) {
-
-                    } else {
+                    if (spanIndex != ((GridLayoutManager) parent.getLayoutManager()).getSpanCount() - 1) {
                         outRect.right = 10;
                     }
                 }
             }
         });
-        ArrayList<OneItem> treeBeen1 = new ArrayList<>();//一级
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
-        for (int i = 0; i < cityBeen.size(); i++) {
-            OneItem oneItem = new OneItem();
-            oneItem.setData(cityBeen.get(i));
-            treeBeen1.add(oneItem);
-        }
-        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, treeBeen1));
+        List<OneItem> itemList = ItemHelper.createItemListForClass(cityBeen, OneItem.class);
+        recyclerView.setAdapter(new TreeRecyclerViewAdapter<>(this, itemList));
     }
 
 }

@@ -4,34 +4,35 @@ import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeParentItem;
+import com.baozi.treerecyclerview.viewholder.ItemHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by baozi on 2016/12/8.
  */
 public class OneItem extends TreeParentItem<CityBean> {
-
-
     @Override
-    protected List<TreeItem> initChildsList(CityBean data) {
-        ArrayList<TreeItem> treeItems = new ArrayList<>();
-        List<CityBean.CitysBean> citys = data.getCitys();
-        if (null == citys) {
-            return null;
-        }
-        for (int i = 0; i < citys.size(); i++) {
-            TwoItem twoItem = new TwoItem();
-            twoItem.setData(citys.get(i));
-            twoItem.setParentItem(this);
-            if (citys.get(i).getCityName().equals("朝阳区")) {
-                twoItem.setCanChangeExpand(false, true);
-            }
-            treeItems.add(twoItem);
-        }
-        return treeItems;
+    public List<? extends TreeItem> initChildsList() {
+        return ItemHelper.createItemListForClass(data.getCitys(), TwoItem.class, this);
     }
+
+    //    @Override
+//    protected List<? extends TreeItem> initChildsList(CityBean data) {
+////        ArrayList<TreeItem> treeItems = new ArrayList<>();
+////        List<CityBean.CitysBean> citys = data.getCitys();
+////        if (null == citys) {
+////            return null;
+////        }
+////        List<TreeItem> childItemList =
+////        for (int i = 0; i < childItemList.size(); i++) {
+////            if (childItemList.get(i).getData().getCityName().equals("朝阳区")) {
+////                twoItem.setCanChangeExpand(false, true);
+////            }
+////        }
+//        List<TwoItem> twoItems =
+//        return twoItems;
+//    }
 
     @Override
     public int initLayoutId() {

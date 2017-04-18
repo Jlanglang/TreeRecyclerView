@@ -19,6 +19,7 @@ import com.baozi.demo.viewholder.shopcart.StoreBean;
 import com.baozi.demo.viewholder.shopcart.TitletItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.viewholder.ItemHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,14 +56,15 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 outRect.top = 2;
             }
         });
-        ArrayList<TitletItem> titleItems = new ArrayList<>();//一级
+//        ArrayList<TitletItem> titleItems = new ArrayList<>();//一级
         List<StoreBean> storeBean = initData();
-        for (int i = 0; i < storeBean.size(); i++) {
-            TitletItem titletItem = new TitletItem();
-            titletItem.setData(storeBean.get(i));
-            titleItems.add(titletItem);
-        }
-        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, titleItems, TreeRecyclerViewType.SHOW_ALL);
+//        for (int i = 0; i < storeBean.size(); i++) {
+//            TitletItem titletItem = new TitletItem();
+//            titletItem.setData(storeBean.get(i));
+//            titleItems.add(titletItem);
+//        }
+        List<TitletItem> itemList = ItemHelper.createItemListForClass(storeBean, TitletItem.class);
+        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerViewAdapter<>(this, itemList, TreeRecyclerViewType.SHOW_ALL);
         mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
     }
 

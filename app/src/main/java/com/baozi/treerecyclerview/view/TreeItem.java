@@ -18,14 +18,14 @@ public abstract class TreeItem<D extends ItemData> {
     /**
      * 布局资源id
      */
-    protected int layoutId;
+    private int layoutId;
     /**
      * 每行所占比例
      */
-    protected int spanSize;
+    private int spanSize;
 
 
-    protected onClickChangeListener mOnClickChangeListener;
+    private onClickChangeListener mOnClickChangeListener;
 
     public TreeItem() {
 

@@ -7,7 +7,7 @@ import java.util.List;
  * @版本 2.0
  * @Change
  */
-public interface ParentItem {
+interface ParentItem {
     /**
      * 是否允许展开
      *
@@ -30,7 +30,7 @@ public interface ParentItem {
      *
      * @return
      */
-    List<TreeItem> getChilds();
+    List<? extends TreeItem> getChilds();
 
 
 }

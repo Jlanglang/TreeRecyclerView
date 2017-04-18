@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/22.
  */
-public class StoreBean implements ItemData{
+public class StoreBean extends ItemData {
     private List<ShopListBean> mShopListBeen;
     private String title;
     private int storeId;
@@ -53,10 +53,5 @@ public class StoreBean implements ItemData{
 
     public void setStoreName(String storeName) {
         this.storeName = storeName;
-    }
-
-    @Override
-    public int getItemType() {
-        return 0;
     }
 }

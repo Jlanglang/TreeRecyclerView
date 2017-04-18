@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.view;
 
+import android.support.annotation.Nullable;
+
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.viewholder.ItemData;
 
@@ -19,7 +21,7 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
     /**
      * 持有的子item
      */
-    protected List<TreeItem> childs;
+    protected List<? extends TreeItem> childs;
     /**
      * 是否展开
      */
@@ -31,10 +33,6 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
 
     public TreeParentItem() {
 
-    }
-
-    public TreeParentItem(TreeParentItem parentItem) {
-        super(parentItem);
     }
 
     public boolean isExpand() {
@@ -50,8 +48,7 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
     @Override
     public void setData(D data) {
         super.setData(data);
-        List<TreeItem> treeItems = initChildsList(data);
-        childs = treeItems == null ? new ArrayList<TreeItem>() : treeItems;
+        childs = initChildsList();
     }
 
     /**
@@ -70,8 +67,9 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
 
     }
 
+    @Nullable
     @Override
-    public List<TreeItem> getChilds() {
+    public List<? extends TreeItem> getChilds() {
         return childs;
     }
 
@@ -98,18 +96,12 @@ public abstract class TreeParentItem<D extends ItemData> extends TreeItem<D>
         return isCanChangeExpand;
     }
 
-    public void setCanChangeExpand(boolean canChangeExpand, boolean defualtExpand) {
-        isCanChangeExpand = canChangeExpand;
-        this.isExpand = defualtExpand;
-    }
-
     /**
-     * 初始化子数据
+     * 初始化子集
      *
-     * @param data 父级数据
-     * @return 得到处理好的子集
+     * @return
      */
-    protected abstract List<TreeItem> initChildsList(D data);
+    protected abstract List<? extends TreeItem> initChildsList();
 
     /**
      * 当子类发现变化时,父一级是否需要处理

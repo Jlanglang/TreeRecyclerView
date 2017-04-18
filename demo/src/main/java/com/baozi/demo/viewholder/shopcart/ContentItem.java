@@ -10,11 +10,6 @@ import com.baozi.treerecyclerview.view.TreeItem;
 
 public class ContentItem extends TreeItem<ShopListBean> {
 
-
-//    public ContentItem(ShopListBean data, TreeParentItem parentItem) {
-//        super(data, parentItem);
-//    }
-
     @Override
     protected int initLayoutId() {
         return R.layout.item_shopcart_content;
@@ -29,6 +24,5 @@ public class ContentItem extends TreeItem<ShopListBean> {
     public void onClickChange(TreeItem treeItem) {
         getData().setCheck(!getData().isCheck());
         parentItem.onUpdate();
-//        mTreeItemManager.notifyDataSetChanged();
     }
 }

@@ -4,8 +4,8 @@ import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeParentItem;
+import com.baozi.treerecyclerview.viewholder.ItemHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,20 +13,19 @@ import java.util.List;
  */
 
 public class TitletItem extends TreeParentItem<StoreBean> {
-
     private List<ShopListBean> mShopListBeen;
 
     @Override
-    protected List<TreeItem> initChildsList(StoreBean data) {
-        mShopListBeen = data.getShopListBeen();
-        ArrayList<TreeItem> contentItems = new ArrayList<>();
-        for (int i = 0; i < mShopListBeen.size(); i++) {
-            ContentItem contentItem = new ContentItem();
-            contentItem.setData(mShopListBeen.get(i));
-            contentItem.setParentItem(this);
-            contentItems.add(contentItem);
-        }
-        return contentItems;
+    protected List<? extends TreeItem> initChildsList() {
+//        mShopListBeen = data.getShopListBeen();
+//        ArrayList<TreeItem> contentItems = new ArrayList<>();
+//        for (int i = 0; i < mShopListBeen.size(); i++) {
+//            ContentItem contentItem = new ContentItem();
+//            contentItem.setData(mShopListBeen.get(i));
+//            contentItem.setParentItem(this);
+//            contentItems.add(contentItem);
+//        }
+        return ItemHelper.createItemListForClass(data.getShopListBeen(), ContentItem.class, this);
     }
 
     @Override

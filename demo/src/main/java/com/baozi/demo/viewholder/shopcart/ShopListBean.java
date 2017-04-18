@@ -5,7 +5,7 @@ import com.baozi.treerecyclerview.viewholder.ItemData;
 /**
  * Created by baozi on 2016/12/22.
  */
-public class ShopListBean implements ItemData{
+public class ShopListBean extends ItemData{
     private String imgUrl;
     private String shopName;
     private int shopId;
@@ -52,8 +52,4 @@ public class ShopListBean implements ItemData{
         this.shopId = shopId;
     }
 
-    @Override
-    public int getItemType() {
-        return 0;
-    }
 }

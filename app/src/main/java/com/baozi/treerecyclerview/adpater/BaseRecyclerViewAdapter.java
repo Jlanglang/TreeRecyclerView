@@ -70,44 +70,4 @@ public class BaseRecyclerViewAdapter<T extends TreeItem> extends RecyclerView.Ad
     public int getItemCount() {
         return mDatas.size();
     }
-//
-//    public void setEd(final int size) {
-//        new EditText(mContext).addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                int length = s.length();
-//                //大于最小触发时
-//                if (length > size + 1) {
-//                    //删除所有空格
-//                    String s1 = s.toString().replaceAll(" ", "");
-//                    //判断是否达到触发点
-//                    if (s1.length() % size == 0) {
-//                        char[] chars = s1.toCharArray();
-//                        StringBuilder stringBuilder = new StringBuilder();
-//                        //遍历添加
-//                        for (int i = 0; i < chars.length; i++) {
-//                            stringBuilder.append(chars[i]);
-//                            //触发点添加空格
-//                            if (i % size == 0) {
-//                                stringBuilder.append(" ");
-//                            }
-//                        }
-//                        String s2 = stringBuilder.toString();
-//                    }
-//                } else if (s.length() == size) {//等于最小触发的时候
-//                    s = s + " ";
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//    }
 }

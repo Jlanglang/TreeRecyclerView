@@ -12,9 +12,8 @@ import java.util.List;
  */
 public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
 
-
     @Override
-    protected List<TreeItem> initChildsList(CityBean.CitysBean data) {
+    public List<? extends TreeItem> initChildsList() {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
         List<CityBean.CitysBean.AreasBean> citys = data.getAreas();
         if (citys == null) {
@@ -38,6 +37,11 @@ public class TwoItem extends TreeParentItem<CityBean.CitysBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getCityName());
+    }
+
+    @Override
+    public boolean isCanChangeExpand() {
+        return data.getCityName().equals("朝阳区");
     }
 
     @Override
