@@ -2,13 +2,13 @@ package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.view.BaseItem;
 
 /**
  * Created by baozi on 2016/12/22.
  */
 
-public class ContentItem extends TreeItem<ShopListBean> {
+public class ContentItem extends BaseItem<ShopListBean> {
 
     @Override
     protected int initLayoutId() {
@@ -21,8 +21,10 @@ public class ContentItem extends TreeItem<ShopListBean> {
     }
 
     @Override
-    public void onClickChange(TreeItem treeItem) {
+    public void onClick(int position) {
         getData().setCheck(!getData().isCheck());
-        parentItem.onUpdate();
+        if (parentItem != null) {
+            parentItem.onUpdate();
+        }
     }
 }
