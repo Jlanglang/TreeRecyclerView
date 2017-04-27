@@ -5,6 +5,8 @@ import android.view.View;
 import com.baozi.treerecyclerview.view.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
+import com.baozi.treerecyclerview.view.TreeItemManager;
+import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 
 public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter<T> {
     private TreeRecyclerViewType type;
+    private TreeItemManager<T> mTreeItemManager;
     /**
      * 最初的数据
      */
@@ -33,10 +36,13 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                         expandOrCollapse(layoutPosition);
                     } else {
                         T item = getDatas().get(layoutPosition);
-                        item.onClick(holder, layoutPosition);
+                        item.onClick();
                     }
                 }
             });
+        }
+        if (item.getTreeItemManager() == null) {
+            item.setTreeItemManager(getTreeItemManager());
         }
     }
 
@@ -60,8 +66,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 T t = datas.get(i);
                 getDatas().add(t);
                 if (t instanceof TreeItemGroup) {
-                    List allChilds = ((TreeItemGroup) t).getChilds(type);
-                    getDatas().addAll(allChilds);
+                    getDatas().addAll(((TreeItemGroup) t).getChilds(type));
                 }
             }
         } else {
@@ -95,5 +100,74 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
 
     public void setType(TreeRecyclerViewType type) {
         this.type = type;
+    }
+
+    /**
+     * 操作adapter
+     *
+     * @return
+     */
+    public TreeItemManager<T> getTreeItemManager() {
+        if (mTreeItemManager == null) {
+            mTreeItemManager = new TreeItemManager<T>() {
+                @Override
+                public void addTreeItem(T item) {
+                    getDatas().add(item);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void addTreeItem(List<T> items) {
+                    getDatas().addAll(items);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void removeItem(T item) {
+                    getDatas().remove(item);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void removeItem(List<T> items) {
+                    getDatas().removeAll(items);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void notifyItemChanged(int position) {
+                }
+
+                @Override
+                public void notifyItemInserted(int position) {
+                }
+
+                @Override
+                public void notifyItemRemoved(int position) {
+                }
+
+                @Override
+                public void notifyItemRangeChanged(int positionStart, int itemCount) {
+                }
+
+                @Override
+                public void notifyItemRangeInserted(int positionStart, int itemCount) {
+                }
+
+                @Override
+                public void notifyItemRangeRemoved(int positionStart, int itemCount) {
+                }
+
+                @Override
+                public void notifyDataSetChanged() {
+                    TreeRecyclerAdapter.this.notifyDataSetChanged();
+                }
+            };
+        }
+        return mTreeItemManager;
+    }
+
+    public void setTreeItemManager(TreeItemManager<T> treeItemManager) {
+        mTreeItemManager = treeItemManager;
     }
 }

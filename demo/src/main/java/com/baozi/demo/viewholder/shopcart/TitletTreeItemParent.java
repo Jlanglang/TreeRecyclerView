@@ -1,7 +1,7 @@
 package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.view.ViewHolder;
 import com.baozi.treerecyclerview.view.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 import com.baozi.treerecyclerview.helper.ItemHelper;
@@ -31,13 +31,10 @@ public class TitletTreeItemParent extends TreeItemGroup<StoreBean> {
     }
 
     @Override
-    public void onClick(ViewHolder viewHolder, int position) {
+    public void onClick() {
         boolean b = getData().isCheck();
         getData().setCheck(!b);
-        viewHolder.setChecked(R.id.cb_ischeck, !b);
-//        for (int i = 0; i < getChildsCount(); i++) {
-//            getChilds().get(i).onClick(viewHolder, position);
-//        }
+        getTreeItemManager().notifyDataSetChanged();
     }
 
 

@@ -1,9 +1,8 @@
 package com.baozi.treerecyclerview.view;
 
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 /**
  * 组合模式
@@ -73,9 +72,8 @@ public abstract class BaseItem<D extends ItemData> {
     /**
      * 当前条目的点击回调
      *
-     * @param position
      */
-    public void onClick(ViewHolder viewHolder, int position) {
+    public void onClick() {
 
     }
 }

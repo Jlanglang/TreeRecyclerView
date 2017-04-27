@@ -6,10 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.view.ViewHolder;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,7 +36,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    getDatas().get(layoutPosition).onClick(holder,layoutPosition);
+                    getDatas().get(layoutPosition).onClick();
                 }
             });
         }
