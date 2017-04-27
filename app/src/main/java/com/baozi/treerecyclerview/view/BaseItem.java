@@ -10,7 +10,6 @@ import com.baozi.treerecyclerview.adpater.ViewHolder;
  */
 public abstract class BaseItem<D extends ItemData> {
 
-    protected ItemGroup parentItem;
     /**
      * 当前item的数据
      */
@@ -18,7 +17,7 @@ public abstract class BaseItem<D extends ItemData> {
     /**
      * 布局资源id
      */
-    private int layoutId;
+    protected int layoutId;
     /**
      * item在每行中的spansize
      * 默认为0,如果为0则占满一行
@@ -57,20 +56,6 @@ public abstract class BaseItem<D extends ItemData> {
         this.data = data;
     }
 
-    public void setParentItem(ItemGroup parentItem) {
-        this.parentItem = parentItem;
-    }
-    /**
-     * 获取当前item的父级
-     *
-     * @return
-     */
-    @Nullable
-    public ItemGroup getParentItem() {
-        return parentItem;
-    }
-
-
 
     /**
      * 该条目的布局id
@@ -81,14 +66,16 @@ public abstract class BaseItem<D extends ItemData> {
 
     /**
      * 抽象holder的绑定
-     *
-     * @param holder ViewHolder
      */
-    public abstract void onBindViewHolder(ViewHolder holder);
+    public abstract void onBindViewHolder(ViewHolder viewHolder);
 
 
-
-    public void onClick(int position) {
+    /**
+     * 当前条目的点击回调
+     *
+     * @param position
+     */
+    public void onClick(ViewHolder viewHolder, int position) {
 
     }
 }

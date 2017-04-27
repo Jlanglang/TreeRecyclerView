@@ -3,10 +3,11 @@ package com.baozi.demo.viewholder.citytree;
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 /**
  */
-public class ThreeItem extends BaseItem<CityBean.CitysBean.AreasBean> {
+public class ThreeItem extends TreeItem<CityBean.CitysBean.AreasBean> {
 
 
     @Override

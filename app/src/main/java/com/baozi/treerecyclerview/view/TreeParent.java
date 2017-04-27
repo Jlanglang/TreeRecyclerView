@@ -7,7 +7,7 @@ import java.util.List;
  * @版本 2.0
  * @Change
  */
-interface ItemParent {
+interface TreeParent {
     /**
      * 是否允许展开
      *

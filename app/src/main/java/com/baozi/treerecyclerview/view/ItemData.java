@@ -7,6 +7,14 @@ package com.baozi.treerecyclerview.view;
 /**
  * 继承该类,后台返回的json中需包含viewItemType,通过viewItemType确定item样式
  */
-public interface ItemData {
-    int getViewItemType();
+public abstract class ItemData {
+    protected int viewItemType;
+
+    public void setViewItemType(int viewItemType) {
+        this.viewItemType = viewItemType;
+    }
+
+    public int getViewItemType() {
+        return viewItemType;
+    }
 }

@@ -1,7 +1,5 @@
 package com.baozi.treerecyclerview.view;
 
-import android.support.annotation.Nullable;
-
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 
 import java.util.ArrayList;
@@ -13,8 +11,8 @@ import java.util.List;
  * //子集可以是parent,也可以是child
  */
 
-public abstract class ItemGroup<D extends ItemData> extends BaseItem<D>
-        implements ItemParent {
+public abstract class TreeItemGroup<D extends ItemData> extends TreeItem<D>
+        implements TreeParent {
     /**
      * 持有的子item
      */
@@ -28,7 +26,7 @@ public abstract class ItemGroup<D extends ItemData> extends BaseItem<D>
      */
     protected boolean isCanChangeExpand = true;
 
-    public ItemGroup() {
+    public TreeItemGroup() {
 
     }
 
@@ -67,7 +65,6 @@ public abstract class ItemGroup<D extends ItemData> extends BaseItem<D>
         return isCanChangeExpand;
     }
 
-    @Nullable
     @Override
     public List<? extends BaseItem> getChilds() {
         return childs;
@@ -78,14 +75,14 @@ public abstract class ItemGroup<D extends ItemData> extends BaseItem<D>
         for (int i = 0; i < childs.size(); i++) {
             BaseItem baseItem = childs.get(i);//下级
             baseItems.add(baseItem);//直接add
-            if (baseItem instanceof ItemGroup && ((ItemGroup) baseItem).isExpand()) {//判断是否还有下下级,并且处于expand的状态
-                List list = ((ItemGroup) baseItem).getChilds();//调用下级的getAllChilds遍历,相当于递归遍历
+            if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isExpand()) {//判断是否还有下下级,并且处于expand的状态
+                List list = ((TreeItemGroup) baseItem).getChilds();//调用下级的getAllChilds遍历,相当于递归遍历
                 if (list != null && list.size() > 0) {
                     baseItems.addAll(list);
                 }
                 if (treeRecyclerViewType == TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS) {
-                    ((ItemGroup) baseItem).setExpand(false);
-                    ((ItemGroup) baseItem).onCollapse();
+                    ((TreeItemGroup) baseItem).setExpand(false);
+                    ((TreeItemGroup) baseItem).onCollapse();
                 }
             }
         }
@@ -111,10 +108,10 @@ public abstract class ItemGroup<D extends ItemData> extends BaseItem<D>
      */
     protected abstract List<? extends BaseItem> initChildsList(D data);
 
-    /**
-     * 当子类发现变化时,父一级是否需要处理
-     */
-    public void onUpdate() {
-
-    }
+//    /**
+//     * 是否响应父级或者子集传来的点击
+//     */
+//    public void dispatchClick() {
+//
+//    }
 }

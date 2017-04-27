@@ -37,7 +37,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    getDatas().get(layoutPosition).onClick(layoutPosition);
+                    getDatas().get(layoutPosition).onClick(holder,layoutPosition);
                 }
             });
         }

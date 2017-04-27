@@ -3,18 +3,18 @@ package com.baozi.demo.viewholder.citytree;
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.BaseItem;
-import com.baozi.treerecyclerview.view.ItemGroup;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 import com.baozi.treerecyclerview.helper.ItemHelper;
 
 import java.util.List;
 
 /**
  */
-public class TwoItemParent extends ItemGroup<CityBean.CitysBean> {
+public class TwoTreeItemParent extends TreeItemGroup<CityBean.CitysBean> {
 
     @Override
     public List<? extends BaseItem> initChildsList(CityBean.CitysBean data) {
-        return ItemHelper.createItemListForClass(data.getAreas(), ThreeItem.class);
+        return ItemHelper.createItemList(data.getAreas(), ThreeItem.class);
     }
 
 
@@ -26,7 +26,7 @@ public class TwoItemParent extends ItemGroup<CityBean.CitysBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setText(R.id.tv_content, data.getCityName());
+        holder.setText(R.id.tv_content, getData().getCityName());
     }
 
     @Override

@@ -1,25 +1,19 @@
 package com.baozi.treerecyclerview.adpater;
 
-import android.support.annotation.IntDef;
-import android.support.annotation.RestrictTo;
-import android.support.design.widget.AppBarLayout;
 import android.view.View;
 
 import com.baozi.treerecyclerview.view.BaseItem;
-import com.baozi.treerecyclerview.view.ItemGroup;
+import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 /**
  * Created by baozi on 2017/4/20.
  */
 
-public class TreeRecyclerAdapter<T extends BaseItem> extends BaseRecyclerAdapter<T> {
+public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter<T> {
     private TreeRecyclerViewType type;
     /**
      * 最初的数据
@@ -28,8 +22,8 @@ public class TreeRecyclerAdapter<T extends BaseItem> extends BaseRecyclerAdapter
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        T t = getDatas().get(position);
-        t.onBindViewHolder(holder);
+        T item = getDatas().get(position);
+        item.onBindViewHolder(holder);
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -38,13 +32,19 @@ public class TreeRecyclerAdapter<T extends BaseItem> extends BaseRecyclerAdapter
                     if (type != TreeRecyclerViewType.SHOW_ALL) {
                         expandOrCollapse(layoutPosition);
                     } else {
-                        getDatas().get(layoutPosition).onClick(layoutPosition);
+                        T item = getDatas().get(layoutPosition);
+                        item.onClick(holder, layoutPosition);
                     }
                 }
             });
         }
     }
 
+    /**
+     * 获得初始的data
+     *
+     * @return
+     */
     public List<T> getInitialDatas() {
         if (initialDatas == null) {
             initialDatas = new ArrayList<>();
@@ -59,8 +59,8 @@ public class TreeRecyclerAdapter<T extends BaseItem> extends BaseRecyclerAdapter
             for (int i = 0; i < datas.size(); i++) {
                 T t = datas.get(i);
                 getDatas().add(t);
-                if (t instanceof ItemGroup) {
-                    List allChilds = ((ItemGroup) t).getChilds(type);
+                if (t instanceof TreeItemGroup) {
+                    List allChilds = ((TreeItemGroup) t).getChilds(type);
                     getDatas().addAll(allChilds);
                 }
             }
@@ -76,8 +76,8 @@ public class TreeRecyclerAdapter<T extends BaseItem> extends BaseRecyclerAdapter
      */
     private void expandOrCollapse(int position) {
         BaseItem baseItem = getDatas().get(position);
-        if (baseItem instanceof ItemGroup && ((ItemGroup) baseItem).isCanChangeExpand()) {
-            ItemGroup treeParentItem = (ItemGroup) baseItem;
+        if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
+            TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
             boolean expand = treeParentItem.isExpand();
             List<T> allChilds = treeParentItem.getChilds(type);
             if (expand) {

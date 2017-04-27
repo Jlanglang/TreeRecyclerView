@@ -17,5 +17,6 @@
         </activity>
         <activity android:name=".activity.CityActivity"/>
         <activity android:name=".activity.ShoppingCartActivity"/>
+        <activity android:name=".activity.TestListAativity"/>
     </application>
 </manifest>

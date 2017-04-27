@@ -3,12 +3,13 @@ package com.baozi.demo.viewholder.shopcart;
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 /**
  * Created by baozi on 2016/12/22.
  */
 
-public class ContentItem extends BaseItem<ShopListBean> {
+public class ContentItem extends TreeItem<ShopListBean> {
 
     @Override
     protected int initLayoutId() {
@@ -16,15 +17,13 @@ public class ContentItem extends BaseItem<ShopListBean> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder) {
-        holder.setChecked(R.id.cb_ischeck, getData().isCheck());
+    public void onBindViewHolder(ViewHolder viewHolder) {
+        viewHolder.setChecked(R.id.cb_ischeck, getData().isCheck());
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(ViewHolder viewHolder, int position) {
         getData().setCheck(!getData().isCheck());
-        if (parentItem != null) {
-            parentItem.onUpdate();
-        }
+        viewHolder.setChecked(R.id.cb_ischeck, getData().isCheck());
     }
 }

@@ -7,7 +7,7 @@
 //import android.view.ViewGroup;
 //
 //import com.baozi.treerecyclerview.view.BaseItem;
-//import com.baozi.treerecyclerview.view.ItemGroup;
+//import com.baozi.treerecyclerview.view.TreeItemGroup;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -48,8 +48,8 @@
 //            for (int i = 0; i < mDatas.size(); i++) {
 //                T t = mDatas.get(i);
 //                mShowDatas.add(t);
-//                if (t instanceof ItemGroup) {
-//                    List allChilds = ((ItemGroup) t).getChilds(type);
+//                if (t instanceof TreeItemGroup) {
+//                    List allChilds = ((TreeItemGroup) t).getChilds(type);
 //                    mShowDatas.addAll(allChilds);
 //                }
 //            }
@@ -65,8 +65,8 @@
 //     */
 //    private void expandOrCollapse(int position) {
 //        BaseItem baseItem = mShowDatas.get(position);
-//        if (baseItem instanceof ItemGroup && ((ItemGroup) baseItem).isCanChangeExpand()) {
-//            ItemGroup treeParentItem = (ItemGroup) baseItem;
+//        if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
+//            TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
 //            boolean expand = treeParentItem.isExpand();
 //            List allChilds = treeParentItem.getChilds(type);
 //            if (expand) {
