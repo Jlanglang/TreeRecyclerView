@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.view;
+package com.baozi.treerecyclerview.modle;
 
 /**
  * Created by baozi on 2017/4/14.

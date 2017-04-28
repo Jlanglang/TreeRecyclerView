@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.view;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 import java.util.ArrayList;
 import java.util.List;

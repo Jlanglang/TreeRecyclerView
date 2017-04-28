@@ -1,7 +1,7 @@
 package com.baozi.demo.viewholder.testlist;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.view.ViewHolder;
 import com.baozi.treerecyclerview.helper.ItemHelper;
 import com.baozi.treerecyclerview.view.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;

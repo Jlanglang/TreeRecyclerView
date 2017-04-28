@@ -1,6 +1,6 @@
 package com.baozi.demo.viewholder.testlist;
 
-import com.baozi.treerecyclerview.view.ItemData;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 /**
  * Created by baozi on 2017/4/27.

@@ -3,7 +3,7 @@ package com.baozi.treerecyclerview.helper;
 import com.baozi.treerecyclerview.view.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
-import com.baozi.treerecyclerview.view.ItemData;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 import java.util.ArrayList;
 import java.util.HashMap;

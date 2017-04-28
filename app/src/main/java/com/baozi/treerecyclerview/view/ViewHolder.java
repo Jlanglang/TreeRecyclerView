@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater;
+package com.baozi.treerecyclerview.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,7 +27,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public ViewHolder(Context context, View itemView) {
         super(itemView);
         mContext = context;
-        mViews = new SparseArray<View>();
+        mViews = new SparseArray<>();
     }
 
     public static ViewHolder createViewHolder(Context context, View itemView) {

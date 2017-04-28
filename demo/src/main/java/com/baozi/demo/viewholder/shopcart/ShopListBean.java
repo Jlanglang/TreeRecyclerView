@@ -1,6 +1,6 @@
 package com.baozi.demo.viewholder.shopcart;
 
-import com.baozi.treerecyclerview.view.ItemData;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 /**
  * Created by baozi on 2016/12/22.

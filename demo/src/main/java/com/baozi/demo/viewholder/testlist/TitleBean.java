@@ -1,6 +1,6 @@
 package com.baozi.demo.viewholder.testlist;
 
-import com.baozi.treerecyclerview.view.ItemData;
+import com.baozi.treerecyclerview.modle.ItemData;
 
 import java.util.List;
 
