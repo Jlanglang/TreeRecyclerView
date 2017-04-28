@@ -68,13 +68,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     public void onNext() {
         List<StoreBean> shopListBeen = new ArrayList<>();
-        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getInitialDatas();
+        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
         for (int i = 0; i < datas.size(); i++) {
             ShopTitileItem titletItem = datas.get(i);
             StoreBean data = titletItem.getData();
             if (data.isCheck()) {
                 ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-                List<? extends BaseItem> childs = titletItem.getChilds();
+                List<? extends BaseItem> childs = titletItem.getAllChilds(TreeRecyclerViewType.SHOW_ALL);
                 for (int j = 0; j < childs.size(); j++) {
                     ContentItem baseItem = (ContentItem) childs.get(j);
                     if (baseItem.getData().isCheck()) {

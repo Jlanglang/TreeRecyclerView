@@ -12,9 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by baozi on 2017/4/14.
+ * 普通BaseRecyclerAdapter,itme无父子关系.
+ * 限定泛型为BaseItem的子类.
+ * 通过BaseItem去处理ViewHolder
  */
-
 public class BaseRecyclerAdapter<T extends BaseItem> extends
         RecyclerView.Adapter<ViewHolder> {
     /**
@@ -87,46 +88,4 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
 
-//
-//    public void addAll(List<T> rows) {
-//        if (rows != null) {
-//            if (mDatas.size() == 0) {
-//                setDatas(rows);
-//            } else {
-//                mDatas.addAll(rows);
-//                notifyDataSetChanged();
-//            }
-//        }
-//    }
-
-//    public void add(int position, T data) {
-//        if (data != null && position >= 0) {
-//            mDatas.add(position, data);
-//            notifyDataSetChanged();
-//        }
-//    }
-//
-//    public void set(T data, int position) {
-//        if (data != null && position >= 0) {
-//            mDatas.set(position, data);
-//            notifyDataSetChanged();
-//        }
-//    }
-//
-//    public void remove(int position) {
-//        mDatas.remove(position);
-//        notifyDataSetChanged();
-//    }
-//
-//    public void remove(T data) {
-//        mDatas.remove(data);
-//        notifyDataSetChanged();
-//    }
-//
-//    public void removeAll(List<T> data) {
-//        if (data != null) {
-//            mDatas.removeAll(data);
-//            notifyDataSetChanged();
-//        }
-//    }
 }

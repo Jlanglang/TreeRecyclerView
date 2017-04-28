@@ -1,7 +1,7 @@
 package com.baozi.demo.viewholder.shopcart;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.ViewHolder;
 import com.baozi.treerecyclerview.view.BaseItem;

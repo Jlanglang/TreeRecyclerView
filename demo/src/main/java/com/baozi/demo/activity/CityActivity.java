@@ -43,7 +43,7 @@ public class CityActivity extends AppCompatActivity {
         });
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
         List<OneTreeItemParent> itemList = ItemHelper.createItemList(cityBeen, OneTreeItemParent.class);
-        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+       TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
     }

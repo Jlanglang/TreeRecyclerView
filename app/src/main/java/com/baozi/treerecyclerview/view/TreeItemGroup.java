@@ -66,18 +66,17 @@ public abstract class TreeItemGroup<D extends ItemData> extends TreeItem<D>
         return isCanChangeExpand;
     }
 
-    @Override
     public List<? extends BaseItem> getChilds() {
         return childs;
     }
 
-    public List<? extends BaseItem> getChilds(TreeRecyclerViewType treeRecyclerViewType) {
+    public List<? extends BaseItem> getAllChilds(TreeRecyclerViewType treeRecyclerViewType) {
         ArrayList<BaseItem> baseItems = new ArrayList<>();
         for (int i = 0; i < childs.size(); i++) {
             BaseItem baseItem = childs.get(i);//下级
             baseItems.add(baseItem);//直接add
             if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isExpand()) {//判断是否还有下下级,并且处于expand的状态
-                List list = ((TreeItemGroup) baseItem).getChilds();//调用下级的getAllChilds遍历,相当于递归遍历
+                List list = ((TreeItemGroup) baseItem).getAllChilds(treeRecyclerViewType);//调用下级的getAllChilds遍历,相当于递归遍历
                 if (list != null && list.size() > 0) {
                     baseItems.addAll(list);
                 }

@@ -2,24 +2,24 @@ package com.baozi.treerecyclerview.adpater;
 
 import android.view.View;
 
-import com.baozi.treerecyclerview.view.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 import com.baozi.treerecyclerview.view.TreeItemManager;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by baozi on 2017/4/20.
+ * 树级结构recycleradapter.
+ * item之间有子父级关系,
  */
 
 public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter<T> {
     private TreeRecyclerViewType type;
     private TreeItemManager<T> mTreeItemManager;
     /**
-     * 最初的数据
+     * 最初的数据.没有经过增删操作.
      */
     private List<T> initialDatas;
 
@@ -62,7 +62,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
      */
     public List<T> getInitialDatas() {
         if (initialDatas == null) {
-            initialDatas = new ArrayList<>();
+            initialDatas = getDatas();
         }
         return initialDatas;
     }
@@ -75,7 +75,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 T t = datas.get(i);
                 getDatas().add(t);
                 if (t instanceof TreeItemGroup) {
-                    getDatas().addAll(((TreeItemGroup) t).getChilds(type));
+                    getDatas().addAll(((TreeItemGroup) t).getAllChilds(type));
                 }
             }
         } else {
@@ -89,11 +89,11 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
      * @param position 触发的条目
      */
     private void expandOrCollapse(int position) {
-        BaseItem baseItem = getDatas().get(position);
+        T baseItem = getDatas().get(position);
         if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
             TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
             boolean expand = treeParentItem.isExpand();
-            List<T> allChilds = treeParentItem.getChilds(type);
+            List<T> allChilds = treeParentItem.getAllChilds(type);
             if (expand) {
                 getDatas().removeAll(allChilds);
                 treeParentItem.onCollapse();

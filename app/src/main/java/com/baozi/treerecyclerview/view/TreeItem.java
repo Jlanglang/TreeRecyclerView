@@ -39,5 +39,4 @@ public abstract class TreeItem<D extends ItemData> extends BaseItem<D> {
     public void setTreeItemManager(TreeItemManager treeItemManager) {
         mTreeItemManager = treeItemManager;
     }
-
 }
