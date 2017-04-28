@@ -17,7 +17,7 @@ import com.baozi.demo.R;
 import com.baozi.demo.viewholder.shopcart.ContentItem;
 import com.baozi.demo.viewholder.shopcart.ShopListBean;
 import com.baozi.demo.viewholder.shopcart.StoreBean;
-import com.baozi.demo.viewholder.shopcart.TitletTreeItemParent;
+import com.baozi.demo.viewholder.shopcart.ShopTitileItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.helper.ItemHelper;
@@ -33,7 +33,7 @@ import java.util.List;
 public class ShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private TreeRecyclerAdapter<TitletTreeItemParent> mTitleItemTreeRecyclerViewAdapter;
+    private TreeRecyclerAdapter<ShopTitileItem> mTitleItemTreeRecyclerViewAdapter;
     private TextView mTvNext;
 
     @Override
@@ -59,7 +59,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             }
         });
         List<StoreBean> storeBean = initData();
-        List<TitletTreeItemParent> itemList = ItemHelper.createItemList(storeBean, TitletTreeItemParent.class);
+        List<ShopTitileItem> itemList = ItemHelper.createItemList(storeBean, ShopTitileItem.class);
         mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerAdapter<>();
         mTitleItemTreeRecyclerViewAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mTitleItemTreeRecyclerViewAdapter.setDatas(itemList);
@@ -68,9 +68,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     public void onNext() {
         List<StoreBean> shopListBeen = new ArrayList<>();
-        List<TitletTreeItemParent> datas = mTitleItemTreeRecyclerViewAdapter.getInitialDatas();
+        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getInitialDatas();
         for (int i = 0; i < datas.size(); i++) {
-            TitletTreeItemParent titletItem = datas.get(i);
+            ShopTitileItem titletItem = datas.get(i);
             StoreBean data = titletItem.getData();
             if (data.isCheck()) {
                 ArrayList<ShopListBean> shopListBeens = new ArrayList<>();

@@ -26,6 +26,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         T item = getDatas().get(position);
+        checkBindItemManage(item);
         item.onBindViewHolder(holder);
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -36,11 +37,19 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                         expandOrCollapse(layoutPosition);
                     } else {
                         T item = getDatas().get(layoutPosition);
+                        TreeItemGroup itemParentItem = item.getParentItem();
+                        //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
+                        if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
+                            return;
+                        }
                         item.onClick();
                     }
                 }
             });
         }
+    }
+
+    private void checkBindItemManage(T item) {
         if (item.getTreeItemManager() == null) {
             item.setTreeItemManager(getTreeItemManager());
         }

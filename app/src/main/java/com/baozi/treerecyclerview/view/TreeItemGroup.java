@@ -109,10 +109,13 @@ public abstract class TreeItemGroup<D extends ItemData> extends TreeItem<D>
      */
     protected abstract List<? extends BaseItem> initChildsList(D data);
 
-//    /**
-//     * 是否响应父级或者子集传来的点击
-//     */
-//    public void dispatchClick() {
-//
-//    }
+    /**
+     * 是否消费child的click事件
+     *
+     * @param child 具体click的item
+     * @return 返回true代表消费此次事件，child不会走onclick()，返回false说明不消费此次事件，child依然会走onclick()
+     */
+    public boolean onInterceptClick(TreeItem child) {
+        return false;
+    }
 }

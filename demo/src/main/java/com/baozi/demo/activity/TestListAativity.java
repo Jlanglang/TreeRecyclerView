@@ -18,6 +18,7 @@ import com.baozi.demo.viewholder.testlist.TitleItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.helper.ItemHelper;
+import com.baozi.treerecyclerview.view.BaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,10 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
-
-        ItemHelper.addHolderType(1, SelectionImageItem.class);
-        ItemHelper.addHolderType(2, ContentImageItem.class);
-        ItemHelper.addHolderType(3, SelectionTextItem.class);
+        ItemHelper.addHolderType(10, TitleItem.class);
+        ItemHelper.addHolderType(11, SelectionImageItem.class);
+        ItemHelper.addHolderType(12, ContentImageItem.class);
+        ItemHelper.addHolderType(13, SelectionTextItem.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
@@ -56,37 +57,38 @@ public class TestListAativity extends AppCompatActivity {
         ArrayList<TitleBean> titleBeens = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
             TitleBean titleBean = new TitleBean();
+            titleBean.setViewItemType(10);
             if (i % 5 == 0) {//图片的选项
                 ArrayList<ContentBean> singleBeens = new ArrayList<>();
-                if (i%10==0){
+                if (i % 10 == 0) {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("image");
-                    singleBean.setViewItemType(2);
+                    singleBean.setViewItemType(12);
                     singleBeens.add(singleBean);
                 }
                 for (int j = 0; j < 4; j++) {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("Contnet_image");
-                    singleBean.setViewItemType(1);
+                    singleBean.setViewItemType(11);
                     singleBeens.add(singleBean);
                 }
 
                 titleBean.setSingleBeen(singleBeens);
                 titleBeens.add(titleBean);
-            }else {//文字的选项
+            } else {//文字的选项
                 ArrayList<ContentBean> singleBeens = new ArrayList<>();
                 for (int j = 0; j < 4; j++) {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("text");
                     singleBean.setNumber(j + ".");
-                    singleBean.setViewItemType(3);
+                    singleBean.setViewItemType(13);
                     singleBeens.add(singleBean);
                 }
                 titleBean.setSingleBeen(singleBeens);
                 titleBeens.add(titleBean);
             }
         }
-        List<TitleItem> itemList = ItemHelper.createItemList(titleBeens, TitleItem.class);
+        List<BaseItem> itemList = ItemHelper.createItemList(titleBeens);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         treeRecyclerAdapter.setDatas(itemList);
