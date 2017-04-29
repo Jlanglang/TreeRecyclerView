@@ -1,27 +1,17 @@
-package com.baozi.demo.viewholder.shopcart;
+package com.baozi.demo.demo.shop.bean;
 
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.base.BaseItemData;
 
 import java.util.List;
 
 /**
  * Created by baozi on 2016/12/22.
  */
-public class StoreBean extends ItemData {
+public class StoreBean extends BaseItemData {
     private List<ShopListBean> mShopListBeen;
     private String title;
     private int storeId;
     private String storeName;
-
-    public boolean isCheck() {
-        return isCheck;
-    }
-
-    public void setCheck(boolean check) {
-        isCheck = check;
-    }
-
-    private boolean isCheck;
 
     public List<ShopListBean> getShopListBeen() {
         return mShopListBeen;

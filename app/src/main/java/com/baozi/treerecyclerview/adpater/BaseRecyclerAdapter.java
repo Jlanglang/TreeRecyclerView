@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.ArrayList;

@@ -103,7 +103,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 treeParentItem.onExpand();
                 treeParentItem.setExpand(true);
             }
-            notifyDataSetChanged();
+            getTreeItemManager().notifyDataSetChanged();
         }
     }
 

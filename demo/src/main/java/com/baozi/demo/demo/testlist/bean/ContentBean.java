@@ -1,12 +1,12 @@
-package com.baozi.demo.viewholder.testlist;
+package com.baozi.demo.demo.testlist.bean;
 
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.base.BaseItemData;
 
 /**
  * Created by baozi on 2017/4/27.
  */
 
-public class ContentBean extends ItemData {
+public class ContentBean extends BaseItemData {
     private String number;
     private String type;
     private int stateCode;

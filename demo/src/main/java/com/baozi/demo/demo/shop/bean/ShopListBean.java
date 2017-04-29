@@ -1,11 +1,11 @@
-package com.baozi.demo.viewholder.shopcart;
+package com.baozi.demo.demo.shop.bean;
 
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.base.BaseItemData;
 
 /**
  * Created by baozi on 2016/12/22.
  */
-public class ShopListBean extends ItemData{
+public class ShopListBean extends BaseItemData {
     private String imgUrl;
     private String shopName;
     private int shopId;

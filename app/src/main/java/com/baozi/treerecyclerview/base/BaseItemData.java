@@ -1,13 +1,13 @@
-package com.baozi.treerecyclerview.modle;
+package com.baozi.treerecyclerview.base;
 
 /**
  * Created by baozi on 2017/4/14.
  */
 
 /**
- * 继承该类,后台返回的json中需包含viewItemType,通过viewItemType确定item样式
+ * javabean继承该类,后台返回的json中可以包含viewItemType,通过解析返回的viewItemType确定item样式
  */
-public abstract class ItemData {
+public abstract class BaseItemData {
     protected int viewItemType;
 
     public void setViewItemType(int viewItemType) {

@@ -1,10 +1,11 @@
-package com.baozi.demo.viewholder.citytree;
+package com.baozi.demo.demo.city;
 
 import com.baozi.demo.R;
-import com.baozi.treerecyclerview.view.ViewHolder;
-import com.baozi.treerecyclerview.view.BaseItem;
-import com.baozi.treerecyclerview.view.TreeItemGroup;
+import com.baozi.demo.demo.city.bean.CityBean;
 import com.baozi.treerecyclerview.helper.ItemHelper;
+import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
 

@@ -6,6 +6,11 @@ public enum TreeRecyclerViewType {
      * 适用场景,多级的data数据展示多type布局.
      */
     SHOW_ALL,
+    /**
+     * 显示所有,可展开折叠
+     * 适用场景,多级的data数据展示多type布局.
+     */
+    EXPAND_SHOW_ALL,
 
     /**
      * 默认显示一级,点击展开一级,折叠会使子级折叠

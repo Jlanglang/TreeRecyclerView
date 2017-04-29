@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.viewholder.shopcart.ContentItem;
-import com.baozi.demo.viewholder.shopcart.ShopListBean;
-import com.baozi.demo.viewholder.shopcart.StoreBean;
-import com.baozi.demo.viewholder.shopcart.ShopTitileItem;
+import com.baozi.demo.demo.shop.ContentItem;
+import com.baozi.demo.demo.shop.bean.ShopListBean;
+import com.baozi.demo.demo.shop.bean.StoreBean;
+import com.baozi.demo.demo.shop.ShopTitileItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.helper.ItemHelper;
-import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,18 +68,15 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     public void onNext() {
         List<StoreBean> shopListBeen = new ArrayList<>();
-        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getDatas();
+        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getInitialDatas();
         for (int i = 0; i < datas.size(); i++) {
             ShopTitileItem titletItem = datas.get(i);
             StoreBean data = titletItem.getData();
-            if (data.isCheck()) {
+            if (titletItem.isHaveCheck()) {
                 ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-                List<? extends BaseItem> childs = titletItem.getAllChilds(TreeRecyclerViewType.SHOW_ALL);
+                List<? extends BaseItem> childs = titletItem.getSelectItems();
                 for (int j = 0; j < childs.size(); j++) {
-                    ContentItem baseItem = (ContentItem) childs.get(j);
-                    if (baseItem.getData().isCheck()) {
-                        shopListBeens.add(baseItem.getData());
-                    }
+                    shopListBeens.add((ShopListBean) childs.get(j).getData());
                 }
                 data.setShopListBeen(shopListBeens);
                 shopListBeen.add(data);

@@ -1,7 +1,8 @@
 package com.baozi.treerecyclerview.view;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItemData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,12 @@ import java.util.List;
  * //子集可以是parent,也可以是child
  */
 
-public abstract class TreeItemGroup<D extends ItemData> extends TreeItem<D>
+public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
         implements TreeParent {
     /**
      * 持有的子item
      */
-    protected List<? extends BaseItem> childs;
+    private List<? extends BaseItem> childs;
     /**
      * 是否展开
      */
@@ -73,16 +74,15 @@ public abstract class TreeItemGroup<D extends ItemData> extends TreeItem<D>
     public List<? extends BaseItem> getAllChilds(TreeRecyclerViewType treeRecyclerViewType) {
         ArrayList<BaseItem> baseItems = new ArrayList<>();
         for (int i = 0; i < childs.size(); i++) {
-            BaseItem baseItem = childs.get(i);//下级
-            baseItems.add(baseItem);//直接add
-            if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isExpand()) {//判断是否还有下下级,并且处于expand的状态
-                List list = ((TreeItemGroup) baseItem).getAllChilds(treeRecyclerViewType);//调用下级的getAllChilds遍历,相当于递归遍历
+            //下级
+            BaseItem baseItem = childs.get(i);
+            baseItems.add(baseItem);
+            //判断是否还有下下级,并且处于expand的状态
+            if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isExpand()) {
+                //调用下级的getAllChilds遍历,相当于递归遍历
+                List list = ((TreeItemGroup) baseItem).getAllChilds(treeRecyclerViewType);
                 if (list != null && list.size() > 0) {
                     baseItems.addAll(list);
-                }
-                if (treeRecyclerViewType == TreeRecyclerViewType.SHOW_COLLAPSE_CHILDS) {
-                    ((TreeItemGroup) baseItem).setExpand(false);
-                    ((TreeItemGroup) baseItem).onCollapse();
                 }
             }
         }

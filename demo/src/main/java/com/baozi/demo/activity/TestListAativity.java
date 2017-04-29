@@ -9,16 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.viewholder.testlist.ContentImageItem;
-import com.baozi.demo.viewholder.testlist.ContentBean;
-import com.baozi.demo.viewholder.testlist.SelectionImageItem;
-import com.baozi.demo.viewholder.testlist.SelectionTextItem;
-import com.baozi.demo.viewholder.testlist.TitleBean;
-import com.baozi.demo.viewholder.testlist.TitleItem;
+import com.baozi.demo.demo.testlist.ContentImageItem;
+import com.baozi.demo.demo.testlist.bean.ContentBean;
+import com.baozi.demo.demo.testlist.SelectionImageItem;
+import com.baozi.demo.demo.testlist.SelectionTextItem;
+import com.baozi.demo.demo.testlist.bean.TitleBean;
+import com.baozi.demo.demo.testlist.TitleItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.helper.ItemConfig;
 import com.baozi.treerecyclerview.helper.ItemHelper;
-import com.baozi.treerecyclerview.view.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,10 +33,10 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
-        ItemHelper.addHolderType(10, TitleItem.class);
-        ItemHelper.addHolderType(11, SelectionImageItem.class);
-        ItemHelper.addHolderType(12, ContentImageItem.class);
-        ItemHelper.addHolderType(13, SelectionTextItem.class);
+        ItemConfig.addHolderType(10, TitleItem.class);
+        ItemConfig.addHolderType(11, SelectionImageItem.class);
+        ItemConfig.addHolderType(12, ContentImageItem.class);
+        ItemConfig.addHolderType(13, SelectionTextItem.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));

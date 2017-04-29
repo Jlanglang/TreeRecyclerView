@@ -10,9 +10,10 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.viewholder.citytree.CityBean;
-import com.baozi.demo.viewholder.citytree.OneTreeItemParent;
+import com.baozi.demo.demo.city.bean.CityBean;
+import com.baozi.demo.demo.city.OneTreeItemParent;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.helper.ItemConfig;
 import com.baozi.treerecyclerview.helper.ItemHelper;
 
 import java.util.List;

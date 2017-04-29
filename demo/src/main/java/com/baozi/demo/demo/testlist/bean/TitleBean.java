@@ -1,13 +1,13 @@
-package com.baozi.demo.viewholder.testlist;
+package com.baozi.demo.demo.testlist.bean;
 
-import com.baozi.treerecyclerview.modle.ItemData;
+import com.baozi.treerecyclerview.base.BaseItemData;
 
 import java.util.List;
 
 /**
  * Created by baozi on 2017/4/27.
  */
-public class TitleBean extends ItemData {
+public class TitleBean extends BaseItemData {
     public List<ContentBean> getSingleBeen() {
         return mSingleBeen;
     }
