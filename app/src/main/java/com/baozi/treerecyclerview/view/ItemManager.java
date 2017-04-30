@@ -4,7 +4,7 @@ import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.List;
 
-public interface TreeItemManager<T extends BaseItem> {
+public interface ItemManager<T extends BaseItem> {
 
     void addTreeItem(T item);
 

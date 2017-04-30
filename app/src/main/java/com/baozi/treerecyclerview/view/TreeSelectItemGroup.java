@@ -20,7 +20,7 @@ import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
  * //子集可以是parent,也可以是child
  */
 
-public abstract class SelectItemGroup<D extends BaseItemData>
+public abstract class TreeSelectItemGroup<D extends BaseItemData>
         extends TreeItemGroup<D> {
     private List<BaseItem> selectItems;
 

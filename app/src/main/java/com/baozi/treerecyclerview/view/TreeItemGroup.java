@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.view;
 
+import android.support.annotation.Nullable;
+
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
@@ -66,7 +68,7 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
     public boolean isCanChangeExpand() {
         return isCanChangeExpand;
     }
-
+    @Nullable
     public List<? extends BaseItem> getChilds() {
         return childs;
     }

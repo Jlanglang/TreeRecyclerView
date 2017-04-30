@@ -11,7 +11,6 @@ import com.baozi.treerecyclerview.base.BaseItemData;
 
 public abstract class TreeItem<D extends BaseItemData> extends BaseItem<D> {
     private TreeItemGroup parentItem;
-    private TreeItemManager mTreeItemManager;
 
     public void setParentItem(TreeItemGroup parentItem) {
         this.parentItem = parentItem;
@@ -27,17 +26,5 @@ public abstract class TreeItem<D extends BaseItemData> extends BaseItem<D> {
         return parentItem;
     }
 
-    /**
-     * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
-     * 如果要使用,可能为null,请加判断.
-     *
-     * @return
-     */
-    public TreeItemManager getTreeItemManager() {
-        return mTreeItemManager;
-    }
 
-    public void setTreeItemManager(TreeItemManager treeItemManager) {
-        mTreeItemManager = treeItemManager;
-    }
 }

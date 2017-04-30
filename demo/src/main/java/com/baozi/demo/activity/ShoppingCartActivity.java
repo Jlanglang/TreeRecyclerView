@@ -78,6 +78,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 for (int j = 0; j < childs.size(); j++) {
                     shopListBeens.add((ShopListBean) childs.get(j).getData());
                 }
+                //这里不行.应该是new一个
                 data.setShopListBeen(shopListBeens);
                 shopListBeen.add(data);
             }
