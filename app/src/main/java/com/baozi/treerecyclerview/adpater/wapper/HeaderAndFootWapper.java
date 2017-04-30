@@ -14,12 +14,12 @@ import java.util.List;
  * Created by baozi on 2017/4/30.
  */
 
-public class HeaderWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
+public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     BaseRecyclerAdapter<T> mAdapter;
     private SparseArray<BaseItem> mHeaderViews = new SparseArray<>();
     private SparseArray<BaseItem> mFootViews = new SparseArray<>();
 
-    public HeaderWapper(BaseRecyclerAdapter<T> baseRecyclerAdapter) {
+    public HeaderAndFootWapper(BaseRecyclerAdapter<T> baseRecyclerAdapter) {
         mAdapter = baseRecyclerAdapter;
     }
 
