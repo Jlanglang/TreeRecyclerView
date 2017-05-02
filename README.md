@@ -30,9 +30,9 @@
 
 
 # 目录介绍
-```
+
 + 1.Adapter
-    *  Wapper------扩展的wapper,
+   * Wapper------扩展的wapper,
  * EmptyWapper  --------当无数据时显示页面.
  * HeaderAndFootWapper --------添加头部view和尾部view
 
@@ -55,11 +55,11 @@ TreeItem  ----树形列表的子item
 TreeItemGroup ----树形列表的父item
 TreeParent---TreeItemGroup 实现该接口
 TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
-```
+
 
 
 # 总结:
-###### 1.我觉得像购物车那种页面复杂的,既然写了多级列表,何不扩展一个出来
+###### 1.我觉得像购物车那种页面挺复杂的,既然写了多级列表,何不扩展一个出来
 
 ###### 2.RecyclerView的点击事件,看了很多封装，发现很多都是每次onBindViewHolder去重新设置一遍,感觉挺不好的.
 
