@@ -43,18 +43,18 @@
   - ViewHolder----封装的通用viewHodler
 
  * 2.base
-BaseItem<D extends BaseItemData> ------item的封装
-BaseItemData-----item的数据要求.javabean需要继承该类.
+ - BaseItem<D extends BaseItemData> ------item的封装
+ - BaseItemData-----item的数据要求.javabean需要继承该类.
 
  * 3.factory
-ItemConfig ----添加item的class,配置样式
-ItemHelper----通过class生成BaseItem的工厂类
+ - ItemConfig ----添加item的class,配置样式
+ - ItemHelper----通过class生成BaseItem的工厂类
 
  * 4.view
-TreeItem  ----树形列表的子item
-TreeItemGroup ----树形列表的父item
-TreeParent---TreeItemGroup 实现该接口
-TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
+ - TreeItem  ----树形列表的子item
+ - TreeItemGroup ----树形列表的父item
+ - TreeParent---TreeItemGroup 实现该接口
+ - TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
 
 
 
