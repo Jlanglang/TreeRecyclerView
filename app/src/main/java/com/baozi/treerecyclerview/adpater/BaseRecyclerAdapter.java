@@ -39,13 +39,18 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
     public void onBindViewHolderClick(final ViewHolder holder) {
+        //判断当前holder是否已经设置了点击事件
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //获得holder的position
                     int layoutPosition = holder.getLayoutPosition();
-                    if (getCheckItem().checkItemPosition(layoutPosition)) {
-                        int itemPosition = getCheckItem().getItemPosition(layoutPosition);
+                    //检查position是否可以点击
+                    if (getCheckItem().checkPosition(layoutPosition)) {
+                        //检查并得到真实的position
+                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        //拿到对应item,回调.
                         getDatas().get(itemPosition).onClick();
                     }
                 }
@@ -54,21 +59,21 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
     public interface CheckItem {
-        boolean checkItemPosition(int position);
+        boolean checkPosition(int position);
 
-        int getItemPosition(int position);
+        int getAfterCheckingPosition(int position);
     }
 
     public CheckItem getCheckItem() {
         if (mCheckItem == null) {
             mCheckItem = new CheckItem() {
                 @Override
-                public boolean checkItemPosition(int position) {
+                public boolean checkPosition(int position) {
                     return true;
                 }
 
                 @Override
-                public int getItemPosition(int position) {
+                public int getAfterCheckingPosition(int position) {
                     return position;
                 }
             };

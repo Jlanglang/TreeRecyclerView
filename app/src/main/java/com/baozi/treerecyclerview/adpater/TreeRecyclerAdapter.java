@@ -30,8 +30,8 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    if (getCheckItem().checkItemPosition(layoutPosition)) {
-                        int itemPosition = getCheckItem().getItemPosition(layoutPosition);
+                    if (getCheckItem().checkPosition(layoutPosition)) {
+                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                         if (type != TreeRecyclerViewType.SHOW_ALL) {
                             expandOrCollapse(itemPosition);
                         } else {

@@ -25,12 +25,12 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         mAdapter.setItemManager(getItemManager());
         mAdapter.setCheckItem(new CheckItem() {
             @Override
-            public boolean checkItemPosition(int position) {
+            public boolean checkPosition(int position) {
                 return !(isHeaderViewPos(position) || isFooterViewPos(position));
             }
 
             @Override
-            public int getItemPosition(int position) {
+            public int getAfterCheckingPosition(int position) {
                 return position - getHeadersCount();
             }
         });
