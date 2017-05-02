@@ -34,9 +34,9 @@
 # 目录介绍
 
 + 1.Adapter
-   * Wapper------扩展Adapte的wapper目录
-   * EmptyWapper  --------当无数据时显示页面.
-   * HeaderAndFootWapper --------添加头部view和尾部view
+  * Wapper------扩展Adapte的wapper目录
+     * EmptyWapper  --------当无数据时显示页面.
+     * HeaderAndFootWapper --------添加头部view和尾部view
 
   - BaseRecyclerAdapter --------封装的Adatper基类
   - ItemManager --------接口,管理Adatper刷新,增删操作
@@ -50,7 +50,7 @@
 
  + 3.factory
    - ItemConfig ----添加item的class,配置样式
-   - ItemHelper----通过class生成BaseItem的工厂类
+   - Itemfactory----通过class生成BaseItem的工厂类
 
  + 4.view
    - TreeItem  ----树形列表的子item
@@ -60,15 +60,5 @@
 
 
 
-# 为什么写这个:
-###### 1.我觉得像购物车那种页面挺复杂的,既然写了多级列表,何不扩展一个出来
 
-###### 2.RecyclerView的点击事件,看了很多封装，发现很多都是每次onBindViewHolder去重新设置一遍,感觉挺不好的.
-
-###### 3.我喜欢把数据集合让Adatper去持有,然后通过Adapter进行增删改查操作.直接在Activity里持有数据集合进行操作,我不是习惯(- -)
-
-###### 4.用的习惯没bug的才是好东西,如果你觉得实用或者能长点姿势,就点个赞把,哈哈.
-
-###### 5.大部分的逻辑都在Item中，由于拆分开了，会发现每个item的代码不会很多,便于查找问题
-
-###### 6.多级列表我已经用在某个项目里了(- -),还没发现什么问题(多级列表的简单使用- -)
+### QQ交流群:493180098
