@@ -8,7 +8,7 @@
 4.item的样式可以编写文档,与type进行对应,可以实现复用,以及后台控
 5.抽取的adapter可以使用装饰者模式进行扩展.
 
-# 思路:(包含第一篇的思路)
+# 思路:
 
 1.Treeadapter应该只需要关心List<TreeAdapterItem> datas 的内容
 
@@ -32,9 +32,9 @@
 # 目录介绍
 
 + 1.Adapter
-   * Wapper------扩展的wapper,
- * EmptyWapper  --------当无数据时显示页面.
- * HeaderAndFootWapper --------添加头部view和尾部view
+    * Wapper------扩展的wapper,
+  * EmptyWapper  --------当无数据时显示页面.
+  * HeaderAndFootWapper --------添加头部view和尾部view
 
  - BaseRecyclerAdapter --------封装的Adatper基类
  - ItemManager --------接口,管理Adatper刷新,增删操作
@@ -42,15 +42,15 @@
  - TreeRecyclerViewType ----多级列表的显示样式,枚举
  - ViewHolder----封装的通用viewHodler
 
-* 2.base
+ * 2.base
 BaseItem<D extends BaseItemData> ------item的封装
 BaseItemData-----item的数据要求.javabean需要继承该类.
 
-* 3.factory
+ * 3.factory
 ItemConfig ----添加item的class,配置样式
 ItemHelper----通过class生成BaseItem的工厂类
 
-* 4.view
+ * 4.view
 TreeItem  ----树形列表的子item
 TreeItemGroup ----树形列表的父item
 TreeParent---TreeItemGroup 实现该接口
@@ -65,7 +65,7 @@ TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
 
 ###### 3.我喜欢把数据集合让Adatper去持有,然后通过Adapter进行增删改查操作.直接在Activity里持有数据集合进行操作,我不是习惯(- -)
 
-###### 4.用的习惯没bug的才是好东西,如果你觉得实用或者能学到姿势,就点个赞把,哈哈.
+###### 4.用的习惯没bug的才是好东西,如果你觉得实用或者能长点姿势,就点个赞把,哈哈.
 
 ###### 5.大部分的逻辑都在Item中，由于拆分开了，会发现每个item的代码也不会很多
 
