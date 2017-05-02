@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class ItemConfig {
 
-    private static  HashMap<Integer, Class<? extends BaseItem>> viewHolderTypes;
+    private static HashMap<Integer, Class<? extends BaseItem>> viewHolderTypes;
 
     static {
         viewHolderTypes = new HashMap<>();

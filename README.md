@@ -32,7 +32,7 @@
 # 目录介绍
 
 + 1.Adapter
-     * Wapper------扩展Adapte的wapper
+     * Wapper------扩展Adapte的wapper目录
    * EmptyWapper  --------当无数据时显示页面.
    * HeaderAndFootWapper --------添加头部view和尾部view
 
@@ -42,19 +42,19 @@
   - TreeRecyclerViewType ----多级列表的显示样式,枚举
   - ViewHolder----封装的通用viewHodler
 
- * 2.base
- - BaseItem<D extends BaseItemData> ------item的封装
- - BaseItemData-----item的数据要求.javabean需要继承该类.
+ + 2.base
+  - BaseItem<D extends BaseItemData> ------item的封装
+  - BaseItemData-----item的数据要求.javabean需要继承该类.
 
- * 3.factory
- - ItemConfig ----添加item的class,配置样式
- - ItemHelper----通过class生成BaseItem的工厂类
+ + 3.factory
+  - ItemConfig ----添加item的class,配置样式
+  - ItemHelper----通过class生成BaseItem的工厂类
 
- * 4.view
- - TreeItem  ----树形列表的子item
- - TreeItemGroup ----树形列表的父item
- - TreeParent---TreeItemGroup 实现该接口
- - TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
+ + 4.view
+  - TreeItem  ----树形列表的子item
+  - TreeItemGroup ----树形列表的父item
+  - TreeParent---TreeItemGroup 实现该接口
+  - TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
 
 
 
