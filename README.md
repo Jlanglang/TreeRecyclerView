@@ -3,13 +3,17 @@
 
 # 要点:
 1.可以通过后台控制Item的展示.
+
 2.TreeRecyclerAdapter,可以展开,折叠.多级展示
+
 3.可以扩展支持EmptyAdapter.可以添加headview和footview
+
 4.item的样式可以编写文档,与type进行对应,可以实现复用,以及后台控
+
 5.抽取的adapter可以使用装饰者模式进行扩展.
 
 # 思路:
-```
+
 1.Treeadapter应该只需要关心List<TreeAdapterItem> datas 的内容
 
 2.把每个item看成独立的个体. 布局样式，每行所占比,bindViewHolder都自实现。
@@ -25,7 +29,7 @@
 7.后台返回字段,获取对应class文件,通过Class.newInstance()方法构建实例.
 
 8.将ViewHolder与adapter写成通用的,则不需要写多个adatper与viewholder,只需要写多个item.与javabean.
-```
+
 
 # 目录介绍
 
