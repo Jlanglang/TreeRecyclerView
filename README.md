@@ -36,11 +36,11 @@
   * EmptyWapper  --------当无数据时显示页面.
   * HeaderAndFootWapper --------添加头部view和尾部view
 
- - BaseRecyclerAdapter --------封装的Adatper基类
- - ItemManager --------接口,管理Adatper刷新,增删操作
- - TreeRecyclerAdapter ----多级列表,树形结构的adapter
- - TreeRecyclerViewType ----多级列表的显示样式,枚举
- - ViewHolder----封装的通用viewHodler
+  - BaseRecyclerAdapter --------封装的Adatper基类
+  - ItemManager --------接口,管理Adatper刷新,增删操作
+  - TreeRecyclerAdapter ----多级列表,树形结构的adapter
+  - TreeRecyclerViewType ----多级列表的显示样式,枚举
+  - ViewHolder----封装的通用viewHodler
 
  * 2.base
 BaseItem<D extends BaseItemData> ------item的封装
