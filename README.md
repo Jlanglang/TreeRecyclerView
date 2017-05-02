@@ -32,9 +32,9 @@
 # 目录介绍
 
 + 1.Adapter
-    * Wapper------扩展Adapte的wapper
-  * EmptyWapper  --------当无数据时显示页面.
-  * HeaderAndFootWapper --------添加头部view和尾部view
+     * Wapper------扩展Adapte的wapper
+   * EmptyWapper  --------当无数据时显示页面.
+   * HeaderAndFootWapper --------添加头部view和尾部view
 
   - BaseRecyclerAdapter --------封装的Adatper基类
   - ItemManager --------接口,管理Adatper刷新,增删操作
