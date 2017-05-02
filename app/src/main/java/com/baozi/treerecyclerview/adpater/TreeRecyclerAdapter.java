@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
-import com.baozi.treerecyclerview.view.ItemManager;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.List;
@@ -16,39 +15,39 @@ import java.util.List;
  */
 
 public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter<T> {
+
     private TreeRecyclerViewType type;
-    private ItemManager<T> mTreeItemManager;
     /**
      * 最初的数据.没有经过增删操作.
      */
     private List<T> initialDatas;
 
+
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        T item = getDatas().get(position);
-        checkBindItemManage(item);
-        item.onBindViewHolder(holder);
+    public void onBindViewHolderClick(final ViewHolder holder) {
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    if (type != TreeRecyclerViewType.SHOW_ALL) {
-                        expandOrCollapse(layoutPosition);
-                    } else {
-                        T item = getDatas().get(layoutPosition);
-                        TreeItemGroup itemParentItem = item.getParentItem();
-                        //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
-                        if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
-                            return;
+                    if (getCheckItem().checkItemPosition(layoutPosition)) {
+                        int itemPosition = getCheckItem().getItemPosition(layoutPosition);
+                        if (type != TreeRecyclerViewType.SHOW_ALL) {
+                            expandOrCollapse(itemPosition);
+                        } else {
+                            T item = getDatas().get(itemPosition);
+                            TreeItemGroup itemParentItem = item.getParentItem();
+                            //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
+                            if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
+                                return;
+                            }
+                            item.onClick();
                         }
-                        item.onClick();
                     }
                 }
             });
         }
     }
-
 
     /**
      * 获得初始的data
@@ -98,7 +97,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 treeParentItem.onExpand();
                 treeParentItem.setExpand(true);
             }
-            getTreeItemManager().notifyDataSetChanged();
+            getItemManager().notifyDataSetChanged();
         }
     }
 

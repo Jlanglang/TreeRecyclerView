@@ -20,6 +20,7 @@ import com.baozi.demo.demo.shop.bean.StoreBean;
 import com.baozi.demo.demo.shop.ShopTitileItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.helper.ItemHelper;
 import com.baozi.treerecyclerview.base.BaseItem;
 
@@ -63,7 +64,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerAdapter<>();
         mTitleItemTreeRecyclerViewAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mTitleItemTreeRecyclerViewAdapter.setDatas(itemList);
-        mRecyclerView.setAdapter(mTitleItemTreeRecyclerViewAdapter);
+        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<>(mTitleItemTreeRecyclerViewAdapter);
+
+        ContentItem contentItem = new ContentItem();
+        contentItem.setData(new ShopListBean());
+        headerAndFootWapper.addHeaderView(contentItem);
+        mRecyclerView.setAdapter(headerAndFootWapper);
     }
 
     public void onNext() {

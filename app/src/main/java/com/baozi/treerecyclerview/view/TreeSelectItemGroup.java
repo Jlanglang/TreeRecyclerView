@@ -1,23 +1,16 @@
 package com.baozi.treerecyclerview.view;
 
 
-import android.support.annotation.IntDef;
-import android.support.annotation.RestrictTo;
 
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 /**
  * Created by baozi on 2016/12/22.
- * //拥有子集
- * //子集可以是parent,也可以是child
  */
 
 public abstract class TreeSelectItemGroup<D extends BaseItemData>

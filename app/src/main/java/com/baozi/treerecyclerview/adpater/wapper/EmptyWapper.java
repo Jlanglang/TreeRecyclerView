@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
@@ -25,6 +26,7 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
 
     public EmptyWapper(BaseRecyclerAdapter<T> adapter) {
         mAdapter = adapter;
+        mAdapter.setItemManager(getItemManager());
     }
 
     private boolean isEmpty() {
@@ -34,6 +36,7 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isEmpty()) {
+
             if (mEmptyView != null) {
                 return ViewHolder.createViewHolder(parent.getContext(), mEmptyView);
             } else {
@@ -48,6 +51,10 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
         mAdapter.onAttachedToRecyclerView(recyclerView);
     }
 
+    @Override
+    public void onViewAttachedToWindow(ViewHolder holder) {
+        mAdapter.onViewAttachedToWindow(holder);
+    }
 
     @Override
     public int getItemViewType(int position) {
@@ -71,7 +78,6 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
         return mAdapter.getItemCount();
     }
 
-
     public void setEmptyView(View emptyView) {
         mEmptyView = emptyView;
     }
@@ -79,6 +85,7 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     public void setEmptyView(int layoutId) {
         mEmptyLayoutId = layoutId;
     }
+
 
     @Override
     public List<T> getDatas() {

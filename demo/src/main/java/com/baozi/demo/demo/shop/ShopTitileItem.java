@@ -44,7 +44,7 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
             ShopListBean data = (ShopListBean) getChilds().get(i).getData();
             data.setCheck(isHaveCheck());
         }
-        getTreeItemManager().notifyDataSetChanged();
+        getItemManager().notifyDataSetChanged();
     }
 
 

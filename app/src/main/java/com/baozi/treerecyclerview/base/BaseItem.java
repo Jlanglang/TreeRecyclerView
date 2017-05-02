@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.base;
 
 import android.content.res.Resources;
 
-import com.baozi.treerecyclerview.view.ItemManager;
+import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
 /**
@@ -20,7 +20,7 @@ public abstract class BaseItem<D extends BaseItemData> {
      * @return 所占值, 比如recyclerview的列数为6, item需要占一半宽度, 就设置3
      */
     private int spanSize;
-    private ItemManager mTreeItemManager;
+    private ItemManager mItemManager;
 
     /**
      * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
@@ -28,12 +28,12 @@ public abstract class BaseItem<D extends BaseItemData> {
      *
      * @return
      */
-    public ItemManager getTreeItemManager() {
-        return mTreeItemManager;
+    public ItemManager getItemManager() {
+        return mItemManager;
     }
 
-    public void setTreeItemManager(ItemManager treeItemManager) {
-        mTreeItemManager = treeItemManager;
+    public void setItemManager(ItemManager itemManager) {
+        mItemManager = itemManager;
     }
 
     public int getLayoutId() {

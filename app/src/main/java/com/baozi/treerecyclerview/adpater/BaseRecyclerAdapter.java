@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.view.ItemManager;
 import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      */
     private List<T> mDatas;//展示数据
     private ItemManager<T> mItemManager;
+    private CheckItem mCheckItem;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,24 +31,58 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         T t = mDatas.get(position);
-        checkBindItemManage(t);
+        checkItemManage(t);
         t.onBindViewHolder(holder);
+        onBindViewHolderClick(holder);
+    }
+
+    public void onBindViewHolderClick(final ViewHolder holder) {
         if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    getDatas().get(layoutPosition).onClick();
+                    if (getCheckItem().checkItemPosition(layoutPosition)) {
+                        int itemPosition = getCheckItem().getItemPosition(layoutPosition);
+                        getDatas().get(itemPosition).onClick();
+                    }
                 }
             });
         }
     }
 
-    protected void checkBindItemManage(T item) {
-        if (item.getTreeItemManager() == null) {
-            item.setTreeItemManager(getTreeItemManager());
+    public interface CheckItem {
+        boolean checkItemPosition(int position);
+
+        int getItemPosition(int position);
+    }
+
+    public CheckItem getCheckItem() {
+        if (mCheckItem == null) {
+            mCheckItem = new CheckItem() {
+                @Override
+                public boolean checkItemPosition(int position) {
+                    return true;
+                }
+
+                @Override
+                public int getItemPosition(int position) {
+                    return position;
+                }
+            };
+        }
+        return mCheckItem;
+    }
+
+    public void setCheckItem(CheckItem checkItem) {
+        mCheckItem = checkItem;
+    }
+
+    void checkItemManage(T item) {
+        if (item.getItemManager() == null) {
+            item.setItemManager(getItemManager());
         }
     }
 
@@ -57,7 +91,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      *
      * @return
      */
-    public ItemManager<T> getTreeItemManager() {
+    public ItemManager<T> getItemManager() {
         if (mItemManager == null) {
             mItemManager = new ItemManager<T>() {
                 @Override
@@ -117,7 +151,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         return mItemManager;
     }
 
-    public void setTreeItemManager(ItemManager<T> itemManager) {
+    public void setItemManager(ItemManager<T> itemManager) {
         mItemManager = itemManager;
     }
 
@@ -160,7 +194,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     public void setDatas(List<T> datas) {
         if (datas != null) {
             mDatas = datas;
-            notifyDataSetChanged();
+            getItemManager().notifyDataSetChanged();
         }
     }
 }
