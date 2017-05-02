@@ -9,9 +9,8 @@
 5.抽取的adapter可以使用装饰者模式进行扩展.
 
 # 思路:
-
+```
 1.Treeadapter应该只需要关心List<TreeAdapterItem> datas 的内容
-
 
 2.把每个item看成独立的个体. 布局样式，每行所占比,bindViewHolder都自实现。
 
@@ -27,12 +26,12 @@
 7.后台返回字段,获取对应class文件,通过Class.newInstance()方法构建实例.
 
 8.将ViewHolder与adapter写成通用的,则不需要写多个adatper与viewholder,只需要写多个item.与javabean.
-
+```
 
 # 目录介绍
 
 + 1.Adapter
-     * Wapper------扩展Adapte的wapper目录
+   * Wapper------扩展Adapte的wapper目录
    * EmptyWapper  --------当无数据时显示页面.
    * HeaderAndFootWapper --------添加头部view和尾部view
 
@@ -43,18 +42,18 @@
   - ViewHolder----封装的通用viewHodler
 
  + 2.base
-  - BaseItem<D extends BaseItemData> ------item的封装
-  - BaseItemData-----item的数据要求.javabean需要继承该类.
+   - BaseItem<D extends BaseItemData> ------item的封装
+   - BaseItemData-----item的数据要求.javabean需要继承该类.
 
  + 3.factory
-  - ItemConfig ----添加item的class,配置样式
-  - ItemHelper----通过class生成BaseItem的工厂类
+   - ItemConfig ----添加item的class,配置样式
+   - ItemHelper----通过class生成BaseItem的工厂类
 
  + 4.view
-  - TreeItem  ----树形列表的子item
-  - TreeItemGroup ----树形列表的父item
-  - TreeParent---TreeItemGroup 实现该接口
-  - TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
+   - TreeItem  ----树形列表的子item
+   - TreeItemGroup ----树形列表的父item
+   - TreeParent---TreeItemGroup 实现该接口
+   - TreeSelectItemGroup---可以选中子item的TreeItemGroup.  demo:见购物页面
 
 
 
