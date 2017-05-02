@@ -9,9 +9,12 @@
 5.抽取的adapter可以使用装饰者模式进行扩展.
 
 # 思路:(包含第一篇的思路)
+
 1.Treeadapter应该只需要关心List<TreeAdapterItem> datas 的内容
 
+
 2.把每个item看成独立的个体. 布局样式，每行所占比,bindViewHolder都自实现。
+
 
 3.每一个item应该只关心自己的数据和自己的下一级的数据，不会去关心上上级，下下级
 
