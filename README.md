@@ -32,7 +32,7 @@
 # 目录介绍
 
 + 1.Adapter
-    * Wapper------扩展的wapper,
+    * Wapper------扩展Adapte的wapper
   * EmptyWapper  --------当无数据时显示页面.
   * HeaderAndFootWapper --------添加头部view和尾部view
 
