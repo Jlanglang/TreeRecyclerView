@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.helper;
+package com.baozi.treerecyclerview.factory;
 
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.base.BaseItem;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by baozi on 2017/4/29.
  */
 
-public class ItemHelper {
+public class ItemFactory {
     /**
      * 不确定item的class类型
      *

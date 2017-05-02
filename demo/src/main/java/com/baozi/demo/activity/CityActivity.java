@@ -13,8 +13,7 @@ import com.baozi.demo.R;
 import com.baozi.demo.demo.city.bean.CityBean;
 import com.baozi.demo.demo.city.OneTreeItemParent;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.helper.ItemConfig;
-import com.baozi.treerecyclerview.helper.ItemHelper;
+import com.baozi.treerecyclerview.factory.ItemFactory;
 
 import java.util.List;
 
@@ -43,8 +42,8 @@ public class CityActivity extends AppCompatActivity {
             }
         });
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
-        List<OneTreeItemParent> itemList = ItemHelper.createItemList(cityBeen, OneTreeItemParent.class);
-       TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+        List<OneTreeItemParent> itemList = ItemFactory.createItemList(cityBeen, OneTreeItemParent.class);
+        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
     }

@@ -3,7 +3,7 @@ package com.baozi.treerecyclerview.base;
 import android.content.res.Resources;
 
 import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 
 /**
  * 组合模式
@@ -50,6 +50,10 @@ public abstract class BaseItem<D extends BaseItemData> {
      */
     protected abstract int initLayoutId();
 
+    /**
+     * 觉得item的所占比例
+     * @return ,如果设置的列数为6,返回3,则代表item占1半宽度
+     */
     public int getSpanSize() {
         return spanSize;
     }
@@ -70,7 +74,6 @@ public abstract class BaseItem<D extends BaseItemData> {
      * 抽象holder的绑定
      */
     public abstract void onBindViewHolder(ViewHolder viewHolder);
-
 
     /**
      * 当前条目的点击回调

@@ -2,9 +2,9 @@ package com.baozi.demo.demo.city;
 
 import com.baozi.demo.R;
 import com.baozi.demo.demo.city.bean.CityBean;
-import com.baozi.treerecyclerview.helper.ItemHelper;
+import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
-import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 public class OneTreeItemParent extends TreeItemGroup<CityBean> {
     @Override
     public List<? extends TreeItem> initChildsList(CityBean data) {
-        return ItemHelper.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
+        return ItemFactory.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
     }
 
     @Override

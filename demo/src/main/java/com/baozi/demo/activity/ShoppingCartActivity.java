@@ -21,7 +21,7 @@ import com.baozi.demo.demo.shop.ShopTitileItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
-import com.baozi.treerecyclerview.helper.ItemHelper;
+import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ import java.util.List;
 public class ShoppingCartActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private TreeRecyclerAdapter<ShopTitileItem> mTitleItemTreeRecyclerViewAdapter;
+    private TreeRecyclerAdapter<ShopTitileItem> mAdapter;
     private TextView mTvNext;
 
     @Override
@@ -60,21 +60,22 @@ public class ShoppingCartActivity extends AppCompatActivity {
             }
         });
         List<StoreBean> storeBean = initData();
-        List<ShopTitileItem> itemList = ItemHelper.createItemList(storeBean, ShopTitileItem.class);
-        mTitleItemTreeRecyclerViewAdapter = new TreeRecyclerAdapter<>();
-        mTitleItemTreeRecyclerViewAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
-        mTitleItemTreeRecyclerViewAdapter.setDatas(itemList);
-        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<>(mTitleItemTreeRecyclerViewAdapter);
+        List<ShopTitileItem> itemList = ItemFactory.createItemList(storeBean, ShopTitileItem.class);
+        mAdapter = new TreeRecyclerAdapter<>();
+        mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        mAdapter.setDatas(itemList);
+        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<>(mAdapter);
 
         ContentItem contentItem = new ContentItem();
         contentItem.setData(new ShopListBean());
         headerAndFootWapper.addHeaderView(contentItem);
+
         mRecyclerView.setAdapter(headerAndFootWapper);
     }
 
     public void onNext() {
         List<StoreBean> shopListBeen = new ArrayList<>();
-        List<ShopTitileItem> datas = mTitleItemTreeRecyclerViewAdapter.getInitialDatas();
+        List<ShopTitileItem> datas = mAdapter.getInitialDatas();
         for (int i = 0; i < datas.size(); i++) {
             ShopTitileItem titletItem = datas.get(i);
             StoreBean data = titletItem.getData();

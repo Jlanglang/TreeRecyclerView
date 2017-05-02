@@ -4,7 +4,6 @@ import android.view.View;
 
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
-import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.List;
 
@@ -32,9 +31,12 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                     int layoutPosition = holder.getLayoutPosition();
                     if (getCheckItem().checkPosition(layoutPosition)) {
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        //展开,折叠和item点击不应该同时响应事件.
                         if (type != TreeRecyclerViewType.SHOW_ALL) {
+                            //展开,折叠
                             expandOrCollapse(itemPosition);
                         } else {
+                            //点击事件
                             T item = getDatas().get(itemPosition);
                             TreeItemGroup itemParentItem = item.getParentItem();
                             //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
@@ -69,7 +71,10 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 T t = datas.get(i);
                 getDatas().add(t);
                 if (t instanceof TreeItemGroup) {
-                    getDatas().addAll(((TreeItemGroup) t).getAllChilds(type));
+                    List childs = ((TreeItemGroup) t).getAllChilds();
+                    if (childs != null) {
+                        getDatas().addAll(childs);
+                    }
                 }
             }
         } else {
@@ -87,7 +92,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
             TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
             boolean expand = treeParentItem.isExpand();
-            List<T> allChilds = treeParentItem.getAllChilds(type);
+            List<T> allChilds = treeParentItem.getAllChilds();
             if (expand) {
                 getDatas().removeAll(allChilds);
                 treeParentItem.onCollapse();
@@ -101,6 +106,11 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         }
     }
 
+    /**
+     * 需要设置在setdata之前,否则type不会生效
+     *
+     * @param type
+     */
     public void setType(TreeRecyclerViewType type) {
         this.type = type;
     }

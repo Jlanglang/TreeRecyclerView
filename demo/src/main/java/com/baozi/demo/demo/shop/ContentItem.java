@@ -2,7 +2,7 @@ package com.baozi.demo.demo.shop;
 
 import com.baozi.demo.R;
 import com.baozi.demo.demo.shop.bean.ShopListBean;
-import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 
 /**

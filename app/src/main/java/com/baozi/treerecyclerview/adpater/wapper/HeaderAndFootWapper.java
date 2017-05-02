@@ -5,9 +5,7 @@ import android.util.SparseArray;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.helper.ItemHelper;
-import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 
 import java.util.List;
 
@@ -26,7 +24,7 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         mAdapter.setCheckItem(new CheckItem() {
             @Override
             public boolean checkPosition(int position) {
-                return !(isHeaderViewPos(position) || isFooterViewPos(position));
+                return !(isHeaderViewPos(position) || !isFooterViewPos(position));
             }
 
             @Override

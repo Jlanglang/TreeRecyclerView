@@ -1,6 +1,5 @@
 package com.baozi.treerecyclerview.adpater;
 
-import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.List;

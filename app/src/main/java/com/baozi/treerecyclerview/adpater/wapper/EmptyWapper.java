@@ -1,14 +1,12 @@
 package com.baozi.treerecyclerview.adpater.wapper;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.view.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 
 import java.util.List;
 
@@ -20,7 +18,9 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     public static final int ITEM_TYPE_EMPTY = Integer.MAX_VALUE - 1;
 
     private BaseRecyclerAdapter<T> mAdapter;
+
     private View mEmptyView;
+
     private int mEmptyLayoutId;
 
 
@@ -36,7 +36,6 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isEmpty()) {
-
             if (mEmptyView != null) {
                 return ViewHolder.createViewHolder(parent.getContext(), mEmptyView);
             } else {

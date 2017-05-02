@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.view.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,26 +17,30 @@ import java.util.List;
  */
 public class BaseRecyclerAdapter<T extends BaseItem> extends
         RecyclerView.Adapter<ViewHolder> {
-    /**
-     * items;
-     */
+
     private List<T> mDatas;//展示数据
     private ItemManager<T> mItemManager;
     private CheckItem mCheckItem;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        //看源码,这里的parent就是Recyclerview,所以不会为null.可以通过它拿到context
         return ViewHolder.createViewHolder(parent.getContext(), parent, viewType);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        T t = mDatas.get(position);
+        T t = getDatas().get(position);
         checkItemManage(t);
         t.onBindViewHolder(holder);
         onBindViewHolderClick(holder);
     }
 
+    /**
+     * 实现item的点击事件
+     *
+     * @param holder 绑定点击事件的ViewHolder
+     */
     public void onBindViewHolderClick(final ViewHolder holder) {
         //判断当前holder是否已经设置了点击事件
         if (!holder.itemView.hasOnClickListeners()) {
@@ -58,12 +61,20 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         }
     }
 
+    /**
+     * 检出item的position,主要viewholder的getLayoutPosition不一定是需要的.
+     * 比如添加了headview和footview.
+     */
     public interface CheckItem {
         boolean checkPosition(int position);
 
         int getAfterCheckingPosition(int position);
     }
 
+    /**
+     * 默认实现的CheckItem接口
+     * @return
+     */
     public CheckItem getCheckItem() {
         if (mCheckItem == null) {
             mCheckItem = new CheckItem() {
@@ -85,7 +96,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         mCheckItem = checkItem;
     }
 
-    void checkItemManage(T item) {
+    private void checkItemManage(T item) {
         if (item.getItemManager() == null) {
             item.setItemManager(getItemManager());
         }
@@ -160,6 +171,11 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         mItemManager = itemManager;
     }
 
+    /**
+     * 这里将LayoutId作为type,因为LayoutId不可能相同,个人觉的可以作为item的标志
+     * @param position
+     * @return
+     */
     @Override
     public int getItemViewType(int position) {
         return mDatas.get(position).getLayoutId();
@@ -196,6 +212,10 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         return mDatas;
     }
 
+    /**
+     * 需要手动setDatas(List<T> datas),否则数据为空
+     * @param datas
+     */
     public void setDatas(List<T> datas) {
         if (datas != null) {
             mDatas = datas;

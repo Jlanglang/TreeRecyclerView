@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.helper;
+package com.baozi.treerecyclerview.factory;
 
 import com.baozi.treerecyclerview.base.BaseItem;
 
