@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
-    public static final int ITEM_TYPE_EMPTY = Integer.MAX_VALUE - 1;
+    public static final int ITEM_TYPE_EMPTY = Integer.MIN_VALUE;
 
     private BaseRecyclerAdapter<T> mAdapter;
 

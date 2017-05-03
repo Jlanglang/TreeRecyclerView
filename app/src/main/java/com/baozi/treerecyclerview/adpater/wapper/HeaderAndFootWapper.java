@@ -2,6 +2,8 @@ package com.baozi.treerecyclerview.adpater.wapper;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseItem;
@@ -15,8 +17,8 @@ import java.util.List;
 
 public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     private BaseRecyclerAdapter<T> mAdapter;
-    private SparseArray<BaseItem> mHeaderViews = new SparseArray<>();
-    private SparseArray<BaseItem> mFootViews = new SparseArray<>();
+    private SparseArray<View> mHeaderViews = new SparseArray<>();
+    private SparseArray<View> mFootViews = new SparseArray<>();
 
     public HeaderAndFootWapper(BaseRecyclerAdapter<T> adapter) {
         mAdapter = adapter;
@@ -24,7 +26,7 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         mAdapter.setCheckItem(new CheckItem() {
             @Override
             public boolean checkPosition(int position) {
-                return !(isHeaderViewPos(position) || !isFooterViewPos(position));
+                return !(isHeaderViewPos(position) || isFooterViewPos(position));
             }
 
             @Override
@@ -35,12 +37,23 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
     }
 
     @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (mHeaderViews.get(viewType) != null) {
+            return ViewHolder.createViewHolder(parent.getContext(), mHeaderViews.get(viewType));
+        } else if (mFootViews.get(viewType) != null) {
+            return ViewHolder.createViewHolder(parent.getContext(), mFootViews.get(viewType));
+        }
+        return mAdapter.onCreateViewHolder(parent, viewType);
+    }
+
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (isHeaderViewPos(position) || isFooterViewPos(position)) {
             return;
         }
         mAdapter.onBindViewHolder(holder, position - getHeadersCount());
     }
+
 
     @Override
     public int getItemCount() {
@@ -50,9 +63,9 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
     @Override
     public int getItemViewType(int position) {
         if (isHeaderViewPos(position)) {
-            return mHeaderViews.get(position).getLayoutId();
+            return mHeaderViews.keyAt(position);
         } else if (isFooterViewPos(position)) {
-            return mFootViews.get(position - getHeadersCount() - mAdapter.getItemCount()).getLayoutId();
+            return mFootViews.keyAt(position - getHeadersCount() - mAdapter.getItemCount());
         }
         return mAdapter.getItemViewType(position - getHeadersCount());
     }
@@ -62,12 +75,12 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         mAdapter.onAttachedToRecyclerView(recyclerView);
     }
 
-    public void addHeaderView(BaseItem view) {
+    public void addHeaderView(View view) {
         mHeaderViews.put(mHeaderViews.size(), view);
     }
 
-    public void addFootView(BaseItem view) {
-        mFootViews.put(mFootViews.size(), view);
+    public void addFootView(View view) {
+        mFootViews.put(Integer.MAX_VALUE - mFootViews.size(), view);
     }
 
     private boolean isHeaderViewPos(int position) {

@@ -3,18 +3,25 @@ package com.baozi.demo.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.demo.shop.ContentItem;
+import com.baozi.demo.demo.shop.HeadViewItem;
 import com.baozi.demo.demo.shop.bean.ShopListBean;
 import com.baozi.demo.demo.shop.bean.StoreBean;
 import com.baozi.demo.demo.shop.ShopTitileItem;
@@ -24,6 +31,8 @@ import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,11 +73,24 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mAdapter = new TreeRecyclerAdapter<>();
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mAdapter.setDatas(itemList);
+        //包装成可以添加头部和尾部的Adapter
         HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<>(mAdapter);
-
-        ContentItem contentItem = new ContentItem();
-        contentItem.setData(new ShopListBean());
-        headerAndFootWapper.addHeaderView(contentItem);
+        //添加头部View1
+        TextView headView1 = new TextView(this);
+        headView1.setText("headview");
+        headView1.setGravity(Gravity.CENTER);
+        headView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+        headerAndFootWapper.addHeaderView(headView1);
+        //添加头部View2
+        ImageView headView2 = new ImageView(this);
+        headView2.setBackgroundResource(R.mipmap.ic_launcher);
+        headView2.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+        headerAndFootWapper.addHeaderView(headView2);
+        //添加底部View1
+        ImageView footView1 = new ImageView(this);
+        footView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+        footView1.setBackgroundResource(R.mipmap.ic_launcher);
+        headerAndFootWapper.addFootView(footView1);
 
         mRecyclerView.setAdapter(headerAndFootWapper);
     }
