@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baozi.treerecyclerview.R;
 import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.ArrayList;
@@ -22,10 +23,15 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     private ItemManager<T> mItemManager;
     private CheckItem mCheckItem;
 
+    protected OnItemClickLitener mOnItemClickListener;
+    protected OnItemLongClickListener mOnItemLongClickListener;
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //看源码,这里的parent就是Recyclerview,所以不会为null.可以通过它拿到context
-        return ViewHolder.createViewHolder(parent.getContext(), parent, viewType);
+        ViewHolder viewHolder = ViewHolder.createViewHolder(parent.getContext(), parent, viewType);
+        onBindViewHolderClick(viewHolder);
+        return viewHolder;
     }
 
     @Override
@@ -33,7 +39,6 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         T t = getDatas().get(position);
         checkItemManage(t);
         t.onBindViewHolder(holder);
-        onBindViewHolderClick(holder);
     }
 
     /**
@@ -53,16 +58,36 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
                     if (getCheckItem().checkPosition(layoutPosition)) {
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
-                        //拿到对应item,回调.
-                        getDatas().get(itemPosition).onClick();
+                        if (mOnItemClickListener != null) {
+                            mOnItemClickListener.onItemClick(holder, getData(itemPosition), itemPosition);
+                        } else {
+                            //拿到对应item,回调.
+                            getDatas().get(itemPosition).onClick();
+                        }
                     }
+                }
+            });
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //获得holder的position
+                    int layoutPosition = holder.getLayoutPosition();
+                    //检查position是否可以点击
+                    if (getCheckItem().checkPosition(layoutPosition)) {
+                        //检查并得到真实的position
+                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        if (mOnItemLongClickListener != null) {
+                            return mOnItemLongClickListener.onItemLongClick(holder, getData(itemPosition), itemPosition);
+                        }
+                    }
+                    return false;
                 }
             });
         }
     }
 
     /**
-     * 检出item的position,主要viewholder的getLayoutPosition不一定是需要的.
+     * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
      * 比如添加了headview和footview.
      */
     public interface CheckItem {
@@ -71,8 +96,25 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         int getAfterCheckingPosition(int position);
     }
 
+    public interface OnItemClickLitener {
+        void onItemClick(ViewHolder viewHolder, BaseItem itemData, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(ViewHolder viewHolder, BaseItem itemData, int position);
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
+    }
+
     /**
      * 默认实现的CheckItem接口
+     *
      * @return
      */
     public CheckItem getCheckItem() {
@@ -109,60 +151,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      */
     public ItemManager<T> getItemManager() {
         if (mItemManager == null) {
-            mItemManager = new ItemManager<T>() {
-                @Override
-                public void addTreeItem(T item) {
-                    getDatas().add(item);
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void addTreeItem(List<T> items) {
-                    getDatas().addAll(items);
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void removeItem(T item) {
-                    getDatas().remove(item);
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void removeItem(List<T> items) {
-                    getDatas().removeAll(items);
-                    notifyDataSetChanged();
-                }
-
-                @Override
-                public void notifyItemChanged(int position) {
-                }
-
-                @Override
-                public void notifyItemInserted(int position) {
-                }
-
-                @Override
-                public void notifyItemRemoved(int position) {
-                }
-
-                @Override
-                public void notifyItemRangeChanged(int positionStart, int itemCount) {
-                }
-
-                @Override
-                public void notifyItemRangeInserted(int positionStart, int itemCount) {
-                }
-
-                @Override
-                public void notifyItemRangeRemoved(int positionStart, int itemCount) {
-                }
-
-                @Override
-                public void notifyDataSetChanged() {
-                    BaseRecyclerAdapter.this.notifyDataSetChanged();
-                }
-            };
+            mItemManager = new ItemManageImpl();
         }
         return mItemManager;
     }
@@ -173,6 +162,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
 
     /**
      * 这里将LayoutId作为type,因为LayoutId不可能相同,个人觉的可以作为item的标志
+     *
      * @param position
      * @return
      */
@@ -212,14 +202,85 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         return mDatas;
     }
 
+    public T getData(int position) {
+        if (position < getDatas().size()) {
+            return getDatas().get(position);
+        }
+        return null;
+    }
+
     /**
      * 需要手动setDatas(List<T> datas),否则数据为空
+     *
      * @param datas
      */
     public void setDatas(List<T> datas) {
         if (datas != null) {
             mDatas = datas;
-            getItemManager().notifyDataSetChanged();
+            getItemManager().notifyDataChanged();
+        }
+    }
+
+    /**
+     * 默认使用 notifyDataChanged();刷新.
+     * 如果使用带动画效果的,条目过多可能会出现卡顿.
+     */
+    private class ItemManageImpl implements ItemManager<T> {
+        @Override
+        public void addItem(T item) {
+            getDatas().add(item);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void addItem(int position, T item) {
+            getDatas().add(position, item);
+        }
+
+        @Override
+        public void addItems(List<T> items) {
+            getDatas().addAll(items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void addItems(int position, List<T> items) {
+            getDatas().addAll(position, items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItem(T item) {
+            getDatas().remove(item);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItem(int position) {
+            getDatas().remove(position);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItems(List<T> items) {
+            getDatas().removeAll(items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void replaceItem(int position, T item) {
+            getDatas().set(position, item);
+            notifyDataChanged();
+        }
+
+        @Override
+        public T getItem(int position) {
+            return getDatas().get(position);
+        }
+
+        @Override
+        public void notifyDataChanged() {
+            notifyDataSetChanged();
         }
     }
 }

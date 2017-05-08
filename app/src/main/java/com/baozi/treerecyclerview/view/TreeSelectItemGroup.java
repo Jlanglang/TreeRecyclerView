@@ -27,10 +27,10 @@ public abstract class TreeSelectItemGroup<D extends BaseItemData>
     }
 
     /**
-     * 是否有选中item,
+     * 子级是否有选中
      * @return
      */
-    public boolean isHaveCheck() {
+    public boolean isChildCheck() {
         return !getSelectItems().isEmpty();
     }
 

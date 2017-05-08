@@ -7,12 +7,17 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.demo.city.bean.CityBean;
 import com.baozi.demo.demo.city.OneTreeItemParent;
+import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 
 import java.util.List;
@@ -43,9 +48,8 @@ public class CityActivity extends AppCompatActivity {
         });
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
         List<OneTreeItemParent> itemList = ItemFactory.createItemList(cityBeen, OneTreeItemParent.class);
-        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+        TreeRecyclerAdapter<OneTreeItemParent> treeRecyclerAdapter = new TreeRecyclerAdapter<OneTreeItemParent>();
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
     }
-
 }

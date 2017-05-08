@@ -16,6 +16,8 @@ import java.util.List;
 public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter<T> {
 
     private TreeRecyclerViewType type;
+
+    private ItemManager<T> mItemManager;
     /**
      * 最初的数据.没有经过增删操作.
      */
@@ -43,12 +45,33 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                             if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
                                 return;
                             }
-                            item.onClick();
+                            if (mOnItemClickListener != null) {
+                                mOnItemClickListener.onItemClick(holder, getData(itemPosition), itemPosition);
+                            } else {
+                                //拿到对应item,回调.
+                                getDatas().get(itemPosition).onClick();
+                            }
                         }
                     }
                 }
             });
         }
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //获得holder的position
+                int layoutPosition = holder.getLayoutPosition();
+                //检查position是否可以点击
+                if (getCheckItem().checkPosition(layoutPosition)) {
+                    //检查并得到真实的position
+                    int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                    if (mOnItemLongClickListener != null) {
+                        return mOnItemLongClickListener.onItemLongClick(holder, getData(itemPosition), itemPosition);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     /**
@@ -82,6 +105,18 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         }
     }
 
+
+    public ItemManager<T> getItemManager() {
+        if (mItemManager == null) {
+            return new TreeItemManageImpl();
+        }
+        return mItemManager;
+    }
+
+    public void setItemManager(ItemManager itemManage) {
+        this.mItemManager = itemManage;
+    }
+
     /**
      * 相应RecyclerView的点击事件 展开或关闭某节点
      *
@@ -92,7 +127,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
             TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
             boolean expand = treeParentItem.isExpand();
-            List<T> allChilds = treeParentItem.getAllChilds();
+            List allChilds = treeParentItem.getAllChilds();
             if (expand) {
                 getDatas().removeAll(allChilds);
                 treeParentItem.onCollapse();
@@ -102,7 +137,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 treeParentItem.onExpand();
                 treeParentItem.setExpand(true);
             }
-            getItemManager().notifyDataSetChanged();
+            getItemManager().notifyDataChanged();
         }
     }
 
@@ -115,4 +150,69 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         this.type = type;
     }
 
+    private class TreeItemManageImpl implements ItemManager<T> {
+        @Override
+        public void addItem(T item) {
+            if (item instanceof TreeItemGroup) {
+                getDatas().add(item);
+            } else {
+                TreeItemGroup itemParentItem = item.getParentItem();
+                if (itemParentItem != null && itemParentItem.getChilds() != null) {
+
+                }
+            }
+            notifyDataChanged();
+        }
+
+        @Override
+        public void addItem(int position, T item) {
+            getDatas().add(position, item);
+        }
+
+        @Override
+        public void addItems(List<T> items) {
+            getDatas().addAll(items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void addItems(int position, List<T> items) {
+            getDatas().addAll(position, items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItem(T item) {
+            getDatas().remove(item);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItem(int position) {
+            getDatas().remove(position);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void removeItems(List<T> items) {
+            getDatas().removeAll(items);
+            notifyDataChanged();
+        }
+
+        @Override
+        public void replaceItem(int position, T item) {
+            getDatas().set(position, item);
+            notifyDataChanged();
+        }
+
+        @Override
+        public T getItem(int position) {
+            return getDatas().get(position);
+        }
+
+        @Override
+        public void notifyDataChanged() {
+            notifyDataSetChanged();
+        }
+    }
 }

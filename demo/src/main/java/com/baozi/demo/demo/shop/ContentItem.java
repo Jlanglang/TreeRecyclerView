@@ -24,6 +24,6 @@ public class ContentItem extends TreeItem<ShopListBean> {
     @Override
     public void onClick() {
         getData().setCheck(!getData().isCheck());
-        getItemManager().notifyDataSetChanged();
+        getItemManager().notifyDataChanged();
     }
 }

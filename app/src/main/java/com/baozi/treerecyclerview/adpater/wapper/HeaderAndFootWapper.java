@@ -54,7 +54,6 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         mAdapter.onBindViewHolder(holder, position - getHeadersCount());
     }
 
-
     @Override
     public int getItemCount() {
         return getHeadersCount() + getFootersCount() + mAdapter.getItemCount();

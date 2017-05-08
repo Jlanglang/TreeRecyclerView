@@ -3,7 +3,6 @@ package com.baozi.demo.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -14,14 +13,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shop.ContentItem;
-import com.baozi.demo.demo.shop.HeadViewItem;
 import com.baozi.demo.demo.shop.bean.ShopListBean;
 import com.baozi.demo.demo.shop.bean.StoreBean;
 import com.baozi.demo.demo.shop.ShopTitileItem;
@@ -31,8 +27,6 @@ import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +95,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         for (int i = 0; i < datas.size(); i++) {
             ShopTitileItem titletItem = datas.get(i);
             StoreBean data = titletItem.getData();
-            if (titletItem.isHaveCheck()) {
+            if (titletItem.isChildCheck()) {
                 ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
                 List<? extends BaseItem> childs = titletItem.getSelectItems();
                 for (int j = 0; j < childs.size(); j++) {

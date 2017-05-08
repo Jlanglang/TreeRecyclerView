@@ -28,12 +28,12 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setChecked(R.id.cb_ischeck, isHaveCheck());
+        holder.setChecked(R.id.cb_ischeck, isChildCheck());
     }
 
     @Override
     public void onClick() {
-        if (!isHaveCheck()) {
+        if (!isChildCheck()) {
             getSelectItems().clear();
             getSelectItems().addAll(getChilds());
         } else {
@@ -42,9 +42,9 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
         int size = getChilds().size();
         for (int i = 0; i < size; i++) {
             ShopListBean data = (ShopListBean) getChilds().get(i).getData();
-            data.setCheck(isHaveCheck());
+            data.setCheck(isChildCheck());
         }
-        getItemManager().notifyDataSetChanged();
+        getItemManager().notifyDataChanged();
     }
 
 

@@ -5,25 +5,28 @@ import com.baozi.treerecyclerview.base.BaseItem;
 import java.util.List;
 
 public interface ItemManager<T extends BaseItem> {
-    void addTreeItem(T item);
+    //增
+    void addItem(T item);
 
-    void addTreeItem(List<T> items);
+    void addItem(int position, T item);
 
+    void addItems(List<T> items);
+
+    void addItems(int position, List<T> items);
+
+    //删
     void removeItem(T item);
 
-    void removeItem(List<T> items);
+    void removeItem(int position);
 
-    void notifyItemChanged(int position);
+    void removeItems(List<T> items);
 
-    void notifyItemInserted(int position);
 
-    void notifyItemRemoved(int position);
+    //改
+    void replaceItem(int position, T item);
 
-    void notifyItemRangeChanged(int positionStart, int itemCount);
+    //查
+    T getItem(int position);
 
-    void notifyItemRangeInserted(int positionStart, int itemCount);
-
-    void notifyItemRangeRemoved(int positionStart, int itemCount);
-
-    void notifyDataSetChanged();
+    void notifyDataChanged();
 }
