@@ -108,6 +108,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     public interface OnItemLongClickListener {
         boolean onItemLongClick(ViewHolder viewHolder, BaseItem itemData, int position);
     }
+
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         mOnItemLongClickListener = onItemLongClickListener;
     }
@@ -281,6 +282,11 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         @Override
         public void notifyDataChanged() {
             notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemPosition(T item) {
+            return getDatas().indexOf(item);
         }
     }
 }

@@ -40,5 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.bt_xunfei).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, XunfeiAcitivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

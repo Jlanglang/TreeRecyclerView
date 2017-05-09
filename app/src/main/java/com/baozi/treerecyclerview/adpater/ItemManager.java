@@ -1,6 +1,8 @@
 package com.baozi.treerecyclerview.adpater;
 
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
 
@@ -29,4 +31,7 @@ public interface ItemManager<T extends BaseItem> {
     T getItem(int position);
 
     void notifyDataChanged();
+
+    int getItemPosition(T item);
+
 }

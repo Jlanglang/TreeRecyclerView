@@ -38,23 +38,38 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
         return isExpand;
     }
 
+    /**
+     * 设置为传入
+     *
+     * @param expand 传入true则展开,传入false则折叠
+     */
     public void setExpand(boolean expand) {
-        if (isCanChangeExpand()) {
-            isExpand = expand;
+        if (!isCanChangeExpand()) {
+            return;
         }
+        if (expand) {
+            onExpand();
+        } else {
+            onCollapse();
+        }
+        this.isExpand = expand;
     }
 
     public void setData(D data) {
         super.setData(data);
         childs = initChildsList(data);
     }
-
+    public void setChilds(List<? extends BaseItem> childs) {
+        this.childs = childs;
+    }
     /**
      * 展开
      */
     @Override
     public void onExpand() {
-
+        int itemPosition = getItemManager().getItemPosition(this);
+        getItemManager().addItems(itemPosition + 1, getAllChilds());
+        getItemManager().notifyDataChanged();
     }
 
     /**
@@ -62,7 +77,8 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
      */
     @Override
     public void onCollapse() {
-
+        getItemManager().removeItems(getAllChilds());
+        getItemManager().notifyDataChanged();
     }
 
     public boolean isCanChangeExpand() {
@@ -71,14 +87,17 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
 
     /**
      * 获得自己的childs.
+     *
      * @return
      */
     @Nullable
     public List<? extends BaseItem> getChilds() {
         return childs;
     }
+
     /**
      * 获得所有childs,包括子item的childs
+     *
      * @return
      */
     @Nullable

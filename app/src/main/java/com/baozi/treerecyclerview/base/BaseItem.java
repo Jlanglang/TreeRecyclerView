@@ -52,7 +52,8 @@ public abstract class BaseItem<D extends BaseItemData> {
 
     /**
      * 觉得item的所占比例
-     * @return ,如果设置的列数为6,返回3,则代表item占1半宽度
+     *
+     * @return , 如果设置的列数为6, 返回3, 则代表item占1半宽度
      */
     public int getSpanSize() {
         return spanSize;

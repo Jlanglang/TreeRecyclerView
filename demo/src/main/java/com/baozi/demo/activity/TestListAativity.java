@@ -33,10 +33,10 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
-        ItemConfig.addHolderType(10, TitleItem.class);
-        ItemConfig.addHolderType(11, SelectionImageItem.class);
-        ItemConfig.addHolderType(12, ContentImageItem.class);
-        ItemConfig.addHolderType(13, SelectionTextItem.class);
+        ItemConfig.addHolderType(100, TitleItem.class);
+        ItemConfig.addHolderType(101, SelectionImageItem.class);
+        ItemConfig.addHolderType(102, ContentImageItem.class);
+        ItemConfig.addHolderType(103, SelectionTextItem.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
@@ -58,19 +58,19 @@ public class TestListAativity extends AppCompatActivity {
         ArrayList<TitleBean> titleBeens = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
             TitleBean titleBean = new TitleBean();
-            titleBean.setViewItemType(10);
+            titleBean.setViewItemType(100);
             if (i % 5 == 0) {//图片的选项
                 ArrayList<ContentBean> singleBeens = new ArrayList<>();
                 if (i % 10 == 0) {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("image");
-                    singleBean.setViewItemType(12);
+                    singleBean.setViewItemType(102);
                     singleBeens.add(singleBean);
                 }
                 for (int j = 0; j < 4; j++) {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("Contnet_image");
-                    singleBean.setViewItemType(11);
+                    singleBean.setViewItemType(101);
                     singleBeens.add(singleBean);
                 }
 
@@ -82,7 +82,7 @@ public class TestListAativity extends AppCompatActivity {
                     ContentBean singleBean = new ContentBean();
                     singleBean.setType("text");
                     singleBean.setNumber(j + ".");
-                    singleBean.setViewItemType(13);
+                    singleBean.setViewItemType(103);
                     singleBeens.add(singleBean);
                 }
                 titleBean.setSingleBeen(singleBeens);

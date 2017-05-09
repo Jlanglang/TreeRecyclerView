@@ -2,9 +2,11 @@ package com.baozi.treerecyclerview.adpater;
 
 import android.view.View;
 
+import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,17 +129,14 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
             TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
             boolean expand = treeParentItem.isExpand();
-            List allChilds = treeParentItem.getAllChilds();
-            if (expand) {
-                getDatas().removeAll(allChilds);
-                treeParentItem.onCollapse();
-                treeParentItem.setExpand(false);
-            } else {
-                getDatas().addAll(position + 1, allChilds);
-                treeParentItem.onExpand();
-                treeParentItem.setExpand(true);
-            }
-            getItemManager().notifyDataChanged();
+//            if (expand) {
+//                //如果展开状态就折叠.
+//                treeParentItem.onCollapse();
+//            } else {
+//                //如果折叠状态就展开.
+//                treeParentItem.onExpand();
+//            }
+            treeParentItem.setExpand(!expand);
         }
     }
 
@@ -153,12 +152,22 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
     private class TreeItemManageImpl implements ItemManager<T> {
         @Override
         public void addItem(T item) {
+            if (null == item) {
+                return;
+            }
             if (item instanceof TreeItemGroup) {
                 getDatas().add(item);
             } else {
                 TreeItemGroup itemParentItem = item.getParentItem();
-                if (itemParentItem != null && itemParentItem.getChilds() != null) {
-
+                if (itemParentItem != null) {
+                    List childs = itemParentItem.getChilds();
+                    if (childs != null) {
+                        int i = getDatas().indexOf(itemParentItem);
+                        getDatas().add(i + itemParentItem.getChilds().size(), item);
+                    } else {
+                        childs = new ArrayList();
+                    }
+                    childs.add(item);
                 }
             }
             notifyDataChanged();
@@ -167,6 +176,10 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         @Override
         public void addItem(int position, T item) {
             getDatas().add(position, item);
+            if (item != null && item.getParentItem() != null) {
+                item.getParentItem().getChilds().add(item);
+            }
+            notifyDataChanged();
         }
 
         @Override
@@ -183,12 +196,28 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
 
         @Override
         public void removeItem(T item) {
+            if (null == item) {
+                return;
+            }
             getDatas().remove(item);
+
+            TreeItemGroup itemParentItem = item.getParentItem();
+            if (itemParentItem != null) {
+                List childs = itemParentItem.getChilds();
+                if (childs != null) {
+                    childs.remove(item);
+                }
+            }
             notifyDataChanged();
         }
 
         @Override
         public void removeItem(int position) {
+            T t = getDatas().get(position);
+            TreeItemGroup parentItem = t.getParentItem();
+            if (parentItem != null && parentItem.getChilds() != null) {
+                parentItem.getChilds().remove(t);
+            }
             getDatas().remove(position);
             notifyDataChanged();
         }
@@ -201,7 +230,18 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
 
         @Override
         public void replaceItem(int position, T item) {
-            getDatas().set(position, item);
+            T t = getDatas().get(position);
+            if (t instanceof TreeItemGroup) {
+                getDatas().set(position, item);
+            } else {
+                TreeItemGroup parentItem = t.getParentItem();
+                if (parentItem != null && parentItem.getChilds() != null) {
+                    List childs = parentItem.getChilds();
+                    int i = childs.indexOf(t);
+                    childs.set(i, item);
+                }
+                getDatas().set(position, item);
+            }
             notifyDataChanged();
         }
 
@@ -213,6 +253,11 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
         @Override
         public void notifyDataChanged() {
             notifyDataSetChanged();
+        }
+
+        @Override
+        public int getItemPosition(T item) {
+            return getDatas().indexOf(item);
         }
     }
 }

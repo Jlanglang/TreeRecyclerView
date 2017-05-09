@@ -21,8 +21,10 @@ import com.baozi.demo.R;
 import com.baozi.demo.demo.shop.bean.ShopListBean;
 import com.baozi.demo.demo.shop.bean.StoreBean;
 import com.baozi.demo.demo.shop.ShopTitileItem;
+import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
@@ -68,7 +70,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mAdapter.setDatas(itemList);
         //包装成可以添加头部和尾部的Adapter
-        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<>(mAdapter);
+        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<ShopTitileItem>(mAdapter){
+            @Override
+            public void onBindViewHolder(ViewHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+            }
+        };
         //添加头部View1
         TextView headView1 = new TextView(this);
         headView1.setText("headview");
@@ -85,7 +92,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
         footView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
         footView1.setBackgroundResource(R.mipmap.ic_launcher);
         headerAndFootWapper.addFootView(footView1);
-
         mRecyclerView.setAdapter(headerAndFootWapper);
     }
 
