@@ -33,15 +33,18 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
+                    //检查item的position,这个item是否可以点击
                     if (getCheckItem().checkPosition(layoutPosition)) {
+                        //获得处理后的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        //拿到BaseItem
+                        T item = getDatas().get(itemPosition);
                         //展开,折叠和item点击不应该同时响应事件.
-                        if (type != TreeRecyclerViewType.SHOW_ALL) {
+                        //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerViewType.SHOW_ALL
+                        if (type != TreeRecyclerViewType.SHOW_ALL && item instanceof TreeItemGroup) {
                             //展开,折叠
-                            expandOrCollapse(itemPosition);
+                            expandOrCollapse(((TreeItemGroup) item));
                         } else {
-                            //点击事件
-                            T item = getDatas().get(itemPosition);
                             TreeItemGroup itemParentItem = item.getParentItem();
                             //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
                             if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
@@ -74,6 +77,16 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                 return false;
             }
         });
+    }
+
+    private boolean checkIsTreeItemGroup(T baseItem) {
+        if (type != TreeRecyclerViewType.SHOW_ALL) {
+            return true;
+        } else if (baseItem instanceof TreeItemGroup) {
+            return true;
+        }
+        return false;
+
     }
 
     /**
@@ -121,23 +134,10 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
 
     /**
      * 相应RecyclerView的点击事件 展开或关闭某节点
-     *
-     * @param position 触发的条目
      */
-    private void expandOrCollapse(int position) {
-        T baseItem = getDatas().get(position);
-        if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isCanChangeExpand()) {
-            TreeItemGroup treeParentItem = (TreeItemGroup) baseItem;
-            boolean expand = treeParentItem.isExpand();
-//            if (expand) {
-//                //如果展开状态就折叠.
-//                treeParentItem.onCollapse();
-//            } else {
-//                //如果折叠状态就展开.
-//                treeParentItem.onExpand();
-//            }
-            treeParentItem.setExpand(!expand);
-        }
+    private void expandOrCollapse(TreeItemGroup treeItemGroup) {
+        boolean expand = treeItemGroup.isExpand();
+        treeItemGroup.setExpand(!expand);
     }
 
     /**
@@ -166,6 +166,7 @@ public class TreeRecyclerAdapter<T extends TreeItem> extends BaseRecyclerAdapter
                         getDatas().add(i + itemParentItem.getChilds().size(), item);
                     } else {
                         childs = new ArrayList();
+                        itemParentItem.setChilds(childs);
                     }
                     childs.add(item);
                 }

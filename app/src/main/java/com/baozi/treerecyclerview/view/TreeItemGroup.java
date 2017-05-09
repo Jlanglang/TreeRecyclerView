@@ -52,21 +52,23 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
         } else {
             onCollapse();
         }
-        this.isExpand = expand;
     }
 
     public void setData(D data) {
         super.setData(data);
         childs = initChildsList(data);
     }
+
     public void setChilds(List<? extends BaseItem> childs) {
         this.childs = childs;
     }
+
     /**
      * 展开
      */
     @Override
     public void onExpand() {
+        isExpand = true;
         int itemPosition = getItemManager().getItemPosition(this);
         getItemManager().addItems(itemPosition + 1, getAllChilds());
         getItemManager().notifyDataChanged();
@@ -77,6 +79,7 @@ public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
      */
     @Override
     public void onCollapse() {
+        isExpand = false;
         getItemManager().removeItems(getAllChilds());
         getItemManager().notifyDataChanged();
     }

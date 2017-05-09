@@ -54,7 +54,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
                 public void onClick(View v) {
                     //获得holder的position
                     int layoutPosition = holder.getLayoutPosition();
-                    //检查position是否可以点击
+                    //检查item的position,是否可以点击.
                     if (getCheckItem().checkPosition(layoutPosition)) {
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
