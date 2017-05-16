@@ -8,7 +8,7 @@ import com.baozi.treerecyclerview.base.BaseItemData;
 /**
  * TreeRecyclerAdapter的item
  */
-public abstract class TreeItem<D extends BaseItemData> extends BaseItem<D> {
+public abstract class TreeItem<D> extends BaseItem<D> {
     private TreeItemGroup parentItem;
 
     public void setParentItem(TreeItemGroup parentItem) {

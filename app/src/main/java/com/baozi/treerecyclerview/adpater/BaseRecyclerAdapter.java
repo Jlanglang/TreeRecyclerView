@@ -97,7 +97,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
     public interface OnItemClickLitener {
-        void onItemClick(ViewHolder viewHolder, BaseItem itemData, int position);
+        void onItemClick(ViewHolder viewHolder, BaseItem baseItem, int position);
     }
 
     public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
@@ -106,7 +106,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
 
 
     public interface OnItemLongClickListener {
-        boolean onItemLongClick(ViewHolder viewHolder, BaseItem itemData, int position);
+        boolean onItemLongClick(ViewHolder viewHolder, BaseItem baseItem, int position);
     }
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
@@ -272,6 +272,15 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         public void replaceItem(int position, T item) {
             getDatas().set(position, item);
             notifyDataChanged();
+        }
+
+        @Override
+        public void replaceAllItem(List<T> items) {
+            if (items != null) {
+                getDatas().clear();
+                getDatas().addAll(items);
+                notifyDataChanged();
+            }
         }
 
         @Override

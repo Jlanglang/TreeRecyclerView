@@ -1,4 +1,4 @@
-package com.baozi.demo.demo.shop.bean;
+package com.baozi.demo.demo.shoplist.bean;
 
 import com.baozi.treerecyclerview.base.BaseItemData;
 

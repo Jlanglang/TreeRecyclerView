@@ -1,7 +1,7 @@
-package com.baozi.demo.demo.shop;
+package com.baozi.demo.demo.shoplist;
 
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shop.bean.ShopListBean;
+import com.baozi.demo.demo.shoplist.bean.ShopListBean;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 
@@ -13,7 +13,7 @@ public class ContentItem extends TreeItem<ShopListBean> {
 
     @Override
     protected int initLayoutId() {
-        return R.layout.item_shopcart_content;
+        return R.layout.item_shoplist_content;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.baozi.demo.demo.city.bean;
+package com.baozi.demo.demo.citylist.bean;
 
 import com.baozi.treerecyclerview.base.BaseItemData;
 

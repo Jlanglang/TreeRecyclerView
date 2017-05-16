@@ -1,8 +1,8 @@
-package com.baozi.demo.demo.shop;
+package com.baozi.demo.demo.shoplist;
 
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shop.bean.ShopListBean;
-import com.baozi.demo.demo.shop.bean.StoreBean;
+import com.baozi.demo.demo.shoplist.bean.ShopListBean;
+import com.baozi.demo.demo.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.view.TreeSelectItemGroup;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
@@ -23,7 +23,7 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
     @Override
     protected int initLayoutId() {
-        return R.layout.item_shopcart_title;
+        return R.layout.item_shoplist_title;
     }
 
     @Override

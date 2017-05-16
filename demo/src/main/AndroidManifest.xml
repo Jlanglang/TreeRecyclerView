@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.baozi.demo">
+          package="com.baozi.demo">
     <!--连接网络权限，用于执行云端语音能力 -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
@@ -32,14 +32,15 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.baozi.demo.activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CityActivity"/>
-        <activity android:name=".activity.ShoppingCartActivity"/>
+        <activity android:name=".activity.CityListActivity"/>
+        <activity android:name=".activity.ShopListActivity"/>
         <activity android:name=".activity.TestListAativity"/>
         <activity android:name=".activity.XunfeiAcitivity"/>
+        <activity android:name=".activity.ShopTabListActivity"/>
     </application>
 </manifest>

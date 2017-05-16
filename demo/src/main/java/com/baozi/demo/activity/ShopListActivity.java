@@ -18,16 +18,16 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shop.bean.ShopListBean;
-import com.baozi.demo.demo.shop.bean.StoreBean;
-import com.baozi.demo.demo.shop.ShopTitileItem;
-import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.demo.demo.shoplist.bean.ShopListBean;
+import com.baozi.demo.demo.shoplist.bean.StoreBean;
+import com.baozi.demo.demo.shoplist.ShopTitileItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +36,10 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  */
 
-public class ShoppingCartActivity extends AppCompatActivity {
+public class ShopListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private TreeRecyclerAdapter<ShopTitileItem> mAdapter;
+    private TreeRecyclerAdapter mAdapter;
     private TextView mTvNext;
 
     @Override
@@ -65,12 +65,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
             }
         });
         List<StoreBean> storeBean = initData();
-        List<ShopTitileItem> itemList = ItemFactory.createItemList(storeBean, ShopTitileItem.class);
-        mAdapter = new TreeRecyclerAdapter<>();
+        List<TreeItem> itemList = ItemFactory.createTreeItemList(storeBean, ShopTitileItem.class, null);
+        mAdapter = new TreeRecyclerAdapter();
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mAdapter.setDatas(itemList);
         //包装成可以添加头部和尾部的Adapter
-        HeaderAndFootWapper<ShopTitileItem> headerAndFootWapper = new HeaderAndFootWapper<ShopTitileItem>(mAdapter){
+        HeaderAndFootWapper<TreeItem> headerAndFootWapper = new HeaderAndFootWapper<TreeItem>(mAdapter) {
             @Override
             public void onBindViewHolder(ViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);
@@ -97,19 +97,22 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
     public void onNext() {
         List<StoreBean> shopListBeen = new ArrayList<>();
-        List<ShopTitileItem> datas = mAdapter.getInitialDatas();
+        List<TreeItem> datas = mAdapter.getDatas();
         for (int i = 0; i < datas.size(); i++) {
-            ShopTitileItem titletItem = datas.get(i);
-            StoreBean data = titletItem.getData();
-            if (titletItem.isChildCheck()) {
-                ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-                List<? extends BaseItem> childs = titletItem.getSelectItems();
-                for (int j = 0; j < childs.size(); j++) {
-                    shopListBeens.add((ShopListBean) childs.get(j).getData());
+            TreeItem treeItem = datas.get(i);
+            if (treeItem instanceof ShopTitileItem) {
+                ShopTitileItem titletItem = (ShopTitileItem) datas.get(i);
+                StoreBean data = titletItem.getData();
+                if (titletItem.isChildCheck()) {
+                    ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
+                    List<? extends BaseItem> childs = titletItem.getSelectItems();
+                    for (int j = 0; j < childs.size(); j++) {
+                        shopListBeens.add((ShopListBean) childs.get(j).getData());
+                    }
+                    //这里不行.应该是new一个
+                    data.setShopListBeen(shopListBeens);
+                    shopListBeen.add(data);
                 }
-                //这里不行.应该是new一个
-                data.setShopListBeen(shopListBeens);
-                shopListBeen.add(data);
             }
         }
         String s = JSON.toJSONString(shopListBeen);

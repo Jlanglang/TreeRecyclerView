@@ -27,6 +27,8 @@ public interface ItemManager<T extends BaseItem> {
     //改
     void replaceItem(int position, T item);
 
+    void replaceAllItem(List<T> items);
+
     //查
     T getItem(int position);
 

@@ -1,6 +1,8 @@
 package com.baozi.treerecyclerview.view;
 
 
+import android.support.annotation.NonNull;
+
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 
@@ -12,7 +14,7 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  * 可以选中子item的TreeItemGroup,点击的item会保存起来.可以通过 getSelectItems()获得选中item
  */
-public abstract class TreeSelectItemGroup<D extends BaseItemData>
+public abstract class TreeSelectItemGroup<D>
         extends TreeItemGroup<D> {
     /**
      * 选中的子item.只支持下一级,不支持下下级
@@ -28,6 +30,7 @@ public abstract class TreeSelectItemGroup<D extends BaseItemData>
 
     /**
      * 子级是否有选中
+     *
      * @return
      */
     public boolean isChildCheck() {
@@ -36,6 +39,19 @@ public abstract class TreeSelectItemGroup<D extends BaseItemData>
 
     @Override
     public boolean onInterceptClick(TreeItem child) {
+        addSelectItem(child);
+        return super.onInterceptClick(child);
+    }
+
+    /**
+     * 添加选中的Item;不建议直接调用该方法,
+     * 当不需要用onInterceptClick()的时候,可以主动调用添加Item.
+     * <
+     * 如果onInterceptClick()生效,还主动调用该方法添加item,将无法添加.
+     *
+     * @param child
+     */
+    protected void addSelectItem(@NonNull TreeItem child) {
         if (selectFlag() == SelectFlag.SINGLE_CHOICE) {
             if (getSelectItems().size() != 0) {
                 getSelectItems().set(0, child);
@@ -50,11 +66,11 @@ public abstract class TreeSelectItemGroup<D extends BaseItemData>
                 getSelectItems().remove(index);
             }
         }
-        return super.onInterceptClick(child);
     }
 
     /**
      * 必须指定选中样式
+     *
      * @return
      */
     public abstract SelectFlag selectFlag();

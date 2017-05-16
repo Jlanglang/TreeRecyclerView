@@ -20,6 +20,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,11 +90,10 @@ public class TestListAativity extends AppCompatActivity {
                 titleBeens.add(titleBean);
             }
         }
-        List<BaseItem> itemList = ItemFactory.createItemList(titleBeens);
+        List<TreeItem> itemList = ItemFactory.createTreeItemList(titleBeens,null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
-
     }
 }

@@ -22,14 +22,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_city).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CityActivity.class);
+                Intent intent = new Intent(MainActivity.this, CityListActivity.class);
                 startActivity(intent);
             }
         });
         findViewById(R.id.bt_shopcart).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShoppingCartActivity.class);
+                Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
                 startActivity(intent);
             }
         });
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_xunfei).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, XunfeiAcitivity.class);
+                Intent intent = new Intent(MainActivity.this, ShopTabListActivity.class);
                 startActivity(intent);
             }
         });

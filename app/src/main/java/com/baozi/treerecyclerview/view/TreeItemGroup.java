@@ -15,7 +15,7 @@ import java.util.List;
  * //子集可以是parent,也可以是child
  */
 
-public abstract class TreeItemGroup<D extends BaseItemData> extends TreeItem<D>
+public abstract class TreeItemGroup<D> extends TreeItem<D>
         implements TreeParent {
     /**
      * 持有的子item

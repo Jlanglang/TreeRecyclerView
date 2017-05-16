@@ -8,7 +8,7 @@ import com.baozi.treerecyclerview.adpater.ViewHolder;
 /**
  * 组合模式
  */
-public abstract class BaseItem<D extends BaseItemData> {
+public abstract class BaseItem<D> {
     /**
      * 当前item的数据
      */

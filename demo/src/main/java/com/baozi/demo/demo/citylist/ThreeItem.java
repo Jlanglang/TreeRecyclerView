@@ -1,7 +1,7 @@
-package com.baozi.demo.demo.city;
+package com.baozi.demo.demo.citylist;
 
 import com.baozi.demo.R;
-import com.baozi.demo.demo.city.bean.CityBean;
+import com.baozi.demo.demo.citylist.bean.CityBean;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 
