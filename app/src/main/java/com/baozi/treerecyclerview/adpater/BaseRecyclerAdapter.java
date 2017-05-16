@@ -20,9 +20,9 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         RecyclerView.Adapter<ViewHolder> {
 
     private List<T> mDatas;//展示数据
-    private ItemManager<T> mItemManager;
     private CheckItem mCheckItem;
 
+    protected ItemManager<T> mItemManager;
     protected OnItemClickLitener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
 
@@ -152,7 +152,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      */
     public ItemManager<T> getItemManager() {
         if (mItemManager == null) {
-            mItemManager = new ItemManageImpl();
+            mItemManager = new ItemManageImpl(this);
         }
         return mItemManager;
     }
@@ -226,7 +226,12 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      * 默认使用 notifyDataChanged();刷新.
      * 如果使用带动画效果的,条目过多可能会出现卡顿.
      */
-    private class ItemManageImpl implements ItemManager<T> {
+    private class ItemManageImpl extends ItemManager<T> {
+
+        public ItemManageImpl(BaseRecyclerAdapter<T> adapter) {
+            super(adapter);
+        }
+
         @Override
         public void addItem(T item) {
             getDatas().add(item);
@@ -286,11 +291,6 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         @Override
         public T getItem(int position) {
             return getDatas().get(position);
-        }
-
-        @Override
-        public void notifyDataChanged() {
-            notifyDataSetChanged();
         }
 
         @Override

@@ -1,39 +1,58 @@
 package com.baozi.treerecyclerview.adpater;
 
+import android.support.v7.widget.RecyclerView;
+
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
 
-public interface ItemManager<T extends BaseItem> {
+public abstract class ItemManager<T extends BaseItem> {
+
+    private BaseRecyclerAdapter<T> mAdapter;
+
+    public ItemManager(BaseRecyclerAdapter<T> adapter) {
+        mAdapter = adapter;
+    }
+
+    public RecyclerView.Adapter getAdapter() {
+        return mAdapter;
+    }
+
+    public void setAdapter(BaseRecyclerAdapter<T> adapter) {
+        mAdapter = adapter;
+    }
+
     //增
-    void addItem(T item);
+    public abstract void addItem(T item);
 
-    void addItem(int position, T item);
+    public abstract void addItem(int position, T item);
 
-    void addItems(List<T> items);
+    public abstract void addItems(List<T> items);
 
-    void addItems(int position, List<T> items);
+    public abstract void addItems(int position, List<T> items);
 
     //删
-    void removeItem(T item);
+    public abstract void removeItem(T item);
 
-    void removeItem(int position);
+    public abstract void removeItem(int position);
 
-    void removeItems(List<T> items);
+    public abstract void removeItems(List<T> items);
 
 
     //改
-    void replaceItem(int position, T item);
+    public abstract void replaceItem(int position, T item);
 
-    void replaceAllItem(List<T> items);
+    public abstract void replaceAllItem(List<T> items);
 
     //查
-    T getItem(int position);
+    public abstract T getItem(int position);
 
-    void notifyDataChanged();
+    public abstract int getItemPosition(T item);
 
-    int getItemPosition(T item);
-
+    //刷新
+    public void notifyDataChanged() {
+        mAdapter.notifyDataSetChanged();
+    }
 }

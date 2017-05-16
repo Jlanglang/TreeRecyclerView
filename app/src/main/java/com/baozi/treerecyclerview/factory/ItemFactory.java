@@ -94,7 +94,7 @@ public class ItemFactory {
         return treeItemList;
     }
 
-    public static <D extends BaseItemData> List<TreeItem> createTreeItemList(List<D> list, Class<? extends TreeItem> iClass, TreeItemGroup treeParentItem) {
+    public static <D> List<TreeItem> createTreeItemList(List<D> list, Class<? extends TreeItem> iClass, TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }

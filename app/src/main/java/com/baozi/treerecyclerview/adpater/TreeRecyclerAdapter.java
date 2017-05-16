@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.treerecyclerview.view.TreeItem;
@@ -113,7 +114,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     public ItemManager<TreeItem> getItemManager() {
         if (mItemManager == null) {
-            mItemManager = new TreeItemManageImpl();
+            mItemManager = new TreeItemManageImpl(this);
         }
         return mItemManager;
     }
@@ -139,7 +140,12 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         this.type = type;
     }
 
-    private class TreeItemManageImpl implements ItemManager<TreeItem> {
+    private class TreeItemManageImpl extends ItemManager<TreeItem> {
+
+        public TreeItemManageImpl(BaseRecyclerAdapter<TreeItem> adapter) {
+            super(adapter);
+        }
+
         @Override
         public void addItem(TreeItem item) {
             if (null == item) {
@@ -250,15 +256,16 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             return getDatas().get(position);
         }
 
-        @Override
-        public void notifyDataChanged() {
-            notifyDataSetChanged();
-        }
+//        @Override
+//        public void notifyDataChanged() {
+//            notifyDataSetChanged();
+//        }
 
         @Override
         public int getItemPosition(TreeItem item) {
             return getDatas().indexOf(item);
         }
+
     }
 
 }

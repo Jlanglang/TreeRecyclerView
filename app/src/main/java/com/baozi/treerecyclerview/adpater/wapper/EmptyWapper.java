@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 
@@ -14,10 +15,10 @@ import java.util.List;
  * Created by baozi on 2017/4/30.
  */
 
-public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
+public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
     public static final int ITEM_TYPE_EMPTY = Integer.MIN_VALUE;
 
-    private BaseRecyclerAdapter<T> mAdapter;
+//    private BaseRecyclerAdapter<T> mAdapter;
 
     private View mEmptyView;
 
@@ -25,8 +26,9 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
 
 
     public EmptyWapper(BaseRecyclerAdapter<T> adapter) {
-        mAdapter = adapter;
-        mAdapter.setItemManager(getItemManager());
+        super(adapter);
+//        mAdapter = adapter;
+//        mAdapter.setItemManager(getItemManager());
     }
 
     private boolean isEmpty() {
@@ -45,15 +47,15 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        mAdapter.onAttachedToRecyclerView(recyclerView);
-    }
+//    @Override
+//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//        mAdapter.onAttachedToRecyclerView(recyclerView);
+//    }
 
-    @Override
-    public void onViewAttachedToWindow(ViewHolder holder) {
-        mAdapter.onViewAttachedToWindow(holder);
-    }
+//    @Override
+//    public void onViewAttachedToWindow(ViewHolder holder) {
+//        mAdapter.onViewAttachedToWindow(holder);
+//    }
 
     @Override
     public int getItemViewType(int position) {
@@ -86,13 +88,13 @@ public class EmptyWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     }
 
 
-    @Override
-    public List<T> getDatas() {
-        return mAdapter.getDatas();
-    }
-
-    @Override
-    public void setDatas(List<T> datas) {
-        mAdapter.setDatas(datas);
-    }
+//    @Override
+//    public List<T> getDatas() {
+//        return mAdapter.getDatas();
+//    }
+//
+//    @Override
+//    public void setDatas(List<T> datas) {
+//        mAdapter.setDatas(datas);
+//    }
 }

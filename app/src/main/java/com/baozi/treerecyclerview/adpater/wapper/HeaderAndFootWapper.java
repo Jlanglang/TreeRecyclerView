@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 
@@ -15,14 +16,14 @@ import java.util.List;
  * Created by baozi on 2017/4/30.
  */
 
-public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
-    private BaseRecyclerAdapter<T> mAdapter;
+public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
+
+//    private BaseRecyclerAdapter<T> mAdapter;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();
 
     public HeaderAndFootWapper(BaseRecyclerAdapter<T> adapter) {
-        mAdapter = adapter;
-        mAdapter.setItemManager(getItemManager());
+        super(adapter);
         mAdapter.setCheckItem(new CheckItem() {
             @Override
             public boolean checkPosition(int position) {
@@ -69,10 +70,10 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         return mAdapter.getItemViewType(position - getHeadersCount());
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        mAdapter.onAttachedToRecyclerView(recyclerView);
-    }
+//    @Override
+//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+//        mAdapter.onAttachedToRecyclerView(recyclerView);
+//    }
 
     public void addHeaderView(View view) {
         mHeaderViews.put(mHeaderViews.size(), view);
@@ -98,14 +99,14 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseRecyclerAdapter
         return mFootViews.size();
     }
 
-    @Override
-    public List<T> getDatas() {
-        return mAdapter.getDatas();
-    }
-
-    @Override
-    public void setDatas(List<T> datas) {
-        mAdapter.setDatas(datas);
-    }
+//    @Override
+//    public List<T> getDatas() {
+//        return mAdapter.getDatas();
+//    }
+//
+//    @Override
+//    public void setDatas(List<T> datas) {
+//        mAdapter.setDatas(datas);
+//    }
 
 }
