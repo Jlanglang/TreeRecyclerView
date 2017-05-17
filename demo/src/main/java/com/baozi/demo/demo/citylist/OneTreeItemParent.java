@@ -29,8 +29,4 @@ public class OneTreeItemParent extends TreeItemGroup<CityBean> {
         holder.setText(R.id.tv_content, data.getProvinceName());
     }
 
-    @Override
-    public boolean canExpandOrCollapse() {
-        return false;
-    }
 }

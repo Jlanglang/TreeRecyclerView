@@ -53,8 +53,4 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
         return SelectFlag.MULTIPLE_CHOICE;
     }
 
-    @Override
-    public boolean canExpandOrCollapse() {
-        return false;
-    }
 }

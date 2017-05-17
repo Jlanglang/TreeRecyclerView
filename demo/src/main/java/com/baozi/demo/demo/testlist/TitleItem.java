@@ -30,7 +30,7 @@ public class TitleItem extends TreeItemGroup<TitleBean> {
 
     @Override
 
-    public boolean canExpandOrCollapse() {
+    public boolean isCanChangeExpand() {
         return false;
     }
 

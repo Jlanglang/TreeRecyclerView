@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater;
 
+import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -212,13 +213,14 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
 
     /**
      * 需要手动setDatas(List<T> datas),否则数据为空
+     * 该方法不会主动刷新布局.如需替换datas并刷新,可以getItemManager().replaceAllItem(List list);
      *
-     * @param datas
+     * @param datas 需要修改的数据
      */
-    public void setDatas(List<T> datas) {
+    public void setDatas(@Nullable List<T> datas) {
         if (datas != null) {
-            mDatas = datas;
-            getItemManager().notifyDataChanged();
+            getDatas().clear();
+            getDatas().addAll(datas);
         }
     }
 
@@ -282,8 +284,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         @Override
         public void replaceAllItem(List<T> items) {
             if (items != null) {
-                getDatas().clear();
-                getDatas().addAll(items);
+                setDatas(items);
                 notifyDataChanged();
             }
         }

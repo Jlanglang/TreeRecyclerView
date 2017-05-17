@@ -89,21 +89,34 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void setDatas(List<TreeItem> datas) {
-        if (type == TreeRecyclerViewType.SHOW_ALL) {
-            for (int i = 0; i < datas.size(); i++) {
-                TreeItem t = datas.get(i);
-                getDatas().add(t);
+    public void setDatas(List<TreeItem> items) {
+        if (null == items) {
+            return;
+        }
+        getDatas().clear();
+        assembleItems(items);
+    }
+
+    /**
+     * 对初始的一级items进行遍历,将每个item的childs拿出来,进行組合。
+     *
+     * @param items
+     */
+    private void assembleItems(List<TreeItem> items) {
+        if (type == TreeRecyclerViewType.SHOW_ALL||type == TreeRecyclerViewType.SHOW_EXPAND) {
+            List<TreeItem> datas = getDatas();
+            for (int i = 0; i < items.size(); i++) {
+                TreeItem t = items.get(i);
+                datas.add(t);
                 if (t instanceof TreeItemGroup) {
                     List childs = ((TreeItemGroup) t).getAllChilds();
                     if (childs != null) {
-                        getDatas().addAll(childs);
+                        datas.addAll(childs);
                     }
                 }
             }
-            getItemManager().notifyDataChanged();
         } else {
-            super.setDatas(datas);
+            super.setDatas(items);
         }
     }
 
@@ -129,6 +142,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     private void expandOrCollapse(TreeItemGroup treeItemGroup) {
         boolean expand = treeItemGroup.isExpand();
         treeItemGroup.setExpand(!expand);
+        treeItemGroup.notifyExpand();
     }
 
     /**
@@ -245,8 +259,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         @Override
         public void replaceAllItem(List<TreeItem> items) {
             if (items != null) {
-                getDatas().clear();
-                getDatas().addAll(items);
+                setDatas(items);
                 notifyDataChanged();
             }
         }
@@ -255,11 +268,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public TreeItem getItem(int position) {
             return getDatas().get(position);
         }
-
-//        @Override
-//        public void notifyDataChanged() {
-//            notifyDataSetChanged();
-//        }
 
         @Override
         public int getItemPosition(TreeItem item) {

@@ -47,7 +47,14 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         if (!isCanChangeExpand()) {
             return;
         }
-        if (expand) {
+        isExpand = expand;
+    }
+
+    /**
+     * 刷新Item的展开状态
+     */
+    public void notifyExpand() {
+        if (isExpand()) {
             onExpand();
         } else {
             onCollapse();
