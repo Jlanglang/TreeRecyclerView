@@ -7,7 +7,7 @@ public enum TreeRecyclerViewType {
      */
     SHOW_ALL,
     /**
-     * 显示一级,根据isexpand展开与折叠,
+     * 根据isExpand的状态显示展开与折叠,
      * 适用场景,多级的data数据展示,多type布局.
      */
     SHOW_EXPAND,

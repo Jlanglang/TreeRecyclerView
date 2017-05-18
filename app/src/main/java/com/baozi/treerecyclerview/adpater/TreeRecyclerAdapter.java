@@ -3,6 +3,7 @@ package com.baozi.treerecyclerview.adpater;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.baozi.treerecyclerview.utils.ItemHelper;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
@@ -103,16 +104,14 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      * @param items
      */
     private void assembleItems(List<TreeItem> items) {
-        if (type == TreeRecyclerViewType.SHOW_ALL||type == TreeRecyclerViewType.SHOW_EXPAND) {
+        if (type == TreeRecyclerViewType.SHOW_ALL || type == TreeRecyclerViewType.SHOW_EXPAND) {
             List<TreeItem> datas = getDatas();
             for (int i = 0; i < items.size(); i++) {
                 TreeItem t = items.get(i);
                 datas.add(t);
                 if (t instanceof TreeItemGroup) {
-                    List childs = ((TreeItemGroup) t).getAllChilds();
-                    if (childs != null) {
-                        datas.addAll(childs);
-                    }
+                    ArrayList<TreeItem> childs = ItemHelper.getChildItemsWithType((TreeItemGroup) t, type);
+                    datas.addAll(childs);
                 }
             }
         } else {
@@ -211,7 +210,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 return;
             }
             getDatas().remove(item);
-
             TreeItemGroup itemParentItem = item.getParentItem();
             if (itemParentItem != null) {
                 List childs = itemParentItem.getChilds();
@@ -273,7 +271,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public int getItemPosition(TreeItem item) {
             return getDatas().indexOf(item);
         }
-
     }
 
 }

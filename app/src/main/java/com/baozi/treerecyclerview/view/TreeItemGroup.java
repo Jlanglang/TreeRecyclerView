@@ -4,9 +4,8 @@ import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.treerecyclerview.utils.ItemHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -77,7 +76,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
     public void onExpand() {
         isExpand = true;
         int itemPosition = getItemManager().getItemPosition(this);
-        getItemManager().addItems(itemPosition + 1, getAllChilds());
+        getItemManager().addItems(itemPosition + 1, getExpandChilds());
         getItemManager().notifyDataChanged();
     }
 
@@ -87,7 +86,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
     @Override
     public void onCollapse() {
         isExpand = false;
-        getItemManager().removeItems(getAllChilds());
+        getItemManager().removeItems(getExpandChilds());
         getItemManager().notifyDataChanged();
     }
 
@@ -111,33 +110,33 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      * @return
      */
     @Nullable
+    public List<? extends BaseItem> getExpandChilds() {
+        if (getChilds() == null) {
+            return null;
+        }
+        //TODO 待解决通过Adapter的Type来获取对应数据的问题
+        return ItemHelper.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
+    }
+
+    /**
+     * 获得所有childs,包括下下....级item的childs
+     *
+     * @return
+     */
+    @Nullable
     public List<? extends BaseItem> getAllChilds() {
         if (getChilds() == null) {
             return null;
         }
-        ArrayList<BaseItem> baseItems = new ArrayList<>();
-        for (int i = 0; i < childs.size(); i++) {
-            //下级
-            BaseItem baseItem = childs.get(i);
-            baseItems.add(baseItem);
-            //判断是否还有下下级,并且处于expand的状态
-            if (baseItem instanceof TreeItemGroup && ((TreeItemGroup) baseItem).isExpand()) {
-                //调用下级的getAllChilds遍历,相当于递归遍历
-                List list = ((TreeItemGroup) baseItem).getAllChilds();
-                if (list != null && list.size() > 0) {
-                    baseItems.addAll(list);
-                }
-            }
-        }
-        return baseItems;
+        return ItemHelper.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_ALL);
     }
 
-    public int getChildsCount() {
+    public int getChildCount() {
         return childs == null ? 0 : childs.size();
     }
 
     public <T extends BaseItem> T getChildsAt(int index) {
-        if (index < 0 || index > getChildsCount()) {
+        if (index < 0 || index > getChildCount()) {
             return null;
         }
         return (T) childs.get(index);

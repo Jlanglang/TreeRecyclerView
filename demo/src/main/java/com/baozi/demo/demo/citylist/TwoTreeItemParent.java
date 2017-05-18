@@ -30,8 +30,8 @@ public class TwoTreeItemParent extends TreeItemGroup<CityBean.CitysBean> {
         holder.setText(R.id.tv_content, getData().getCityName());
     }
 
-//    @Override
-//    public boolean isCanChangeExpand() {
-//        return data.getCityName().equals("朝阳区");
-//    }
+    @Override
+    public boolean isCanChangeExpand() {
+        return data.getCityName().equals("朝阳区");
+    }
 }
