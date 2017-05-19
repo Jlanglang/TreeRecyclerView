@@ -104,14 +104,17 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      * @param items
      */
     private void assembleItems(List<TreeItem> items) {
+        //TODO  有待优化
         if (type == TreeRecyclerViewType.SHOW_ALL || type == TreeRecyclerViewType.SHOW_EXPAND) {
             List<TreeItem> datas = getDatas();
             for (int i = 0; i < items.size(); i++) {
                 TreeItem t = items.get(i);
                 datas.add(t);
                 if (t instanceof TreeItemGroup) {
-                    ArrayList<TreeItem> childs = ItemHelper.getChildItemsWithType((TreeItemGroup) t, type);
-                    datas.addAll(childs);
+                    if (type == TreeRecyclerViewType.SHOW_ALL || ((TreeItemGroup) t).isExpand()) {
+                        ArrayList<TreeItem> childs = ItemHelper.getChildItemsWithType((TreeItemGroup) t, type);
+                        datas.addAll(childs);
+                    }
                 }
             }
         } else {
