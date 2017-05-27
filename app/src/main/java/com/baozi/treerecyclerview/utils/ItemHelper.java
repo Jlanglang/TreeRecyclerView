@@ -47,4 +47,21 @@ public class ItemHelper {
         }
         return baseItems;
     }
+
+    @NonNull
+    public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerViewType type) {
+        ArrayList<TreeItem> baseItems = new ArrayList<>();
+        int childCount = treeItems.size();
+        for (int i = 0; i < childCount; i++) {
+            TreeItem treeItem = treeItems.get(i);
+            baseItems.add(treeItem);
+            if (treeItem instanceof TreeItemGroup) {
+                ArrayList<TreeItem> childItems = getChildItemsWithType((TreeItemGroup) treeItem, type);
+                if (!childItems.isEmpty()) {
+                    baseItems.addAll(childItems);
+                }
+            }
+        }
+        return baseItems;
+    }
 }
