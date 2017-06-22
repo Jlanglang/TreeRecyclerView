@@ -9,6 +9,7 @@ import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
 
@@ -18,7 +19,6 @@ import java.util.List;
 
 public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
 
-//    private BaseRecyclerAdapter<T> mAdapter;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();
 
@@ -37,12 +37,14 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
         });
     }
 
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder(parent.getContext(), mHeaderViews.get(viewType));
+            return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
         } else if (mFootViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder(parent.getContext(), mFootViews.get(viewType));
+            return ViewHolder.createViewHolder( mFootViews.get(viewType));
         }
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
@@ -52,7 +54,7 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
         if (isHeaderViewPos(position) || isFooterViewPos(position)) {
             return;
         }
-        mAdapter.onBindViewHolder(holder, position - getHeadersCount());
+        super.onBindViewHolder(holder, position - getHeadersCount());
     }
 
     @Override
@@ -67,13 +69,9 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
         } else if (isFooterViewPos(position)) {
             return mFootViews.keyAt(position - getHeadersCount() - mAdapter.getItemCount());
         }
-        return mAdapter.getItemViewType(position - getHeadersCount());
+        return super.getItemViewType(position - getHeadersCount());
     }
 
-//    @Override
-//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-//        mAdapter.onAttachedToRecyclerView(recyclerView);
-//    }
 
     public void addHeaderView(View view) {
         mHeaderViews.put(mHeaderViews.size(), view);
@@ -99,14 +97,5 @@ public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
         return mFootViews.size();
     }
 
-//    @Override
-//    public List<T> getDatas() {
-//        return mAdapter.getDatas();
-//    }
-//
-//    @Override
-//    public void setDatas(List<T> datas) {
-//        mAdapter.setDatas(datas);
-//    }
 
 }

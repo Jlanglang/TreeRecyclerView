@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class OneTreeItemParent extends TreeItemGroup<CityBean> {
     @Override
-    public List<? extends TreeItem> initChildsList(CityBean data) {
+    public List<TreeItem> initChildsList(CityBean data) {
         return ItemFactory.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
     }
 

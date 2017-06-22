@@ -1,9 +1,11 @@
 package com.baozi.treerecyclerview.factory;
 
+import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
+import com.baozi.treerecyclerview.view.TreeItemWapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +84,7 @@ public class ItemFactory {
             try {
                 Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(itemData.getViewItemType());
                 if (itemClass != null) {
-                    TreeItem treeItem = (TreeItem) itemClass.newInstance();
+                    TreeItem treeItem = new TreeItemWapper(itemClass.newInstance());
                     treeItem.setData(itemData);
                     treeItem.setParentItem(treeParentItem);
                     treeItemList.add(treeItem);

@@ -4,10 +4,12 @@ import com.baozi.demo.R;
 import com.baozi.demo.demo.shoplist.bean.ShopListBean;
 import com.baozi.demo.demo.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.factory.ItemFactory;
+import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeSelectItemGroup;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +19,7 @@ import java.util.List;
 public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
     @Override
-    protected List<? extends BaseItem> initChildsList(StoreBean data) {
+    protected List<TreeItem> initChildsList(StoreBean data) {
         return ItemFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
     }
 

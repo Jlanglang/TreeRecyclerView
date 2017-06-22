@@ -22,23 +22,21 @@ import android.widget.TextView;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
-    private Context mContext;
 
-    public ViewHolder(Context context, View itemView) {
+    public ViewHolder(View itemView) {
         super(itemView);
-        mContext = context;
         mViews = new SparseArray<>();
     }
 
-    public static ViewHolder createViewHolder(Context context, View itemView) {
-        return new ViewHolder(context, itemView);
+    public static ViewHolder createViewHolder(View itemView) {
+        return new ViewHolder(itemView);
     }
 
     public static ViewHolder createViewHolder(Context context,
                                               ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(context).inflate(layoutId, parent,
-                false);
-        return new ViewHolder(context, itemView);
+            View itemView = LayoutInflater.from(context).inflate(layoutId, parent,
+                    false);
+        return createViewHolder(itemView);
     }
 
     /**
@@ -110,7 +108,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     public ViewHolder setTextColorRes(int viewId, int textColorRes) {
         TextView view = getView(viewId);
-        view.setTextColor(mContext.getResources().getColor(textColorRes));
+        view.setTextColor(view.getContext().getResources().getColor(textColorRes));
         return this;
     }
 

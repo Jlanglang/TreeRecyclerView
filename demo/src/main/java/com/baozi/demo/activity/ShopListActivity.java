@@ -21,13 +21,17 @@ import com.baozi.demo.R;
 import com.baozi.demo.demo.shoplist.bean.ShopListBean;
 import com.baozi.demo.demo.shoplist.bean.StoreBean;
 import com.baozi.demo.demo.shoplist.ShopTitileItem;
+import com.baozi.demo.demo.shoptablist.ContentItem;
+import com.baozi.demo.demo.shoptablist.bean.ShopTabContentBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.view.HeadAndFootGroupWapper;
 import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +70,23 @@ public class ShopListActivity extends AppCompatActivity {
         });
         List<StoreBean> storeBean = initData();
         List<TreeItem> itemList = ItemFactory.createTreeItemList(storeBean, ShopTitileItem.class, null);
+
+        HeadAndFootGroupWapper headAndFootItemGroup = new HeadAndFootGroupWapper((TreeItemGroup) itemList.get(0));
+        ContentItem contentItem = new ContentItem();
+        ShopTabContentBean shopTabContentBean = new ShopTabContentBean();
+        shopTabContentBean.setTitle("头部");
+        shopTabContentBean.setName("头部");
+        contentItem.setData(shopTabContentBean);
+
+        ContentItem contentItem1 = new ContentItem();
+        ShopTabContentBean shopTabContentBean1 = new ShopTabContentBean();
+        shopTabContentBean1.setTitle("尾部");
+        shopTabContentBean1.setName("尾部");
+        contentItem1.setData(shopTabContentBean1);
+        headAndFootItemGroup.addHeadItem(contentItem);
+        headAndFootItemGroup.addfootItem(contentItem1);
+        itemList.set(0, headAndFootItemGroup);
+
         mAdapter = new TreeRecyclerAdapter();
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         mAdapter.setDatas(itemList);

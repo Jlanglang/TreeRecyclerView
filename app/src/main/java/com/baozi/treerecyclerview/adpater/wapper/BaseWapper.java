@@ -19,8 +19,6 @@ public class BaseWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
 
     protected BaseRecyclerAdapter<T> mAdapter;
 
-    private ItemManager<T> mItemManager;
-
     public BaseWapper(BaseRecyclerAdapter<T> adapter) {
         mAdapter = adapter;
         mAdapter.getItemManager().setAdapter(this);

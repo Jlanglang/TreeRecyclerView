@@ -134,7 +134,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     private void expandOrCollapse(TreeItemGroup treeItemGroup) {
         boolean expand = treeItemGroup.isExpand();
         treeItemGroup.setExpand(!expand);
-        treeItemGroup.notifyExpand();
     }
 
     /**

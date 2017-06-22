@@ -19,15 +19,11 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
     /**
      * 持有的子item
      */
-    private List<? extends BaseItem> childs;
+    private List<TreeItem> childs;
     /**
      * 是否展开
      */
     private boolean isExpand;
-    /**
-     * 能否展开
-     */
-    protected boolean isCanChangeExpand = true;
 
     public TreeItemGroup() {
 
@@ -43,16 +39,16 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      * @param expand 传入true则展开,传入false则折叠
      */
     public void setExpand(boolean expand) {
-        if (!isCanChangeExpand()) {
-            return;
+        if (isCanExpand()) {
+            isExpand = expand;
+            notifyExpand();
         }
-        isExpand = expand;
     }
 
     /**
      * 刷新Item的展开状态
      */
-    public void notifyExpand() {
+    private void notifyExpand() {
         if (isExpand()) {
             onExpand();
         } else {
@@ -65,7 +61,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         childs = initChildsList(data);
     }
 
-    public void setChilds(List<? extends BaseItem> childs) {
+    public void setChilds(List<TreeItem> childs) {
         this.childs = childs;
     }
 
@@ -90,8 +86,13 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         getItemManager().notifyDataChanged();
     }
 
-    public boolean isCanChangeExpand() {
-        return isCanChangeExpand;
+    /**
+     * 能否展开折叠
+     *
+     * @return
+     */
+    public boolean isCanExpand() {
+        return true;
     }
 
     /**
@@ -100,7 +101,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      * @return
      */
     @Nullable
-    public List<? extends BaseItem> getChilds() {
+    public List<TreeItem> getChilds() {
         return childs;
     }
 
@@ -110,11 +111,10 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      * @return
      */
     @Nullable
-    public List<? extends BaseItem> getExpandChilds() {
+    public List<TreeItem> getExpandChilds() {
         if (getChilds() == null) {
             return null;
         }
-        //TODO 待解决通过Adapter的Type来获取对应数据的问题
         return ItemHelper.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
     }
 
@@ -124,7 +124,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      * @return
      */
     @Nullable
-    public List<? extends BaseItem> getAllChilds() {
+    public List<TreeItem> getAllChilds() {
         if (getChilds() == null) {
             return null;
         }
@@ -135,20 +135,13 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         return childs == null ? 0 : childs.size();
     }
 
-    public <T extends BaseItem> T getChildsAt(int index) {
-        if (index < 0 || index > getChildCount()) {
-            return null;
-        }
-        return (T) childs.get(index);
-    }
-
     /**
      * 初始化子集
      *
      * @param data
      * @return
      */
-    protected abstract List<? extends BaseItem> initChildsList(D data);
+    protected abstract List<TreeItem> initChildsList(D data);
 
     /**
      * 是否消费child的click事件

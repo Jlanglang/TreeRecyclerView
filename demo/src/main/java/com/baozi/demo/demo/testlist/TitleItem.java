@@ -5,6 +5,7 @@ import com.baozi.demo.demo.testlist.bean.TitleBean;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class TitleItem extends TreeItemGroup<TitleBean> {
     @Override
-    protected List<? extends BaseItem> initChildsList(TitleBean data) {
+    protected List<TreeItem> initChildsList(TitleBean data) {
         return ItemFactory.createItemList(data.getSingleBeen());
     }
 
@@ -30,7 +31,7 @@ public class TitleItem extends TreeItemGroup<TitleBean> {
 
     @Override
 
-    public boolean isCanChangeExpand() {
+    public boolean isCanExpand() {
         return false;
     }
 

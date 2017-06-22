@@ -18,8 +18,6 @@ import java.util.List;
 public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
     public static final int ITEM_TYPE_EMPTY = Integer.MIN_VALUE;
 
-//    private BaseRecyclerAdapter<T> mAdapter;
-
     private View mEmptyView;
 
     private int mEmptyLayoutId;
@@ -27,8 +25,6 @@ public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
 
     public EmptyWapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-//        mAdapter = adapter;
-//        mAdapter.setItemManager(getItemManager());
     }
 
     private boolean isEmpty() {
@@ -39,30 +35,21 @@ public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isEmpty()) {
             if (mEmptyView != null) {
-                return ViewHolder.createViewHolder(parent.getContext(), mEmptyView);
+                return ViewHolder.createViewHolder(mEmptyView);
             } else {
                 return ViewHolder.createViewHolder(parent.getContext(), parent, mEmptyLayoutId);
             }
         }
-        return mAdapter.onCreateViewHolder(parent, viewType);
+        return super.onCreateViewHolder(parent, viewType);
     }
 
-//    @Override
-//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-//        mAdapter.onAttachedToRecyclerView(recyclerView);
-//    }
-
-//    @Override
-//    public void onViewAttachedToWindow(ViewHolder holder) {
-//        mAdapter.onViewAttachedToWindow(holder);
-//    }
 
     @Override
     public int getItemViewType(int position) {
         if (isEmpty()) {
             return ITEM_TYPE_EMPTY;
         }
-        return mAdapter.getItemViewType(position);
+        return super.getItemViewType(position);
     }
 
     @Override
@@ -70,7 +57,7 @@ public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
         if (isEmpty()) {
             return;
         }
-        mAdapter.onBindViewHolder(holder, position);
+        super.onBindViewHolder(holder,position);
     }
 
     @Override
@@ -87,14 +74,4 @@ public class EmptyWapper<T extends BaseItem> extends BaseWapper<T> {
         mEmptyLayoutId = layoutId;
     }
 
-
-//    @Override
-//    public List<T> getDatas() {
-//        return mAdapter.getDatas();
-//    }
-//
-//    @Override
-//    public void setDatas(List<T> datas) {
-//        mAdapter.setDatas(datas);
-//    }
 }

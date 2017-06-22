@@ -19,9 +19,9 @@ public abstract class TreeSelectItemGroup<D>
     /**
      * 选中的子item.只支持下一级,不支持下下级
      */
-    private List<BaseItem> selectItems;
+    private List<TreeItem> selectItems;
 
-    public List<BaseItem> getSelectItems() {
+    public List<TreeItem> getSelectItems() {
         if (selectItems == null) {
             selectItems = new ArrayList<>();
         }

@@ -15,7 +15,7 @@ interface TreeParent {
      *
      * @return
      */
-    boolean isCanChangeExpand();
+    boolean isCanExpand();
 
     /**
      * 展开后的回调

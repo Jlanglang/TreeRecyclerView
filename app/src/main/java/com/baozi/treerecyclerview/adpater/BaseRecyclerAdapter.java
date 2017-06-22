@@ -182,7 +182,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
-                    BaseItem baseItem = mDatas.get(position);
+                    BaseItem baseItem = getDatas().get(position);
                     if (baseItem.getSpanSize() == 0) {
                         return gridLayoutManager.getSpanCount();
                     }
@@ -194,7 +194,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
 
     @Override
     public int getItemCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return getDatas() == null ? 0 : getDatas().size();
     }
 
     public List<T> getDatas() {

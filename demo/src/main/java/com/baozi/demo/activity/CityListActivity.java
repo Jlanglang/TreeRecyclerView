@@ -14,6 +14,7 @@ import com.baozi.demo.demo.citylist.TwoTreeItemParent;
 import com.baozi.demo.demo.citylist.bean.CityBean;
 import com.baozi.demo.demo.citylist.OneTreeItemParent;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemFactory;
 import com.baozi.treerecyclerview.utils.ItemHelper;
 import com.baozi.treerecyclerview.view.TreeItem;
