@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.utils.ItemHelper;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 
 import java.util.List;
 
@@ -115,7 +115,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         if (getChilds() == null) {
             return null;
         }
-        return ItemHelper.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
+        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
     }
 
     /**
@@ -128,7 +128,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         if (getChilds() == null) {
             return null;
         }
-        return ItemHelper.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_ALL);
+        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_ALL);
     }
 
     public int getChildCount() {
@@ -151,5 +151,10 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
      */
     public boolean onInterceptClick(TreeItem child) {
         return false;
+    }
+
+    @Override
+    public String getItemName() {
+        return "TreeItemGroup";
     }
 }

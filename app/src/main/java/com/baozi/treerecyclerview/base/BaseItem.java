@@ -82,4 +82,8 @@ public abstract class BaseItem<D> {
     public void onClick() {
 
     }
+
+    public String getItemName() {
+        return "BaseItem";
+    }
 }

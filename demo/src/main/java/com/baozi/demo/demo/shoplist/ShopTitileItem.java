@@ -1,15 +1,15 @@
+
 package com.baozi.demo.demo.shoplist;
 
 import com.baozi.demo.R;
 import com.baozi.demo.demo.shoplist.bean.ShopListBean;
 import com.baozi.demo.demo.shoplist.bean.StoreBean;
-import com.baozi.treerecyclerview.factory.ItemFactory;
+import com.baozi.demo.demo.shoptablist.bean.ShopTabContentBean;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeSelectItemGroup;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.base.BaseItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +20,14 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
     @Override
     protected List<TreeItem> initChildsList(StoreBean data) {
-        return ItemFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
+        List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
+        com.baozi.demo.demo.shoptablist.ContentItem contentItem = new com.baozi.demo.demo.shoptablist.ContentItem();
+        ShopTabContentBean shopListBean = new ShopTabContentBean();
+        shopListBean.setName("头部");
+        shopListBean.setTitle("头部");
+        contentItem.setData(shopListBean);
+        treeItemList.add(0, contentItem);
+        return treeItemList;
     }
 
     @Override

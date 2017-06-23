@@ -18,8 +18,7 @@ import com.baozi.demo.demo.testlist.TitleItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
-import com.baozi.treerecyclerview.factory.ItemFactory;
-import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
@@ -34,10 +33,10 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
-        ItemConfig.addHolderType(100, TitleItem.class);
-        ItemConfig.addHolderType(101, SelectionImageItem.class);
         ItemConfig.addHolderType(102, ContentImageItem.class);
-        ItemConfig.addHolderType(103, SelectionTextItem.class);
+        ItemConfig.addTreeHolderType(100, TitleItem.class);
+        ItemConfig.addTreeHolderType(101, SelectionImageItem.class);
+        ItemConfig.addTreeHolderType(103, SelectionTextItem.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
@@ -90,7 +89,7 @@ public class TestListAativity extends AppCompatActivity {
                 titleBeens.add(titleBean);
             }
         }
-        List<TreeItem> itemList = ItemFactory.createTreeItemList(titleBeens,null);
+        List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(titleBeens,null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
         treeRecyclerAdapter.setDatas(itemList);

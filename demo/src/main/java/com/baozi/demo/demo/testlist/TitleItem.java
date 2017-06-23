@@ -2,9 +2,8 @@ package com.baozi.demo.demo.testlist;
 
 import com.baozi.demo.R;
 import com.baozi.demo.demo.testlist.bean.TitleBean;
-import com.baozi.treerecyclerview.factory.ItemFactory;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class TitleItem extends TreeItemGroup<TitleBean> {
     @Override
     protected List<TreeItem> initChildsList(TitleBean data) {
-        return ItemFactory.createItemList(data.getSingleBeen());
+        return ItemHelperFactory.createTreeItemList(data.getSingleBeen(), this);
     }
 
     @Override

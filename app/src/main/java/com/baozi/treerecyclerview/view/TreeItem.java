@@ -14,7 +14,6 @@ public abstract class TreeItem<D> extends BaseItem<D> {
     public void setParentItem(TreeItemGroup parentItem) {
         this.parentItem = parentItem;
     }
-
     /**
      * 获取当前item的父级
      *
@@ -25,4 +24,7 @@ public abstract class TreeItem<D> extends BaseItem<D> {
         return parentItem;
     }
 
+    public String getItemName() {
+        return "TreeItem";
+    }
 }

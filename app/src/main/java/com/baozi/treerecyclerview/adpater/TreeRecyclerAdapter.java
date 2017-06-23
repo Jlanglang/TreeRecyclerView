@@ -1,9 +1,8 @@
 package com.baozi.treerecyclerview.adpater;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.baozi.treerecyclerview.utils.ItemHelper;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 
@@ -106,7 +105,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     private void assembleItems(List<TreeItem> items) {
         if (type != null) {
             List<TreeItem> datas = getDatas();
-            datas.addAll(ItemHelper.getChildItemsWithType(items, type));
+            datas.addAll(ItemHelperFactory.getChildItemsWithType(items, type));
         } else {
             super.setDatas(items);
         }

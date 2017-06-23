@@ -17,11 +17,10 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.factory.ItemFactory;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -67,7 +66,7 @@ public class ShopTabListActivity extends Activity {
         mTabBeanArrayList.add(tabBean3);
         mTabBeanArrayList.add(tabBean4);
         mTabBeanArrayList.add(tabBean5);
-        mTabItemList = ItemFactory.createTreeItemList(mTabBeanArrayList, TabItem.class, null);
+        mTabItemList = ItemHelperFactory.createTreeItemList(mTabBeanArrayList, TabItem.class, null);
 
         mTabAdapter = new TreeRecyclerAdapter();
         mTabAdapter.setDatas(new ArrayList<TreeItem>(mTabItemList));
@@ -115,7 +114,7 @@ public class ShopTabListActivity extends Activity {
             shopTabContentBean.setName(i % 5 + 1 + "");
             mContentBeanArrayList.add(shopTabContentBean);
         }
-        mContentItems = ItemFactory.createTreeItemList(mContentBeanArrayList, ContentItem.class, null);
+        mContentItems = ItemHelperFactory.createTreeItemList(mContentBeanArrayList, ContentItem.class, null);
 
         mContentAdapter = new TreeRecyclerAdapter();
         mContentAdapter.setDatas(new ArrayList<TreeItem>(mContentItems));

@@ -2,7 +2,7 @@ package com.baozi.demo.demo.citylist;
 
 import com.baozi.demo.R;
 import com.baozi.demo.demo.citylist.bean.CityBean;
-import com.baozi.treerecyclerview.factory.ItemFactory;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
@@ -15,7 +15,7 @@ import java.util.List;
 public class OneTreeItemParent extends TreeItemGroup<CityBean> {
     @Override
     public List<TreeItem> initChildsList(CityBean data) {
-        return ItemFactory.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
+        return ItemHelperFactory.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
     }
 
     @Override
