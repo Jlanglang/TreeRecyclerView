@@ -30,18 +30,18 @@ public class ItemHelperFactory {
         }
         int size = list.size();
         ArrayList<BaseItem> treeItemList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            BaseItemData itemData = list.get(i);
-            try {
+        try {
+            for (int i = 0; i < size; i++) {
+                BaseItemData itemData = list.get(i);
                 Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(itemData.getViewItemType());
                 if (itemClass != null) {
                     BaseItem item = itemClass.newInstance();
                     item.setData(itemData);
                     treeItemList.add(item);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return treeItemList;
     }
@@ -58,17 +58,18 @@ public class ItemHelperFactory {
         }
         int size = list.size();
         ArrayList<BaseItem> baseItemList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            D o = list.get(i);
-            try {
+        try {
+            for (int i = 0; i < size; i++) {
+                D o = list.get(i);
+
                 if (iClass != null) {
                     BaseItem baseItem = iClass.newInstance();
                     baseItem.setData(o);
                     baseItemList.add(baseItem);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return baseItemList;
     }
@@ -78,13 +79,14 @@ public class ItemHelperFactory {
         if (null == list) {
             return null;
         }
-        int size = list.size();
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            BaseItemData itemData = list.get(i);
-            try {
-                TreeItem treeItem;
+        int size = list.size();
+        try {
+            for (int i = 0; i < size; i++) {
+                BaseItemData itemData = list.get(i);
                 int viewItemType = itemData.getViewItemType();
+
+                TreeItem treeItem;
                 //判断是否是TreeItem的子类
                 if (ItemConfig.getTreeViewHolderType(viewItemType) != null) {
                     Class<? extends TreeItem> treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
@@ -97,9 +99,9 @@ public class ItemHelperFactory {
                 treeItem.setData(itemData);
                 treeItem.setParentItem(treeParentItem);
                 treeItemList.add(treeItem);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return treeItemList;
     }

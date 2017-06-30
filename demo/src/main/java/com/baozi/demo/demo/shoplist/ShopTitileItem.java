@@ -18,15 +18,17 @@ import java.util.List;
 
 public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
+    private com.baozi.demo.demo.shoptablist.ContentItem mContentItem;
+
     @Override
     protected List<TreeItem> initChildsList(StoreBean data) {
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
-        com.baozi.demo.demo.shoptablist.ContentItem contentItem = new com.baozi.demo.demo.shoptablist.ContentItem();
+        mContentItem = new com.baozi.demo.demo.shoptablist.ContentItem();
         ShopTabContentBean shopListBean = new ShopTabContentBean();
         shopListBean.setName("头部");
         shopListBean.setTitle("头部");
-        contentItem.setData(shopListBean);
-        treeItemList.add(0, contentItem);
+        mContentItem.setData(shopListBean);
+        treeItemList.add(0, mContentItem);
         return treeItemList;
     }
 
@@ -38,6 +40,11 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
     @Override
     public void onBindViewHolder(ViewHolder holder) {
         holder.setChecked(R.id.cb_ischeck, isChildCheck());
+    }
+
+    @Override
+    public boolean onInterceptClick(TreeItem child) {
+        return child != mContentItem && super.onInterceptClick(child);
     }
 
     @Override
