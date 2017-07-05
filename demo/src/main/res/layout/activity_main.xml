@@ -21,8 +21,13 @@
         android:layout_height="wrap_content"
         android:text="考试列表"/>
     <Button
-        android:id="@+id/bt_xunfei"
+        android:id="@+id/bt_shoptab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="分类购物列表"/>
+    <Button
+        android:id="@+id/bt_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="新闻混合列表"/>
 </LinearLayout>

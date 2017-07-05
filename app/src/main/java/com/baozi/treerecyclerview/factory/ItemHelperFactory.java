@@ -3,9 +3,8 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
-import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 import com.baozi.treerecyclerview.view.TreeItemWapper;
@@ -155,7 +154,7 @@ public class ItemHelperFactory {
     public static <D extends BaseItemData> TreeItem createTreeItem(D d) {
         TreeItem treeItem = null;
         try {
-            Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(d.getViewItemType());
+            Class<? extends BaseItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
             if (itemClass != null) {
                 treeItem = (TreeItem) itemClass.newInstance();
                 treeItem.setData(d);

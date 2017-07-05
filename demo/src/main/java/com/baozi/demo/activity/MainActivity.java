@@ -40,10 +40,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        findViewById(R.id.bt_xunfei).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_shoptab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ShopTabListActivity.class);
+                startActivity(intent);
+            }
+        });
+        findViewById(R.id.bt_news).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NewsActivity.class);
                 startActivity(intent);
             }
         });

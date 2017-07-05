@@ -12,26 +12,26 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shoplist.bean.ShopListBean;
-import com.baozi.demo.demo.shoplist.bean.StoreBean;
-import com.baozi.demo.demo.shoplist.ShopTitileItem;
+import com.baozi.demo.moudle.shoplist.ShopTitileItem;
+import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
+import com.baozi.demo.moudle.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
-import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.base.BaseItem;
-//import com.baozi.treerecyclerview.view.HeadAndFootGroupWapper;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.baozi.treerecyclerview.view.HeadAndFootGroupWapper;
 
 /**
  * Created by baozi on 2016/12/22.
@@ -67,22 +67,6 @@ public class ShopListActivity extends AppCompatActivity {
         });
         List<StoreBean> storeBean = initData();
         List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(storeBean, ShopTitileItem.class, null);
-//
-//        HeadAndFootGroupWapper headAndFootItemGroup = new HeadAndFootGroupWapper((TreeItemGroup) itemList.get(0));
-//        ContentItem contentItem = new ContentItem();
-//        ShopTabContentBean shopTabContentBean = new ShopTabContentBean();
-//        shopTabContentBean.setTitle("头部");
-//        shopTabContentBean.setName("头部");
-//        contentItem.setData(shopTabContentBean);
-//
-//        ContentItem contentItem1 = new ContentItem();
-//        ShopTabContentBean shopTabContentBean1 = new ShopTabContentBean();
-//        shopTabContentBean1.setTitle("尾部");
-//        shopTabContentBean1.setName("尾部");
-//        contentItem1.setData(shopTabContentBean1);
-//        headAndFootItemGroup.addHeadItem(contentItem);
-//        headAndFootItemGroup.addfootItem(contentItem1);
-//        itemList.set(0, headAndFootItemGroup);
 
         mAdapter = new TreeRecyclerAdapter();
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
@@ -96,19 +80,14 @@ public class ShopListActivity extends AppCompatActivity {
         };
         //添加头部View1
         TextView headView1 = new TextView(this);
-        headView1.setText("headview");
+        headView1.setText("headView");
         headView1.setGravity(Gravity.CENTER);
         headView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
         headerAndFootWapper.addHeaderView(headView1);
-        //添加头部View2
-        ImageView headView2 = new ImageView(this);
-        headView2.setBackgroundResource(R.mipmap.ic_launcher);
-        headView2.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-        headerAndFootWapper.addHeaderView(headView2);
         //添加底部View1
-        ImageView footView1 = new ImageView(this);
+        TextView footView1 = new TextView(this);
         footView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-        footView1.setBackgroundResource(R.mipmap.ic_launcher);
+        headView1.setText("footView");
         headerAndFootWapper.addFootView(footView1);
         mRecyclerView.setAdapter(headerAndFootWapper);
     }

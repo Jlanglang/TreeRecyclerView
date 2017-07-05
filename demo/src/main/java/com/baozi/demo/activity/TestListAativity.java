@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.demo.testlist.ContentImageItem;
-import com.baozi.demo.demo.testlist.bean.ContentBean;
-import com.baozi.demo.demo.testlist.SelectionImageItem;
-import com.baozi.demo.demo.testlist.SelectionTextItem;
-import com.baozi.demo.demo.testlist.bean.TitleBean;
-import com.baozi.demo.demo.testlist.TitleItem;
+import com.baozi.demo.moudle.testlist.ContentImageItem;
+import com.baozi.demo.moudle.testlist.bean.ContentBean;
+import com.baozi.demo.moudle.testlist.SelectionImageItem;
+import com.baozi.demo.moudle.testlist.SelectionTextItem;
+import com.baozi.demo.moudle.testlist.bean.TitleBean;
+import com.baozi.demo.moudle.testlist.TitleItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.factory.ItemConfig;

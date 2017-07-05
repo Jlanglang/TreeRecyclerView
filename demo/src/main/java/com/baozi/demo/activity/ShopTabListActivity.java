@@ -8,10 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.demo.shoptablist.ContentItem;
-import com.baozi.demo.demo.shoptablist.TabItem;
-import com.baozi.demo.demo.shoptablist.bean.ShopTabContentBean;
-import com.baozi.demo.demo.shoptablist.bean.ShopTabBean;
+import com.baozi.demo.moudle.shoptablist.ContentItem;
+import com.baozi.demo.moudle.shoptablist.TabItem;
+import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
+import com.baozi.demo.moudle.shoptablist.bean.ShopTabBean;
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
