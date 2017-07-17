@@ -4,8 +4,8 @@ import com.baozi.demo.R;
 import com.baozi.demo.moudle.newslist.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.view.TreeItem;
-import com.baozi.treerecyclerview.view.TreeItemGroup;
+import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItemGroup;
 
 import java.util.List;
 

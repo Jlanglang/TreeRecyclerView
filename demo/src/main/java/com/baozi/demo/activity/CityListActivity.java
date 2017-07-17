@@ -14,7 +14,7 @@ import com.baozi.demo.moudle.citylist.bean.CityBean;
 import com.baozi.demo.moudle.citylist.OneTreeItemParent;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 import java.util.List;
 

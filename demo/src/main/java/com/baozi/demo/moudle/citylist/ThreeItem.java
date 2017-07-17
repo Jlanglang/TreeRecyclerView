@@ -3,7 +3,7 @@ package com.baozi.demo.moudle.citylist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.citylist.bean.CityBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 /**
  */

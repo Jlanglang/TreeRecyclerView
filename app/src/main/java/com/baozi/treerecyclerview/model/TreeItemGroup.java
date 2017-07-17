@@ -1,9 +1,8 @@
-package com.baozi.treerecyclerview.view;
+package com.baozi.treerecyclerview.model;
 
 import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 
 import java.util.List;

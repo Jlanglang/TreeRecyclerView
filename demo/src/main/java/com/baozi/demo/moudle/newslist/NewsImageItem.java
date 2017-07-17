@@ -3,7 +3,7 @@ package com.baozi.demo.moudle.newslist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.newslist.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 /**
  * @author jlanglang  2017/7/5 17:15

@@ -19,7 +19,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;

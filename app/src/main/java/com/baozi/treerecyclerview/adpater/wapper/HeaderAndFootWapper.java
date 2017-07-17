@@ -4,7 +4,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
 

@@ -26,7 +26,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;

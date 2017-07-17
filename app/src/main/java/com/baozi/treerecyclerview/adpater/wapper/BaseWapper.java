@@ -3,7 +3,7 @@ package com.baozi.treerecyclerview.adpater.wapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.ViewHolder;

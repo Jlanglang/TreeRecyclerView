@@ -1,10 +1,10 @@
-package com.baozi.treerecyclerview.adpater;
+package com.baozi.treerecyclerview.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.base.ViewHolder;
+import com.baozi.treerecyclerview.adpater.ItemManager;
 
 import java.util.ArrayList;
 import java.util.List;

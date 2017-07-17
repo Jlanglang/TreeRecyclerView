@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.widget;
 
 import android.os.Bundle;
 
-import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.ArrayList;

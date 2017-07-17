@@ -4,7 +4,7 @@ import android.view.View;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.view.TreeItem;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 /**
  * Created by baozi on 2017/5/3.

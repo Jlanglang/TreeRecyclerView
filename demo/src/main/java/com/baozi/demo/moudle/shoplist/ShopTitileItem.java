@@ -6,8 +6,8 @@ import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.demo.moudle.shoplist.bean.StoreBean;
 import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.view.TreeItem;
-import com.baozi.treerecyclerview.view.TreeSelectItemGroup;
+import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.model.TreeSelectItemGroup;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;

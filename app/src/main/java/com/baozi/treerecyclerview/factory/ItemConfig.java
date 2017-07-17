@@ -3,9 +3,7 @@ package com.baozi.treerecyclerview.factory;
 import android.util.SparseArray;
 
 import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.view.TreeItem;
-
-import java.util.HashMap;
+import com.baozi.treerecyclerview.model.TreeItem;
 
 public class ItemConfig {
 

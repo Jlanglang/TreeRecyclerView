@@ -1,10 +1,7 @@
-package com.baozi.treerecyclerview.view;
+package com.baozi.treerecyclerview.model;
 
 
 import android.support.annotation.NonNull;
-
-import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.base.BaseItemData;
 
 import java.util.ArrayList;
 import java.util.List;
