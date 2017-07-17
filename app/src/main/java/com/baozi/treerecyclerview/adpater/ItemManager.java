@@ -2,13 +2,9 @@ package com.baozi.treerecyclerview.adpater;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.baozi.treerecyclerview.base.BaseItem;
-import com.baozi.treerecyclerview.base.BaseItemData;
-import com.baozi.treerecyclerview.view.TreeItemGroup;
-
 import java.util.List;
 
-public abstract class ItemManager<T extends BaseItem> {
+public abstract class ItemManager<T> {
 
     private BaseRecyclerAdapter<T> mAdapter;
 

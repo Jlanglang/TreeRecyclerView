@@ -1,13 +1,11 @@
 package com.baozi.treerecyclerview.adpater.wapper;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
 
@@ -16,11 +14,10 @@ import java.util.List;
  * 待开发
  */
 
-public class SwipeMenuWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
-    private BaseRecyclerAdapter<T> mAdapter;
+public class SwipeMenuWapper<T extends BaseItem> extends BaseWapper<T> {
 
     public SwipeMenuWapper(BaseRecyclerAdapter<T> adapter) {
-        mAdapter = adapter;
+        super(adapter);
         mAdapter.setItemManager(getItemManager());
     }
 
@@ -41,6 +38,11 @@ public class SwipeMenuWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> 
     }
 
     @Override
+    public int getLayoutId(int position) {
+        return 0;
+    }
+
+    @Override
     public int getItemViewType(int position) {
         return mAdapter.getItemViewType(position);
     }
@@ -58,5 +60,10 @@ public class SwipeMenuWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> 
     @Override
     public void setDatas(List<T> datas) {
         mAdapter.setDatas(datas);
+    }
+
+    @Override
+    public void onBind(ViewHolder holder, T t, int position) {
+
     }
 }

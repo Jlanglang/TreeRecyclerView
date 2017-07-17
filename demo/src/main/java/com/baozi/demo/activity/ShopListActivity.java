@@ -22,7 +22,7 @@ import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.demo.moudle.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
@@ -87,7 +87,7 @@ public class ShopListActivity extends AppCompatActivity {
         //添加底部View1
         TextView footView1 = new TextView(this);
         footView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-        headView1.setText("footView");
+        footView1.setText("footView");
         headerAndFootWapper.addFootView(footView1);
         mRecyclerView.setAdapter(headerAndFootWapper);
     }

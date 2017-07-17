@@ -1,7 +1,6 @@
-package com.baozi.treerecyclerview.adpater;
+package com.baozi.treerecyclerview.base;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -32,10 +31,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return new ViewHolder(itemView);
     }
 
-    public static ViewHolder createViewHolder(Context context,
-                                              ViewGroup parent, int layoutId) {
-            View itemView = LayoutInflater.from(context).inflate(layoutId, parent,
-                    false);
+    public static ViewHolder createViewHolder(ViewGroup parent, int layoutId) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
+                false);
         return createViewHolder(itemView);
     }
 

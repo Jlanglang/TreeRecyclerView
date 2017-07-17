@@ -1,46 +1,48 @@
 package com.baozi.treerecyclerview.adpater;
 
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.R;
-import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 普通BaseRecyclerAdapter,itme无父子关系.
- * 限定泛型为BaseItem的子类.
- * 通过BaseItem去处理ViewHolder
+ * Created by zhy on 16/4/9.
  */
-public class BaseRecyclerAdapter<T extends BaseItem> extends
-        RecyclerView.Adapter<ViewHolder> {
-
-    private List<T> mDatas;//展示数据
-    private CheckItem mCheckItem;
-
+public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
+    private List<T> mDatas;
+    protected CheckItem mCheckItem;
     protected ItemManager<T> mItemManager;
     protected OnItemClickLitener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
 
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //看源码,这里的parent就是Recyclerview,所以不会为null.可以通过它拿到context
-        ViewHolder viewHolder = ViewHolder.createViewHolder(parent.getContext(), parent, viewType);
-        onBindViewHolderClick(viewHolder);
-        return viewHolder;
+        ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
+        onBindViewHolderClick(holder);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        T t = getDatas().get(position);
-        checkItemManage(t);
-        t.onBindViewHolder(holder);
+        onBind(holder, getDatas().get(position), position);
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return getLayoutId(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return getDatas().size();
+    }
+
+    public abstract int getLayoutId(int position);
 
     /**
      * 实现item的点击事件
@@ -49,7 +51,7 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
      */
     public void onBindViewHolderClick(final ViewHolder holder) {
         //判断当前holder是否已经设置了点击事件
-        if (!holder.itemView.hasOnClickListeners()) {
+        if (holder.itemView instanceof ViewGroup && !holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -60,31 +62,28 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                         if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onItemClick(holder, getData(itemPosition), itemPosition);
-                        } else {
-                            //拿到对应item,回调.
-                            getDatas().get(itemPosition).onClick();
+                            mOnItemClickListener.onItemClick(holder, itemPosition);
                         }
                     }
-                }
-            });
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    //获得holder的position
-                    int layoutPosition = holder.getLayoutPosition();
-                    //检查position是否可以点击
-                    if (getCheckItem().checkPosition(layoutPosition)) {
-                        //检查并得到真实的position
-                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
-                        if (mOnItemLongClickListener != null) {
-                            return mOnItemLongClickListener.onItemLongClick(holder, getData(itemPosition), itemPosition);
-                        }
-                    }
-                    return false;
                 }
             });
         }
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //获得holder的position
+                int layoutPosition = holder.getLayoutPosition();
+                //检查position是否可以点击
+                if (getCheckItem().checkPosition(layoutPosition)) {
+                    //检查并得到真实的position
+                    int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                    if (mOnItemLongClickListener != null) {
+                        return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     /**
@@ -95,23 +94,6 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         boolean checkPosition(int position);
 
         int getAfterCheckingPosition(int position);
-    }
-
-    public interface OnItemClickLitener {
-        void onItemClick(ViewHolder viewHolder, BaseItem baseItem, int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
-
-
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(ViewHolder viewHolder, BaseItem baseItem, int position);
-    }
-
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        mOnItemLongClickListener = onItemLongClickListener;
     }
 
     /**
@@ -137,14 +119,32 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
     }
 
     public void setCheckItem(CheckItem checkItem) {
-        mCheckItem = checkItem;
+        this.mCheckItem = checkItem;
     }
 
-    private void checkItemManage(T item) {
-        if (item.getItemManager() == null) {
-            item.setItemManager(getItemManager());
+    public List<T> getDatas() {
+        if (mDatas == null) {
+            mDatas = new ArrayList<>();
+        }
+        return mDatas;
+    }
+
+    public T getData(int position) {
+        if (position < getDatas().size()) {
+            return getDatas().get(position);
+        }
+        return null;
+    }
+
+    public void setDatas(List<T> datas) {
+        if (datas != null) {
+            getDatas().clear();
+            getDatas().addAll(datas);
         }
     }
+
+    public abstract void onBind(ViewHolder holder, T t, int position);
+
 
     /**
      * 操作adapter
@@ -162,67 +162,22 @@ public class BaseRecyclerAdapter<T extends BaseItem> extends
         mItemManager = itemManager;
     }
 
-    /**
-     * 这里将LayoutId作为type,因为LayoutId不可能相同,个人觉的可以作为item的标志
-     *
-     * @param position
-     * @return
-     */
-    @Override
-    public int getItemViewType(int position) {
-        return mDatas.get(position).getLayoutId();
+    //
+    public interface OnItemClickLitener {
+        void onItemClick(ViewHolder viewHolder, int position);
+    }
+    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    BaseItem baseItem = getDatas().get(position);
-                    if (baseItem.getSpanSize() == 0) {
-                        return gridLayoutManager.getSpanCount();
-                    }
-                    return baseItem.getSpanSize();
-                }
-            });
-        }
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(ViewHolder viewHolder, int position);
     }
 
-    @Override
-    public int getItemCount() {
-        return getDatas() == null ? 0 : getDatas().size();
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        mOnItemLongClickListener = onItemLongClickListener;
     }
 
-    public List<T> getDatas() {
-        if (mDatas == null) {
-            mDatas = new ArrayList<>();
-        }
-        return mDatas;
-    }
-
-    public T getData(int position) {
-        if (position < getDatas().size()) {
-            return getDatas().get(position);
-        }
-        return null;
-    }
-
-    /**
-     * 需要手动setDatas(List<T> datas),否则数据为空
-     * 该方法不会主动刷新布局.如需替换datas并刷新,可以getItemManager().replaceAllItem(List list);
-     *
-     * @param datas 需要修改的数据
-     */
-    public void setDatas(@Nullable List<T> datas) {
-        if (datas != null) {
-            getDatas().clear();
-            getDatas().addAll(datas);
-        }
-    }
 
     /**
      * 默认使用 notifyDataChanged();刷新.

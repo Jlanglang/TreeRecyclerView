@@ -8,7 +8,7 @@ import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeSelectItemGroup;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
 
@@ -57,8 +57,12 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
         }
         int size = getChilds().size();
         for (int i = 0; i < size; i++) {
-            ShopListBean data = (ShopListBean) getChilds().get(i).getData();
-            data.setCheck(isChildCheck());
+            Object data = getChilds().get(i).getData();
+            if (data instanceof ShopListBean) {
+//                continue;
+                ((ShopListBean) data).setCheck(isChildCheck());
+            }
+//            ShopListBean data = (ShopListBean) getChilds().get(i).getData();
         }
         getItemManager().notifyDataChanged();
     }

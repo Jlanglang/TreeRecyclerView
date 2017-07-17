@@ -88,6 +88,7 @@ public class NewsActivity extends AppCompatActivity {
             newsItemBean.setFootBean(newsFootBean);
             newsItemBeens.add(newsItemBean);
         }
+        
         List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(newsItemBeens, null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);

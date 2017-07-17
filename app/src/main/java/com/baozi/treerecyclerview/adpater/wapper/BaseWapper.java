@@ -1,13 +1,12 @@
 package com.baozi.treerecyclerview.adpater.wapper;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.adpater.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
 import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
 
@@ -56,6 +55,11 @@ public class BaseWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
+    public int getLayoutId(int position) {
+        return mAdapter.getLayoutId(position);
+    }
+
+    @Override
     public T getData(int position) {
         return mAdapter.getData(position);
     }
@@ -68,6 +72,11 @@ public class BaseWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
     @Override
     public void setDatas(List<T> datas) {
         mAdapter.setDatas(datas);
+    }
+
+    @Override
+    public void onBind(ViewHolder holder, T t, int position) {
+        mAdapter.onBind(holder, t, position);
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.baozi.demo.moudle.shoptablist;
 
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 
 /**

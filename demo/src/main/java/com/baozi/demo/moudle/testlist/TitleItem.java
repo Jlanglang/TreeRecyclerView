@@ -3,7 +3,7 @@ package com.baozi.demo.moudle.testlist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.testlist.bean.TitleBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
 

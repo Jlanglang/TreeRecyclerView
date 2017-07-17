@@ -2,6 +2,7 @@ package com.baozi.treerecyclerview.adpater;
 
 import android.view.View;
 
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.view.TreeItem;
 import com.baozi.treerecyclerview.view.TreeItemGroup;
@@ -15,7 +16,7 @@ import java.util.List;
  * item之间有子父级关系,
  */
 
-public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
+public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
 
     private TreeRecyclerViewType type;
 
@@ -146,7 +147,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     private class TreeItemManageImpl extends ItemManager<TreeItem> {
 
-        public TreeItemManageImpl(BaseRecyclerAdapter<TreeItem> adapter) {
+        public TreeItemManageImpl(ItemRecyclerAdapter<TreeItem> adapter) {
             super(adapter);
         }
 

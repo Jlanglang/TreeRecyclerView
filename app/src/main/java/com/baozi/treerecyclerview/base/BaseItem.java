@@ -3,7 +3,6 @@ package com.baozi.treerecyclerview.base;
 import android.content.res.Resources;
 
 import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.adpater.ViewHolder;
 
 /**
  * 组合模式
