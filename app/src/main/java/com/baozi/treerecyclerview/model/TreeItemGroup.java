@@ -40,14 +40,13 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
     public void setExpand(boolean expand) {
         if (isCanExpand()) {
             isExpand = expand;
-            notifyExpand();
         }
     }
 
     /**
      * 刷新Item的展开状态
      */
-    private void notifyExpand() {
+    public void notifyExpand() {
         if (isExpand()) {
             onExpand();
         } else {

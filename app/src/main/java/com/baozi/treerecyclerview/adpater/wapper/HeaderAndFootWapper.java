@@ -5,14 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 /**
  * Created by baozi on 2017/4/30.
  */
 
-public class HeaderAndFootWapper<T extends BaseItem> extends BaseWapper<T> {
+public class HeaderAndFootWapper<T> extends BaseWapper<T> {
 
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();

@@ -3,9 +3,8 @@ package com.baozi.treerecyclerview.adpater.wapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.base.BaseItem;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * Created by baozi on 2017/5/16.
  */
 
-public class BaseWapper<T extends BaseItem> extends BaseRecyclerAdapter<T> {
+public class BaseWapper<T> extends BaseRecyclerAdapter<T> {
 
     protected BaseRecyclerAdapter<T> mAdapter;
 

@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * 待开发
  */
 
-public class SwipeMenuWapper<T extends BaseItem> extends BaseWapper<T> {
+public class SwipeMenuWapper<T> extends BaseWapper<T> {
 
     public SwipeMenuWapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);

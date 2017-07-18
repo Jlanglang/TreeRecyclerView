@@ -19,7 +19,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected OnItemClickLitener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
@@ -32,18 +31,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         onBind(holder, getDatas().get(position), position);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return getLayoutId(position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return getDatas().size();
-    }
-
-    public abstract int getLayoutId(int position);
-
     /**
      * 实现item的点击事件
      *
@@ -51,7 +38,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      */
     public void onBindViewHolderClick(final ViewHolder holder) {
         //判断当前holder是否已经设置了点击事件
-        if (holder.itemView instanceof ViewGroup && !holder.itemView.hasOnClickListeners()) {
+        if (!holder.itemView.hasOnClickListeners()) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -86,14 +73,14 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         });
     }
 
-    /**
-     * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
-     * 比如添加了headview和footview.
-     */
-    public interface CheckItem {
-        boolean checkPosition(int position);
+    @Override
+    public int getItemViewType(int position) {
+        return getLayoutId(position);
+    }
 
-        int getAfterCheckingPosition(int position);
+    @Override
+    public int getItemCount() {
+        return getDatas().size();
     }
 
     /**
@@ -129,13 +116,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return mDatas;
     }
 
-    public T getData(int position) {
-        if (position < getDatas().size()) {
-            return getDatas().get(position);
-        }
-        return null;
-    }
-
     public void setDatas(List<T> datas) {
         if (datas != null) {
             getDatas().clear();
@@ -143,8 +123,12 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         }
     }
 
-    public abstract void onBind(ViewHolder holder, T t, int position);
-
+    public T getData(int position) {
+        if (position < getDatas().size()) {
+            return getDatas().get(position);
+        }
+        return null;
+    }
 
     /**
      * 操作adapter
@@ -162,22 +146,37 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         mItemManager = itemManager;
     }
 
-    //
-    public interface OnItemClickLitener {
-        void onItemClick(ViewHolder viewHolder, int position);
-    }
     public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(ViewHolder viewHolder, int position);
     }
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         mOnItemLongClickListener = onItemLongClickListener;
     }
 
+    public interface OnItemClickLitener {
+        void onItemClick(ViewHolder viewHolder, int position);
+    }
+
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(ViewHolder viewHolder, int position);
+    }
+
+    /**
+     * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
+     * 比如添加了headview和footview.
+     */
+    public interface CheckItem {
+
+        boolean checkPosition(int position);
+
+        int getAfterCheckingPosition(int position);
+
+    }
+
+    public abstract int getLayoutId(int position);
+
+    public abstract void onBind(ViewHolder holder, T t, int position);
 
     /**
      * 默认使用 notifyDataChanged();刷新.
