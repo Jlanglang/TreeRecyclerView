@@ -197,6 +197,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         @Override
         public void addItem(int position, T item) {
             getDatas().add(position, item);
+            notifyDataChanged();
         }
 
         @Override

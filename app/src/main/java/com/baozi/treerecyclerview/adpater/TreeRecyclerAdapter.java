@@ -4,8 +4,8 @@ import android.view.View;
 
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
-import com.baozi.treerecyclerview.model.TreeItemGroup;
+import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.ArrayList;
 import java.util.List;

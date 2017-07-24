@@ -4,10 +4,11 @@ package com.baozi.demo.moudle.shoplist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.demo.moudle.shoplist.bean.StoreBean;
-import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
+import com.baozi.demo.moudle.shoptablist.TabItem;
+import com.baozi.demo.moudle.shoptablist.bean.ShopTabBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
-import com.baozi.treerecyclerview.model.TreeSelectItemGroup;
+import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.List;
@@ -16,19 +17,18 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  */
 
-public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
+public class ShopGroupItem extends TreeSelectItemGroup<StoreBean> {
 
-    private com.baozi.demo.moudle.shoptablist.ContentItem mContentItem;
+    private TabItem mHeadItem;
 
     @Override
     protected List<TreeItem> initChildsList(StoreBean data) {
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
-        mContentItem = new com.baozi.demo.moudle.shoptablist.ContentItem();
-        ShopTabContentBean shopListBean = new ShopTabContentBean();
+        mHeadItem = new TabItem();
+        ShopTabBean shopListBean = new ShopTabBean();
         shopListBean.setName("头部");
-        shopListBean.setTitle("头部");
-        mContentItem.setData(shopListBean);
-        treeItemList.add(0, mContentItem);
+        mHeadItem.setData(shopListBean);
+        treeItemList.add(0, mHeadItem);
         return treeItemList;
     }
 
@@ -44,7 +44,7 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
 
     @Override
     public boolean onInterceptClick(TreeItem child) {
-        return child != mContentItem && super.onInterceptClick(child);
+        return child != mHeadItem && super.onInterceptClick(child);
     }
 
     @Override
@@ -52,17 +52,16 @@ public class ShopTitileItem extends TreeSelectItemGroup<StoreBean> {
         if (!isChildCheck()) {
             getSelectItems().clear();
             getSelectItems().addAll(getChilds());
+            getSelectItems().remove(mHeadItem);
         } else {
             getSelectItems().clear();
         }
         int size = getChilds().size();
         for (int i = 0; i < size; i++) {
             Object data = getChilds().get(i).getData();
-            if (data instanceof ShopListBean) {
-//                continue;
+            if (data != mHeadItem) {
                 ((ShopListBean) data).setCheck(isChildCheck());
             }
-//            ShopListBean data = (ShopListBean) getChilds().get(i).getData();
         }
         getItemManager().notifyDataChanged();
     }

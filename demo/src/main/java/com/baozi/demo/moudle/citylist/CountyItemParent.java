@@ -4,18 +4,18 @@ import com.baozi.demo.R;
 import com.baozi.demo.moudle.citylist.bean.CityBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.model.TreeItem;
-import com.baozi.treerecyclerview.model.TreeItemGroup;
+import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.List;
 
 /**
  */
-public class TwoTreeItemParent extends TreeItemGroup<CityBean.CitysBean> {
+public class CountyItemParent extends TreeItemGroup<CityBean.CitysBean> {
 
     @Override
     public List<TreeItem> initChildsList(CityBean.CitysBean data) {
-        return ItemHelperFactory.createTreeItemList(data.getAreas(), ThreeItem.class, this);
+        return ItemHelperFactory.createTreeItemList(data.getAreas(), AreaItem.class, this);
     }
 
 

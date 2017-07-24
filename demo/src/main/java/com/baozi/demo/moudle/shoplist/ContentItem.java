@@ -3,7 +3,7 @@ package com.baozi.demo.moudle.shoplist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 /**
  * Created by baozi on 2016/12/22.

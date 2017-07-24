@@ -3,19 +3,19 @@ package com.baozi.demo.moudle.citylist;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.citylist.bean.CityBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.model.TreeItemGroup;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.List;
 
 /**
  * Created by baozi on 2016/12/8.
  */
-public class OneTreeItemParent extends TreeItemGroup<CityBean> {
+public class ProvinceItemParent extends TreeItemGroup<CityBean> {
     @Override
     public List<TreeItem> initChildsList(CityBean data) {
-        return ItemHelperFactory.createTreeItemList(data.getCitys(), TwoTreeItemParent.class, this);
+        return ItemHelperFactory.createTreeItemList(data.getCitys(), CountyItemParent.class, this);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.model;
+package com.baozi.treerecyclerview.item;
 
 
 import android.support.annotation.NonNull;

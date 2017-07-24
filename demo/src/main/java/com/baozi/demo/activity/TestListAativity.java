@@ -14,12 +14,12 @@ import com.baozi.demo.moudle.testlist.bean.ContentBean;
 import com.baozi.demo.moudle.testlist.SelectionImageItem;
 import com.baozi.demo.moudle.testlist.SelectionTextItem;
 import com.baozi.demo.moudle.testlist.bean.TitleBean;
-import com.baozi.demo.moudle.testlist.TitleItem;
+import com.baozi.demo.moudle.testlist.ContentGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class TestListAativity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
         ItemConfig.addHolderType(102, ContentImageItem.class);
-        ItemConfig.addTreeHolderType(100, TitleItem.class);
+        ItemConfig.addTreeHolderType(100, ContentGroupItem.class);
         ItemConfig.addTreeHolderType(101, SelectionImageItem.class);
         ItemConfig.addTreeHolderType(103, SelectionTextItem.class);
 

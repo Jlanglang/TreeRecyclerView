@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.model;
+package com.baozi.treerecyclerview.item;
 
 import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.base.ViewHolder;

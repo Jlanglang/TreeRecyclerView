@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.moudle.shoplist.ShopTitileItem;
+import com.baozi.demo.moudle.shoplist.ShopGroupItem;
 import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.demo.moudle.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
@@ -26,7 +26,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wapper.HeaderAndFootWapper;
 import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class ShopListActivity extends AppCompatActivity {
             }
         });
         List<StoreBean> storeBean = initData();
-        List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(storeBean, ShopTitileItem.class, null);
+        List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(storeBean, ShopGroupItem.class, null);
 
         mAdapter = new TreeRecyclerAdapter();
         mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
@@ -97,8 +97,8 @@ public class ShopListActivity extends AppCompatActivity {
         List<TreeItem> datas = mAdapter.getDatas();
         for (int i = 0; i < datas.size(); i++) {
             TreeItem treeItem = datas.get(i);
-            if (treeItem instanceof ShopTitileItem) {
-                ShopTitileItem titletItem = (ShopTitileItem) datas.get(i);
+            if (treeItem instanceof ShopGroupItem) {
+                ShopGroupItem titletItem = (ShopGroupItem) datas.get(i);
                 StoreBean data = titletItem.getData();
                 if (titletItem.isChildCheck()) {
                     ArrayList<ShopListBean> shopListBeens = new ArrayList<>();

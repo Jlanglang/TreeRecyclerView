@@ -4,8 +4,8 @@ import com.baozi.demo.R;
 import com.baozi.demo.moudle.testlist.bean.TitleBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.model.TreeItem;
-import com.baozi.treerecyclerview.model.TreeItemGroup;
+import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by baozi on 2017/4/27.
  */
 
-public class TitleItem extends TreeItemGroup<TitleBean> {
+public class ContentGroupItem extends TreeItemGroup<TitleBean> {
     @Override
     protected List<TreeItem> initChildsList(TitleBean data) {
         return ItemHelperFactory.createTreeItemList(data.getSingleBeen(), this);
@@ -29,7 +29,6 @@ public class TitleItem extends TreeItemGroup<TitleBean> {
     }
 
     @Override
-
     public boolean isCanExpand() {
         return false;
     }

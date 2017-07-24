@@ -11,10 +11,10 @@ import android.view.View;
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.citylist.bean.CityBean;
-import com.baozi.demo.moudle.citylist.OneTreeItemParent;
+import com.baozi.demo.moudle.citylist.ProvinceItemParent;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
-import com.baozi.treerecyclerview.model.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class CityListActivity extends AppCompatActivity {
             }
         });
         List<CityBean> cityBeen = JSON.parseArray(getResources().getString(R.string.location), CityBean.class);
-        List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(cityBeen, OneTreeItemParent.class, null);
+        List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class, null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setDatas(treeItemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
