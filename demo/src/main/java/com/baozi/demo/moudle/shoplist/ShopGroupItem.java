@@ -59,7 +59,7 @@ public class ShopGroupItem extends TreeSelectItemGroup<StoreBean> {
         int size = getChilds().size();
         for (int i = 0; i < size; i++) {
             Object data = getChilds().get(i).getData();
-            if (data != mHeadItem) {
+            if (data != mHeadItem.getData()) {
                 ((ShopListBean) data).setCheck(isChildCheck());
             }
         }
