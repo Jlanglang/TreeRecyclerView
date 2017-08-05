@@ -16,8 +16,8 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  */
 public class ItemRecyclerAdapter<T extends BaseItem> extends
         BaseRecyclerAdapter<T> {
-    protected OnItemClickLitener mOnItemClickListener;
-    protected OnItemLongClickListener mOnItemLongClickListener;
+//    protected OnItemClickLitener mOnItemClickListener;
+//    protected OnItemLongClickListener mOnItemLongClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,7 +62,7 @@ public class ItemRecyclerAdapter<T extends BaseItem> extends
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                         if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onItemClick(holder, getData(itemPosition), itemPosition);
+                            mOnItemClickListener.onItemClick(holder, itemPosition);
                         } else {
                             //拿到对应item,回调.
                             getDatas().get(itemPosition).onClick();
@@ -80,7 +80,7 @@ public class ItemRecyclerAdapter<T extends BaseItem> extends
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                         if (mOnItemLongClickListener != null) {
-                            return mOnItemLongClickListener.onItemLongClick(holder, getData(itemPosition), itemPosition);
+                            return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
                         }
                     }
                     return false;
@@ -90,22 +90,22 @@ public class ItemRecyclerAdapter<T extends BaseItem> extends
     }
 
 
-    public interface OnItemClickLitener {
-        void onItemClick(ViewHolder viewHolder, BaseItem baseItem, int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
-
-
-    public interface OnItemLongClickListener {
-        boolean onItemLongClick(ViewHolder viewHolder, BaseItem baseItem, int position);
-    }
-
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        mOnItemLongClickListener = onItemLongClickListener;
-    }
+//    public interface OnItemClickLitener {
+//        void onItemClick(ViewHolder viewHolder, BaseItem baseItem, int position);
+//    }
+//
+//    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
+//        mOnItemClickListener = onItemClickListener;
+//    }
+//
+//
+//    public interface OnItemLongClickListener {
+//        boolean onItemLongClick(ViewHolder viewHolder, BaseItem baseItem, int position);
+//    }
+//
+//    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+//        mOnItemLongClickListener = onItemLongClickListener;
+//    }
 
 
     private void checkItemManage(T item) {

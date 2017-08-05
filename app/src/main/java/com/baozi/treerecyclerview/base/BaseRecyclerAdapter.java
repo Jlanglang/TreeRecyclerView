@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
     private List<T> mDatas;
-    protected CheckItem mCheckItem;
+    private CheckItem mCheckItem;
     protected ItemManager<T> mItemManager;
     protected OnItemClickLitener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
@@ -124,7 +124,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public T getData(int position) {
-        if (position < getDatas().size()) {
+        if (position >= 0 && position < getDatas().size()) {
             return getDatas().get(position);
         }
         return null;

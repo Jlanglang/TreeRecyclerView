@@ -10,13 +10,12 @@ import android.view.View;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.shoptablist.ContentItem;
 import com.baozi.demo.moudle.shoptablist.TabItem;
-import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
 import com.baozi.demo.moudle.shoptablist.bean.ShopTabBean;
+import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
 import com.baozi.treerecyclerview.adpater.ItemRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -81,8 +80,8 @@ public class ShopTabListActivity extends Activity {
         });
         mTabAdapter.setOnItemClickListener(new ItemRecyclerAdapter.OnItemClickLitener() {
             @Override
-            public void onItemClick(ViewHolder viewHolder, BaseItem baseItem, int position) {
-                ShopTabBean data = (ShopTabBean) baseItem.getData();
+            public void onItemClick(ViewHolder viewHolder, int position) {
+                ShopTabBean data = (ShopTabBean) mTabAdapter.getData(position).getData();
                 String name = data.getName();
                 int size = mContentItems.size();
                 ArrayList<TreeItem> contentBeenList = new ArrayList<>();
@@ -92,7 +91,7 @@ public class ShopTabListActivity extends Activity {
                     for (int i = 0; i < size; i++) {
                         ShopTabContentBean shopTabContentBean = (ShopTabContentBean) mContentItems.get(i).getData();
                         if (shopTabContentBean.getName().equals(name)) {
-                            contentBeenList.add((ContentItem) mContentItems.get(i));
+                            contentBeenList.add(mContentItems.get(i));
                         }
                     }
                     mContentAdapter.getItemManager().replaceAllItem(contentBeenList);

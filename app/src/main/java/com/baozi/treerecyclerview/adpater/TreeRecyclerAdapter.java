@@ -47,7 +47,7 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
                                 return;
                             }
                             if (mOnItemClickListener != null) {
-                                mOnItemClickListener.onItemClick(holder, getDatas().get(itemPosition), itemPosition);
+                                mOnItemClickListener.onItemClick(holder,itemPosition);
                             } else {
                                 //拿到对应item,回调.
                                 getDatas().get(itemPosition).onClick();
@@ -67,7 +67,7 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
                     //检查并得到真实的position
                     int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
-                        return mOnItemLongClickListener.onItemLongClick(holder, getDatas().get(itemPosition), itemPosition);
+                        return mOnItemLongClickListener.onItemLongClick(holder,itemPosition);
                     }
                 }
                 return false;
