@@ -8,6 +8,7 @@ import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeItemWapper;
+import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,8 @@ public class ItemHelperFactory {
         }
         int size = list.size();
         ArrayList<BaseItem> treeItemList = new ArrayList<>();
-        try {
-            for (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
+            try {
                 BaseItemData itemData = list.get(i);
                 Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(itemData.getViewItemType());
                 if (itemClass != null) {
@@ -38,9 +39,9 @@ public class ItemHelperFactory {
                     item.setData(itemData);
                     treeItemList.add(item);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return treeItemList;
     }
@@ -57,8 +58,9 @@ public class ItemHelperFactory {
         }
         int size = list.size();
         ArrayList<BaseItem> baseItemList = new ArrayList<>();
-        try {
-            for (int i = 0; i < size; i++) {
+
+        for (int i = 0; i < size; i++) {
+            try {
                 D o = list.get(i);
 
                 if (iClass != null) {
@@ -66,9 +68,9 @@ public class ItemHelperFactory {
                     baseItem.setData(o);
                     baseItemList.add(baseItem);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return baseItemList;
     }
@@ -80,11 +82,11 @@ public class ItemHelperFactory {
         }
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         int size = list.size();
-        try {
-            for (int i = 0; i < size; i++) {
+
+        for (int i = 0; i < size; i++) {
+            try {
                 BaseItemData itemData = list.get(i);
                 int viewItemType = itemData.getViewItemType();
-
                 TreeItem treeItem;
                 //判断是否是TreeItem的子类
                 if (ItemConfig.getTreeViewHolderType(viewItemType) != null) {
@@ -98,9 +100,9 @@ public class ItemHelperFactory {
                 treeItem.setData(itemData);
                 treeItem.setParentItem(treeParentItem);
                 treeItemList.add(treeItem);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return treeItemList;
     }
@@ -112,13 +114,46 @@ public class ItemHelperFactory {
         int size = list.size();
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            D itemData = list.get(i);
             try {
+                D itemData = list.get(i);
                 if (iClass != null) {
                     TreeItem<D> treeItem = iClass.newInstance();
                     treeItem.setData(itemData);
                     treeItem.setParentItem(treeParentItem);
                     treeItemList.add(treeItem);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return treeItemList;
+    }
+
+    /**
+     * 创建排序List
+     *
+     * @param list
+     * @param iClass
+     * @param sortKey
+     * @param treeParentItem
+     * @param <D>
+     * @return
+     */
+    public static <D> List<TreeItem> createTreeSortList(List<D> list, Class<? extends TreeSortItem> iClass, Object sortKey, TreeItemGroup treeParentItem) {
+        if (null == list) {
+            return null;
+        }
+        int size = list.size();
+        ArrayList<TreeItem> treeItemList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            try {
+                D itemData = list.get(i);
+                if (iClass != null) {
+                    TreeSortItem<D> sortItem = iClass.newInstance();
+                    sortItem.setData(itemData);
+                    sortItem.setSortKey(sortKey);
+                    sortItem.setParentItem(treeParentItem);
+                    treeItemList.add(sortItem);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
