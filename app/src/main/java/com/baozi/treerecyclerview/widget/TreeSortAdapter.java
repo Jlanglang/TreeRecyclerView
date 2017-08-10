@@ -141,7 +141,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             return manager.getItemPosition(treeItem);
         }
 
-        private void updateSorts(List<TreeItem> treeItems) {
+        public void updateSorts(List<TreeItem> treeItems) {
             int size = treeItems.size();
             for (int i = 0; i < size; i++) {
                 TreeItem treeItem = treeItems.get(i);
@@ -151,7 +151,13 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             }
         }
 
-        private void updataSort(int position, TreeItem treeItem) {
+        public void updataSort(TreeItem treeItem) {
+            if (treeItem instanceof TreeSortItem) {
+                sortMap.put(((TreeSortItem) treeItem).getSortKey(), getItemPosition(treeItem));
+            }
+        }
+
+        public void updataSort(int position, TreeItem treeItem) {
             if (treeItem instanceof TreeSortItem) {
                 sortMap.put(((TreeSortItem) treeItem).getSortKey(), position);
             }
