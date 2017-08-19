@@ -42,5 +42,6 @@
         <activity android:name=".activity.TestListAativity"/>
         <activity android:name=".activity.ShopTabListActivity"/>
         <activity android:name=".activity.NewsActivity"/>
+        <activity android:name=".activity.SortActivity"/>
     </application>
 </manifest>

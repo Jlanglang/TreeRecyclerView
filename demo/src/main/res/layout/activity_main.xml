@@ -30,4 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="新闻混合列表"/>
+    <Button
+        android:id="@+id/bt_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="索引列表"/>
 </LinearLayout>

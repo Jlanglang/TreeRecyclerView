@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baozi.treerecyclerview.adpater.ItemManager;
 import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeItemMangerInterface;
 import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeLayout;
 import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeMode;
@@ -25,7 +26,7 @@ import java.util.Set;
  */
 
 public class SwipeWrapper extends BaseWrapper {
-
+    private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
     private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
     private SparseArray<SwipeItem> swipeItemSparseArray = new SparseArray<>();
@@ -34,22 +35,6 @@ public class SwipeWrapper extends BaseWrapper {
         super(adapter);
     }
 
-    public void updateSwipeDatas(List<Object> list) {
-        if (list == null || list.size() == 0) {
-            return;
-        }
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) instanceof SwipeItem) {
-                swipeItemSparseArray.put(i, (SwipeItem) list.get(i));
-            }
-        }
-    }
-
-    @Override
-    public void setDatas(List datas) {
-        super.setDatas(datas);
-        updateSwipeDatas(datas);
-    }
 
     public SwipeItemMangerInterface getSwipeManger() {
         if (mSwipeManger == null) {
@@ -64,7 +49,7 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == -666) {
+        if (viewType == SWIPE_ITEM) {
             ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
             viewHolder.itemView.setOnClickListener(null);
 
@@ -81,14 +66,21 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public int getItemViewType(int position) {
-        return swipeItemSparseArray.get(position) == null ? super.getItemViewType(position) : -666;
+        if (swipeItemSparseArray.get(position) == null) {
+            Object o = getDatas().get(position);
+            if (o instanceof SwipeItem) {
+                swipeItemSparseArray.put(position, (SwipeItem) o);
+                return SWIPE_ITEM;
+            }
+            return super.getItemViewType(position);
+        }
+        return SWIPE_ITEM;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Object data = getData(position);
-        if (data instanceof SwipeItem) {
-            SwipeItem swipeItem = (SwipeItem) data;
+        SwipeItem swipeItem = swipeItemSparseArray.get(position);
+        if (swipeItem != null) {
             SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
             checkSwipeLayout(holder, swipeItem);
             getSwipeManger().bind(swipeLayout, swipeItem.getSwipeLayoutId(), position);
@@ -119,8 +111,9 @@ public class SwipeWrapper extends BaseWrapper {
         });
     }
 
+
     /**
-     * SwipeItemMangerImpl is a helper class to help all the adapters to maintain open status.
+     * Swipe    ItemMangerImpl is a helper class to help all the adapters to maintain open status.
      */
     private class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         private SwipeMode mode = SwipeMode.Single;

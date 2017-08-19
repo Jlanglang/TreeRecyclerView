@@ -12,7 +12,8 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  */
 
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
-
+    private static final int HEAD_ITEM = 1000;
+    private static final int FOOT_ITEM = 2000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();
 
@@ -30,7 +31,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             }
         });
     }
-
 
 
     @Override
@@ -68,11 +68,11 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
 
     public void addHeaderView(View view) {
-        mHeaderViews.put(mHeaderViews.size(), view);
+        mHeaderViews.put(HEAD_ITEM + mHeaderViews.size(), view);
     }
 
     public void addFootView(View view) {
-        mFootViews.put(Integer.MAX_VALUE - mFootViews.size(), view);
+        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
     }
 
     private boolean isHeaderViewPos(int position) {

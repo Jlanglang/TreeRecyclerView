@@ -11,9 +11,9 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  */
 
 public class LoadingWrapper<T> extends BaseWrapper<T> {
-    public static final int ITEM_TYPE_EMPTY = Integer.MIN_VALUE;
-    private static final int ITEM_TYPE_LOADING = Integer.MIN_VALUE + 1;
-    private static final int ITEM_LOAD_MORE = Integer.MIN_VALUE + 2;
+    private static final int ITEM_TYPE_EMPTY = 3000;
+    private static final int ITEM_TYPE_LOADING = 4000;
+    private static final int ITEM_LOAD_MORE = 5000;
     private View mEmptyView;
     private int mEmptyLayoutId;
 

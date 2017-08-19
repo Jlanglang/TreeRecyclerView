@@ -38,7 +38,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         return manageWapper;
     }
 
-    private class TreeSortManageWapper extends ItemManager<TreeItem> {
+    public class TreeSortManageWapper extends ItemManager<TreeItem> {
         ItemManager<TreeItem> manager;
 
         public TreeSortManageWapper(BaseRecyclerAdapter adapter, ItemManager<TreeItem> manager) {
@@ -69,13 +69,6 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         public void addItems(int i, List<TreeItem> list) {
             manager.addItems(i, list);
             updateSorts(list);
-//            int size = list.size();
-//            for (int x = 0; x < size; x++) {
-//                TreeItem item = list.get(x);
-//                if (item instanceof SortTreeItem) {
-//                    sortMap.put(((SortTreeItem) item).getSortKey(), manager.getItemPosition(item));
-//                }
-//            }
         }
 
         @Override
@@ -92,9 +85,6 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         public void removeItem(TreeItem treeItem) {
             manager.removeItem(treeItem);
             updataSort(getItemPosition(treeItem), treeItem);
-//            if (treeItem instanceof SortTreeItem) {
-//                sortMap.remove(((SortTreeItem) treeItem).getSortKey());
-//            }
         }
 
         @Override
@@ -122,22 +112,12 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         public void replaceItem(int i, TreeItem treeItem) {
             manager.replaceItem(i, treeItem);
             updataSort(i, treeItem);
-//            if (treeItem instanceof SortTreeItem) {
-//                sortMap.put(((SortTreeItem) treeItem).getSortKey(), i);
-//            }
         }
 
         @Override
         public void replaceAllItem(List<TreeItem> list) {
             manager.replaceAllItem(list);
             updateSorts(list);
-//            int size = list.size();
-//            for (int i = 0; i < size; i++) {
-//                TreeItem item = list.get(i);
-//                if (item instanceof SortTreeItem) {
-//                    sortMap.put(((SortTreeItem) item).getSortKey(), manager.getItemPosition(item));
-//                }
-//            }
         }
 
         @Override

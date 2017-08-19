@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * @author jlanglang  2017/7/5 10:22
- * @版本 2.0 复杂的item,如新闻,朋友圈.
+ * @版本 2017-8-19;有点勉强,不建议这样使用- -
  */
 
 public class NewsActivity extends AppCompatActivity {
@@ -88,7 +88,7 @@ public class NewsActivity extends AppCompatActivity {
             newsItemBean.setFootBean(newsFootBean);
             newsItemBeens.add(newsItemBean);
         }
-        
+
         List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(newsItemBeens, null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
         treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
