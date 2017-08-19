@@ -22,8 +22,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
     @Override
     public void setDatas(List<TreeItem> datas) {
         super.setDatas(datas);
-        List<TreeItem> treeItems = getDatas();
-        getItemManager().updateSorts(treeItems);
+        getItemManager().updateSorts(getDatas());
     }
 
 
@@ -39,7 +38,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         return manageWapper;
     }
 
-    public class TreeSortManageWapper extends ItemManager<TreeItem> {
+    private class TreeSortManageWapper extends ItemManager<TreeItem> {
         ItemManager<TreeItem> manager;
 
         public TreeSortManageWapper(BaseRecyclerAdapter adapter, ItemManager<TreeItem> manager) {
@@ -77,6 +76,16 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
 //                    sortMap.put(((SortTreeItem) item).getSortKey(), manager.getItemPosition(item));
 //                }
 //            }
+        }
+
+        @Override
+        public void setAdapter(BaseRecyclerAdapter<TreeItem> adapter) {
+            manager.setAdapter(adapter);
+        }
+
+        @Override
+        public BaseRecyclerAdapter getAdapter() {
+            return manager.getAdapter();
         }
 
         @Override

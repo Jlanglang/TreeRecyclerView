@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater.wapper;
+package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.util.SparseArray;
 import android.view.View;
@@ -11,12 +11,12 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  * Created by baozi on 2017/4/30.
  */
 
-public class HeaderAndFootWapper<T> extends BaseWapper<T> {
+public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();
 
-    public HeaderAndFootWapper(BaseRecyclerAdapter<T> adapter) {
+    public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
         mAdapter.setCheckItem(new CheckItem() {
             @Override
@@ -38,7 +38,7 @@ public class HeaderAndFootWapper<T> extends BaseWapper<T> {
         if (mHeaderViews.get(viewType) != null) {
             return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
         } else if (mFootViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder( mFootViews.get(viewType));
+            return ViewHolder.createViewHolder(mFootViews.get(viewType));
         }
         return mAdapter.onCreateViewHolder(parent, viewType);
     }

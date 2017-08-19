@@ -112,10 +112,10 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
         }
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        return getDatas().get(position).getLayoutId();
-    }
+//    @Override
+//    public int getItemViewType(int position) {
+//        return getDatas().get(position).getLayoutId();
+//    }
 
     public ItemManager<TreeItem> getItemManager() {
         if (mItemManager == null) {

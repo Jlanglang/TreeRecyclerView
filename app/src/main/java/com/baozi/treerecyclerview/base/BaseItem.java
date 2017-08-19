@@ -42,6 +42,7 @@ public abstract class BaseItem<D> {
         return initLayoutId();
     }
 
+
     /**
      * 该条目的布局id
      *

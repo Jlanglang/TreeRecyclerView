@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater.wapper;
+package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -13,11 +13,11 @@ import java.util.List;
  * Created by baozi on 2017/5/16.
  */
 
-public class BaseWapper<T> extends BaseRecyclerAdapter<T> {
+public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
 
     protected BaseRecyclerAdapter<T> mAdapter;
 
-    public BaseWapper(BaseRecyclerAdapter<T> adapter) {
+    public BaseWrapper(BaseRecyclerAdapter<T> adapter) {
         mAdapter = adapter;
         mAdapter.getItemManager().setAdapter(this);
     }

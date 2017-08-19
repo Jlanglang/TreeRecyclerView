@@ -16,8 +16,6 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  */
 public class ItemRecyclerAdapter<T extends BaseItem> extends
         BaseRecyclerAdapter<T> {
-//    protected OnItemClickLitener mOnItemClickListener;
-//    protected OnItemLongClickListener mOnItemLongClickListener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
