@@ -12,6 +12,9 @@ import com.baozi.demo.R;
 import com.baozi.demo.moudle.sortList.IndexBar;
 import com.baozi.demo.moudle.sortList.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
+import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
+import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -20,14 +23,16 @@ import java.util.List;
 
 /**
  * Created by baozi on 2017/8/19.
+ * 在SortAcitivity的代码逻辑上,加少部分代码实现
  */
 
-public class SortActivity extends AppCompatActivity {
+public class SwipeSortActivity extends AppCompatActivity {
     private static final String[] LETTERS = new String[]{"A", "B", "C", "D",
             "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private TreeSortAdapter mTreeSortAdapter;
     private LinearLayoutManager mLinearLayoutManager;
+    private SwipeWrapper mSwipeWrapper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,10 +60,17 @@ public class SortActivity extends AppCompatActivity {
                 outRect.bottom = 2;
             }
         });
+        //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        //一行包装成侧滑删除列表
+        mSwipeWrapper = new SwipeWrapper(mTreeSortAdapter);
+        //包装头尾
+        HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mSwipeWrapper);
+        //包装加载
+        LoadingWrapper loadingWrapper = new LoadingWrapper<>(headerAndFootWrapper);
 
-        rlcontent.setAdapter(mTreeSortAdapter);
+        rlcontent.setAdapter(mSwipeWrapper);
         initData();
     }
 
@@ -71,6 +83,6 @@ public class SortActivity extends AppCompatActivity {
             sortGroupItem.setData(5);
             groupItems.add(sortGroupItem);
         }
-        mTreeSortAdapter.getItemManager().replaceAllItem(groupItems);
+        mSwipeWrapper.getItemManager().replaceAllItem(groupItems);
     }
 }

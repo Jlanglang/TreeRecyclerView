@@ -1,11 +1,15 @@
 package com.baozi.treerecyclerview.adpater;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,7 @@ import java.util.List;
  * item之间有子父级关系,
  */
 
-public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
+public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     private TreeRecyclerViewType type;
 
@@ -75,15 +79,6 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
         });
     }
 
-    private boolean checkIsTreeItemGroup(TreeItem baseItem) {
-        if (type != TreeRecyclerViewType.SHOW_ALL) {
-            return true;
-        } else if (baseItem instanceof TreeItemGroup) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public List<TreeItem> getDatas() {
         return super.getDatas();
@@ -112,11 +107,6 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
         }
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        return getDatas().get(position).getLayoutId();
-//    }
-
     public ItemManager<TreeItem> getItemManager() {
         if (mItemManager == null) {
             mItemManager = new TreeItemManageImpl(this);
@@ -128,6 +118,46 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
         this.mItemManager = itemManage;
     }
 
+    @Override
+    public int getLayoutId(int position) {
+        return getDatas().get(position).getLayoutId();
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        TreeItem t = getDatas().get(position);
+        checkItemManage(t);
+        t.onBindViewHolder(holder);
+    }
+
+    private void checkItemManage(TreeItem item) {
+        if (item.getItemManager() == null) {
+            item.setItemManager(getItemManager());
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, TreeItem item, int position) {
+
+    }
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    TreeItem baseItem = getDatas().get(position);
+                    if (baseItem.getSpanSize() == 0) {
+                        return gridLayoutManager.getSpanCount();
+                    }
+                    return baseItem.getSpanSize();
+                }
+            });
+        }
+    }
     /**
      * 相应RecyclerView的点击事件 展开或关闭某节点
      */
@@ -148,7 +178,7 @@ public class TreeRecyclerAdapter extends ItemRecyclerAdapter<TreeItem> {
 
     private class TreeItemManageImpl extends ItemManager<TreeItem> {
 
-        public TreeItemManageImpl(ItemRecyclerAdapter<TreeItem> adapter) {
+        TreeItemManageImpl(BaseRecyclerAdapter<TreeItem> adapter) {
             super(adapter);
         }
 

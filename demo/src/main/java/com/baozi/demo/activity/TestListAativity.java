@@ -33,7 +33,7 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testlist);
-        ItemConfig.addHolderType(102, ContentImageItem.class);
+        ItemConfig.addTreeHolderType(102, ContentImageItem.class);
         ItemConfig.addTreeHolderType(100, ContentGroupItem.class);
         ItemConfig.addTreeHolderType(101, SelectionImageItem.class);
         ItemConfig.addTreeHolderType(103, SelectionTextItem.class);

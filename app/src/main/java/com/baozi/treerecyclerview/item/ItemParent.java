@@ -1,6 +1,5 @@
 package com.baozi.treerecyclerview.item;
 
-import com.baozi.treerecyclerview.base.BaseItem;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  * @版本 2.0
  * @Change
  */
-interface TreeParent {
+interface ItemParent {
     /**
      * 是否允许展开
      *
@@ -32,6 +31,6 @@ interface TreeParent {
      *
      * @return
      */
-    List<? extends BaseItem> getChilds();
+    List<? extends TreeItem> getChilds();
 
 }

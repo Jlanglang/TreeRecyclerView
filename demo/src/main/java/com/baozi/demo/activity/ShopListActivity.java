@@ -24,7 +24,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
-import com.baozi.treerecyclerview.base.BaseItem;
+//import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -102,7 +102,7 @@ public class ShopListActivity extends AppCompatActivity {
                 StoreBean data = titletItem.getData();
                 if (titletItem.isChildCheck()) {
                     ArrayList<ShopListBean> shopListBeens = new ArrayList<>();
-                    List<? extends BaseItem> childs = titletItem.getSelectItems();
+                    List<? extends TreeItem> childs = titletItem.getSelectItems();
                     for (int j = 0; j < childs.size(); j++) {
                         shopListBeens.add((ShopListBean) childs.get(j).getData());
                     }

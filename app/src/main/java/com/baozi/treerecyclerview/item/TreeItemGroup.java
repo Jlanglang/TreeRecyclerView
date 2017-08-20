@@ -11,22 +11,20 @@ import java.util.List;
  * Created by baozi on 2016/12/22.
  * //拥有子集
  * //子集可以是parent,也可以是child
+ * //可展开折叠
  */
 
-public abstract class TreeItemGroup<D> extends TreeItem<D>
-        implements TreeParent {
+public abstract class TreeItemGroup<D> extends TreeItem<D> {
+
     /**
      * 持有的子item
      */
     private List<TreeItem> childs;
+
     /**
      * 是否展开
      */
     private boolean isExpand;
-
-    public TreeItemGroup() {
-
-    }
 
     public boolean isExpand() {
         return isExpand;
@@ -54,19 +52,9 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         }
     }
 
-    public void setData(D data) {
-        super.setData(data);
-        childs = initChildsList(data);
-    }
-
-    public void setChilds(List<TreeItem> childs) {
-        this.childs = childs;
-    }
-
     /**
      * 展开
      */
-    @Override
     public void onExpand() {
         isExpand = true;
         int itemPosition = getItemManager().getItemPosition(this);
@@ -77,7 +65,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
     /**
      * 折叠
      */
-    @Override
     public void onCollapse() {
         isExpand = false;
         getItemManager().removeItems(getExpandChilds());
@@ -93,15 +80,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         return true;
     }
 
-    /**
-     * 获得自己的childs.
-     *
-     * @return
-     */
-    @Nullable
-    public List<TreeItem> getChilds() {
-        return childs;
-    }
 
     /**
      * 获得所有childs,包括子item的childs
@@ -116,6 +94,16 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
     }
 
+
+    public void setData(D data) {
+        super.setData(data);
+        childs = initChildsList(data);
+    }
+
+    public void setChilds(List<TreeItem> childs) {
+        this.childs = childs;
+    }
+
     /**
      * 获得所有childs,包括下下....级item的childs
      *
@@ -128,6 +116,17 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         }
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_ALL);
     }
+
+    /**
+     * 获得自己的childs.
+     *
+     * @return
+     */
+    @Nullable
+    public List<TreeItem> getChilds() {
+        return childs;
+    }
+
 
     public int getChildCount() {
         return childs == null ? 0 : childs.size();
@@ -151,8 +150,5 @@ public abstract class TreeItemGroup<D> extends TreeItem<D>
         return false;
     }
 
-    @Override
-    public String getItemName() {
-        return "TreeItemGroup";
-    }
+
 }

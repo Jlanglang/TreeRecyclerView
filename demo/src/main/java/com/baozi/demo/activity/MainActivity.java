@@ -61,5 +61,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.bt_swipe_sort).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SwipeSortActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

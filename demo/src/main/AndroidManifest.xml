@@ -43,5 +43,6 @@
         <activity android:name=".activity.ShopTabListActivity"/>
         <activity android:name=".activity.NewsActivity"/>
         <activity android:name=".activity.SortActivity"/>
+        <activity android:name=".activity.SwipeSortActivity"/>
     </application>
 </manifest>

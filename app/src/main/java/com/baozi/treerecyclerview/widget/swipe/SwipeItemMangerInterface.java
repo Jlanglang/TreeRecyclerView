@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater.wrapper.swipe;
+package com.baozi.treerecyclerview.widget.swipe;
 
 import java.util.List;
 

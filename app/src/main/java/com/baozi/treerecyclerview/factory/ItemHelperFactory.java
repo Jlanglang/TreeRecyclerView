@@ -3,11 +3,11 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
-import com.baozi.treerecyclerview.base.BaseItem;
+//import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
-import com.baozi.treerecyclerview.item.TreeItemWapper;
+//import com.baozi.treerecyclerview.item.TreeItemWapper;
 import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
@@ -18,62 +18,6 @@ import java.util.List;
  */
 
 public class ItemHelperFactory {
-    /**
-     * 确定item的class类型,并且添加到了itemConfig,用该方法创建List<BaseItem>
-     *
-     * @param list
-     * @return
-     */
-    public static List<BaseItem> createItemList(List<BaseItemData> list) {
-        if (null == list) {
-            return null;
-        }
-        int size = list.size();
-        ArrayList<BaseItem> treeItemList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            try {
-                BaseItemData itemData = list.get(i);
-                Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(itemData.getViewItemType());
-                if (itemClass != null) {
-                    BaseItem item = itemClass.newInstance();
-                    item.setData(itemData);
-                    treeItemList.add(item);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return treeItemList;
-    }
-
-    /**
-     * 不确定item的class类型,用该方法创建List<BaseItem>
-     *
-     * @param list
-     * @return
-     */
-    public static <D> List<BaseItem> createItemList(List<D> list, Class<BaseItem> iClass) {
-        if (null == list) {
-            return null;
-        }
-        int size = list.size();
-        ArrayList<BaseItem> baseItemList = new ArrayList<>();
-
-        for (int i = 0; i < size; i++) {
-            try {
-                D o = list.get(i);
-
-                if (iClass != null) {
-                    BaseItem baseItem = iClass.newInstance();
-                    baseItem.setData(o);
-                    baseItemList.add(baseItem);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return baseItemList;
-    }
 
 
     public static List<TreeItem> createTreeItemList(List<? extends BaseItemData> list, TreeItemGroup treeParentItem) {
@@ -92,14 +36,12 @@ public class ItemHelperFactory {
                 if (ItemConfig.getTreeViewHolderType(viewItemType) != null) {
                     Class<? extends TreeItem> treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
                     treeItem = treeItemClass.newInstance();
-                } else {
-                    Class<? extends BaseItem> baseItmeClass = ItemConfig.getViewHolderType(viewItemType);
-                    //判断是否是BaseItem的子类
-                    treeItem = new TreeItemWapper(baseItmeClass.newInstance());
+                    treeItem.setData(itemData);
+                    treeItem.setParentItem(treeParentItem);
+                    treeItemList.add(treeItem);
                 }
-                treeItem.setData(itemData);
-                treeItem.setParentItem(treeParentItem);
-                treeItemList.add(treeItem);
+//                } else {
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -162,24 +104,6 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-    /**
-     * 确定item的class类型,并且添加到了itemConfig,用该方法创建BaseItem
-     *
-     * @return
-     */
-    public static <D extends BaseItemData> BaseItem createBaseItem(D d) {
-        BaseItem baetItem = null;
-        try {
-            Class<? extends BaseItem> itemClass = ItemConfig.getViewHolderType(d.getViewItemType());
-            if (itemClass != null) {
-                baetItem = itemClass.newInstance();
-                baetItem.setData(d);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return baetItem;
-    }
 
     /**
      * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
@@ -189,9 +113,9 @@ public class ItemHelperFactory {
     public static <D extends BaseItemData> TreeItem createTreeItem(D d) {
         TreeItem treeItem = null;
         try {
-            Class<? extends BaseItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
+            Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
             if (itemClass != null) {
-                treeItem = (TreeItem) itemClass.newInstance();
+                treeItem = itemClass.newInstance();
                 treeItem.setData(d);
             }
         } catch (Exception e) {
@@ -202,10 +126,10 @@ public class ItemHelperFactory {
 
 
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup treeItemGroup, TreeRecyclerViewType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerViewType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
-        List allChild = treeItemGroup.getChilds();
-        int childCount = treeItemGroup.getChildCount();
+        List allChild = itemGroup.getChilds();
+        int childCount = itemGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
             //下级
             TreeItem baseItem = (TreeItem) allChild.get(i);

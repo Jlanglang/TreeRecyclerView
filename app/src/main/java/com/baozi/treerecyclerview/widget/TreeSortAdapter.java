@@ -1,6 +1,6 @@
 package com.baozi.treerecyclerview.widget;
 
-import com.baozi.treerecyclerview.adpater.ItemManager;
+import com.baozi.treerecyclerview.manager.ItemManager;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.item.TreeItem;

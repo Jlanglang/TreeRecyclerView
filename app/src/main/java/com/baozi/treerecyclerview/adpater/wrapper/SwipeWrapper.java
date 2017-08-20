@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.adpater.ItemManager;
-import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeItemMangerInterface;
-import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeLayout;
-import com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeMode;
+import com.baozi.treerecyclerview.item.SwipeItem;
+import com.baozi.treerecyclerview.widget.swipe.SwipeItemMangerInterface;
+import com.baozi.treerecyclerview.widget.swipe.SwipeLayout;
+import com.baozi.treerecyclerview.widget.swipe.SwipeMode;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
@@ -29,7 +29,7 @@ public class SwipeWrapper extends BaseWrapper {
     private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
     private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
-    private SparseArray<SwipeItem> swipeItemSparseArray = new SparseArray<>();
+    private SparseArray<Integer> swipeItemSparseArray = new SparseArray<>();
 
     public SwipeWrapper(BaseRecyclerAdapter adapter) {
         super(adapter);
@@ -49,14 +49,17 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == SWIPE_ITEM) {
+        int i = swipeItemSparseArray.get(viewType, -1);
+        if (i != -1) {
             ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
             viewHolder.itemView.setOnClickListener(null);
 
             SwipeLayout swipeLayout = new SwipeLayout(parent.getContext());
-            swipeLayout.setLayoutParams(new SwipeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            swipeLayout.setLayoutParams(viewHolder.itemView.getLayoutParams());
             swipeLayout.addView(viewHolder.itemView);
+
             ViewHolder swipeViewHolder = ViewHolder.createViewHolder(swipeLayout);
+
             swipeLayoutHashMap.put(swipeViewHolder, swipeLayout);
             onBindViewHolderClick(swipeViewHolder);
             return swipeViewHolder;
@@ -66,24 +69,26 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public int getItemViewType(int position) {
-        if (swipeItemSparseArray.get(position) == null) {
-            Object o = getDatas().get(position);
+        int itemViewType = super.getItemViewType(position);
+        int i = swipeItemSparseArray.get(itemViewType, -1);
+        if (i == -1) {//说明该type不存在;
+            Object o = getData(position);
             if (o instanceof SwipeItem) {
-                swipeItemSparseArray.put(position, (SwipeItem) o);
-                return SWIPE_ITEM;
+                swipeItemSparseArray.put(itemViewType, SWIPE_ITEM + swipeItemSparseArray.size());
             }
-            return super.getItemViewType(position);
         }
-        return SWIPE_ITEM;
+        return super.getItemViewType(position);
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SwipeItem swipeItem = swipeItemSparseArray.get(position);
-        if (swipeItem != null) {
+        Object data = getData(position);
+        if (data instanceof SwipeItem) {
             SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
-            checkSwipeLayout(holder, swipeItem);
-            getSwipeManger().bind(swipeLayout, swipeItem.getSwipeLayoutId(), position);
+            checkSwipeLayout(holder, (SwipeItem) data);
+            getSwipeManger().bind(swipeLayout, ((SwipeItem) data).getSwipeLayoutId(), position);
+            ((SwipeItem) data).onBindSwipeView(holder, position);
         }
         super.onBindViewHolder(holder, position);
     }
@@ -93,7 +98,7 @@ public class SwipeWrapper extends BaseWrapper {
         Map<SwipeLayout.DragEdge, View> dragEdgeMap = view.getDragEdgeMap();
         if (dragEdgeMap.get(data.getDragEdge()) == null) {
             View inflate = LayoutInflater.from(view.getContext()).inflate(data.getSwipeLayoutId(), null);
-            view.addDrag(data.getDragEdge(), inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            view.addDrag(data.getDragEdge(), inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
     }
 

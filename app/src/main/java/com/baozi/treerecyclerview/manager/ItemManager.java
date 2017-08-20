@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater;
+package com.baozi.treerecyclerview.manager;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 
@@ -12,7 +12,7 @@ public abstract class ItemManager<T> {
         mAdapter = adapter;
     }
 
-    public BaseRecyclerAdapter getAdapter() {
+    public BaseRecyclerAdapter<T> getAdapter() {
         return mAdapter;
     }
 

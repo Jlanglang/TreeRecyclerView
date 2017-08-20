@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview.adpater.wrapper.swipe;
+package com.baozi.treerecyclerview.widget.swipe;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -26,8 +26,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeLayout.ShowMode.LayDown;
-import static com.baozi.treerecyclerview.adpater.wrapper.swipe.SwipeLayout.ShowMode.PullOut;
+import static com.baozi.treerecyclerview.widget.swipe.SwipeLayout.ShowMode.LayDown;
+import static com.baozi.treerecyclerview.widget.swipe.SwipeLayout.ShowMode.PullOut;
 
 public class SwipeLayout extends FrameLayout {
     @Deprecated

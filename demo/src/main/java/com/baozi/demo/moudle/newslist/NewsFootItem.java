@@ -11,7 +11,7 @@ import com.baozi.treerecyclerview.item.TreeItem;
  * @Change
  */
 
-public class NewsFootItem extends TreeItem<NewsItemBean.NewsFootBean>{
+public class NewsFootItem extends TreeItem<NewsItemBean.NewsFootBean> {
 
     @Override
     protected int initLayoutId() {

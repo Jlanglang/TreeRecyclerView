@@ -35,4 +35,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="索引列表"/>
+    <Button
+        android:id="@+id/bt_swipe_sort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="索引加侧滑删除列表"/>
 </LinearLayout>

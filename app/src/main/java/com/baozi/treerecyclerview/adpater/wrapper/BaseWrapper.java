@@ -3,7 +3,7 @@ package com.baozi.treerecyclerview.adpater.wrapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.adpater.ItemManager;
+import com.baozi.treerecyclerview.manager.ItemManager;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 
@@ -74,8 +74,8 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onBind(ViewHolder holder, T t, int position) {
-        mAdapter.onBind(holder, t, position);
+    public void onBindViewHolder(ViewHolder holder, T t, int position) {
+        mAdapter.onBindViewHolder(holder, t, position);
     }
 
     @Override

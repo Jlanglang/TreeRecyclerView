@@ -4,7 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.adpater.ItemManager;
+import com.baozi.treerecyclerview.manager.ItemManageImpl;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        onBind(holder, getDatas().get(position), position);
+        onBindViewHolder(holder, getDatas().get(position), position);
     }
 
     /**
@@ -124,7 +125,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public T getData(int position) {
-        if (position >= 0 && position < getDatas().size()) {
+//        if (position >= 0 && position < getDatas().size()) {
+        if (position > 0) {
             return getDatas().get(position);
         }
         return null;
@@ -137,7 +139,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      */
     public ItemManager<T> getItemManager() {
         if (mItemManager == null) {
-            mItemManager = new ItemManageImpl(this);
+            mItemManager = new ItemManageImpl<T>(this);
         }
         return mItemManager;
     }
@@ -176,82 +178,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     public abstract int getLayoutId(int position);
 
-    public abstract void onBind(ViewHolder holder, T t, int position);
+    public abstract void onBindViewHolder(ViewHolder holder, T t, int position);
 
-    /**
-     * 默认使用 notifyDataChanged();刷新.
-     * 如果使用带动画效果的,条目过多可能会出现卡顿.
-     */
-    private class ItemManageImpl extends ItemManager<T> {
-
-        public ItemManageImpl(BaseRecyclerAdapter<T> adapter) {
-            super(adapter);
-        }
-
-        @Override
-        public void addItem(T item) {
-            getDatas().add(item);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void addItem(int position, T item) {
-            getDatas().add(position, item);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void addItems(List<T> items) {
-            getDatas().addAll(items);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void addItems(int position, List<T> items) {
-            getDatas().addAll(position, items);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void removeItem(T item) {
-            getDatas().remove(item);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void removeItem(int position) {
-            getDatas().remove(position);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void removeItems(List<T> items) {
-            getDatas().removeAll(items);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void replaceItem(int position, T item) {
-            getDatas().set(position, item);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void replaceAllItem(List<T> items) {
-            if (items != null) {
-                setDatas(items);
-                notifyDataChanged();
-            }
-        }
-
-        @Override
-        public T getItem(int position) {
-            return getDatas().get(position);
-        }
-
-        @Override
-        public int getItemPosition(T item) {
-            return getDatas().indexOf(item);
-        }
-    }
 }
