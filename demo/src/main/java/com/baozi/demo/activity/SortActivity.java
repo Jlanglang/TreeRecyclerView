@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.sortList.IndexBar;
 import com.baozi.demo.moudle.sortList.SortGroupItem;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -56,7 +56,7 @@ public class SortActivity extends AppCompatActivity {
             }
         });
         mTreeSortAdapter = new TreeSortAdapter();
-        mTreeSortAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
 
         rlcontent.setAdapter(mTreeSortAdapter);
         initData();

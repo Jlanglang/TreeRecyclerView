@@ -16,7 +16,7 @@ import com.baozi.demo.moudle.testlist.SelectionTextItem;
 import com.baozi.demo.moudle.testlist.bean.TitleBean;
 import com.baozi.demo.moudle.testlist.ContentGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -91,7 +91,7 @@ public class TestListAativity extends AppCompatActivity {
         }
         List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(titleBeens,null);
         TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
-        treeRecyclerAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        treeRecyclerAdapter.setType(TreeRecyclerType.SHOW_ALL);
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
     }

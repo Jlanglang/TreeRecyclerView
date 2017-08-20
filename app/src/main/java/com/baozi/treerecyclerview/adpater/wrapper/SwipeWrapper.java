@@ -2,6 +2,7 @@ package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,7 @@ public class SwipeWrapper extends BaseWrapper {
     private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
     private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
-    private SparseArray<Integer> swipeItemSparseArray = new SparseArray<>();
+    private SparseIntArray swipeItemSparseArray = new SparseIntArray();
 
     public SwipeWrapper(BaseRecyclerAdapter adapter) {
         super(adapter);

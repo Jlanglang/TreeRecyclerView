@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.factory;
 
 import android.support.annotation.NonNull;
 
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 //import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -124,9 +124,15 @@ public class ItemHelperFactory {
         return treeItem;
     }
 
-
+    /**
+     * 根据TreeRecyclerType获取子item集合,不包含TreeItemGroup自身
+     *
+     * @param itemGroup
+     * @param type
+     * @return
+     */
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerViewType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
         List allChild = itemGroup.getChilds();
         int childCount = itemGroup.getChildCount();
@@ -160,7 +166,7 @@ public class ItemHelperFactory {
     }
 
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerViewType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
         int childCount = treeItems.size();
         for (int i = 0; i < childCount; i++) {

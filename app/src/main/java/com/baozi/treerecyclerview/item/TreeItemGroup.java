@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.item;
 
 import android.support.annotation.Nullable;
 
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 
 import java.util.List;
@@ -91,7 +91,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (getChilds() == null) {
             return null;
         }
-        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_EXPAND);
+        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_EXPAND);
     }
 
 
@@ -114,7 +114,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (getChilds() == null) {
             return null;
         }
-        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerViewType.SHOW_ALL);
+        return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_ALL);
     }
 
     /**

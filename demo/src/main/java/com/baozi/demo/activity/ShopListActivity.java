@@ -21,7 +21,7 @@ import com.baozi.demo.moudle.shoplist.ShopGroupItem;
 import com.baozi.demo.moudle.shoplist.bean.ShopListBean;
 import com.baozi.demo.moudle.shoplist.bean.StoreBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
 //import com.baozi.treerecyclerview.base.BaseItem;
@@ -69,7 +69,7 @@ public class ShopListActivity extends AppCompatActivity {
         List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(storeBean, ShopGroupItem.class, null);
 
         mAdapter = new TreeRecyclerAdapter();
-        mAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        mAdapter.setType(TreeRecyclerType.SHOW_ALL);
         mAdapter.setDatas(itemList);
         //包装成可以添加头部和尾部的Adapter
         HeaderAndFootWrapper<TreeItem> headerAndFootWapper = new HeaderAndFootWrapper<TreeItem>(mAdapter) {

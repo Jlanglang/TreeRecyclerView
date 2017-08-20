@@ -3,15 +3,20 @@ package com.baozi.demo.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.sortList.IndexBar;
 import com.baozi.demo.moudle.sortList.SortGroupItem;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.demo.moudle.testlist.ContentGroupItem;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
@@ -60,16 +65,37 @@ public class SwipeSortActivity extends AppCompatActivity {
                 outRect.bottom = 2;
             }
         });
+        //需求初定:好友列表
+//        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+//        treeRecyclerAdapter.setDatas(new ContentGroupItem());
+        //第一次修改:添加索引
+        //ContentGroupItem换成继承TreeSortItem
+        //TreeSortAdapter继承TreeRecyclerAdapter.因为索引的item,一般是group类型.父容器
+//        TreeSortAdapter sortAdapter = new TreeSortAdapter();
+//        sortAdapter.setDatas(new ContentGroupItem());
+//        //第二次修改:添加下拉刷新,上啦加载
+//        //加载wapper
+//        //需和网络请求绑定
+//        LoadingWrapper<TreeItem> loadingWrapper = new LoadingWrapper<>(sortAdapter);
+//        //第三次修改:添加侧滑菜单删除
+//        //需要侧滑删除的item,实现SwipeItem接口.
+//        SwipeWrapper swipeWrapper = new SwipeWrapper(loadingWrapper);
+//        //还有其他的,也可以封装一个headItem,或者footItem,
+//        HeaderAndFootWrapper<TreeItem> headerAndFootWrapper = new HeaderAndFootWrapper(swipeWrapper);
+//        //....wrapper,item的种类会逐渐丰富.只是设计合理.还怕需求和加功能吗
+
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
-        mTreeSortAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
-        //一行包装成侧滑删除列表
-        mSwipeWrapper = new SwipeWrapper(mTreeSortAdapter);
-        //包装头尾
-        HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mSwipeWrapper);
-        //包装加载
-        LoadingWrapper loadingWrapper = new LoadingWrapper<>(headerAndFootWrapper);
-
+        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
+        HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
+        //添加头部View1
+        TextView headView1 = new TextView(this);
+        headView1.setText("headView");
+        headView1.setGravity(Gravity.CENTER);
+        headView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+        headerAndFootWrapper.addHeaderView(headView1);
+        //包装成侧滑删除列表
+        mSwipeWrapper = new SwipeWrapper(headerAndFootWrapper);
         rlcontent.setAdapter(mSwipeWrapper);
         initData();
     }

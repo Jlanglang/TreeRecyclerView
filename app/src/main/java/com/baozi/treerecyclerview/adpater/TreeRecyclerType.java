@@ -1,6 +1,6 @@
 package com.baozi.treerecyclerview.adpater;
 
-public enum TreeRecyclerViewType {
+public enum TreeRecyclerType {
     /**
      * 显示所有,不可展开折叠
      * 适用场景,多级的data数据展示,多type布局.

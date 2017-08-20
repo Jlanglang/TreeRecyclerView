@@ -14,7 +14,7 @@ import com.baozi.demo.moudle.shoptablist.bean.ShopTabBean;
 import com.baozi.demo.moudle.shoptablist.bean.ShopTabContentBean;
 //import com.baozi.treerecyclerview.adpater.ItemRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerViewType;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -69,7 +69,7 @@ public class ShopTabListActivity extends Activity {
 
         mTabAdapter = new TreeRecyclerAdapter();
         mTabAdapter.setDatas(new ArrayList<TreeItem>(mTabItemList));
-        mTabAdapter.setType(TreeRecyclerViewType.SHOW_ALL);
+        mTabAdapter.setType(TreeRecyclerType.SHOW_ALL);
 
         mTabRecyclerView = (RecyclerView) findViewById(R.id.rl_tab);
         mTabRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {

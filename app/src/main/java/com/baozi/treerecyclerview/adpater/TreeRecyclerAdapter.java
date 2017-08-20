@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
-    private TreeRecyclerViewType type;
+    private TreeRecyclerType type;
 
     private ItemManager<TreeItem> mItemManager;
 
@@ -40,8 +40,8 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                         //拿到BaseItem
                         TreeItem item = getDatas().get(itemPosition);
                         //展开,折叠和item点击不应该同时响应事件.
-                        //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerViewType.SHOW_ALL
-                        if (type != TreeRecyclerViewType.SHOW_ALL && item instanceof TreeItemGroup) {
+                        //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
+                        if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup) {
                             //展开,折叠
                             expandOrCollapse(((TreeItemGroup) item));
                         } else {
@@ -93,6 +93,16 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         assembleItems(items);
     }
 
+    public void setDatas(TreeItemGroup treeItemGroup) {
+        if (null == treeItemGroup) {
+            return;
+        }
+        getDatas().clear();
+        ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(treeItemGroup, type);
+        childItemsWithType.add(0, treeItemGroup);
+        assembleItems(childItemsWithType);
+    }
+
     /**
      * 对初始的一级items进行遍历,将每个item的childs拿出来,进行組合。
      *
@@ -137,9 +147,10 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, TreeItem item, int position) {
+    public final void onBindViewHolder(ViewHolder holder, TreeItem item, int position) {
 
     }
+
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
@@ -158,6 +169,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             });
         }
     }
+
     /**
      * 相应RecyclerView的点击事件 展开或关闭某节点
      */
@@ -172,7 +184,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      *
      * @param type
      */
-    public void setType(TreeRecyclerViewType type) {
+    public void setType(TreeRecyclerType type) {
         this.type = type;
     }
 
