@@ -78,6 +78,10 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.onBindViewHolder(holder, t, position);
     }
 
+    public int getCheckPosition(int position) {
+        return getCheckItem().getAfterCheckingPosition(position);
+    }
+
     @Override
     public CheckItem getCheckItem() {
         return mAdapter.getCheckItem();

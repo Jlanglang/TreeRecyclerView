@@ -126,7 +126,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     public T getData(int position) {
 //        if (position >= 0 && position < getDatas().size()) {
-        if (position > 0) {
+        if (position >= 0) {
             return getDatas().get(position);
         }
         return null;

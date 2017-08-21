@@ -1,18 +1,17 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SwipeItem;
 import com.baozi.treerecyclerview.widget.swipe.SwipeItemMangerInterface;
 import com.baozi.treerecyclerview.widget.swipe.SwipeLayout;
 import com.baozi.treerecyclerview.widget.swipe.SwipeMode;
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -73,7 +72,7 @@ public class SwipeWrapper extends BaseWrapper {
         int itemViewType = super.getItemViewType(position);
         int i = swipeItemSparseArray.get(itemViewType, -1);
         if (i == -1) {//说明该type不存在;
-            Object o = getData(position);
+            Object o = getData(getCheckItem().getAfterCheckingPosition(position));
             if (o instanceof SwipeItem) {
                 swipeItemSparseArray.put(itemViewType, SWIPE_ITEM + swipeItemSparseArray.size());
             }
@@ -84,11 +83,12 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Object data = getData(position);
+        int checkPosition = getCheckPosition(position);
+        Object data = getData(checkPosition);
         if (data instanceof SwipeItem) {
             SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
             checkSwipeLayout(holder, (SwipeItem) data);
-            getSwipeManger().bind(swipeLayout, ((SwipeItem) data).getSwipeLayoutId(), position);
+            getSwipeManger().bind(swipeLayout, ((SwipeItem) data).getSwipeLayoutId(), checkPosition);
             ((SwipeItem) data).onBindSwipeView(holder, position);
         }
         super.onBindViewHolder(holder, position);

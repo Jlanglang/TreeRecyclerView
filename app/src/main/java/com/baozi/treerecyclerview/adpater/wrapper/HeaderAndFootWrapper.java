@@ -32,6 +32,10 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         });
     }
 
+    @Override
+    public T getData(int position) {
+        return mAdapter.getData(position);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
