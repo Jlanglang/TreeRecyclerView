@@ -35,6 +35,9 @@ public class SwipeWrapper extends BaseWrapper {
         super(adapter);
     }
 
+    public void RegiestSwipeItem(SwipeItem swipeItem) {
+
+    }
 
     public SwipeItemMangerInterface getSwipeManger() {
         if (mSwipeManger == null) {
@@ -51,21 +54,44 @@ public class SwipeWrapper extends BaseWrapper {
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         int i = swipeItemSparseArray.get(viewType, -1);
         if (i != -1) {
-            ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-            viewHolder.itemView.setOnClickListener(null);
+//            ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+//            viewHolder.itemView.setOnClickListener(null);
 
+//            LinearLayout linearLayout = new LinearLayout(parent.getContext());
+//            linearLayout.setClickable(true);
             SwipeLayout swipeLayout = new SwipeLayout(parent.getContext());
-            swipeLayout.setLayoutParams(viewHolder.itemView.getLayoutParams());
-            swipeLayout.addView(viewHolder.itemView);
-
+            View inflate = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+//            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(v.getContext(), "123", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+            swipeLayout.setLayoutParams(inflate.getLayoutParams());
+            swipeLayout.addView(inflate);
+//            linearLayout.addView(swipeLayout);
             ViewHolder swipeViewHolder = ViewHolder.createViewHolder(swipeLayout);
-
             swipeLayoutHashMap.put(swipeViewHolder, swipeLayout);
-            onBindViewHolderClick(swipeViewHolder);
+            super.onBindViewHolderClick(swipeViewHolder, inflate);
             return swipeViewHolder;
         }
         return super.onCreateViewHolder(parent, viewType);
     }
+
+//    @Override
+//    public void onBindViewHolderClick(final ViewHolder holder, View view) {
+//        if (holder.itemView instanceof SwipeLayout) {
+//            if (mAdapter.getmOnItemClickListener() != null) {
+//                ((SwipeLayout) holder.itemView).getChildAt(0).setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mAdapter.getmOnItemClickListener().onItemClick(holder, getCheckItem().getAfterCheckingPosition(holder.getLayoutPosition()));
+//                    }
+//                });
+//            }
+//        }
+//        super.onBindViewHolderClick(holder, holder.itemView);
+//    }
 
     @Override
     public int getItemViewType(int position) {

@@ -20,10 +20,19 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected OnItemClickLitener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
 
+//    public OnItemClickLitener getmOnItemClickListener() {
+//        return mOnItemClickListener;
+//    }
+
+    public void setmOnItemClickListener(OnItemClickLitener mOnItemClickListener) {
+        this.mOnItemClickListener = mOnItemClickListener;
+    }
+
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
-        onBindViewHolderClick(holder);
+        onBindViewHolderClick(holder, holder.itemView);
         return holder;
     }
 
@@ -34,39 +43,37 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     /**
      * 实现item的点击事件
-     *
-     * @param holder 绑定点击事件的ViewHolder
      */
-    public void onBindViewHolderClick(final ViewHolder holder) {
+    public void onBindViewHolderClick(final ViewHolder viewHolder, View view) {
         //判断当前holder是否已经设置了点击事件
-        if (!holder.itemView.hasOnClickListeners()) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+        if (!view.hasOnClickListeners()) {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //获得holder的position
-                    int layoutPosition = holder.getLayoutPosition();
+                    int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
                     if (getCheckItem().checkPosition(layoutPosition)) {
                         //检查并得到真实的position
                         int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                         if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onItemClick(holder, itemPosition);
+                            mOnItemClickListener.onItemClick(viewHolder, itemPosition);
                         }
                     }
                 }
             });
         }
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 //获得holder的position
-                int layoutPosition = holder.getLayoutPosition();
+                int layoutPosition = viewHolder.getLayoutPosition();
                 //检查position是否可以点击
                 if (getCheckItem().checkPosition(layoutPosition)) {
                     //检查并得到真实的position
                     int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
-                        return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
+                        return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
                     }
                 }
                 return false;
@@ -125,7 +132,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public T getData(int position) {
-//        if (position >= 0 && position < getDatas().size()) {
         if (position >= 0) {
             return getDatas().get(position);
         }

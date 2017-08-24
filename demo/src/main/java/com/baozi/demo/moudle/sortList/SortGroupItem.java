@@ -34,4 +34,10 @@ public class SortGroupItem extends TreeSortItem<Integer> {
     public void onBindViewHolder(ViewHolder viewHolder) {
         viewHolder.setText(R.id.tv_content, (String) getSortKey());
     }
+
+    @Override
+    public void onClick() {
+        super.onClick();
+
+    }
 }

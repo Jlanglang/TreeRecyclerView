@@ -91,7 +91,7 @@ public class SwipeLayout extends FrameLayout {
 
 //        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwipeLayout);
 //        int dragEdgeChoices = a.getInt(R.styleable.SwipeLayout_drag_edge, DRAG_RIGHT);
-        int dragEdgeChoices =DRAG_RIGHT;
+        int dragEdgeChoices = DRAG_RIGHT;
 //        mEdgeSwipesOffset[DragEdge.Left.ordinal()] = a.getDimension(R.styleable.SwipeLayout_leftEdgeSwipeOffset, 0);
 //        mEdgeSwipesOffset[DragEdge.Right.ordinal()] = a.getDimension(R.styleable.SwipeLayout_rightEdgeSwipeOffset, 0);
 //        mEdgeSwipesOffset[DragEdge.Top.ordinal()] = a.getDimension(R.styleable.SwipeLayout_topEdgeSwipeOffset, 0);
@@ -991,7 +991,6 @@ public class SwipeLayout extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isSwipeEnabled()) return super.onTouchEvent(event);
-
         int action = event.getActionMasked();
         gestureDetector.onTouchEvent(event);
 

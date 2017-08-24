@@ -10,16 +10,16 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baozi.demo.R;
 import com.baozi.demo.moudle.sortList.IndexBar;
 import com.baozi.demo.moudle.sortList.SortGroupItem;
-import com.baozi.demo.moudle.testlist.ContentGroupItem;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
-import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -83,7 +83,6 @@ public class SwipeSortActivity extends AppCompatActivity {
 //        //还有其他的,也可以封装一个headItem,或者footItem,
 //        HeaderAndFootWrapper<TreeItem> headerAndFootWrapper = new HeaderAndFootWrapper(swipeWrapper);
 //        //....wrapper,item的种类会逐渐丰富.只是设计合理.还怕需求和加功能吗
-
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
@@ -96,6 +95,12 @@ public class SwipeSortActivity extends AppCompatActivity {
         headerAndFootWrapper.addHeaderView(headView1);
         //包装成侧滑删除列表
         mSwipeWrapper = new SwipeWrapper(headerAndFootWrapper);
+        mSwipeWrapper.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(ViewHolder viewHolder, int position) {
+                Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
+            }
+        });
         rlcontent.setAdapter(mSwipeWrapper);
         initData();
     }

@@ -1,5 +1,6 @@
 package com.baozi.demo.moudle.swipelist;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,4 +35,9 @@ public class SwipeSortItem extends SortChildItem implements SwipeItem {
         });
     }
 
+    @Override
+    public void onClick() {
+        super.onClick();
+        Log.i("123","123");
+    }
 }

@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.manager.ItemManager;
@@ -22,6 +23,15 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.getItemManager().setAdapter(this);
     }
 
+//    @Override
+//    public OnItemClickLitener getmOnItemClickListener() {
+//        return mAdapter.getmOnItemClickListener();
+//    }
+
+    @Override
+    public void onBindViewHolderClick(ViewHolder holder, View view) {
+        mAdapter.onBindViewHolderClick(holder, view);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -3,15 +3,16 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
-//import com.baozi.treerecyclerview.base.BaseItem;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
-//import com.baozi.treerecyclerview.item.TreeItemWapper;
 import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.baozi.treerecyclerview.base.BaseItem;
+//import com.baozi.treerecyclerview.item.TreeItemWapper;
 
 /**
  * Created by baozi on 2017/4/29.
@@ -49,7 +50,7 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-    public static <D> List<TreeItem> createTreeItemList(List<D> list, Class<? extends TreeItem> iClass, TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeItemList(List list, Class<? extends TreeItem> iClass, TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -57,9 +58,9 @@ public class ItemHelperFactory {
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             try {
-                D itemData = list.get(i);
+                Object itemData = list.get(i);
                 if (iClass != null) {
-                    TreeItem<D> treeItem = iClass.newInstance();
+                    TreeItem treeItem = iClass.newInstance();
                     treeItem.setData(itemData);
                     treeItem.setParentItem(treeParentItem);
                     treeItemList.add(treeItem);
@@ -78,10 +79,9 @@ public class ItemHelperFactory {
      * @param iClass
      * @param sortKey
      * @param treeParentItem
-     * @param <D>
      * @return
      */
-    public static <D> List<TreeItem> createTreeSortList(List<D> list, Class<? extends TreeSortItem> iClass, Object sortKey, TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeSortList(List list, Class<? extends TreeSortItem> iClass, Object sortKey, TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -89,9 +89,9 @@ public class ItemHelperFactory {
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             try {
-                D itemData = list.get(i);
+                Object itemData = list.get(i);
                 if (iClass != null) {
-                    TreeSortItem<D> sortItem = iClass.newInstance();
+                    TreeSortItem sortItem = iClass.newInstance();
                     sortItem.setData(itemData);
                     sortItem.setSortKey(sortKey);
                     sortItem.setParentItem(treeParentItem);

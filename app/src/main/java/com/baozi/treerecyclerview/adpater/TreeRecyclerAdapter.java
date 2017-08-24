@@ -27,9 +27,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     private ItemManager<TreeItem> mItemManager;
 
     @Override
-    public void onBindViewHolderClick(final ViewHolder holder) {
-        if (!holder.itemView.hasOnClickListeners()) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolderClick(final ViewHolder holder, View view) {
+        if (!view.hasOnClickListeners()) {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
@@ -61,7 +61,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 }
             });
         }
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 //获得holder的position
