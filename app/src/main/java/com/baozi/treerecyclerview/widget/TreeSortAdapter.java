@@ -27,7 +27,8 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
 
 
     public int getSortIndex(Object o) {
-        return sortMap.get(o);
+        Integer integer = sortMap.get(o);
+        return integer == null ? -1 : integer;
     }
 
     @Override

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
-    private TreeRecyclerType type;
+    private TreeRecyclerType type = TreeRecyclerType.SHOW_DEFUTAL;
 
     private ItemManager<TreeItem> mItemManager;
 
@@ -97,10 +97,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         if (null == treeItemGroup) {
             return;
         }
-        getDatas().clear();
-        ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(treeItemGroup, type);
-        childItemsWithType.add(0, treeItemGroup);
-        assembleItems(childItemsWithType);
+        ArrayList<TreeItem> arrayList = new ArrayList<>();
+        arrayList.add(treeItemGroup);
+        setDatas(arrayList);
     }
 
     /**
