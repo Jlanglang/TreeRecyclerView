@@ -22,7 +22,7 @@ public class ContentItem extends TreeItem<ShopListBean> {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(ViewHolder viewHolder) {
         getData().setCheck(!getData().isCheck());
         getItemManager().notifyDataChanged();
     }

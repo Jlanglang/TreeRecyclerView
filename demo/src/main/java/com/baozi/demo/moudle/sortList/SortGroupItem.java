@@ -36,8 +36,7 @@ public class SortGroupItem extends TreeSortItem<Integer> {
     }
 
     @Override
-    public void onClick() {
-        super.onClick();
-
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
     }
 }

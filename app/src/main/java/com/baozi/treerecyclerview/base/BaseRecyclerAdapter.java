@@ -63,22 +63,24 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                 }
             });
         }
-        view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                //获得holder的position
-                int layoutPosition = viewHolder.getLayoutPosition();
-                //检查position是否可以点击
-                if (getCheckItem().checkPosition(layoutPosition)) {
-                    //检查并得到真实的position
-                    int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
-                    if (mOnItemLongClickListener != null) {
-                        return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
+        if (!view.isLongClickable()){
+            view.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    //获得holder的position
+                    int layoutPosition = viewHolder.getLayoutPosition();
+                    //检查position是否可以点击
+                    if (getCheckItem().checkPosition(layoutPosition)) {
+                        //检查并得到真实的position
+                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        if (mOnItemLongClickListener != null) {
+                            return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
+                        }
                     }
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
     }
 
     @Override

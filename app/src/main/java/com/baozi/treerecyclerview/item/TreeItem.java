@@ -96,7 +96,7 @@ public abstract class TreeItem<D> {
     /**
      * 当前条目的点击回调
      */
-    public void onClick() {
+    public void onClick(ViewHolder viewHolder) {
 
     }
 

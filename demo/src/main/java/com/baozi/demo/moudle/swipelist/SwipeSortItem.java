@@ -36,8 +36,7 @@ public class SwipeSortItem extends SortChildItem implements SwipeItem {
     }
 
     @Override
-    public void onClick() {
-        super.onClick();
-        Log.i("123","123");
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
     }
 }

@@ -9,7 +9,9 @@ import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 //import com.baozi.treerecyclerview.base.BaseItem;
 //import com.baozi.treerecyclerview.item.TreeItemWapper;
@@ -167,10 +169,11 @@ public class ItemHelperFactory {
 
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerType type) {
+
         if (type == TreeRecyclerType.SHOW_DEFUTAL) {
             return (ArrayList<TreeItem>) treeItems;
         }
-        ArrayList<TreeItem> baseItems = new ArrayList<>();
+        ArrayList<TreeItem> baseItems = new ArrayList<TreeItem>();
         int childCount = treeItems.size();
         for (int i = 0; i < childCount; i++) {
             TreeItem treeItem = treeItems.get(i);

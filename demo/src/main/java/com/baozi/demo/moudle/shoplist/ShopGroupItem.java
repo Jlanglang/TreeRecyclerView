@@ -48,7 +48,7 @@ public class ShopGroupItem extends TreeSelectItemGroup<StoreBean> {
     }
 
     @Override
-    public void onClick() {
+    public void onClick(ViewHolder viewHolder) {
         if (!isChildCheck()) {
             getSelectItems().clear();
             getSelectItems().addAll(getChilds());
