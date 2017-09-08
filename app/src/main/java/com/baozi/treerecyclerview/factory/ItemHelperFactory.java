@@ -167,6 +167,9 @@ public class ItemHelperFactory {
 
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerType type) {
+        if (type == TreeRecyclerType.SHOW_DEFUTAL) {
+            return (ArrayList<TreeItem>) treeItems;
+        }
         ArrayList<TreeItem> baseItems = new ArrayList<>();
         int childCount = treeItems.size();
         for (int i = 0; i < childCount; i++) {

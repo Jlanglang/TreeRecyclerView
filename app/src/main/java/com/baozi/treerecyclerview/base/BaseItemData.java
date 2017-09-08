@@ -9,7 +9,7 @@ package com.baozi.treerecyclerview.base;
  */
 public abstract class BaseItemData {
 
-    protected int viewItemType;
+    private int viewItemType;
 
     public void setViewItemType(int viewItemType) {
         this.viewItemType = viewItemType;
