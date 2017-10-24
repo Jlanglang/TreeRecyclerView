@@ -132,7 +132,6 @@ public class SwipeSortActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         mWrapper.setType(LoadingWrapper.Type.SUCCESS);
-//                        mWrapper.getItemManager().replaceAllItem(groupItems);
                         mWrapper.getItemManager().replaceAllItem(new ArrayList());
                     }
                 });
@@ -156,7 +155,6 @@ public class SwipeSortActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         mWrapper.setType(LoadingWrapper.Type.SUCCESS);
-//                        mWrapper.getItemManager().replaceAllItem(groupItems);
                         mWrapper.getItemManager().replaceAllItem(groupItems);
                     }
                 });

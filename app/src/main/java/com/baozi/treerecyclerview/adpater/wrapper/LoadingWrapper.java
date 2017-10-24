@@ -19,15 +19,12 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     private static final int ITEM_LOAD_OVER = -6000;
     private View mEmptyView;
     private int mEmptyLayoutId;
-
-    private View mLoadMoreView;
-    private int mLoadMoreLayoutId;
-
-    private View mLoadMoreOverView;
-    private int mLoadMoreOverLayoutId;
-
     private View mLoadingView;
     private int mLoadingLayoutId;
+    private View mLoadMoreView;
+    private int mLoadMoreLayoutId;
+    private View mLoadMoreOverView;
+    private int mLoadMoreOverLayoutId;
 
     private Type mType = Type.SUCCESS;
 
@@ -46,6 +43,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     private boolean isLoading() {
         return mType == Type.LOADING;
     }
+
 
     public void setType(Type type) {
         mType = type;
@@ -156,14 +154,4 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         mLoadingLayoutId = layoutId;
     }
 
-    interface LoadingCallBack {
-
-        void onEmpty();
-
-        void loadMore();
-
-        void loadMoreOver();
-
-        void loading();
-    }
 }
