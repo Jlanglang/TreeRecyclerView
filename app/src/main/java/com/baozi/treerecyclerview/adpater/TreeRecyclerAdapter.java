@@ -34,9 +34,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
                     //检查item的position,这个item是否可以点击
-                    if (getCheckItem().checkPosition(layoutPosition)) {
+                    if (getCheckItem().checkClick(layoutPosition)) {
                         //获得处理后的position
-                        int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                        int itemPosition = getCheckItem().checkPosition(layoutPosition);
                         //拿到BaseItem
                         TreeItem item = getDatas().get(itemPosition);
                         //展开,折叠和item点击不应该同时响应事件.
@@ -67,9 +67,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 //获得holder的position
                 int layoutPosition = holder.getLayoutPosition();
                 //检查position是否可以点击
-                if (getCheckItem().checkPosition(layoutPosition)) {
+                if (getCheckItem().checkClick(layoutPosition)) {
                     //检查并得到真实的position
-                    int itemPosition = getCheckItem().getAfterCheckingPosition(layoutPosition);
+                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
                         return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
                     }

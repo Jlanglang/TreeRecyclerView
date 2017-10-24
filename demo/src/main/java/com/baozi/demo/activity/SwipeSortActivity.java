@@ -17,6 +17,7 @@ import com.baozi.demo.moudle.sortList.IndexBar;
 import com.baozi.demo.moudle.sortList.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
+import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -37,7 +38,7 @@ public class SwipeSortActivity extends AppCompatActivity {
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private TreeSortAdapter mTreeSortAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private SwipeWrapper mSwipeWrapper;
+    private LoadingWrapper mWrapper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,26 +95,74 @@ public class SwipeSortActivity extends AppCompatActivity {
         headView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
         headerAndFootWrapper.addHeaderView(headView1);
         //包装成侧滑删除列表
-        mSwipeWrapper = new SwipeWrapper(headerAndFootWrapper);
-        mSwipeWrapper.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickLitener() {
+        SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
+        adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ViewHolder viewHolder, int position) {
                 Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
             }
         });
-        rlcontent.setAdapter(mSwipeWrapper);
+        mWrapper = new LoadingWrapper<>(adapter);
+        mWrapper.setType(LoadingWrapper.Type.LOADING);
+        mWrapper.setEmptyView(R.layout.
+                layout_empty);
+        mWrapper.setLoadingView(R.layout.layout_loading);
+        rlcontent.setAdapter(mWrapper);
         initData();
     }
 
 
     private void initData() {
-        List<TreeItem> groupItems = new ArrayList<>();
+        final List<TreeItem> groupItems = new ArrayList<>();
         for (int i = 0; i < LETTERS.length; i++) {
             SortGroupItem sortGroupItem = new SortGroupItem();
             sortGroupItem.setSortKey(LETTERS[i]);
             sortGroupItem.setData(5);
             groupItems.add(sortGroupItem);
         }
-        mSwipeWrapper.getItemManager().replaceAllItem(groupItems);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mWrapper.setType(LoadingWrapper.Type.SUCCESS);
+//                        mWrapper.getItemManager().replaceAllItem(groupItems);
+                        mWrapper.getItemManager().replaceAllItem(new ArrayList());
+                    }
+                });
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mWrapper.setType(LoadingWrapper.Type.LOADING);
+                    }
+                });
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mWrapper.setType(LoadingWrapper.Type.SUCCESS);
+//                        mWrapper.getItemManager().replaceAllItem(groupItems);
+                        mWrapper.getItemManager().replaceAllItem(groupItems);
+                    }
+                });
+            }
+        }).start();
+
+
     }
 }

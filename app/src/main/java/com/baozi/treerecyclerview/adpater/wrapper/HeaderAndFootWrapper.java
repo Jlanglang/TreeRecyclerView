@@ -21,13 +21,18 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         super(adapter);
         mAdapter.setCheckItem(new CheckItem() {
             @Override
-            public boolean checkPosition(int position) {
+            public boolean checkClick(int position) {
                 return !(isHeaderViewPos(position) || isFooterViewPos(position));
             }
 
             @Override
-            public int getAfterCheckingPosition(int position) {
+            public int checkPosition(int position) {
                 return position - getHeadersCount();
+            }
+
+            @Override
+            public int checkCount() {
+                return getItemCount() - getHeadersCount() - getFootersCount();
             }
         });
     }
@@ -52,7 +57,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         if (isHeaderViewPos(position) || isFooterViewPos(position)) {
             return;
         }
-        super.onBindViewHolder(holder, position - getHeadersCount());
+        mAdapter.onBindViewHolder(holder, position - getHeadersCount());
     }
 
     @Override
@@ -67,7 +72,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         } else if (isFooterViewPos(position)) {
             return mFootViews.keyAt(position - getHeadersCount() - mAdapter.getItemCount());
         }
-        return super.getItemViewType(position - getHeadersCount());
+        return mAdapter.getItemViewType(position - getHeadersCount());
     }
 
 

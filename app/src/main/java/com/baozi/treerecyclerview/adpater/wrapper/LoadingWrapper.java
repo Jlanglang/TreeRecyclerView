@@ -8,13 +8,15 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 
 /**
  * Created by baozi on 2017/4/30.
- * 待开发
+ * 该装饰请务必使用在最后一次
  */
 
 public class LoadingWrapper<T> extends BaseWrapper<T> {
-    private static final int ITEM_TYPE_EMPTY = 3000;
-    private static final int ITEM_TYPE_LOADING = 4000;
-    private static final int ITEM_LOAD_MORE = 5000;
+
+    private static final int ITEM_TYPE_EMPTY = -3000;
+    private static final int ITEM_TYPE_LOADING = -4000;
+    private static final int ITEM_LOAD_MORE = -5000;
+    private static final int ITEM_LOAD_OVER = -6000;
     private View mEmptyView;
     private int mEmptyLayoutId;
 
@@ -26,27 +28,39 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
 
     private View mLoadingView;
     private int mLoadingLayoutId;
-    private boolean isLoading;
 
+    private Type mType = Type.SUCCESS;
+
+    public enum Type {
+        EMPTY, SUCCESS, LOADING, LOAD_MORE, LOAD_OVER
+    }
 
     public LoadingWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
     }
 
     private boolean isEmpty() {
-        return (mEmptyView != null || mEmptyLayoutId != 0) && mAdapter.getItemCount() == 0;
+        return getCheckItem().checkCount() == 0;
     }
 
     private boolean isLoading() {
-        return (mLoadingView != null || mLoadingLayoutId != 0) && isLoading;
+        return mType == Type.LOADING;
     }
 
-    public void setLoading(boolean loading) {
-        isLoading = loading;
-        if (loading) {
-
-        } else {
-
+    public void setType(Type type) {
+        mType = type;
+        switch (type) {
+            case EMPTY:
+                break;
+            case SUCCESS:
+                break;
+            case LOADING:
+                notifyDataSetChanged();
+                break;
+            case LOAD_MORE:
+                break;
+            case LOAD_OVER:
+                break;
         }
     }
 
@@ -68,13 +82,20 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
             }
         }
         if (viewType == ITEM_LOAD_MORE) {
-            if (mEmptyView != null) {
+            if (mLoadingView != null) {
                 return ViewHolder.createViewHolder(mLoadMoreView);
             } else {
                 return ViewHolder.createViewHolder(parent, mLoadingLayoutId);
             }
         }
-        return super.onCreateViewHolder(parent, viewType);
+        if (viewType == ITEM_LOAD_OVER) {
+            if (mLoadMoreOverView != null) {
+                return ViewHolder.createViewHolder(mLoadMoreOverView);
+            } else {
+                return ViewHolder.createViewHolder(parent, mLoadMoreOverLayoutId);
+            }
+        }
+        return mAdapter.onCreateViewHolder(parent, viewType);
     }
 
     private boolean isLoadMoreViewPos(int position) {
@@ -90,9 +111,13 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
             return ITEM_TYPE_EMPTY;
         }
         if (isLoadMoreViewPos(position)) {
-            return ITEM_LOAD_MORE;
+            if (mType == Type.LOAD_MORE) {
+                return ITEM_LOAD_MORE;
+            } else {
+                return ITEM_LOAD_OVER;
+            }
         }
-        return super.getItemViewType(position);
+        return mAdapter.getItemViewType(position);
     }
 
     @Override
@@ -100,12 +125,17 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         if (isEmpty() || isLoading() || isLoadMoreViewPos(position)) {
             return;
         }
-        super.onBindViewHolder(holder, position);
+        mAdapter.onBindViewHolder(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        if (isEmpty() || isLoading()) return 1;
+        if (isEmpty() || isLoading()) {
+            return 1;
+        }
+        if (mType == Type.LOAD_OVER || mType == Type.LOAD_MORE) {
+            return mAdapter.getItemCount() + 1;
+        }
         return mAdapter.getItemCount();
     }
 
@@ -118,4 +148,22 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         mEmptyLayoutId = layoutId;
     }
 
+    public void setLoadingView(View loadingView) {
+        mLoadingView = loadingView;
+    }
+
+    public void setLoadingView(int layoutId) {
+        mLoadingLayoutId = layoutId;
+    }
+
+    interface LoadingCallBack {
+
+        void onEmpty();
+
+        void loadMore();
+
+        void loadMoreOver();
+
+        void loading();
+    }
 }

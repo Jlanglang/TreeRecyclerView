@@ -23,11 +23,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.getItemManager().setAdapter(this);
     }
 
-//    @Override
-//    public OnItemClickLitener getmOnItemClickListener() {
-//        return mAdapter.getmOnItemClickListener();
-//    }
-
     @Override
     public void onBindViewHolderClick(ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
@@ -88,10 +83,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.onBindViewHolder(holder, t, position);
     }
 
-    public int getCheckPosition(int position) {
-        return getCheckItem().getAfterCheckingPosition(position);
-    }
-
     @Override
     public CheckItem getCheckItem() {
         return mAdapter.getCheckItem();
@@ -103,7 +94,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void setOnItemClickListener(OnItemClickLitener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mAdapter.setOnItemClickListener(onItemClickListener);
     }
 
