@@ -103,7 +103,7 @@ public class SwipeSortActivity extends AppCompatActivity {
             }
         });
         mWrapper = new LoadingWrapper<>(adapter);
-        mWrapper.setType(LoadingWrapper.Type.LOADING);
+//        mWrapper.setType(LoadingWrapper.Type.LOADING);
         mWrapper.setEmptyView(R.layout.
                 layout_empty);
         mWrapper.setLoadingView(R.layout.layout_loading);

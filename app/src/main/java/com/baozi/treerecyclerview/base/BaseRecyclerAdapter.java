@@ -175,21 +175,33 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     /**
      * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
-     * 比如添加了headview和footview.
      */
     public interface CheckItem {
         //检查当前position,是否可点击
         boolean checkClick(int position);
 
-        //检查当前position,是否装饰过
+        //检查当前position,获取原始角标
         int checkPosition(int position);
 
-        //检查总条目数,是否装饰过
+        //检查总条目数,获取实际数据长度
         int checkCount();
     }
 
+    /**
+     * 获取该position的item的layout
+     *
+     * @param position 角标
+     * @return item的layout id
+     */
     public abstract int getLayoutId(int position);
 
+    /**
+     * view与数据绑定
+     *
+     * @param holder
+     * @param t
+     * @param position
+     */
     public abstract void onBindViewHolder(ViewHolder holder, T t, int position);
 
 }

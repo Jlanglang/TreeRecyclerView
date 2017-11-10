@@ -22,7 +22,7 @@ public class ShopGroupItem extends TreeSelectItemGroup<StoreBean> {
     private TabItem mHeadItem;
 
     @Override
-    protected List<TreeItem> initChildsList(StoreBean data) {
+    protected List<TreeItem> initChildList(StoreBean data) {
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getShopListBeen(), ContentItem.class, this);
         mHeadItem = new TabItem();
         ShopTabBean shopListBean = new ShopTabBean();

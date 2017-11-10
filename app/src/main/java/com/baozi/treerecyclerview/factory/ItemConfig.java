@@ -6,20 +6,20 @@ import com.baozi.treerecyclerview.item.TreeItem;
 
 public class ItemConfig {
 
-    private static SparseArray<Class<? extends TreeItem>> treeviewHolderTypes;
+    private static SparseArray<Class<? extends TreeItem>> treeViewHolderTypes;
 
     static {
-        treeviewHolderTypes = new SparseArray<>();
+        treeViewHolderTypes = new SparseArray<>();
     }
 
     public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
-        return treeviewHolderTypes.get(type);
+        return treeViewHolderTypes.get(type);
     }
 
     public static void addTreeHolderType(int type, Class<? extends TreeItem> clazz) {
         if (null == clazz) {
             return;
         }
-        treeviewHolderTypes.put(type, clazz);
+        treeViewHolderTypes.put(type, clazz);
     }
 }

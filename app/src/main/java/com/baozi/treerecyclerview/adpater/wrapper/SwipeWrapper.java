@@ -111,15 +111,12 @@ public class SwipeWrapper extends BaseWrapper {
             }
         });
     }
-
-
     /**
      * Swipe    ItemMangerImpl is a helper class to help all the adapters to maintain open status.
      */
     private class SwipeItemMangerImpl implements SwipeItemMangerInterface {
         private SwipeMode mode = SwipeMode.Single;
         public static final int INVALID_POSITION = -1;
-
 
         protected int mOpenPosition = INVALID_POSITION;
 

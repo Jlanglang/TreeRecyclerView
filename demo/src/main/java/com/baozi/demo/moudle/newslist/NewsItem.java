@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NewsItem extends TreeItemGroup<NewsItemBean> {
     @Override
-    protected List<TreeItem> initChildsList(NewsItemBean data) {
+    protected List<TreeItem> initChildList(NewsItemBean data) {
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getImageBeanList(), this);
         treeItemList.add(ItemHelperFactory.createTreeItem(data.getFootBean()));
         return treeItemList;

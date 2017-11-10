@@ -97,7 +97,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
 
     public void setData(D data) {
         super.setData(data);
-        childs = initChildsList(data);
+        childs = initChildList(data);
     }
 
     public void setChilds(List<TreeItem> childs) {
@@ -138,7 +138,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @param data
      * @return
      */
-    protected abstract List<TreeItem> initChildsList(D data);
+    protected abstract List<TreeItem> initChildList(D data);
 
     /**
      * 是否消费child的click事件

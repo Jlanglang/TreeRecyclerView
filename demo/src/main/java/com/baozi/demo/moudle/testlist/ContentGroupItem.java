@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ContentGroupItem extends TreeItemGroup<TitleBean> {
     @Override
-    protected List<TreeItem> initChildsList(TitleBean data) {
+    protected List<TreeItem> initChildList(TitleBean data) {
         return ItemHelperFactory.createTreeItemList(data.getSingleBeen(), this);
     }
 

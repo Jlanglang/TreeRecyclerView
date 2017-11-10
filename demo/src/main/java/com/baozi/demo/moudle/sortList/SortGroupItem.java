@@ -15,7 +15,7 @@ import java.util.List;
 
 public class SortGroupItem extends TreeSortItem<Integer> {
     @Override
-    protected List<TreeItem> initChildsList(Integer childs) {
+    protected List<TreeItem> initChildList(Integer childs) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
         for (int i = 0; i < childs; i++) {
             SwipeSortItem sortChildItem = new SwipeSortItem();
