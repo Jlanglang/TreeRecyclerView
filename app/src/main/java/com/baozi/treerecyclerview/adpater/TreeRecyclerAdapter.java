@@ -1,7 +1,5 @@
 package com.baozi.treerecyclerview.adpater;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
@@ -150,23 +148,8 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    TreeItem baseItem = getDatas().get(position);
-                    if (baseItem.getSpanSize() == 0) {
-                        return gridLayoutManager.getSpanCount();
-                    }
-                    return baseItem.getSpanSize();
-                }
-            });
-        }
+    public int getItemSpanSize(int position) {
+        return getData(position).getSpanSize();
     }
 
     /**
@@ -305,6 +288,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public int getItemPosition(TreeItem item) {
             return getDatas().indexOf(item);
         }
+
     }
 
 }

@@ -1,7 +1,6 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +49,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     public void setType(Type type) {
+        mType = type;
         switch (type) {
             case EMPTY:
                 break;
@@ -59,7 +59,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                 if (mLoadingView == null && mLoadingLayoutId == 0) {
                     return;
                 }
-                mAdapter.notifyDataSetChanged();
+                notifyDataSetChanged();
                 break;
             case LOAD_MORE:
             case LOAD_OVER:
@@ -69,30 +69,12 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                 }
                 break;
         }
-        mType = type;
     }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         setType(Type.LOADING);
-        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            final GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager.getSpanSizeLookup();
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    if ((isEmpty() || isLoading()) && position == 0) {
-                        return gridLayoutManager.getSpanCount();
-                    }
-                    if (isLoadMoreViewPos(position)) {
-                        return gridLayoutManager.getSpanCount();
-                    }
-                    return spanSizeLookup.getSpanSize(position);
-                }
-            });
-        }
         if (mLoadMoreItem != null) {
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
@@ -111,6 +93,16 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         }
     }
 
+    @Override
+    public int getItemSpanSize(int position) {
+        if ((isEmpty() || isLoading()) && position == 0) {
+            return 0;
+        }
+        if (isLoadMoreViewPos(position)) {
+            return 0;
+        }
+        return super.getItemSpanSize(position);
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -162,7 +154,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         if (isEmpty() || isLoading()) {
             return 1;
         }
-        if (initLoadMore) {
+        if (initLoadMore && mAdapter.getItemCount() >= mLoadMoreItem.getPageSize()) {
             return mAdapter.getItemCount() + 1;
         }
         return mAdapter.getItemCount();
@@ -268,7 +260,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         //加载更多回调
         public abstract void loadMore();
 
-        //没页条目数
+        //屏幕可见条目数
         public abstract int getPageSize();
     }
 }

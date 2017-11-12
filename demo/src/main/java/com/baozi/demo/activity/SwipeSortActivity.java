@@ -3,6 +3,7 @@ package com.baozi.demo.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,7 +58,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         qb_sort.setIndexs(LETTERS);
         qb_sort.setSelectedIndexTextView(tv_index);
 
-        mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager = new GridLayoutManager(this,2);
         rlcontent.setLayoutManager(mLinearLayoutManager);
         rlcontent.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -124,7 +125,7 @@ public class SwipeSortActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -136,7 +137,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -147,7 +148,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.base;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,12 @@ import java.util.List;
  * Created by zhy on 16/4/9.
  */
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHolder> {
-    private List<T> mDatas;
-    private CheckItem mCheckItem;
+
     protected ItemManager<T> mItemManager;
     protected OnItemClickListener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
-
-    public void setmOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
-    }
+    private List<T> mDatas;
+    private CheckItem mCheckItem;
 
 
     @Override
@@ -30,6 +28,25 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
         onBindViewHolderClick(holder, holder.itemView);
         return holder;
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int itemSpanSize = getCheckItem().checkSpanSize(position);
+                    if (itemSpanSize == 0) {
+                        return gridLayoutManager.getSpanCount();
+                    }
+                    return itemSpanSize;
+                }
+            });
+        }
     }
 
     @Override
@@ -89,6 +106,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return getDatas().size();
     }
 
+    public int getItemSpanSize(int position) {
+        return 0;
+    }
+
     /**
      * 默认实现的CheckItem接口
      *
@@ -98,18 +119,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         if (mCheckItem == null) {
             mCheckItem = new CheckItem() {
                 @Override
-                public boolean checkClick(int position) {
-                    return true;
-                }
-
-                @Override
-                public int checkPosition(int position) {
-                    return position;
-                }
-
-                @Override
                 public int checkCount() {
                     return getItemCount();
+                }
+
+                @Override
+                public int checkSpanSize(int position) {
+                    return getItemSpanSize(position);
                 }
             };
         }
@@ -176,16 +192,27 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     /**
      * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
      */
-    public interface CheckItem {
+    public abstract class CheckItem {
+
         //检查当前position,是否可点击
-        boolean checkClick(int position);
+        public boolean checkClick(int position) {
+            return true;
+        }
 
         //检查当前position,获取原始角标
-        int checkPosition(int position);
+        public int checkPosition(int position) {
+            return position;
+        }
 
         //检查总条目数,获取实际数据长度
-        int checkCount();
+        public abstract int checkCount();
+
+        //TODO 待优化
+        public int checkSpanSize(int position) {
+            return 0;
+        }
     }
+
 
     /**
      * 获取该position的item的layout

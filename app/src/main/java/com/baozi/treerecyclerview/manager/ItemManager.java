@@ -51,4 +51,5 @@ public abstract class ItemManager<T> {
     public void notifyDataChanged() {
         mAdapter.notifyDataSetChanged();
     }
+
 }

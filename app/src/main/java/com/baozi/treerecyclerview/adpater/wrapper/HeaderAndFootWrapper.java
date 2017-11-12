@@ -19,7 +19,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-        mAdapter.setCheckItem(new CheckItem() {
+        setCheckItem(new CheckItem() {
             @Override
             public boolean checkClick(int position) {
                 return !(isHeaderViewPos(position) || isFooterViewPos(position));
@@ -33,6 +33,11 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             @Override
             public int checkCount() {
                 return getItemCount() - getHeadersCount() - getFootersCount();
+            }
+
+            @Override
+            public int checkSpanSize(int position) {
+                return getItemSpanSize(position);
             }
         });
     }
@@ -63,6 +68,13 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     @Override
     public int getItemCount() {
         return getHeadersCount() + getFootersCount() + mAdapter.getItemCount();
+    }
+
+    public int getItemSpanSize(int position) {
+        if (isHeaderViewPos(position)) {
+            return 0;
+        }
+        return mAdapter.getItemSpanSize(position);
     }
 
     @Override

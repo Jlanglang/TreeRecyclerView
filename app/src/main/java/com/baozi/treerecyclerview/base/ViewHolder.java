@@ -52,6 +52,15 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return (T) view;
     }
 
+    /**
+     * 用的挺多,所以写个方法.
+     *
+     * @param id
+     * @return
+     */
+    public ImageView getImageView(int id) {
+        return getView(id);
+    }
 
     /****以下为辅助方法*****/
 

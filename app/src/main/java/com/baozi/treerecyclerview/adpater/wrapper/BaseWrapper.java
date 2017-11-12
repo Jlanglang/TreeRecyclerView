@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.baozi.treerecyclerview.manager.ItemManager;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.List;
 
@@ -58,6 +58,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         return mAdapter.getItemCount();
     }
 
+
     @Override
     public int getLayoutId(int position) {
         return mAdapter.getLayoutId(position);
@@ -87,6 +88,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     public CheckItem getCheckItem() {
         return mAdapter.getCheckItem();
     }
+
 
     @Override
     public void setCheckItem(CheckItem checkItem) {
