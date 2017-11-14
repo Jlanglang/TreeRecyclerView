@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.adpater;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
@@ -32,31 +34,31 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
                     //检查item的position,这个item是否可以点击
-                    if (getCheckItem().checkClick(layoutPosition)) {
-                        //获得处理后的position
-                        int itemPosition = getCheckItem().checkPosition(layoutPosition);
-                        //拿到BaseItem
-                        TreeItem item = getDatas().get(itemPosition);
-                        //展开,折叠和item点击不应该同时响应事件.
-                        //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-                        if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup) {
-                            //展开,折叠
-                            expandOrCollapse(((TreeItemGroup) item));
+//                    if (getCheckItem().checkClick(layoutPosition)) {
+                    //获得处理后的position
+                    layoutPosition = getCheckItem().checkPosition(layoutPosition);
+                    //拿到BaseItem
+                    TreeItem item = getDatas().get(layoutPosition);
+                    //展开,折叠和item点击不应该同时响应事件.
+                    //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
+                    if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup) {
+                        //展开,折叠
+                        expandOrCollapse(((TreeItemGroup) item));
+                    } else {
+                        TreeItemGroup itemParentItem = item.getParentItem();
+                        //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
+                        if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
+                            return;
+                        }
+                        if (mOnItemClickListener != null) {
+                            mOnItemClickListener.onItemClick(holder, layoutPosition);
                         } else {
-                            TreeItemGroup itemParentItem = item.getParentItem();
-                            //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
-                            if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
-                                return;
-                            }
-                            if (mOnItemClickListener != null) {
-                                mOnItemClickListener.onItemClick(holder, itemPosition);
-                            } else {
-                                //拿到对应item,回调.
-                                getDatas().get(itemPosition).onClick(holder);
-                            }
+                            //拿到对应item,回调.
+                            getDatas().get(layoutPosition).onClick(holder);
                         }
                     }
                 }
+//                }
             });
         }
         view.setOnLongClickListener(new View.OnLongClickListener() {
@@ -65,21 +67,16 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 //获得holder的position
                 int layoutPosition = holder.getLayoutPosition();
                 //检查position是否可以点击
-                if (getCheckItem().checkClick(layoutPosition)) {
-                    //检查并得到真实的position
-                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
-                    if (mOnItemLongClickListener != null) {
-                        return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
-                    }
+//                if (getCheckItem().checkClick(layoutPosition)) {
+                //检查并得到真实的position
+                int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                if (mOnItemLongClickListener != null) {
+                    return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
                 }
+//                }
                 return false;
             }
         });
-    }
-
-    @Override
-    public List<TreeItem> getDatas() {
-        return super.getDatas();
     }
 
     @Override
@@ -146,6 +143,31 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     @Override
     public final void onBindViewHolder(ViewHolder holder, TreeItem item, int position) {
 
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            final int spanCount = gridLayoutManager.getSpanCount();
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    int i = getItemCount();
+                    if (i == 0 || position >= i) {
+                        return spanCount;
+                    }
+                    int checkPosition = getCheckItem().checkPosition(position);
+                    int itemSpanSize = getItemSpanSize(checkPosition);
+                    if (itemSpanSize == 0) {
+                        return spanCount;
+                    }
+                    return itemSpanSize;
+                }
+            });
+        }
     }
 
     public int getItemSpanSize(int position) {

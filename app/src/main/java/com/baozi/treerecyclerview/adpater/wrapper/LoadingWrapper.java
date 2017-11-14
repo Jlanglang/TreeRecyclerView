@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +38,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     private boolean isEmpty() {
-        return getCheckItem().checkCount() == 0;
+        return getDatas().size() == 0;
     }
 
     private boolean isLoading() {
@@ -49,7 +50,6 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     public void setType(Type type) {
-        mType = type;
         switch (type) {
             case EMPTY:
                 break;
@@ -69,6 +69,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                 }
                 break;
         }
+        mType = type;
     }
 
     @Override

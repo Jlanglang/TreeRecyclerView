@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,26 +23,15 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         super(adapter);
         setCheckItem(new CheckItem() {
             @Override
-            public boolean checkClick(int position) {
-                return !(isHeaderViewPos(position) || isFooterViewPos(position));
-            }
-
-            @Override
             public int checkPosition(int position) {
+                if (position == 0) {
+                    return position;
+                }
                 return position - getHeadersCount();
-            }
-
-            @Override
-            public int checkCount() {
-                return getItemCount() - getHeadersCount() - getFootersCount();
-            }
-
-            @Override
-            public int checkSpanSize(int position) {
-                return getItemSpanSize(position);
             }
         });
     }
+
 
     @Override
     public T getData(int position) {
@@ -55,6 +46,15 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             return ViewHolder.createViewHolder(mFootViews.get(viewType));
         }
         return mAdapter.onCreateViewHolder(parent, viewType);
+    }
+
+    @Override
+    public void onBindViewHolderClick(ViewHolder holder, View view) {
+        int layoutPosition = holder.getLayoutPosition();
+        if ((isHeaderViewPos(layoutPosition) || isFooterViewPos(layoutPosition))) {
+            return;
+        }
+        super.onBindViewHolderClick(holder, view);
     }
 
     @Override

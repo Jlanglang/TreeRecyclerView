@@ -150,5 +150,8 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         return false;
     }
 
-
+    @Override
+    public int getSpanSize() {
+        return super.getSpanSize();
+    }
 }

@@ -22,7 +22,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     private List<T> mDatas;
     private CheckItem mCheckItem;
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
@@ -33,21 +32,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int itemSpanSize = getCheckItem().checkSpanSize(position);
-                    if (itemSpanSize == 0) {
-                        return gridLayoutManager.getSpanCount();
-                    }
-                    return itemSpanSize;
-                }
-            });
-        }
     }
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -66,13 +52,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     //获得holder的position
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
-                    if (getCheckItem().checkClick(layoutPosition)) {
-                        //检查并得到真实的position
-                        int itemPosition = getCheckItem().checkPosition(layoutPosition);
-                        if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onItemClick(viewHolder, itemPosition);
-                        }
+//                    if (getCheckItem().checkClick(layoutPosition)) {
+//                    检查并得到真实的position
+                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(viewHolder, itemPosition);
                     }
+//                    }
                 }
             });
         }
@@ -83,13 +69,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     //获得holder的position
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查position是否可以点击
-                    if (getCheckItem().checkClick(layoutPosition)) {
-                        //检查并得到真实的position
-                        int itemPosition = getCheckItem().checkPosition(layoutPosition);
-                        if (mOnItemLongClickListener != null) {
-                            return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
-                        }
+//                    if (getCheckItem().checkClick(layoutPosition)) {
+                    //检查并得到真实的position
+                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                    if (mOnItemLongClickListener != null) {
+                        return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
                     }
+//                    }
                     return false;
                 }
             });
@@ -118,15 +104,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     public CheckItem getCheckItem() {
         if (mCheckItem == null) {
             mCheckItem = new CheckItem() {
-                @Override
-                public int checkCount() {
-                    return getItemCount();
-                }
-
-                @Override
-                public int checkSpanSize(int position) {
-                    return getItemSpanSize(position);
-                }
+//                @Override
+//                public int checkCount() {
+//                    return getItemCount();
+//                }
             };
         }
         return mCheckItem;
@@ -194,23 +175,19 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      */
     public abstract class CheckItem {
 
-        //检查当前position,是否可点击
-        public boolean checkClick(int position) {
-            return true;
-        }
+//        //检查当前position,是否可点击
+//        public boolean checkClick(int position) {
+//            return true;
+//        }
 
         //检查当前position,获取原始角标
         public int checkPosition(int position) {
             return position;
         }
 
-        //检查总条目数,获取实际数据长度
-        public abstract int checkCount();
+//        //检查总条目数,获取实际数据长度
+//        public abstract int checkCount();
 
-        //TODO 待优化
-        public int checkSpanSize(int position) {
-            return 0;
-        }
     }
 
 
