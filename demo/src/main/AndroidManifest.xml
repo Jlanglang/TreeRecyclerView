@@ -30,7 +30,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.baozi.demo.activity.MainActivity">
+        <activity android:name="com.baozi.demo.activity.TestActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -44,5 +45,6 @@
         <activity android:name=".activity.NewsActivity"/>
         <activity android:name=".activity.SortActivity"/>
         <activity android:name=".activity.SwipeSortActivity"/>
+        <!--<activity android:name=".activity.TestActivity"/>-->
     </application>
 </manifest>

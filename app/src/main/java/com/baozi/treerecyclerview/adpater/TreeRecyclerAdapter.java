@@ -49,7 +49,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     TreeItem item = getDatas().get(layoutPosition);
                     //展开,折叠和item点击不应该同时响应事件.
                     //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-                    if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup) {
+                    if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup && ((TreeItemGroup) item).isCanExpand()) {
                         //展开,折叠
                         expandOrCollapse(((TreeItemGroup) item));
                     } else {

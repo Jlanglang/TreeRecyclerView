@@ -51,14 +51,15 @@ public class ShopGroupItem extends TreeSelectItemGroup<StoreBean> {
     public void onClick(ViewHolder viewHolder) {
         if (!isChildCheck()) {
             getSelectItems().clear();
-            getSelectItems().addAll(getChilds());
+            if (getChild() == null) return;
+            getSelectItems().addAll(getChild());
             getSelectItems().remove(mHeadItem);
         } else {
             getSelectItems().clear();
         }
-        int size = getChilds().size();
+        int size = getChild().size();
         for (int i = 0; i < size; i++) {
-            Object data = getChilds().get(i).getData();
+            Object data = getChild().get(i).getData();
             if (data != mHeadItem.getData()) {
                 ((ShopListBean) data).setCheck(isChildCheck());
             }

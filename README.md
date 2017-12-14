@@ -13,7 +13,6 @@
 
 
 # 目录介绍
-
 + 1.Adapter
   * Wapper------扩展Adapte的wapper目录
      * EmptyWapper  --------当无数据时显示页面.
@@ -23,9 +22,9 @@
   - TreeRecyclerViewType ----多级列表的显示样式,枚举
 
  + 2.base
-  - BaseItemData-----item的数据要求.javabean需要继承该类.
-  - BaseRecyclerAdapter --------封装的Adatper基类
-  - ViewHolder----封装的通用viewHodler
+     - BaseItemData-----item的数据要求.javabean需要继承该类.
+     - BaseRecyclerAdapter --------封装的Adatper基类
+     - ViewHolder----封装的通用viewHodler
 
  + 3.factory
    - ItemConfig ----添加item的class,配置样式
@@ -39,8 +38,6 @@
 
 
 
-
-
-### QQ交流群:493180098#
+### QQ交流群:493180098
 
 

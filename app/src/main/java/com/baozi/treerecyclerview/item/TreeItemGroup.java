@@ -55,7 +55,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     /**
      * 展开
      */
-    public void onExpand() {
+    protected void onExpand() {
         isExpand = true;
         int itemPosition = getItemManager().getItemPosition(this);
         getItemManager().addItems(itemPosition + 1, getExpandChild());
@@ -65,7 +65,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     /**
      * 折叠
      */
-    public void onCollapse() {
+    protected void onCollapse() {
         isExpand = false;
         getItemManager().removeItems(getExpandChild());
         getItemManager().notifyDataChanged();
