@@ -1,7 +1,6 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +24,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     private View mLoadingView;
     private int mLoadingLayoutId;
     private LoadMoreItem mLoadMoreItem;
-
+    private LoadMoreListener loadMoreListener;
     private boolean initLoadMore;
     private Type mType;
 
@@ -75,19 +74,21 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        if (mEmptyView == null && mEmptyLayoutId == 0) {
+            mEmptyView = new View(recyclerView.getContext());
+        }
+        if (mLoadingView == null && mLoadingLayoutId == 0) {
+            mLoadingView = new View(recyclerView.getContext());
+        }
         setType(Type.LOADING);
         if (mLoadMoreItem != null) {
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                }
-
-                @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (loadMoreListener == null) return;
                     if (!recyclerView.canScrollVertically(1)
-                            && getItemCount() >= mLoadMoreItem.getPageSize()) {//判断是否啦到最底部,不能再下拉
-                        mLoadMoreItem.loadMore();
+                            && getItemCount() >= (mLoadMoreItem.getPageSize() - mLoadMoreItem.getLastVisibleIndex())) {//判断是否啦到最底部,不能再下拉
+                        loadMoreListener.loadMore(mType);
                     }
                 }
             });
@@ -105,20 +106,28 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         return super.getItemSpanSize(position);
     }
 
+    public LoadMoreListener getLoadMoreListener() {
+        return loadMoreListener;
+    }
+
+    public void setLoadMoreListener(LoadMoreListener loadMoreListener) {
+        this.loadMoreListener = loadMoreListener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_LOADING) {
-            if (mLoadingView != null) {
-                return ViewHolder.createViewHolder(mLoadingView);
-            } else {
+            if (mLoadingLayoutId > 0) {
                 return ViewHolder.createViewHolder(parent, mLoadingLayoutId);
+            } else {
+                return ViewHolder.createViewHolder(mLoadingView);
             }
         }
         if (viewType == ITEM_TYPE_EMPTY) {
-            if (mEmptyView != null) {
-                return ViewHolder.createViewHolder(mEmptyView);
-            } else if (mEmptyLayoutId > 0) {
+            if (mEmptyLayoutId > 0) {
                 return ViewHolder.createViewHolder(parent, mEmptyLayoutId);
+            } else {
+                return ViewHolder.createViewHolder(mEmptyView);
             }
         }
         if (viewType == ITEM_LOAD_MORE) {
@@ -126,7 +135,6 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         }
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
-
 
     @Override
     public int getItemViewType(int position) {
@@ -182,6 +190,10 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         initLoadMore = mLoadMoreItem != null;
     }
 
+    public interface LoadMoreListener {
+        void loadMore(Type type);
+    }
+
     public abstract static class LoadMoreItem {
         private FrameLayout mLayout;
         private View loadMoreView;
@@ -217,27 +229,26 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
             } else {
                 loadMoreView = new View(context);
             }
-
         }
 
-        View getLoadMoreView() {
+        public View getLoadMoreView() {
             return mLayout;
         }
 
         //倒数第几条开始加载更多
-        int getLastVisibleIndex() {
+        public int getLastVisibleIndex() {
             return 0;
         }
 
-        View getLoadOverView() {
+        public View getLoadOverView() {
             return null;
         }
 
-        View getLoadErrorView() {
+        public View getLoadErrorView() {
             return null;
         }
 
-        public void setType(Type type) {
+        void setType(Type type) {
             loadErrorView.setVisibility(View.GONE);
             loadMoreView.setVisibility(View.GONE);
             loadOverView.setVisibility(View.GONE);
@@ -258,8 +269,8 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
 
         public abstract int getLoadOverLayout();
 
-        //加载更多回调
-        public abstract void loadMore();
+//        //加载更多回调
+//        public abstract void loadMore();
 
         //屏幕可见条目数
         public abstract int getPageSize();

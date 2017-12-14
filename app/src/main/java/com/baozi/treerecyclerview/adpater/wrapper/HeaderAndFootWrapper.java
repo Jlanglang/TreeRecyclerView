@@ -1,7 +1,5 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +16,14 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     private static final int FOOT_ITEM = 2000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private SparseArray<View> mFootViews = new SparseArray<>();
+    private boolean headShow = true;
+    private boolean footShow = true;
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
         setCheckItem(new CheckItem() {
             @Override
             public int checkPosition(int position) {
-                if (position == 0) {
-                    return position;
-                }
                 return position - getHeadersCount();
             }
         });
@@ -104,7 +101,14 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return position >= getHeadersCount() + mAdapter.getItemCount();
     }
 
+    public void setShowHeadView(boolean show) {
+        this.headShow = show;
+    }
+
     public int getHeadersCount() {
+        if (!headShow) {
+            return 0;
+        }
         return mHeaderViews.size();
     }
 

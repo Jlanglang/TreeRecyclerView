@@ -22,9 +22,17 @@ import java.util.List;
 
 public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
-    private TreeRecyclerType type = TreeRecyclerType.SHOW_DEFUTAL;
+    private TreeRecyclerType type;
 
     private ItemManager<TreeItem> mItemManager;
+
+    public TreeRecyclerAdapter() {
+        this(null);
+    }
+
+    public TreeRecyclerAdapter(TreeRecyclerType treeRecyclerType) {
+        type = treeRecyclerType == null ? TreeRecyclerType.SHOW_DEFUTAL : treeRecyclerType;
+    }
 
     @Override
     public void onBindViewHolderClick(final ViewHolder holder, View view) {
@@ -156,10 +164,13 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 @Override
                 public int getSpanSize(int position) {
                     int i = getItemCount();
-                    if (i == 0 || position >= i) {
+                    if (i == 0) {
                         return spanCount;
                     }
                     int checkPosition = getCheckItem().checkPosition(position);
+                    if (checkPosition < 0 || checkPosition >= i) {
+                        return spanCount;
+                    }
                     int itemSpanSize = getItemSpanSize(checkPosition);
                     if (itemSpanSize == 0) {
                         return spanCount;
@@ -188,6 +199,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      *
      * @param type
      */
+    @Deprecated
     public void setType(TreeRecyclerType type) {
         this.type = type;
     }
@@ -208,13 +220,13 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             } else {
                 TreeItemGroup itemParentItem = item.getParentItem();
                 if (itemParentItem != null) {
-                    List childs = itemParentItem.getChilds();
+                    List childs = itemParentItem.getChild();
                     if (childs != null) {
                         int i = getDatas().indexOf(itemParentItem);
-                        getDatas().add(i + itemParentItem.getChilds().size(), item);
+                        getDatas().add(i + itemParentItem.getChild().size(), item);
                     } else {
                         childs = new ArrayList();
-                        itemParentItem.setChilds(childs);
+                        itemParentItem.setChild(childs);
                     }
                     childs.add(item);
                 }
@@ -226,7 +238,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public void addItem(int position, TreeItem item) {
             getDatas().add(position, item);
             if (item != null && item.getParentItem() != null) {
-                item.getParentItem().getChilds().add(item);
+                item.getParentItem().getChild().add(item);
             }
             notifyDataChanged();
         }
@@ -251,7 +263,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             getDatas().remove(item);
             TreeItemGroup itemParentItem = item.getParentItem();
             if (itemParentItem != null) {
-                List childs = itemParentItem.getChilds();
+                List childs = itemParentItem.getChild();
                 if (childs != null) {
                     childs.remove(item);
                 }
@@ -263,8 +275,8 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public void removeItem(int position) {
             TreeItem t = getDatas().get(position);
             TreeItemGroup parentItem = t.getParentItem();
-            if (parentItem != null && parentItem.getChilds() != null) {
-                parentItem.getChilds().remove(t);
+            if (parentItem != null && parentItem.getChild() != null) {
+                parentItem.getChild().remove(t);
             }
             getDatas().remove(position);
             notifyDataChanged();
@@ -283,8 +295,8 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 getDatas().set(position, item);
             } else {
                 TreeItemGroup parentItem = t.getParentItem();
-                if (parentItem != null && parentItem.getChilds() != null) {
-                    List childs = parentItem.getChilds();
+                if (parentItem != null && parentItem.getChild() != null) {
+                    List childs = parentItem.getChild();
                     int i = childs.indexOf(t);
                     childs.set(i, item);
                 }

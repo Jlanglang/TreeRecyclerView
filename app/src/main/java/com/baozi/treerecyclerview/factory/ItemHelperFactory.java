@@ -9,9 +9,7 @@ import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.TreeSet;
 
 //import com.baozi.treerecyclerview.base.BaseItem;
 //import com.baozi.treerecyclerview.item.TreeItemWapper;
@@ -136,7 +134,7 @@ public class ItemHelperFactory {
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
-        List allChild = itemGroup.getChilds();
+        List allChild = itemGroup.getChild();
         int childCount = itemGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
             //下级
@@ -153,7 +151,7 @@ public class ItemHelperFactory {
                     case SHOW_EXPAND:
                         //根据isExpand,来决定是否展示
                         if (((TreeItemGroup) baseItem).isExpand()) {
-                            list = ((TreeItemGroup) baseItem).getExpandChilds();
+                            list = ((TreeItemGroup) baseItem).getExpandChild();
                         }
                         break;
                     case SHOW_DEFUTAL:

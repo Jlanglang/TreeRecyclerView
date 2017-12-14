@@ -29,9 +29,9 @@ public class CountyItemParent extends TreeItemGroup<CityBean.CitysBean> {
     public void onBindViewHolder(ViewHolder holder) {
         holder.setText(R.id.tv_content, getData().getCityName());
     }
-
-    @Override
-    public boolean isCanExpand() {
-        return data.getCityName().equals("朝阳区");
-    }
+//
+//    @Override
+//    public boolean isCanExpand() {
+//        return data.getCityName().equals("朝阳区");
+//    }
 }

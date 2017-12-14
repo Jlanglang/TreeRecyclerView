@@ -19,7 +19,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     /**
      * 持有的子item
      */
-    private List<TreeItem> childs;
+    private List<TreeItem> child;
 
     /**
      * 是否展开
@@ -58,7 +58,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     public void onExpand() {
         isExpand = true;
         int itemPosition = getItemManager().getItemPosition(this);
-        getItemManager().addItems(itemPosition + 1, getExpandChilds());
+        getItemManager().addItems(itemPosition + 1, getExpandChild());
         getItemManager().notifyDataChanged();
     }
 
@@ -67,7 +67,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     public void onCollapse() {
         isExpand = false;
-        getItemManager().removeItems(getExpandChilds());
+        getItemManager().removeItems(getExpandChild());
         getItemManager().notifyDataChanged();
     }
 
@@ -87,8 +87,8 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @return
      */
     @Nullable
-    public List<TreeItem> getExpandChilds() {
-        if (getChilds() == null) {
+    public List<TreeItem> getExpandChild() {
+        if (getChild() == null) {
             return null;
         }
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_EXPAND);
@@ -97,11 +97,11 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
 
     public void setData(D data) {
         super.setData(data);
-        childs = initChildList(data);
+        child = initChildList(data);
     }
 
-    public void setChilds(List<TreeItem> childs) {
-        this.childs = childs;
+    public void setChild(List<TreeItem> child) {
+        this.child = child;
     }
 
     /**
@@ -111,7 +111,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     @Nullable
     public List<TreeItem> getAllChilds() {
-        if (getChilds() == null) {
+        if (getChild() == null) {
             return null;
         }
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_ALL);
@@ -123,13 +123,13 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @return
      */
     @Nullable
-    public List<TreeItem> getChilds() {
-        return childs;
+    public List<TreeItem> getChild() {
+        return child;
     }
 
 
     public int getChildCount() {
-        return childs == null ? 0 : childs.size();
+        return child == null ? 0 : child.size();
     }
 
     /**
