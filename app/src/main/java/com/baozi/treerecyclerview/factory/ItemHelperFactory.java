@@ -11,8 +11,6 @@ import com.baozi.treerecyclerview.item.TreeSortItem;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.baozi.treerecyclerview.base.BaseItem;
-//import com.baozi.treerecyclerview.item.TreeItemWapper;
 
 /**
  * Created by baozi on 2017/4/29.
