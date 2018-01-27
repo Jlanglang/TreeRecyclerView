@@ -18,7 +18,6 @@ import com.baozi.treerecyclerview.R;
 
 
 /**
- * @author Aidan Follestad (afollestad)
  */
 public class DragSelectRecyclerView extends RecyclerView {
 
@@ -241,7 +240,7 @@ public class DragSelectRecyclerView extends RecyclerView {
                         mInBottomHotspot = false;
                         if (!mInTopHotspot) {
                             mInTopHotspot = true;
-                            LOG("Now in TOP hotspot");
+                            //LOG("Now in TOP hotspot");
                             mAutoScrollHandler.removeCallbacks(mAutoScrollRunnable);
                             mAutoScrollHandler.postDelayed(mAutoScrollRunnable, AUTO_SCROLL_DELAY);
                         }
@@ -250,12 +249,12 @@ public class DragSelectRecyclerView extends RecyclerView {
                         final float simulatedY = e.getY() - mHotspotTopBoundStart;
                         mAutoScrollVelocity = (int) (simulatedFactor - simulatedY) / 2;
 
-                        LOG("Auto scroll velocity = %d", mAutoScrollVelocity);
+                        //LOG("Auto scroll velocity = %d", mAutoScrollVelocity);
                     } else if (e.getY() >= mHotspotBottomBoundStart && e.getY() <= mHotspotBottomBoundEnd) {
                         mInTopHotspot = false;
                         if (!mInBottomHotspot) {
                             mInBottomHotspot = true;
-                            LOG("Now in BOTTOM hotspot");
+                            //LOG("Now in BOTTOM hotspot");
                             mAutoScrollHandler.removeCallbacks(mAutoScrollRunnable);
                             mAutoScrollHandler.postDelayed(mAutoScrollRunnable, AUTO_SCROLL_DELAY);
                         }
@@ -264,9 +263,9 @@ public class DragSelectRecyclerView extends RecyclerView {
                         final float simulatedFactor = mHotspotBottomBoundStart + mHotspotBottomBoundEnd;
                         mAutoScrollVelocity = (int) (simulatedY - simulatedFactor) / 2;
 
-                        LOG("Auto scroll velocity = %d", mAutoScrollVelocity);
+                        //LOG("Auto scroll velocity = %d", mAutoScrollVelocity);
                     } else if (mInTopHotspot || mInBottomHotspot) {
-                        LOG("Left the hotspot");
+                        //LOG("Left the hotspot");
                         mAutoScrollHandler.removeCallbacks(mAutoScrollRunnable);
                         mInTopHotspot = false;
                         mInBottomHotspot = false;

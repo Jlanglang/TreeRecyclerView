@@ -9,7 +9,6 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 import java.util.ArrayList;
 
 /**
- * @author Aidan Follestad (afollestad)
  */
 public abstract class DragSelectRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
 

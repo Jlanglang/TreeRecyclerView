@@ -89,7 +89,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         return mAdapter.getCheckItem();
     }
 
-
     @Override
     public void setCheckItem(CheckItem checkItem) {
         mAdapter.setCheckItem(checkItem);

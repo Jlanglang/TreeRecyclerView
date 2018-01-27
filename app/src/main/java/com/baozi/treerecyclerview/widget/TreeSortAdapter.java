@@ -1,10 +1,11 @@
 package com.baozi.treerecyclerview.widget;
 
-import com.baozi.treerecyclerview.manager.ItemManager;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeSortItem;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,14 @@ import java.util.List;
 public class TreeSortAdapter extends TreeRecyclerAdapter {
     private final HashMap<Object, Integer> sortMap = new HashMap<>();
     private TreeSortManageWapper manageWapper;
+
+    public TreeSortAdapter() {
+
+    }
+
+    public TreeSortAdapter(TreeRecyclerType treeRecyclerType) {
+        super(treeRecyclerType);
+    }
 
     @Override
     public void setDatas(List<TreeItem> datas) {

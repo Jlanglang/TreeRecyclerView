@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     private Type mType;
 
     public enum Type {
-        EMPTY, SUCCESS, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
+        EMPTY, REFRESH_OVER, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
     }
 
     public LoadingWrapper(BaseRecyclerAdapter<T> adapter) {
@@ -52,7 +53,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         switch (type) {
             case EMPTY:
                 break;
-            case SUCCESS:
+            case REFRESH_OVER:
                 break;
             case LOADING:
                 if (mLoadingView == null && mLoadingLayoutId == 0) {
@@ -86,8 +87,13 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     if (loadMoreListener == null) return;
-                    if (!recyclerView.canScrollVertically(1)
-                            && getItemCount() >= (mLoadMoreItem.getPageSize() - mLoadMoreItem.getLastVisibleIndex())) {//判断是否啦到最底部,不能再下拉
+                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//                    int itemCount = layoutManager.getItemCount();
+                    int itemCount = getDatas().size();
+                    int lastPosition = layoutManager.findLastVisibleItemPosition();
+                    //如果当前不是正在加载更多，并且到了该加载更多的位置，加载更多。
+                    int lastVisibleIndex = mLoadMoreItem.getLastVisibleIndex() == 0 ? 1 : mLoadMoreItem.getLastVisibleIndex();
+                    if (lastPosition >= (itemCount - lastVisibleIndex) && itemCount >= (mLoadMoreItem.getMinPageSize() - lastVisibleIndex)) {
                         loadMoreListener.loadMore(mType);
                     }
                 }
@@ -163,7 +169,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         if (isEmpty() || isLoading()) {
             return 1;
         }
-        if (initLoadMore && mAdapter.getItemCount() >= mLoadMoreItem.getPageSize()) {
+        if (initLoadMore && mAdapter.getItemCount() >= mLoadMoreItem.getMinPageSize()) {
             return mAdapter.getItemCount() + 1;
         }
         return mAdapter.getItemCount();
@@ -269,10 +275,8 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
 
         public abstract int getLoadOverLayout();
 
-//        //加载更多回调
-//        public abstract void loadMore();
 
         //屏幕可见条目数
-        public abstract int getPageSize();
+        public abstract int getMinPageSize();
     }
 }

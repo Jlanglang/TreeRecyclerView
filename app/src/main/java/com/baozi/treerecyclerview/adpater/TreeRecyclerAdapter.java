@@ -220,15 +220,15 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             } else {
                 TreeItemGroup itemParentItem = item.getParentItem();
                 if (itemParentItem != null) {
-                    List childs = itemParentItem.getChild();
-                    if (childs != null) {
+                    List child = itemParentItem.getChild();
+                    if (child != null) {
                         int i = getDatas().indexOf(itemParentItem);
                         getDatas().add(i + itemParentItem.getChild().size(), item);
                     } else {
-                        childs = new ArrayList();
-                        itemParentItem.setChild(childs);
+                        child = new ArrayList();
+                        itemParentItem.setChild(child);
                     }
-                    childs.add(item);
+                    child.add(item);
                 }
             }
             notifyDataChanged();

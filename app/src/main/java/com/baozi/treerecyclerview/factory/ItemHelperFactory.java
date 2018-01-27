@@ -11,13 +11,11 @@ import com.baozi.treerecyclerview.item.TreeSortItem;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Created by baozi on 2017/4/29.
  */
 
 public class ItemHelperFactory {
-
 
     public static List<TreeItem> createTreeItemList(List<? extends BaseItemData> list, TreeItemGroup treeParentItem) {
         if (null == list) {
@@ -39,8 +37,6 @@ public class ItemHelperFactory {
                     treeItem.setParentItem(treeParentItem);
                     treeItemList.add(treeItem);
                 }
-//                } else {
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -64,7 +60,7 @@ public class ItemHelperFactory {
                     treeItemList.add(treeItem);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return treeItemList;
@@ -96,7 +92,7 @@ public class ItemHelperFactory {
                     treeItemList.add(sortItem);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
         return treeItemList;
@@ -117,7 +113,7 @@ public class ItemHelperFactory {
                 treeItem.setData(d);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         return treeItem;
     }

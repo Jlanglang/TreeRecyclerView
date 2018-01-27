@@ -29,7 +29,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         });
     }
 
-
     @Override
     public T getData(int position) {
         return mAdapter.getData(position);
