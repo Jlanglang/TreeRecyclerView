@@ -19,7 +19,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected OnItemClickListener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
     private List<T> mDatas;
-    private CheckItem mCheckItem;
+//    private CheckItem mCheckItem;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,13 +51,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     //获得holder的position
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
-//                    if (getCheckItem().checkClick(layoutPosition)) {
 //                    检查并得到真实的position
-                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(viewHolder, itemPosition);
                     }
-//                    }
                 }
             });
         }
@@ -68,13 +66,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     //获得holder的position
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查position是否可以点击
-//                    if (getCheckItem().checkClick(layoutPosition)) {
                     //检查并得到真实的position
-                    int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
                         return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
                     }
-//                    }
                     return false;
                 }
             });
@@ -95,26 +91,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return 0;
     }
 
-    /**
-     * 默认实现的CheckItem接口
-     *
-     * @return
-     */
-    public CheckItem getCheckItem() {
-        if (mCheckItem == null) {
-            mCheckItem = new CheckItem() {
-//                @Override
-//                public int checkCount() {
-//                    return getItemCount();
-//                }
-            };
-        }
-        return mCheckItem;
-    }
-
-    public void setCheckItem(CheckItem checkItem) {
-        this.mCheckItem = checkItem;
-    }
 
     public List<T> getDatas() {
         if (mDatas == null) {
@@ -170,23 +146,32 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     /**
-     * 检查item的position,主要viewholder的getLayoutPosition不一定是需要的.
+     * 检查item属性
      */
-    public abstract class CheckItem {
+    public interface CheckItemInterface {
+        int checkPosition(int position);
+    }
 
-//        //检查当前position,是否可点击
-//        public boolean checkClick(int position) {
-//            return true;
-//        }
+    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
+        if (checkItemInterfaces == null) return;
+        checkItemInterfaces.remove(itemInterface);
+    }
 
-        //检查当前position,获取原始角标
-        public int checkPosition(int position) {
-            return position;
+    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
+        if (checkItemInterfaces == null) checkItemInterfaces = new ArrayList<>();
+        checkItemInterfaces.add(itemInterface);
+    }
+
+    private ArrayList<CheckItemInterface> checkItemInterfaces;
+
+    //检查当前position,获取原始角标
+    public int checkPosition(int position) {
+        if (checkItemInterfaces != null) {
+            for (CheckItemInterface itemInterface : checkItemInterfaces) {
+                position = itemInterface.checkPosition(position);
+            }
         }
-
-//        //检查总条目数,获取实际数据长度
-//        public abstract int checkCount();
-
+        return position;
     }
 
 

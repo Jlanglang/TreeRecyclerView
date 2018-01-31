@@ -129,7 +129,8 @@ public class ItemHelperFactory {
     public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
         List allChild = itemGroup.getChild();
-        int childCount = itemGroup.getChildCount();
+        if (allChild == null) return baseItems;
+        int childCount = allChild.size();
         for (int i = 0; i < childCount; i++) {
             //下级
             TreeItem baseItem = (TreeItem) allChild.get(i);
@@ -161,7 +162,6 @@ public class ItemHelperFactory {
 
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerType type) {
-
         if (type == TreeRecyclerType.SHOW_DEFUTAL) {
             return (ArrayList<TreeItem>) treeItems;
         }

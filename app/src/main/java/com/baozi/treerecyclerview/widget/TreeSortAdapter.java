@@ -18,7 +18,7 @@ import java.util.List;
 
 public class TreeSortAdapter extends TreeRecyclerAdapter {
     private final HashMap<Object, Integer> sortMap = new HashMap<>();
-    private TreeSortManageWapper manageWapper;
+    private TreeSortManageWrapper manageWrapper;
 
     public TreeSortAdapter() {
 
@@ -44,17 +44,17 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
     }
 
     @Override
-    public TreeSortManageWapper getItemManager() {
-        if (manageWapper == null) {
-            manageWapper = new TreeSortManageWapper(this, super.getItemManager());
+    public TreeSortManageWrapper getItemManager() {
+        if (manageWrapper == null) {
+            manageWrapper = new TreeSortManageWrapper(this, super.getItemManager());
         }
-        return manageWapper;
+        return manageWrapper;
     }
 
-    public class TreeSortManageWapper extends ItemManager<TreeItem> {
+    public class TreeSortManageWrapper extends ItemManager<TreeItem> {
         ItemManager<TreeItem> manager;
 
-        public TreeSortManageWapper(BaseRecyclerAdapter adapter, ItemManager<TreeItem> manager) {
+        public TreeSortManageWrapper(BaseRecyclerAdapter adapter, ItemManager<TreeItem> manager) {
             super(adapter);
             this.manager = manager;
         }
@@ -62,14 +62,14 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         @Override
         public void addItem(TreeItem treeItem) {
             manager.addItem(treeItem);
-            updataSort(manager.getItemPosition(treeItem), treeItem);
+            updateSort(manager.getItemPosition(treeItem), treeItem);
         }
 
 
         @Override
         public void addItem(int i, TreeItem treeItem) {
             manager.addItem(i, treeItem);
-            updataSort(i, treeItem);
+            updateSort(i, treeItem);
         }
 
         @Override
@@ -97,7 +97,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         @Override
         public void removeItem(TreeItem treeItem) {
             manager.removeItem(treeItem);
-            updataSort(getItemPosition(treeItem), treeItem);
+            updateSort(getItemPosition(treeItem), treeItem);
         }
 
         @Override
@@ -124,7 +124,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         @Override
         public void replaceItem(int i, TreeItem treeItem) {
             manager.replaceItem(i, treeItem);
-            updataSort(i, treeItem);
+            updateSort(i, treeItem);
         }
 
         @Override
@@ -153,13 +153,13 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             }
         }
 
-        public void updataSort(TreeItem treeItem) {
+        public void updateSort(TreeItem treeItem) {
             if (treeItem instanceof TreeSortItem) {
                 sortMap.put(((TreeSortItem) treeItem).getSortKey(), getItemPosition(treeItem));
             }
         }
 
-        public void updataSort(int position, TreeItem treeItem) {
+        public void updateSort(int position, TreeItem treeItem) {
             if (treeItem instanceof TreeSortItem) {
                 sortMap.put(((TreeSortItem) treeItem).getSortKey(), position);
             }

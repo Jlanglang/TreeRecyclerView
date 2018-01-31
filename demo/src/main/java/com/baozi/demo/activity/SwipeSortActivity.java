@@ -58,7 +58,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         qb_sort.setIndexs(LETTERS);
         qb_sort.setSelectedIndexTextView(tv_index);
 
-        mLinearLayoutManager = new GridLayoutManager(this,2);
+        mLinearLayoutManager = new GridLayoutManager(this, 2);
         rlcontent.setLayoutManager(mLinearLayoutManager);
         rlcontent.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -131,7 +131,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mWrapper.setType(LoadingWrapper.Type.SUCCESS);
+                        mWrapper.setType(LoadingWrapper.Type.REFRESH_OVER);
                         mWrapper.getItemManager().replaceAllItem(new ArrayList());
                     }
                 });
@@ -154,7 +154,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mWrapper.setType(LoadingWrapper.Type.SUCCESS);
+                        mWrapper.setType(LoadingWrapper.Type.REFRESH_OVER);
                         mWrapper.getItemManager().replaceAllItem(groupItems);
                     }
                 });

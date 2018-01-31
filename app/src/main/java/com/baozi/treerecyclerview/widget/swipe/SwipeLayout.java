@@ -403,12 +403,17 @@ public class SwipeLayout extends FrameLayout {
      * save children's bounds, so they can restore the bound in {@link #onLayout(boolean, int, int, int, int)}
      */
     private void captureChildrenBound() {
+//        View currentBottomView = getCurrentBottomView();
+//        if (getOpenStatus() == Status.Close) {
+//            mViewBoundCache.remove(currentBottomView);
+//            return;
+//        }
         View currentBottomView = getCurrentBottomView();
         if (getOpenStatus() == Status.Close) {
             mViewBoundCache.remove(currentBottomView);
+            mViewBoundCache.remove(getSurfaceView());
             return;
         }
-
         View[] views = new View[]{
                 getSurfaceView(),
                 currentBottomView};

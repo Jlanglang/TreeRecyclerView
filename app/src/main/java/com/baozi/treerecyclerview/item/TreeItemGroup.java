@@ -3,6 +3,7 @@ package com.baozi.treerecyclerview.item;
 import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     private boolean isExpand;
 
+
     public boolean isExpand() {
         return isExpand;
     }
@@ -35,21 +37,23 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      *
      * @param expand 传入true则展开,传入false则折叠
      */
-    public void setExpand(boolean expand) {
-        if (isCanExpand()) {
-            isExpand = expand;
+    public final void setExpand(boolean expand) {
+        if (!isCanExpand()) {
+            return;
+        }
+        if (expand) {
+            onExpand();
+        } else {
+            onCollapse();
         }
     }
 
     /**
      * 刷新Item的展开状态
      */
+    @Deprecated
     public void notifyExpand() {
-        if (isExpand()) {
-            onExpand();
-        } else {
-            onCollapse();
-        }
+        setExpand(isExpand);
     }
 
     /**
@@ -149,6 +153,14 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     public boolean onInterceptClick(TreeItem child) {
         return false;
     }
+
+//    /**
+//     * 相应RecyclerView的点击事件 展开或关闭某节点
+//     */
+//    public void expandOrCollapse() {
+//        //展开,折叠
+//        setExpand(!isExpand);
+//    }
 
     @Override
     public int getSpanSize() {

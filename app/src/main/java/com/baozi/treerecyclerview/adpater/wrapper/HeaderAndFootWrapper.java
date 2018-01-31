@@ -21,7 +21,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-        setCheckItem(new CheckItem() {
+        mAdapter.addCheckItemInterfaces(new CheckItemInterface() {
             @Override
             public int checkPosition(int position) {
                 return position - getHeadersCount();

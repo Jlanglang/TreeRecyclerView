@@ -41,29 +41,26 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 @Override
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
-                    //检查item的position,这个item是否可以点击
-//                    if (getCheckItem().checkClick(layoutPosition)) {
                     //获得处理后的position
-                    layoutPosition = getCheckItem().checkPosition(layoutPosition);
+                    layoutPosition = checkPosition(layoutPosition);
                     //拿到BaseItem
                     TreeItem item = getDatas().get(layoutPosition);
+                    TreeItemGroup itemParentItem = item.getParentItem();
+                    //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
+                    if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
+                        return;
+                    }
                     //展开,折叠和item点击不应该同时响应事件.
                     //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-                    if (type != TreeRecyclerType.SHOW_ALL && item instanceof TreeItemGroup && ((TreeItemGroup) item).isCanExpand()) {
-                        //展开,折叠
-                        expandOrCollapse(((TreeItemGroup) item));
+                    if (item instanceof TreeItemGroup && type != TreeRecyclerType.SHOW_ALL) {
+                        TreeItemGroup treeItemGroup = (TreeItemGroup) item;
+                        treeItemGroup.setExpand(!treeItemGroup.isExpand());
+                    }
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(holder, layoutPosition);
                     } else {
-                        TreeItemGroup itemParentItem = item.getParentItem();
-                        //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
-                        if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
-                            return;
-                        }
-                        if (mOnItemClickListener != null) {
-                            mOnItemClickListener.onItemClick(holder, layoutPosition);
-                        } else {
-                            //拿到对应item,回调.
-                            getDatas().get(layoutPosition).onClick(holder);
-                        }
+                        //拿到对应item,回调.
+                        getDatas().get(layoutPosition).onClick(holder);
                     }
                 }
 //                }
@@ -75,13 +72,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 //获得holder的position
                 int layoutPosition = holder.getLayoutPosition();
                 //检查position是否可以点击
-//                if (getCheckItem().checkClick(layoutPosition)) {
                 //检查并得到真实的position
-                int itemPosition = getCheckItem().checkPosition(layoutPosition);
+                int itemPosition = checkPosition(layoutPosition);
                 if (mOnItemLongClickListener != null) {
                     return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
                 }
-//                }
                 return false;
             }
         });
@@ -167,7 +162,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     if (i == 0) {
                         return spanCount;
                     }
-                    int checkPosition = getCheckItem().checkPosition(position);
+                    int checkPosition = checkPosition(position);
                     if (checkPosition < 0 || checkPosition >= i) {
                         return spanCount;
                     }
@@ -185,14 +180,14 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         return getData(position).getSpanSize();
     }
 
-    /**
-     * 相应RecyclerView的点击事件 展开或关闭某节点
-     */
-    private void expandOrCollapse(TreeItemGroup treeItemGroup) {
-        boolean expand = treeItemGroup.isExpand();
-        treeItemGroup.setExpand(!expand);
-        treeItemGroup.notifyExpand();
-    }
+//    /**
+//     * 相应RecyclerView的点击事件 展开或关闭某节点
+//     */
+//    private void expandOrCollapse(TreeItemGroup treeItemGroup) {
+//        boolean expand = treeItemGroup.isExpand();
+//        treeItemGroup.setExpand(!expand);
+//        treeItemGroup.notifyExpand();
+//    }
 
     /**
      * 需要设置在setdata之前,否则type不会生效

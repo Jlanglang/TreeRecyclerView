@@ -84,15 +84,12 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.onBindViewHolder(holder, t, position);
     }
 
-    @Override
-    public CheckItem getCheckItem() {
-        return mAdapter.getCheckItem();
-    }
 
     @Override
-    public void setCheckItem(CheckItem checkItem) {
-        mAdapter.setCheckItem(checkItem);
+    public int checkPosition(int position) {
+        return mAdapter.checkPosition(position);
     }
+
 
     @Override
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

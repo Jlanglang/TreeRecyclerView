@@ -28,7 +28,7 @@ import java.util.Set;
 public class SwipeWrapper extends BaseWrapper {
     private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
-    private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
+    //    private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
     private SparseIntArray swipeItemSparseArray = new SparseIntArray();
 
     public SwipeWrapper(BaseRecyclerAdapter adapter) {
@@ -55,7 +55,7 @@ public class SwipeWrapper extends BaseWrapper {
             swipeLayout.setLayoutParams(inflate.getLayoutParams());
             swipeLayout.addView(inflate);
             ViewHolder swipeViewHolder = ViewHolder.createViewHolder(swipeLayout);
-            swipeLayoutHashMap.put(swipeViewHolder, swipeLayout);
+//            swipeLayoutHashMap.put(swipeViewHolder, swipeLayout);
             super.onBindViewHolderClick(swipeViewHolder, inflate);
             return swipeViewHolder;
         }
@@ -65,9 +65,8 @@ public class SwipeWrapper extends BaseWrapper {
     @Override
     public int getItemViewType(int position) {
         int itemViewType = super.getItemViewType(position);
-        int i = swipeItemSparseArray.get(itemViewType, -1);
-        if (i == -1) {//说明该type不存在;
-            Object o = getData(getCheckItem().checkPosition(position));
+        if (swipeItemSparseArray.get(itemViewType, -1) == -1) {//说明该type不存在;
+            Object o = getData(checkPosition(position));
             if (o instanceof SwipeItem) {
                 swipeItemSparseArray.put(itemViewType, SWIPE_ITEM + swipeItemSparseArray.size());
             }
@@ -78,24 +77,23 @@ public class SwipeWrapper extends BaseWrapper {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        int checkPosition = getCheckItem().checkPosition(position);
+        int checkPosition = checkPosition(position);
         Object data = getData(checkPosition);
         if (data instanceof SwipeItem) {
-            SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
-            checkSwipeLayout(holder, (SwipeItem) data);
-            getSwipeManger().bind(swipeLayout, ((SwipeItem) data).getSwipeLayoutId(), checkPosition);
-            ((SwipeItem) data).onBindSwipeView(holder, position);
+            checkSwipeLayout(holder, (SwipeItem) data, position);
         }
         super.onBindViewHolder(holder, position);
     }
 
-    private void checkSwipeLayout(ViewHolder holder, SwipeItem data) {
-        SwipeLayout view = swipeLayoutHashMap.get(holder);
-        Map<SwipeLayout.DragEdge, View> dragEdgeMap = view.getDragEdgeMap();
+    private void checkSwipeLayout(ViewHolder holder, SwipeItem data, int position) {
+        SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
+        Map<SwipeLayout.DragEdge, View> dragEdgeMap = swipeLayout.getDragEdgeMap();
         if (dragEdgeMap.get(data.getDragEdge()) == null) {
-            View inflate = LayoutInflater.from(view.getContext()).inflate(data.getSwipeLayoutId(), null);
-            view.addDrag(data.getDragEdge(), inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            View inflate = LayoutInflater.from(swipeLayout.getContext()).inflate(data.getSwipeLayoutId(), null);
+            swipeLayout.addDrag(data.getDragEdge(), inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         }
+        getSwipeManger().bind(swipeLayout, data.getSwipeLayoutId(), position);
+        data.onBindSwipeView(holder, position, getSwipeManger());
     }
 
     @Override
@@ -111,6 +109,7 @@ public class SwipeWrapper extends BaseWrapper {
             }
         });
     }
+
     /**
      * Swipe    ItemMangerImpl is a helper class to help all the adapters to maintain open status.
      */
