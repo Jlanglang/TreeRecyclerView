@@ -24,6 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile files('libs/fastjson-1.2.9.jar')
-    compile files('libs/Msc.jar')
+//    compile files('libs/Msc.jar')
     compile project(':app')
 }

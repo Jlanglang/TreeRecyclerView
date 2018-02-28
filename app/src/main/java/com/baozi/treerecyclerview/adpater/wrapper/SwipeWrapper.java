@@ -55,7 +55,6 @@ public class SwipeWrapper extends BaseWrapper {
             swipeLayout.setLayoutParams(inflate.getLayoutParams());
             swipeLayout.addView(inflate);
             ViewHolder swipeViewHolder = ViewHolder.createViewHolder(swipeLayout);
-//            swipeLayoutHashMap.put(swipeViewHolder, swipeLayout);
             super.onBindViewHolderClick(swipeViewHolder, inflate);
             return swipeViewHolder;
         }

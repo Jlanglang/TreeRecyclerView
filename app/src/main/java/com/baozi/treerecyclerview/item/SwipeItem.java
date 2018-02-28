@@ -16,4 +16,6 @@ public interface SwipeItem {
     SwipeLayout.DragEdge getDragEdge();
 
     void onBindSwipeView(ViewHolder viewHolder, int position, SwipeItemMangerInterface swipeManger);
+
+    void openCallback();
 }

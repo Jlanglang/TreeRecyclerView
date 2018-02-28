@@ -26,6 +26,7 @@ public class ContentGroupItem extends TreeItemGroup<TitleBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder) {
+
     }
 
     @Override
