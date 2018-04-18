@@ -25,13 +25,13 @@ import java.util.Set;
  * Created by Administrator on 2017/8/18 0018.
  */
 
-public class SwipeWrapper extends BaseWrapper {
+public class SwipeWrapper<T> extends BaseWrapper<T> {
     private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
     //    private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
     private SparseIntArray swipeItemSparseArray = new SparseIntArray();
 
-    public SwipeWrapper(BaseRecyclerAdapter adapter) {
+    public SwipeWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
     }
 
@@ -88,8 +88,8 @@ public class SwipeWrapper extends BaseWrapper {
         SwipeLayout swipeLayout = (SwipeLayout) holder.itemView;
         Map<SwipeLayout.DragEdge, View> dragEdgeMap = swipeLayout.getDragEdgeMap();
         if (dragEdgeMap.get(data.getDragEdge()) == null) {
-            View inflate = LayoutInflater.from(swipeLayout.getContext()).inflate(data.getSwipeLayoutId(), null);
-            swipeLayout.addDrag(data.getDragEdge(), inflate, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            View inflate = LayoutInflater.from(swipeLayout.getContext()).inflate(data.getSwipeLayoutId(), swipeLayout, false);
+            swipeLayout.addDrag(data.getDragEdge(), inflate, inflate.getLayoutParams());
         }
         getSwipeManger().bind(swipeLayout, data.getSwipeLayoutId(), position);
         data.onBindSwipeView(holder, position, getSwipeManger());

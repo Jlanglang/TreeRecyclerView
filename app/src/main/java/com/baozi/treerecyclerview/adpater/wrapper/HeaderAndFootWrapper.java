@@ -21,7 +21,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-        mAdapter.addCheckItemInterfaces(new CheckItemInterface() {
+        addCheckItemInterfaces(new CheckItemInterface() {
             @Override
             public int checkPosition(int position) {
                 return position - getHeadersCount();
@@ -102,6 +102,11 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public void setShowHeadView(boolean show) {
         this.headShow = show;
+        int size = mHeaderViews.size();
+        for (int i = 0; i < size; i++) {
+            View view = mHeaderViews.valueAt(i);
+            view.setVisibility(show ? View.VISIBLE : View.GONE);
+        }
     }
 
     public int getHeadersCount() {

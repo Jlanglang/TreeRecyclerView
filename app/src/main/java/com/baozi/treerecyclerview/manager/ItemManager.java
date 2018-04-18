@@ -47,6 +47,8 @@ public abstract class ItemManager<T> {
 
     public abstract int getItemPosition(T item);
 
+    public abstract void clean();
+
     //刷新
     public void notifyDataChanged() {
         mAdapter.notifyDataSetChanged();

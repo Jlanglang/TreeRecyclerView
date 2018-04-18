@@ -1,5 +1,7 @@
 package com.baozi.treerecyclerview.item;
 
+import android.support.annotation.NonNull;
+
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.widget.swipe.SwipeItemMangerInterface;
 import com.baozi.treerecyclerview.widget.swipe.SwipeLayout;
@@ -15,7 +17,7 @@ public interface SwipeItem {
 
     SwipeLayout.DragEdge getDragEdge();
 
-    void onBindSwipeView(ViewHolder viewHolder, int position, SwipeItemMangerInterface swipeManger);
+    void onBindSwipeView(@NonNull ViewHolder viewHolder, int position, SwipeItemMangerInterface swipeManger);
 
     void openCallback();
 }

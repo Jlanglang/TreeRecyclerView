@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.factory;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseItemData;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class ItemHelperFactory {
 
-    public static List<TreeItem> createTreeItemList(List<? extends BaseItemData> list, TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeItemList(@Nullable List<? extends BaseItemData> list, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -44,7 +45,7 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-    public static List<TreeItem> createTreeItemList(List list, Class<? extends TreeItem> iClass, TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -75,7 +76,7 @@ public class ItemHelperFactory {
      * @param treeParentItem
      * @return
      */
-    public static List<TreeItem> createTreeSortList(List list, Class<? extends TreeSortItem> iClass, Object sortKey, TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -126,7 +127,7 @@ public class ItemHelperFactory {
      * @return
      */
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(TreeItemGroup itemGroup, TreeRecyclerType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(@Nullable TreeItemGroup itemGroup, @Nullable TreeRecyclerType type) {
         ArrayList<TreeItem> baseItems = new ArrayList<>();
         List allChild = itemGroup.getChild();
         if (allChild == null) return baseItems;
@@ -161,7 +162,7 @@ public class ItemHelperFactory {
     }
 
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(List<TreeItem> treeItems, TreeRecyclerType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> treeItems, @NonNull TreeRecyclerType type) {
         if (type == TreeRecyclerType.SHOW_DEFUTAL) {
             return (ArrayList<TreeItem>) treeItems;
         }

@@ -1,8 +1,15 @@
 package com.baozi.treerecyclerview.factory;
 
+import android.content.Context;
 import android.util.SparseArray;
 
+import com.baozi.treerecyclerview.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
+
+import java.io.IOException;
+import java.lang.annotation.Annotation;
+
+import dalvik.system.DexFile;
 
 public class ItemConfig {
 
@@ -21,5 +28,22 @@ public class ItemConfig {
             return;
         }
         treeViewHolderTypes.put(type, clazz);
+    }
+
+    @SafeVarargs
+    public static void addTreeHolderType(Class<? extends TreeItem>... clazz) {
+        for (Class<? extends TreeItem> zClass : clazz) {
+            Annotation annotation = zClass.getAnnotation(TreeItemType.class);
+            if (annotation != null) {
+                int type = ((TreeItemType) annotation).type();
+                Class<? extends TreeItem> aClass = treeViewHolderTypes.get(type);
+                if (aClass == null) {
+                    treeViewHolderTypes.put(type, zClass);
+                } else if (!aClass.getSimpleName().equals(zClass.getSimpleName())) {
+                    throw new IllegalStateException(zClass.getSimpleName() +
+                            " type already exists and " + treeViewHolderTypes.get(type).getSimpleName());
+                }
+            }
+        }
     }
 }

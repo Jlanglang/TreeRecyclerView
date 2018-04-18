@@ -24,6 +24,16 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
+    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
+        mAdapter.addCheckItemInterfaces(itemInterface);
+    }
+
+    @Override
+    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
+        mAdapter.removeCheckItemInterfaces(itemInterface);
+    }
+
+    @Override
     public void onBindViewHolderClick(ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
     }

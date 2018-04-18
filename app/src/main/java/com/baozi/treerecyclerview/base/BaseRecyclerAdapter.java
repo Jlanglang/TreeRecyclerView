@@ -19,7 +19,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected OnItemClickListener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
     private List<T> mDatas;
-//    private CheckItem mCheckItem;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -95,7 +94,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public void setDatas(List<T> datas) {
-        if (datas != null) {
+        if (datas != null && !datas.isEmpty()) {
             getDatas().clear();
             getDatas().addAll(datas);
         }
@@ -153,7 +152,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
-        if (checkItemInterfaces == null) checkItemInterfaces = new ArrayList<>();
+        if (checkItemInterfaces == null) {
+            checkItemInterfaces = new ArrayList<>();
+        }
         checkItemInterfaces.add(itemInterface);
     }
 

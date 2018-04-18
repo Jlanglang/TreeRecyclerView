@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.List;
 
@@ -61,9 +62,12 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     protected void onExpand() {
         isExpand = true;
-        int itemPosition = getItemManager().getItemPosition(this);
-        getItemManager().addItems(itemPosition + 1, getExpandChild());
-        getItemManager().notifyDataChanged();
+        ItemManager itemManager = getItemManager();
+        if (itemManager != null) {
+            int itemPosition = itemManager.getItemPosition(this);
+            itemManager.addItems(itemPosition + 1, getExpandChild());
+            itemManager.notifyDataChanged();
+        }
     }
 
     /**
@@ -71,8 +75,11 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     protected void onCollapse() {
         isExpand = false;
-        getItemManager().removeItems(getExpandChild());
-        getItemManager().notifyDataChanged();
+        ItemManager itemManager = getItemManager();
+        if (itemManager != null) {
+            itemManager.removeItems(getExpandChild());
+            itemManager.notifyDataChanged();
+        }
     }
 
     /**
@@ -142,6 +149,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @param data
      * @return
      */
+    @Nullable
     protected abstract List<TreeItem> initChildList(D data);
 
     /**

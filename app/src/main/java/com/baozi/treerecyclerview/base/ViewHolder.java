@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.base;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -32,8 +33,13 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     public static ViewHolder createViewHolder(ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
-                false);
+        View itemView = null;
+        try {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
+                    false);
+        } catch (Resources.NotFoundException exception) {
+            itemView = new View(parent.getContext());
+        }
         return createViewHolder(itemView);
     }
 
@@ -72,6 +78,18 @@ public class ViewHolder extends RecyclerView.ViewHolder {
      * @return
      */
     public ViewHolder setText(int viewId, String text) {
+        TextView tv = getView(viewId);
+        tv.setText(text);
+        return this;
+    }
+    /**
+     * 设置TextView的值
+     *
+     * @param viewId
+     * @param text
+     * @return
+     */
+    public ViewHolder setText(int viewId, int text) {
         TextView tv = getView(viewId);
         tv.setText(text);
         return this;

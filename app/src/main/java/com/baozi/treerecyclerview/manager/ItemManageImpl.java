@@ -16,6 +16,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void addItem(T item) {
+        if (item == null) return;
         getDatas().add(item);
         notifyDataChanged();
     }
@@ -86,5 +87,11 @@ public class ItemManageImpl<T> extends ItemManager<T> {
     @Override
     public int getItemPosition(T item) {
         return getDatas().indexOf(item);
+    }
+
+    @Override
+    public void clean() {
+        getDatas().clear();
+        notifyDataChanged();
     }
 }

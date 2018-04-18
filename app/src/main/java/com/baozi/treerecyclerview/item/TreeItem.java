@@ -1,7 +1,9 @@
 package com.baozi.treerecyclerview.item;
 
-import android.content.res.Resources;
+import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.treerecyclerview.manager.ItemManager;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -51,13 +53,10 @@ public abstract class TreeItem<D> {
     public void setItemManager(ItemManager itemManager) {
         mItemManager = itemManager;
     }
-
-    public int getLayoutId() {
-        if (initLayoutId() <= 0) {
-            throw new Resources.NotFoundException("请设置布局Id");
-        }
-        return initLayoutId();
-    }
+//
+//    public int getLayoutId() {
+//        return this.getLayoutId();
+//    }
 
 
     /**
@@ -65,7 +64,7 @@ public abstract class TreeItem<D> {
      *
      * @return 布局id
      */
-    protected abstract int initLayoutId();
+    public abstract int getLayoutId();
 
     /**
      * 觉得item的所占比例
@@ -80,6 +79,17 @@ public abstract class TreeItem<D> {
         this.spanSize = spanSize;
     }
 
+    /**
+     * 设置当前条目间隔
+     *
+     * @param outRect
+     * @param layoutParams
+     * @param position
+     */
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+
+    }
+
     public D getData() {
         return data;
     }
@@ -91,7 +101,7 @@ public abstract class TreeItem<D> {
     /**
      * 抽象holder的绑定
      */
-    public abstract void onBindViewHolder(ViewHolder viewHolder);
+    public abstract void onBindViewHolder(@NonNull ViewHolder viewHolder);
 
     /**
      * 当前条目的点击回调
@@ -99,5 +109,4 @@ public abstract class TreeItem<D> {
     public void onClick(ViewHolder viewHolder) {
 
     }
-
 }
