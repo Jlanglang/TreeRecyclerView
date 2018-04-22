@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.moudle.testlist.ContentImageItem;
-import com.baozi.demo.moudle.testlist.bean.ContentBean;
-import com.baozi.demo.moudle.testlist.SelectionImageItem;
-import com.baozi.demo.moudle.testlist.SelectionTextItem;
-import com.baozi.demo.moudle.testlist.bean.TitleBean;
-import com.baozi.demo.moudle.testlist.ContentGroupItem;
+import com.baozi.demo.item.testlist.ContentImageItem;
+import com.baozi.demo.bean.ContentBean;
+import com.baozi.demo.item.testlist.SelectionImageItem;
+import com.baozi.demo.item.testlist.SelectionTextItem;
+import com.baozi.demo.bean.TitleBean;
+import com.baozi.demo.item.testlist.ContentGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
@@ -32,13 +32,13 @@ public class TestListAativity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testlist);
+        setContentView(R.layout.layout_rv_content);
         ItemConfig.addTreeHolderType(102, ContentImageItem.class);
         ItemConfig.addTreeHolderType(100, ContentGroupItem.class);
         ItemConfig.addTreeHolderType(101, SelectionImageItem.class);
         ItemConfig.addTreeHolderType(103, SelectionTextItem.class);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {

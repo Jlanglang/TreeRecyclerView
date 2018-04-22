@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/et_left"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="left"
+        android:text="0" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/et_top"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="top"
+        android:text="0" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/et_right"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="right"
+        android:text="0" />
+
+    <EditText
+        android:inputType="number"
+        android:id="@+id/et_bottom"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:hint="bottom"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="100dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="截图" />
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="" />
+</LinearLayout>

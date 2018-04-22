@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
-import com.baozi.demo.moudle.sortList.IndexBar;
-import com.baozi.demo.moudle.sortList.SortGroupItem;
+import com.baozi.demo.item.sortList.IndexBar;
+import com.baozi.demo.item.sortList.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
@@ -33,7 +33,7 @@ public class SortActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        RecyclerView rlcontent = (RecyclerView) findViewById(R.id.rl_content);
+        RecyclerView rlcontent = (RecyclerView) findViewById(R.id.rv_content);
         TextView tv_index = (TextView) findViewById(R.id.tv_index);
         IndexBar qb_sort = (IndexBar) findViewById(R.id.qb_sort);
         qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {

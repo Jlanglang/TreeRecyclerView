@@ -26,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        findViewById(R.id.bt_shopcart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.bt_shopcart).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ShopListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         findViewById(R.id.bt_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        findViewById(R.id.bt_shoptab).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShopTabListActivity.class);
-                startActivity(intent);
-            }
-        });
+//        findViewById(R.id.bt_shoptab).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ShopTabListActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         findViewById(R.id.bt_news).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_swipe_sort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SwipeSortActivity.class);
+                Intent intent = new Intent(MainActivity.this, ScreenCaptureActivity.class);
                 startActivity(intent);
             }
         });

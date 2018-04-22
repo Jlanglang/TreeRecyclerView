@@ -9,10 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.moudle.newslist.NewsFootItem;
-import com.baozi.demo.moudle.newslist.NewsImageItem;
-import com.baozi.demo.moudle.newslist.NewsItem;
-import com.baozi.demo.moudle.newslist.bean.NewsItemBean;
+import com.baozi.demo.item.newslist.NewsFootItem;
+import com.baozi.demo.item.newslist.NewsImageItem;
+import com.baozi.demo.item.newslist.NewsItem;
+import com.baozi.demo.bean.NewsItemBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemConfig;
@@ -32,12 +32,12 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_testlist);
+        setContentView(R.layout.layout_rv_content);
         ItemConfig.addTreeHolderType(200, NewsItem.class);
         ItemConfig.addTreeHolderType(201, NewsImageItem.class);
         ItemConfig.addTreeHolderType(202, NewsFootItem.class);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rl_content);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
