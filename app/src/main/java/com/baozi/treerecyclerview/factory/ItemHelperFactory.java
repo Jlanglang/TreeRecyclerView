@@ -104,7 +104,7 @@ public class ItemHelperFactory {
      *
      * @return
      */
-    public static <D extends BaseItemData> TreeItem createTreeItem(D d, Class<? extends TreeItem> zClass) {
+    public static <D> TreeItem createTreeItem(D d, Class<? extends TreeItem> zClass) {
         TreeItem treeItem = null;
         try {
             treeItem = zClass.newInstance();
