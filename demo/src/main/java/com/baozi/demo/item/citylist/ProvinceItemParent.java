@@ -29,4 +29,5 @@ public class ProvinceItemParent extends TreeItemGroup<CityBean> {
         holder.setText(R.id.tv_content, data.getProvinceName());
     }
 
+
 }

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.baozi.demo.R;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 
 /**
  * @author jlanglang  2016/12/22 9:58
@@ -15,6 +17,8 @@ import com.baozi.demo.R;
  */
 
 public class MainActivity extends AppCompatActivity {
+    private View statusBarView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_swipe_sort).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ScreenCaptureActivity.class);
+                Intent intent = new Intent(MainActivity.this, SwipeSortActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/tv_content"
-        android:text="三级"
-        android:textSize="25dp"
-        android:textColor="#000"
-        android:background="#aa00aa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="#aa00aa"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="15dp" />
 </LinearLayout>

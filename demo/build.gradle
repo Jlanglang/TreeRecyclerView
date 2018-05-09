@@ -20,10 +20,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+//    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
 //    compile 'com.jakewharton:butterknife:8.8.1'
     compile files('libs/fastjson-1.2.9.jar')
 //    compile files('libs/Msc.jar')
-    compile project(':app')
+//    compile project(':app')
+    implementation 'com.github.Jlanglang:TreeRecyclerView:b5089003fe'
 }

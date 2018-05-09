@@ -10,8 +10,14 @@
 
 4.item的样式可以实现复用,与baseItemData的type对应,实现复用
 
-
-
+# 依赖方式
+```
+ implementation 'com.github.Jlanglang:TreeRecyclerView:b5089003fe'
+```
+根build.gradle里面添加
+```
+  maven { url 'https://jitpack.io' }
+```
 # 目录介绍
 + 1.Adapter
   * Wapper------扩展Adapte的wapper目录

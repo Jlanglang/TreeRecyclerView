@@ -22,7 +22,6 @@
         <activity android:name=".activity.NewsActivity" />
         <activity android:name=".activity.SortActivity" />
         <activity android:name=".activity.SwipeSortActivity" />
-        <activity android:name=".activity.ScreenCaptureActivity"/>
         <!--<activity android:name=".activity.TestActivity"/>-->
     </application>
 </manifest>
