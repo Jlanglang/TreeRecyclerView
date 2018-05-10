@@ -16,7 +16,9 @@
 ```
 根build.gradle里面添加
 ```
-  maven { url 'https://jitpack.io' }
+ repositories {
+     maven { url 'https://jitpack.io' }
+ }
 ```
 # 目录介绍
 + 1.Adapter
