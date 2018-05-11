@@ -94,7 +94,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.onBindViewHolder(holder, t, position);
     }
 
-
     @Override
     public int checkPosition(int position) {
         return mAdapter.checkPosition(position);

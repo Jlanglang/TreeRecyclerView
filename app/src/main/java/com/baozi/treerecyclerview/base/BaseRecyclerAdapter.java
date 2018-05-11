@@ -27,7 +27,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return holder;
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         onBindViewHolder(holder, getDatas().get(position), position);
@@ -84,7 +83,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     public int getItemSpanSize(int position) {
         return 0;
     }
-
 
     public List<T> getDatas() {
         if (mDatas == null) {

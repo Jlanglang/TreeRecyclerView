@@ -99,21 +99,6 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-    /**
-     * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
-     *
-     * @return
-     */
-    public static <D> TreeItem createTreeItem(D d, Class<? extends TreeItem> zClass) {
-        TreeItem treeItem = null;
-        try {
-            treeItem = zClass.newInstance();
-            treeItem.setData(d);
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
-        return treeItem;
-    }
 
     /**
      * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
@@ -121,8 +106,17 @@ public class ItemHelperFactory {
      * @return
      */
     public static <D extends BaseItemData> TreeItem createTreeItem(D d) {
-        Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
-        return createTreeItem(d, itemClass);
+        TreeItem treeItem = null;
+        try {
+            Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
+            if (itemClass != null) {
+                treeItem = itemClass.newInstance();
+                treeItem.setData(d);
+            }
+        } catch (Exception e) {
+            //e.printStackTrace();
+        }
+        return treeItem;
     }
 
     /**

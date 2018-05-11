@@ -92,11 +92,11 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
     }
 
-    private boolean isHeaderViewPos(int position) {
+    protected boolean isHeaderViewPos(int position) {
         return position < getHeadersCount();
     }
 
-    private boolean isFooterViewPos(int position) {
+    protected boolean isFooterViewPos(int position) {
         return position >= getHeadersCount() + mAdapter.getItemCount();
     }
 

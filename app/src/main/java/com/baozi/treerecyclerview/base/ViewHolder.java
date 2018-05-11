@@ -68,6 +68,10 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return getView(id);
     }
 
+    public TextView getTextView(int id) {
+        return getView(id);
+    }
+
     /****以下为辅助方法*****/
 
     /**
@@ -82,6 +86,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         tv.setText(text);
         return this;
     }
+
     /**
      * 设置TextView的值
      *

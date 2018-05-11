@@ -1,15 +1,11 @@
 package com.baozi.treerecyclerview.factory;
 
-import android.content.Context;
 import android.util.SparseArray;
 
 import com.baozi.treerecyclerview.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 
-import java.io.IOException;
 import java.lang.annotation.Annotation;
-
-import dalvik.system.DexFile;
 
 public class ItemConfig {
 
