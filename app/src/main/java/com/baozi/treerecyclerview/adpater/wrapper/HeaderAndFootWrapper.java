@@ -9,6 +9,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 
 /**
  * Created by baozi on 2017/4/30.
+ * 在最后一个，优先级高于loadwrapper,
  */
 
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
