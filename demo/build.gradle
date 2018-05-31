@@ -25,6 +25,6 @@ dependencies {
 //    compile 'com.jakewharton:butterknife:8.8.1'
     compile files('libs/fastjson-1.2.9.jar')
 //    compile files('libs/Msc.jar')
-//    compile project(':app')
-    implementation 'com.github.Jlanglang:TreeRecyclerView:v1.0.0'
+    compile project(':app')
+//    implementation
 }

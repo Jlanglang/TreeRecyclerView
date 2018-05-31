@@ -161,16 +161,4 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         return false;
     }
 
-//    /**
-//     * 相应RecyclerView的点击事件 展开或关闭某节点
-//     */
-//    public void expandOrCollapse() {
-//        //展开,折叠
-//        setExpand(!isExpand);
-//    }
-
-    @Override
-    public int getSpanSize() {
-        return super.getSpanSize();
-    }
 }

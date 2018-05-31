@@ -3,6 +3,8 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.baozi.treerecyclerview.BindItemClass;
+import com.baozi.treerecyclerview.BindItemType;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -18,21 +20,19 @@ import java.util.List;
 
 public class ItemHelperFactory {
 
-    public static List<TreeItem> createTreeItemList(@Nullable List<? extends BaseItemData> list, @Nullable TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createTreeItemList(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         int size = list.size();
-
         for (int i = 0; i < size; i++) {
             try {
-                BaseItemData itemData = list.get(i);
-                int viewItemType = itemData.getViewItemType();
+                Object itemData = list.get(i);
+                Class<? extends TreeItem> treeItemClass = getTypeClass(itemData);
                 TreeItem treeItem;
                 //判断是否是TreeItem的子类
-                if (ItemConfig.getTreeViewHolderType(viewItemType) != null) {
-                    Class<? extends TreeItem> treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
+                if (treeItemClass != null) {
                     treeItem = treeItemClass.newInstance();
                     treeItem.setData(itemData);
                     treeItem.setParentItem(treeParentItem);
@@ -45,6 +45,23 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
+    private static Class<? extends TreeItem> getTypeClass(Object itemData) {
+        Class<? extends TreeItem> treeItemClass = null;
+        //先判断是否继承了ItemData,适用于跨模块获取
+        if (itemData instanceof BaseItemData) {
+            int viewItemType = ((BaseItemData) itemData).getViewItemType();
+            treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
+        } else {
+            //判断是否使用注解绑定了ItemClass,适用当前模块
+            BindItemClass annotation = itemData.getClass().getAnnotation(BindItemClass.class);
+            if (annotation != null) {
+                treeItemClass = annotation.itemClass();
+            }
+        }
+        return treeItemClass;
+    }
+
+    @Deprecated
     public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -71,11 +88,11 @@ public class ItemHelperFactory {
      * 创建排序List
      *
      * @param list
-     * @param iClass
      * @param sortKey
      * @param treeParentItem
      * @return
      */
+    @Deprecated
     public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -87,6 +104,38 @@ public class ItemHelperFactory {
                 Object itemData = list.get(i);
                 if (iClass != null) {
                     TreeSortItem sortItem = iClass.newInstance();
+                    sortItem.setData(itemData);
+                    sortItem.setSortKey(sortKey);
+                    sortItem.setParentItem(treeParentItem);
+                    treeItemList.add(sortItem);
+                }
+            } catch (Exception e) {
+                //e.printStackTrace();
+            }
+        }
+        return treeItemList;
+    }
+
+    /**
+     * 创建排序List
+     *
+     * @param list
+     * @param sortKey
+     * @param treeParentItem
+     * @return
+     */
+    public static List<TreeItem> createTreeSortList(@Nullable List list, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
+        if (null == list) {
+            return null;
+        }
+        int size = list.size();
+        ArrayList<TreeItem> treeItemList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            try {
+                Object itemData = list.get(i);
+                Class<? extends TreeItem> iClass = getTypeClass(itemData);
+                if (iClass != null && iClass == TreeSortItem.class) {
+                    TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
                     sortItem.setData(itemData);
                     sortItem.setSortKey(sortKey);
                     sortItem.setParentItem(treeParentItem);

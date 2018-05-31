@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.factory;
 
 import android.util.SparseArray;
 
-import com.baozi.treerecyclerview.TreeItemType;
+import com.baozi.treerecyclerview.BindItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.lang.annotation.Annotation;
@@ -29,13 +29,13 @@ public class ItemConfig {
     @SafeVarargs
     public static void addTreeHolderType(Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
-            Annotation annotation = zClass.getAnnotation(TreeItemType.class);
+            Annotation annotation = zClass.getAnnotation(BindItemType.class);
             if (annotation != null) {
-                int type = ((TreeItemType) annotation).type();
-                Class<? extends TreeItem> aClass = treeViewHolderTypes.get(type);
-                if (aClass == null) {
+                int type = ((BindItemType) annotation).type();
+                Class<? extends TreeItem> typeClass = treeViewHolderTypes.get(type);
+                if (typeClass == null) {
                     treeViewHolderTypes.put(type, zClass);
-                } else if (!aClass.getSimpleName().equals(zClass.getSimpleName())) {
+                } else if (typeClass != zClass) {
                     throw new IllegalStateException(zClass.getSimpleName() +
                             " type already exists and " + treeViewHolderTypes.get(type).getSimpleName());
                 }

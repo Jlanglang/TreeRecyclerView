@@ -53,11 +53,6 @@ public abstract class TreeItem<D> {
     public void setItemManager(ItemManager itemManager) {
         mItemManager = itemManager;
     }
-//
-//    public int getLayoutId() {
-//        return this.getLayoutId();
-//    }
-
 
     /**
      * 该条目的布局id
