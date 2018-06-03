@@ -8,17 +8,17 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by 125C01063144 on 2018/2/27.
+ * Created by baozi on 2018/2/27.
+ * 可使用在item类上或者bean的变量上,type值与注册的item类对应.
+ * 如果使用在item的类上,只取type值,value无效.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.TYPE})
 public @interface BindItemType {
     /**
-     * -1代表不注册，请勿使用该值
-     *
-     * @return
+     * @return -1代表不查找，请勿使用该值
      */
-    int type() default -1;
+    int value() default -1;
 
-    Class itemClass() default Object.class;
+    int type() default -1;
 }

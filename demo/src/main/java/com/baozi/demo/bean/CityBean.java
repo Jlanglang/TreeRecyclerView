@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by baozi on 2016/12/8.
  */
-@BindItemClass(itemClass = ProvinceItemParent.class)
+@BindItemClass(filedName = "provinceId")
 public class CityBean {
 
     /**
@@ -20,6 +20,7 @@ public class CityBean {
      * provinceId : 1
      * provinceName : 北京
      */
+    @BindItemType(value = 0, type = 1)
     private int provinceId;
     private String provinceName;
     private List<CitysBean> citys;
