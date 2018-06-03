@@ -133,7 +133,8 @@ public class ItemHelperFactory {
         for (int i = 0; i < size; i++) {
             try {
                 Object itemData = list.get(i);
-                Class<? extends TreeItem> iClass = getTypeClass(itemData);
+                Class<? extends TreeItem> iClass =
+                        getTypeClass(itemData);
                 if (iClass != null && iClass == TreeSortItem.class) {
                     TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
                     sortItem.setData(itemData);

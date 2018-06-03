@@ -15,10 +15,12 @@ public class ItemConfig {
         treeViewHolderTypes = new SparseArray<>();
     }
 
+    @Deprecated
     public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
         return treeViewHolderTypes.get(type);
     }
 
+    @Deprecated
     public static void addTreeHolderType(int type, Class<? extends TreeItem> clazz) {
         if (null == clazz) {
             return;
@@ -26,20 +28,32 @@ public class ItemConfig {
         treeViewHolderTypes.put(type, clazz);
     }
 
-    @SafeVarargs
+    @Deprecated
     public static void addTreeHolderType(Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
             Annotation annotation = zClass.getAnnotation(BindItemType.class);
             if (annotation != null) {
                 int type = ((BindItemType) annotation).type();
+                if (type == -1) {
+                    continue;
+                }
                 Class<? extends TreeItem> typeClass = treeViewHolderTypes.get(type);
                 if (typeClass == null) {
                     treeViewHolderTypes.put(type, zClass);
-                } else if (typeClass != zClass) {
-                    throw new IllegalStateException(zClass.getSimpleName() +
-                            " type already exists and " + treeViewHolderTypes.get(type).getSimpleName());
+                }
+                if (zClass != typeClass) {//如果该type,已经添加了,则抛出异常
+                    throw new IllegalStateException("该type映射了一个TreeItemClass,不能再映射其他TreeItemClass");
                 }
             }
         }
+    }
+
+    /**
+     * 注册classType
+     *
+     * @param clazz
+     */
+    public static void registerTreeItem(Class<? extends TreeItem>... clazz) {
+        addTreeHolderType(clazz);
     }
 }

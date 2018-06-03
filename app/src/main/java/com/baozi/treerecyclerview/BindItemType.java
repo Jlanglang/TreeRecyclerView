@@ -13,9 +13,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface BindItemType {
+    /**
+     * -1代表不注册，请勿使用该值
+     *
+     * @return
+     */
     int type() default -1;
 
-    String fileName() default "";
-
-    String fileValue() default "";
+    Class itemClass() default Object.class;
 }

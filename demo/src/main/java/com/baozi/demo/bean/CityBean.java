@@ -1,9 +1,11 @@
 package com.baozi.demo.bean;
 
+import com.baozi.demo.item.citylist.AreaItem;
 import com.baozi.demo.item.citylist.ProvinceItemParent;
 import com.baozi.treerecyclerview.BindItemClass;
 import com.baozi.treerecyclerview.BindItemType;
 import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.List;
 

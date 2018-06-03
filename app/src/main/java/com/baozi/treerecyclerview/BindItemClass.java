@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface BindItemClass {
-    Class<? extends TreeItem> itemClass();
+    Class itemClass() default Object.class;
 
-    BindItemType[] type() default {};
+    String filedName() default "";
 }
