@@ -1,6 +1,9 @@
 package com.baozi.demo.bean;
 
-import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.demo.item.news.NewsFootItem;
+import com.baozi.demo.item.news.NewsImageItem;
+import com.baozi.demo.item.news.NewsItem;
+import com.baozi.treerecyclerview.annotation.TreeItemClass;
 
 import java.util.List;
 
@@ -9,7 +12,8 @@ import java.util.List;
  * @版本 2.0
  * @Change
  */
-public class NewsItemBean extends BaseItemData {
+@TreeItemClass(iClass = NewsItem.class)
+public class NewsItemBean {
     private String title;
 
     public NewsFootBean getFootBean() {
@@ -39,11 +43,13 @@ public class NewsItemBean extends BaseItemData {
     private NewsFootBean mFootBean;
     private List<NewsImageBean> mImageBeanList;
 
-    public static class NewsImageBean extends BaseItemData {
+    @TreeItemClass(iClass = NewsImageItem.class)
+    public static class NewsImageBean {
 
     }
 
-    public static class NewsFootBean extends BaseItemData {
+    @TreeItemClass(iClass = NewsFootItem.class)
+    public static class NewsFootBean {
 
     }
 

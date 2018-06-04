@@ -2,7 +2,7 @@ package com.baozi.treerecyclerview.factory;
 
 import android.util.SparseArray;
 
-import com.baozi.treerecyclerview.BindItemType;
+import com.baozi.treerecyclerview.annotation.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.lang.annotation.Annotation;
@@ -31,9 +31,9 @@ public class ItemConfig {
     @Deprecated
     public static void addTreeHolderType(Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
-            Annotation annotation = zClass.getAnnotation(BindItemType.class);
+            Annotation annotation = zClass.getAnnotation(TreeItemType.class);
             if (annotation != null) {
-                int type = ((BindItemType) annotation).type();
+                int type = ((TreeItemType) annotation).type();
                 if (type == -1) {
                     continue;
                 }

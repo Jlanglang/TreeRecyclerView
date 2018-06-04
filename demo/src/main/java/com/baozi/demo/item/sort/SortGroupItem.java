@@ -1,7 +1,7 @@
-package com.baozi.demo.item.sortList;
+package com.baozi.demo.item.sort;
 
 import com.baozi.demo.R;
-import com.baozi.demo.item.swipelist.SwipeSortItem;
+import com.baozi.demo.item.swipe.SwipeSortItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeSortItem;

@@ -1,21 +1,25 @@
-package com.baozi.demo.item.sortList;
+package com.baozi.demo.item.news;
 
 import com.baozi.demo.R;
+import com.baozi.demo.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 /**
- * Created by baozi on 2017/8/19.
+ * @author jlanglang  2017/7/5 17:16
+ * @版本 2.0
+ * @Change
  */
 
-public class SortChildItem extends TreeItem<String> {
+public class NewsFootItem extends TreeItem<NewsItemBean.NewsFootBean> {
+
     @Override
     public int getLayoutId() {
-        return R.layout.item_sort_child;
+        return R.layout.item_news_foot;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder) {
-        viewHolder.setText(R.id.tv_content, data);
+
     }
 }

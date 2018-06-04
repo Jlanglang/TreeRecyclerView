@@ -1,18 +1,17 @@
-package com.baozi.demo.item.citylist;
+package com.baozi.demo.item.city;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.CityBean;
-import com.baozi.treerecyclerview.BindItemType;
+import com.baozi.demo.bean.ProvinceBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 /**
  */
-public class AreaItem extends TreeItem<CityBean.CitysBean.AreasBean> {
+public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
 
 
     @Override

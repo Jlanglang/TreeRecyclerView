@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baozi.demo.R;
-import com.baozi.demo.item.sortList.IndexBar;
-import com.baozi.demo.item.sortList.SortGroupItem;
+import com.baozi.demo.item.sort.IndexBar;
+import com.baozi.demo.item.sort.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
@@ -103,7 +103,6 @@ public class SwipeSortActivity extends AppCompatActivity {
             }
         });
         mWrapper = new LoadingWrapper<>(adapter);
-//        mWrapper.setType(LoadingWrapper.Type.LOADING);
         mWrapper.setEmptyView(R.layout.layout_empty);
         mWrapper.setLoadingView(R.layout.layout_loading);
         rlcontent.setAdapter(mWrapper);

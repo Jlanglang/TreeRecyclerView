@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview;
+package com.baozi.treerecyclerview.annotation;
 
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -14,13 +14,13 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface BindItemClass {
+public @interface TreeItemClass {
     /**
      * 直接绑定itemclass
      *
      * @return
      */
-    Class itemClass() default Object.class;
+    Class iClass() default Object.class;
 
     /**
      * 参数名,用来获取对应的参数,解析值,获得type

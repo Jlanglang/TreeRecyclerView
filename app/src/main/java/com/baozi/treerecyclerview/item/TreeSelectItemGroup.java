@@ -26,6 +26,27 @@ public abstract class TreeSelectItemGroup<D>
     }
 
     /**
+     * 是否全选选中
+     *
+     * @return
+     */
+    public boolean isSelectAll() {
+        return getSelectItems().containsAll(getChild());
+    }
+
+    /**
+     * 选择全部，取消全部
+     *
+     * @param b
+     */
+    public void selectAll(boolean b) {
+        getSelectItems().clear();
+        if (b) {
+            getSelectItems().addAll(getChild());
+        }
+    }
+
+    /**
      * 子级是否有选中
      *
      * @return
@@ -59,7 +80,7 @@ public abstract class TreeSelectItemGroup<D>
             int index = getSelectItems().indexOf(child);
             if (index == -1) {//不存在则添加
                 getSelectItems().add(child);
-            } else {//存在则添加
+            } else {//存在则删除
                 getSelectItems().remove(index);
             }
         }
@@ -85,4 +106,5 @@ public abstract class TreeSelectItemGroup<D>
          */
         MULTIPLE_CHOICE
     }
+
 }

@@ -1,4 +1,4 @@
-package com.baozi.demo.item.newslist;
+package com.baozi.demo.item.news;
 
 import com.baozi.demo.R;
 import com.baozi.demo.bean.NewsItemBean;

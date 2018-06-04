@@ -1,4 +1,4 @@
-package com.baozi.demo.item.sortList;
+package com.baozi.demo.item.sort;
 
 import android.content.Context;
 import android.graphics.Canvas;

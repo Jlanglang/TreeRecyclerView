@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
-import com.baozi.demo.item.sortList.IndexBar;
-import com.baozi.demo.item.sortList.SortGroupItem;
+import com.baozi.demo.item.sort.IndexBar;
+import com.baozi.demo.item.sort.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;

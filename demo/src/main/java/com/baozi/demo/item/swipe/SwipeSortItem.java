@@ -1,10 +1,10 @@
-package com.baozi.demo.item.swipelist;
+package com.baozi.demo.item.swipe;
 
 import android.view.View;
 import android.widget.Toast;
 
 import com.baozi.demo.R;
-import com.baozi.demo.item.sortList.SortChildItem;
+import com.baozi.demo.item.sort.SortChildItem;
 import com.baozi.treerecyclerview.item.SwipeItem;
 import com.baozi.treerecyclerview.widget.swipe.SwipeItemMangerInterface;
 import com.baozi.treerecyclerview.widget.swipe.SwipeLayout;

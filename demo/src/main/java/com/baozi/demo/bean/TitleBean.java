@@ -1,13 +1,15 @@
 package com.baozi.demo.bean;
 
-import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.demo.item.testlist.ContentGroupItem;
+import com.baozi.treerecyclerview.annotation.TreeItemClass;
 
 import java.util.List;
 
 /**
  * Created by baozi on 2017/4/27.
  */
-public class TitleBean extends BaseItemData {
+@TreeItemClass(iClass = ContentGroupItem.class)
+public class TitleBean {
     public List<ContentBean> getSingleBeen() {
         return mSingleBeen;
     }

@@ -1,4 +1,4 @@
-package com.baozi.demo.item.newslist;
+package com.baozi.demo.item.news;
 
 import com.baozi.demo.R;
 import com.baozi.demo.bean.NewsItemBean;
@@ -18,7 +18,7 @@ import java.util.List;
 public class NewsItem extends TreeItemGroup<NewsItemBean> {
     @Override
     protected List<TreeItem> initChildList(NewsItemBean data) {
-        List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(data.getImageBeanList(), this);
+        List<TreeItem> treeItemList = ItemHelperFactory.createItems(data.getImageBeanList(), this);
         treeItemList.add(ItemHelperFactory.createTreeItem(data.getFootBean()));
         return treeItemList;
     }

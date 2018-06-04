@@ -33,65 +33,17 @@ public class TestListAativity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_rv_content);
-        ItemConfig.addTreeHolderType(102, ContentImageItem.class);
-        ItemConfig.addTreeHolderType(100, ContentGroupItem.class);
-        ItemConfig.addTreeHolderType(101, SelectionImageItem.class);
-        ItemConfig.addTreeHolderType(103, SelectionTextItem.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.top = 10;
-                if (view.getLayoutParams() instanceof GridLayoutManager.LayoutParams) {
-                    GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams) view.getLayoutParams();
-                    int spanIndex = layoutParams.getSpanIndex();//在一行中所在的角标，第几列
-                    if (spanIndex != ((GridLayoutManager) parent.getLayoutManager()).getSpanCount() - 1) {
-                        outRect.right = 10;
-                    }
-                }
-            }
-        });
         ArrayList<TitleBean> titleBeens = new ArrayList<>();
         for (int i = 0; i < 200; i++) {
             TitleBean titleBean = new TitleBean();
-            titleBean.setViewItemType(100);
-            if (i % 5 == 0) {//图片的选项
-                ArrayList<ContentBean> singleBeens = new ArrayList<>();
-                if (i % 10 == 0) {
-                    ContentBean singleBean = new ContentBean();
-                    singleBean.setType("image");
-                    singleBean.setViewItemType(102);
-                    singleBeens.add(singleBean);
-                }
-                for (int j = 0; j < 4; j++) {
-                    ContentBean singleBean = new ContentBean();
-                    singleBean.setType("Contnet_image");
-                    singleBean.setViewItemType(101);
-                    singleBeens.add(singleBean);
-                }
-
-                titleBean.setSingleBeen(singleBeens);
-                titleBeens.add(titleBean);
-            } else {//文字的选项
-                ArrayList<ContentBean> singleBeens = new ArrayList<>();
-                for (int j = 0; j < 4; j++) {
-                    ContentBean singleBean = new ContentBean();
-                    singleBean.setType("text");
-                    singleBean.setNumber(j + ".");
-                    singleBean.setViewItemType(103);
-                    singleBeens.add(singleBean);
-                }
-                titleBean.setSingleBeen(singleBeens);
-                titleBeens.add(titleBean);
-            }
+            titleBeens.add(titleBean);
         }
-        List<TreeItem> itemList = ItemHelperFactory.createTreeItemList(titleBeens,null);
-        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
-        treeRecyclerAdapter.setType(TreeRecyclerType.SHOW_ALL);
+        List<TreeItem> itemList = ItemHelperFactory.createItems(titleBeens, null);
+        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
         treeRecyclerAdapter.setDatas(itemList);
         recyclerView.setAdapter(treeRecyclerAdapter);
     }

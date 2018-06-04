@@ -18,4 +18,8 @@ public class ContentImageItem extends TreeItem<ContentBean> {
     public void onBindViewHolder(ViewHolder viewHolder) {
         viewHolder.setBackgroundRes(R.id.iv_content, R.mipmap.ic_launcher);
     }
+    @Override
+    public int getSpanSize() {
+        return 1;
+    }
 }

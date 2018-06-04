@@ -3,8 +3,7 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.baozi.treerecyclerview.BindItemClass;
-import com.baozi.treerecyclerview.BindItemType;
+import com.baozi.treerecyclerview.annotation.TreeItemClass;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseItemData;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -20,7 +19,7 @@ import java.util.List;
 
 public class ItemHelperFactory {
 
-    public static List<TreeItem> createTreeItemList(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createItems(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -45,6 +44,12 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
+    /**
+     * 获取ItemClass
+     *
+     * @param itemData
+     * @return
+     */
     private static Class<? extends TreeItem> getTypeClass(Object itemData) {
         Class<? extends TreeItem> treeItemClass = null;
         //先判断是否继承了ItemData,适用于跨模块获取
@@ -53,9 +58,9 @@ public class ItemHelperFactory {
             treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
         } else {
             //判断是否使用注解绑定了ItemClass,适用当前模块
-            BindItemClass annotation = itemData.getClass().getAnnotation(BindItemClass.class);
+            TreeItemClass annotation = itemData.getClass().getAnnotation(TreeItemClass.class);
             if (annotation != null) {
-                treeItemClass = annotation.itemClass();
+                treeItemClass = annotation.iClass();
             }
         }
         return treeItemClass;
@@ -155,10 +160,15 @@ public class ItemHelperFactory {
      *
      * @return
      */
-    public static <D extends BaseItemData> TreeItem createTreeItem(D d) {
+    public static <D> TreeItem createTreeItem(D d) {
         TreeItem treeItem = null;
         try {
-            Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(d.getViewItemType());
+            Class<? extends TreeItem> itemClass;
+            if (d instanceof BaseItemData) {
+                itemClass = ItemConfig.getTreeViewHolderType(((BaseItemData) d).getViewItemType());
+            } else {
+                itemClass = getTypeClass(d);
+            }
             if (itemClass != null) {
                 treeItem = itemClass.newInstance();
                 treeItem.setData(d);

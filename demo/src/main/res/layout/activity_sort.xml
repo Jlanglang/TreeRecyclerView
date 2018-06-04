@@ -21,7 +21,7 @@
         android:visibility="gone"
         android:layout_centerInParent="true"/>
 
-    <com.baozi.demo.item.sortList.IndexBar
+    <com.baozi.demo.item.sort.IndexBar
         android:id="@+id/qb_sort"
         android:layout_width="40dp"
         android:layout_height="match_parent"

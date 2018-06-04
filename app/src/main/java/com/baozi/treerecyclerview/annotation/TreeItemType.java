@@ -1,4 +1,4 @@
-package com.baozi.treerecyclerview;
+package com.baozi.treerecyclerview.annotation;
 
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
-public @interface BindItemType {
+public @interface TreeItemType {
     /**
      * @return -1代表不查找，请勿使用该值
      */
