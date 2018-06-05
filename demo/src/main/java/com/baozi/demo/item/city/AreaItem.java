@@ -24,11 +24,6 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
         holder.setText(R.id.tv_content, data.getAreaName());
     }
 
-    @Override
-    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
-        super.getItemOffsets(outRect, layoutParams, position);
-
-    }
 
     @Override
     public int getSpanSize() {

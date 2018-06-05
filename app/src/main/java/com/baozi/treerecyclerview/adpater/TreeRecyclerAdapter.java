@@ -219,10 +219,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             if (null == item) {
                 return;
             }
-//            ArrayList<TreeItem> items = checkItemHasItems(item);
-//            if (item instanceof TreeItemGroup) {
-//                ((TreeItemGroup) item).getChild().addAll(items);
-//            }
             if (item instanceof TreeItemGroup) {
                 ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType((TreeItemGroup) item, type);
                 childItemsWithType.add(0, item);
@@ -232,6 +228,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             }
             notifyDataChanged();
         }
+
 
         private ArrayList<TreeItem> checkItemHasItems(TreeItem item) {
             ArrayList<TreeItem> treeItems;
@@ -267,19 +264,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         @Override
         public void addItem(int position, TreeItem item) {
             getDatas().add(position, item);
-//            if (item != null && item.getParentItem() != null) {
-//                item.getParentItem().getChild().add(item);
-//            }
             notifyDataChanged();
         }
 
         @Override
         public void addItems(List<TreeItem> items) {
-//            ArrayList<TreeItem> list = new ArrayList<>();
-//            for (TreeItem item : items) {
-//                ArrayList<TreeItem> items1 = checkItemHasItems(item);
-//                list.addAll(items1);
-//            }
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
             getDatas().addAll(childItemsWithType);
             notifyDataChanged();
@@ -287,11 +276,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
         @Override
         public void addItems(int position, List<TreeItem> items) {
-//            ArrayList<TreeItem> list = new ArrayList<>();
-//            for (TreeItem item : items) {
-//                ArrayList<TreeItem> items1 = checkItemHasItems(item);
-//                list.addAll(items1);
-//            }
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
             getDatas().addAll(position, childItemsWithType);
             notifyDataChanged();
@@ -314,21 +298,12 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
         @Override
         public void removeItem(int position) {
-//            TreeItem t = getDatas().get(position);
-//            TreeItemGroup parentItem = t.getParentItem();
-//            if (parentItem != null && parentItem.getChild() != null) {
-//                parentItem.getChild().remove(t);
-//            }
             getDatas().remove(position);
             notifyDataChanged();
         }
 
         @Override
         public void removeItems(List<TreeItem> items) {
-//            for (TreeItem item : items) {
-//                ArrayList<TreeItem> items1 = checkItemHasItems(item);
-//                item.getParentItem().getChild().removeAll(items1);
-//            }
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
             getDatas().removeAll(childItemsWithType);
             notifyDataChanged();
@@ -336,18 +311,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
         @Override
         public void replaceItem(int position, TreeItem item) {
-//            TreeItem t = getDatas().get(position);
-//            if (t instanceof TreeItemGroup) {
-//                getDatas().set(position, item);
-//            } else {
-//                TreeItemGroup parentItem = t.getParentItem();
-//                if (parentItem != null && parentItem.getChild() != null) {
-//                    List childs = parentItem.getChild();
-//                    int i = childs.indexOf(t);
-//                    childs.set(i, item);
-//                }
             getDatas().set(position, item);
-//            }
             notifyDataChanged();
         }
 

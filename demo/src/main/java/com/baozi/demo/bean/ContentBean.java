@@ -1,12 +1,10 @@
 package com.baozi.demo.bean;
 
-import com.baozi.demo.item.testlist.ContentImageItem;
 import com.baozi.treerecyclerview.annotation.TreeItemClass;
 
 /**
  * Created by baozi on 2017/4/27.
  */
-@TreeItemClass(iClass = ContentImageItem.class)
 public class ContentBean {
     private String number;
     private String type;

@@ -87,11 +87,13 @@ public abstract class TreeSelectItemGroup<D>
     }
 
     /**
-     * 必须指定选中样式
+     * 默认多选
      *
      * @return
      */
-    public abstract SelectFlag selectFlag();
+    public SelectFlag selectFlag() {
+        return SelectFlag.MULTIPLE_CHOICE;
+    }
 
     /**
      * 决定TreeSelectItemGroup的选中样式

@@ -27,7 +27,6 @@ import java.util.Set;
 public class SwipeWrapper<T> extends BaseWrapper<T> {
     private static final int SWIPE_ITEM = 6666;
     private SwipeItemMangerInterface mSwipeManger;
-    //    private HashMap<ViewHolder, SwipeLayout> swipeLayoutHashMap = new HashMap<>();
     private SparseIntArray swipeItemSparseArray = new SparseIntArray();
 
     public SwipeWrapper(BaseRecyclerAdapter<T> adapter) {

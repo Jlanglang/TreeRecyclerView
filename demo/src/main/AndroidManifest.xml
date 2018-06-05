@@ -18,10 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.CityListActivity" />
-        <activity android:name=".activity.TestListAativity" />
         <activity android:name=".activity.NewsActivity" />
         <activity android:name=".activity.SortActivity" />
         <activity android:name=".activity.SwipeSortActivity" />
-        <!--<activity android:name=".activity.TestActivity"/>-->
+        <activity android:name=".activity.CartActivity" />
     </application>
 </manifest>
