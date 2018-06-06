@@ -13,7 +13,6 @@ import com.baozi.treerecyclerview.item.TreeItem;
  */
 public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
 
-
     @Override
     public int getLayoutId() {
         return R.layout.item_three;
