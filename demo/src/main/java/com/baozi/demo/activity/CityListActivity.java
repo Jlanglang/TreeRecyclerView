@@ -9,12 +9,13 @@ import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.bean.ProvinceBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 
 import java.util.List;
 
 public class CityListActivity extends AppCompatActivity {
-    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

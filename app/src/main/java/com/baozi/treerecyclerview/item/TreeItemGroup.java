@@ -92,7 +92,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
 
 
     /**
-     * 获得所有childs,包括子item的childs
+     * 获得所有展开的childs,包括子item的childs
      *
      * @return
      */

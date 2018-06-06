@@ -192,6 +192,7 @@ public class ItemHelperFactory {
         List allChild = itemGroup.getChild();
         if (allChild == null) return baseItems;
         int childCount = allChild.size();
+
         for (int i = 0; i < childCount; i++) {
             //下级
             TreeItem baseItem = (TreeItem) allChild.get(i);
@@ -210,8 +211,6 @@ public class ItemHelperFactory {
                             list = ((TreeItemGroup) baseItem).getExpandChild();
                         }
                         break;
-                    case SHOW_DEFUTAL:
-                        break;
                 }
                 if (list != null && list.size() > 0) {
                     baseItems.addAll(list);
@@ -223,19 +222,16 @@ public class ItemHelperFactory {
 
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> treeItems, @NonNull TreeRecyclerType type) {
-        if (type == TreeRecyclerType.SHOW_DEFUTAL) {
+        if (type == TreeRecyclerType.SHOW_DEFAULT) {
             return (ArrayList<TreeItem>) treeItems;
         }
-        ArrayList<TreeItem> baseItems = new ArrayList<TreeItem>();
+        ArrayList<TreeItem> baseItems = new ArrayList<>();
         int childCount = treeItems.size();
         for (int i = 0; i < childCount; i++) {
             TreeItem treeItem = treeItems.get(i);
             baseItems.add(treeItem);
             if (treeItem instanceof TreeItemGroup) {
-                ArrayList<TreeItem> childItems = getChildItemsWithType((TreeItemGroup) treeItem, type);
-                if (!childItems.isEmpty()) {
-                    baseItems.addAll(childItems);
-                }
+                baseItems.addAll(getChildItemsWithType((TreeItemGroup) treeItem, type));
             }
         }
         return baseItems;

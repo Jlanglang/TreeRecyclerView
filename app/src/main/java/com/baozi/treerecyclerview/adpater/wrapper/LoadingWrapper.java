@@ -157,7 +157,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder,T t, int position) {
         if (isEmpty() || isLoading() || isLoadMoreViewPos(position)) {
             return;
         }

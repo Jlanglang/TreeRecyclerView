@@ -33,7 +33,7 @@ public class SortActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        RecyclerView rlcontent = (RecyclerView) findViewById(R.id.rv_content);
+        RecyclerView rv_content = (RecyclerView) findViewById(R.id.rv_content);
         TextView tv_index = (TextView) findViewById(R.id.tv_index);
         IndexBar qb_sort = (IndexBar) findViewById(R.id.qb_sort);
         qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {
@@ -47,8 +47,8 @@ public class SortActivity extends AppCompatActivity {
         qb_sort.setSelectedIndexTextView(tv_index);
 
         mLinearLayoutManager = new LinearLayoutManager(this);
-        rlcontent.setLayoutManager(mLinearLayoutManager);
-        rlcontent.addItemDecoration(new RecyclerView.ItemDecoration() {
+        rv_content.setLayoutManager(mLinearLayoutManager);
+        rv_content.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
                 super.getItemOffsets(outRect, view, parent, state);
@@ -58,7 +58,7 @@ public class SortActivity extends AppCompatActivity {
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
 
-        rlcontent.setAdapter(mTreeSortAdapter);
+        rv_content.setAdapter(mTreeSortAdapter);
         initData();
     }
 

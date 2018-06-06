@@ -22,6 +22,7 @@ import java.util.List;
  */
 
 public class NewsActivity extends AppCompatActivity {
+    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class NewsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
         ArrayList<NewsItemBean> newsItemBeans = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsItemBean newsItemBean = new NewsItemBean();
@@ -49,10 +50,9 @@ public class NewsActivity extends AppCompatActivity {
             newsItemBean.setFootBean(newsFootBean);
             newsItemBeans.add(newsItemBean);
         }
+        recyclerView.setAdapter(treeRecyclerAdapter);
 
         List<TreeItem> itemList = ItemHelperFactory.createItems(newsItemBeans, null);
-        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
-        treeRecyclerAdapter.setDatas(itemList);
-        recyclerView.setAdapter(treeRecyclerAdapter);
+        treeRecyclerAdapter.getItemManager().replaceAllItem(itemList);
     }
 }

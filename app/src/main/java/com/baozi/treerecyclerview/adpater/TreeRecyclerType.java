@@ -16,5 +16,5 @@ public enum TreeRecyclerType {
      * 默认显示,显示一级,点击展开,折叠不会影响子级展开折叠
      * 适用场景,多级列表,保存展开状态
      */
-    SHOW_DEFUTAL;
+    SHOW_DEFAULT;
 }
