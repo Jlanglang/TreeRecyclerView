@@ -188,36 +188,7 @@ public class ItemHelperFactory {
      */
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(@Nullable TreeItemGroup itemGroup, @Nullable TreeRecyclerType type) {
-        ArrayList<TreeItem> baseItems = new ArrayList<>();
-        List allChild = itemGroup.getChild();
-        if (allChild == null) return baseItems;
-        int childCount = allChild.size();
-
-        for (int i = 0; i < childCount; i++) {
-            //下级
-            TreeItem baseItem = (TreeItem) allChild.get(i);
-            baseItems.add(baseItem);
-            //判断下级是否为TreeItemGroup
-            if (baseItem instanceof TreeItemGroup) {
-                List list = null;
-                switch (type) {
-                    case SHOW_ALL:
-                        //调用下级的getAllChilds遍历,相当于递归遍历
-                        list = ((TreeItemGroup) baseItem).getAllChilds();
-                        break;
-                    case SHOW_EXPAND:
-                        //根据isExpand,来决定是否展示
-                        if (((TreeItemGroup) baseItem).isExpand()) {
-                            list = ((TreeItemGroup) baseItem).getExpandChild();
-                        }
-                        break;
-                }
-                if (list != null && list.size() > 0) {
-                    baseItems.addAll(list);
-                }
-            }
-        }
-        return baseItems;
+        return getChildItemsWithType(itemGroup.getChild(), type);
     }
 
     @NonNull
@@ -231,7 +202,22 @@ public class ItemHelperFactory {
             TreeItem treeItem = treeItems.get(i);
             baseItems.add(treeItem);
             if (treeItem instanceof TreeItemGroup) {
-                baseItems.addAll(getChildItemsWithType((TreeItemGroup) treeItem, type));
+                List list = null;
+                switch (type) {
+                    case SHOW_ALL:
+                        //调用下级的getAllChilds遍历,相当于递归遍历
+                        list = ((TreeItemGroup) treeItem).getAllChilds();
+                        break;
+                    case SHOW_EXPAND:
+                        //根据isExpand,来决定是否展示
+                        if (((TreeItemGroup) treeItem).isExpand()) {
+                            list = ((TreeItemGroup) treeItem).getExpandChild();
+                        }
+                        break;
+                }
+                if (list != null && list.size() > 0) {
+                    baseItems.addAll(list);
+                }
             }
         }
         return baseItems;
