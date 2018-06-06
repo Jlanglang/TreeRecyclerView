@@ -29,5 +29,13 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
         holder.setText(R.id.tv_content, data.getProvinceName());
     }
 
+    @Override
+    protected void onExpand() {
+        super.onExpand();
+    }
 
+    @Override
+    protected void onCollapse() {
+        super.onCollapse();
+    }
 }

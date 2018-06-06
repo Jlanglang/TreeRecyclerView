@@ -42,7 +42,9 @@ public abstract class TreeSelectItemGroup<D>
     public void selectAll(boolean b) {
         getSelectItems().clear();
         if (b) {
-            getSelectItems().addAll(getChild());
+            if (getChildCount() != 0) {
+                getSelectItems().addAll(getChild());
+            }
         }
     }
 

@@ -23,7 +23,15 @@ public class CartItem extends TreeItem<String> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-
+        TreeItemGroup parentItem = getParentItem();
+        if (parentItem instanceof CartGroupItem) {
+            viewHolder.setChecked(R.id.cb_ischeck, ((CartGroupItem) parentItem).getSelectItems().contains(this));
+        }
     }
 
+    @Override
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
+        getItemManager().notifyDataChanged();
+    }
 }

@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.bt_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, TestListAativity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
 //        findViewById(R.id.bt_shoptab).setOnClickListener(new View.OnClickListener() {
