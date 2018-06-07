@@ -6,6 +6,7 @@ public enum TreeRecyclerType {
      * 适用场景,不需要折叠，默认显示所有item
      */
     SHOW_ALL,
+
     /**
      * 根据isExpand的状态显示展开与折叠,
      * 适用场景,多级的data数据展示,保存展开状态

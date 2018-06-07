@@ -230,37 +230,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
 
 
-        private ArrayList<TreeItem> checkItemHasItems(TreeItem item) {
-            ArrayList<TreeItem> treeItems;
-            if (item instanceof TreeItemGroup) {
-                treeItems = ItemHelperFactory.getChildItemsWithType((TreeItemGroup) item, type);
-                treeItems.add(0, item);
-                return treeItems;
-            } else {
-                treeItems = new ArrayList<>();
-                TreeItemGroup itemParentItem = item.getParentItem();
-                if (itemParentItem != null) {
-                    List child = itemParentItem.getChild();
-                    if (child != null) {
-                        int i = getDatas().indexOf(itemParentItem) + 1;
-                        child.add(i, item);
-                        treeItems.add(item);
-//                        getDatas().add(i + child.size(), item);
-                    } else {
-
-                        child = new ArrayList();
-                        itemParentItem.setChild(child);
-                        treeItems.add(item);
-//                        int i = getDatas().indexOf(itemParentItem);
-//                        getDatas().add(i + child.size(), item);
-                    }
-                } else {
-                    treeItems.add(item);
-                }
-            }
-            return treeItems;
-        }
-
         @Override
         public void addItem(int position, TreeItem item) {
             getDatas().add(position, item);

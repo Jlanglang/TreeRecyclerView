@@ -2,6 +2,7 @@ package com.baozi.treerecyclerview.factory;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.baozi.treerecyclerview.annotation.TreeItemClass;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
@@ -192,34 +193,35 @@ public class ItemHelperFactory {
     }
 
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> treeItems, @NonNull TreeRecyclerType type) {
-        if (type == TreeRecyclerType.SHOW_DEFAULT) {
-            return (ArrayList<TreeItem>) treeItems;
-        }
-        ArrayList<TreeItem> baseItems = new ArrayList<>();
-        int childCount = treeItems.size();
+    public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> items, @NonNull TreeRecyclerType type) {
+//        if (type == TreeRecyclerType.SHOW_DEFAULT) {
+//            return (ArrayList<TreeItem>) items;
+//        }
+        ArrayList<TreeItem> returnItems = new ArrayList<>();
+        int childCount = items.size();
         for (int i = 0; i < childCount; i++) {
-            TreeItem treeItem = treeItems.get(i);
-            baseItems.add(treeItem);
-            if (treeItem instanceof TreeItemGroup) {
+            TreeItem childItem = items.get(i);//获取当前一级
+            returnItems.add(childItem);
+            if (childItem instanceof TreeItemGroup) {//获取下一级
                 List list = null;
                 switch (type) {
                     case SHOW_ALL:
-                        //调用下级的getAllChilds遍历,相当于递归遍历
-                        list = ((TreeItemGroup) treeItem).getAllChilds();
+                        //调用下级的getAllChild遍历,相当于递归遍历
+                        list = getChildItemsWithType((TreeItemGroup) childItem,type);
                         break;
                     case SHOW_EXPAND:
                         //根据isExpand,来决定是否展示
-                        if (((TreeItemGroup) treeItem).isExpand()) {
-                            list = ((TreeItemGroup) treeItem).getExpandChild();
+                        if (((TreeItemGroup) childItem).isExpand()) {
+                            list = getChildItemsWithType((TreeItemGroup) childItem,type);
                         }
                         break;
                 }
                 if (list != null && list.size() > 0) {
-                    baseItems.addAll(list);
+                    returnItems.addAll(list);
                 }
             }
+
         }
-        return baseItems;
+        return returnItems;
     }
 }
