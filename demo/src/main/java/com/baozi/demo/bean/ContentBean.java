@@ -1,6 +1,7 @@
 package com.baozi.demo.bean;
 
 import com.baozi.treerecyclerview.annotation.TreeItemClass;
+import com.baozi.treerecyclerview.annotation.TreeItemType;
 
 /**
  * Created by baozi on 2017/4/27.
