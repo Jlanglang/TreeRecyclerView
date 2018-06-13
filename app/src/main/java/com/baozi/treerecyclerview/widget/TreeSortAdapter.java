@@ -121,6 +121,7 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             }
         }
 
+
         @Override
         public void replaceItem(int i, TreeItem treeItem) {
             manager.replaceItem(i, treeItem);
@@ -168,6 +169,11 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             if (treeItem instanceof TreeSortItem) {
                 sortMap.put(((TreeSortItem) treeItem).getSortKey(), position);
             }
+        }
+
+        @Override
+        public void notifyDataChanged() {
+            manager.notifyDataChanged();
         }
     }
 }
