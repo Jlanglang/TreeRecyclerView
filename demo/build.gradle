@@ -22,8 +22,8 @@ android {
 dependencies {
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
 //    compile 'com.jakewharton:butterknife:8.8.1'
-    compile files('libs/fastjson-1.2.9.jar')
+    implementation files('libs/fastjson-1.2.9.jar')
 //    compile files('libs/Msc.jar')
-    compile project(':app')
+    implementation project(':app')
 //    implementation
 }
