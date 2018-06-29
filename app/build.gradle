@@ -23,4 +23,5 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'org.codehaus.groovy:groovy-all:2.4.12'
 }
