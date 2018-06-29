@@ -28,5 +28,6 @@ public class CityListActivity extends AppCompatActivity {
         List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
         treeRecyclerAdapter.getItemManager().replaceAllItem(ItemHelperFactory.createItems(cityBeen, null));
         recyclerView.setAdapter(treeRecyclerAdapter);
+
     }
 }

@@ -40,6 +40,7 @@ public class ItemConfig {
                 Class<? extends TreeItem> typeClass = treeViewHolderTypes.get(type);
                 if (typeClass == null) {
                     treeViewHolderTypes.put(type, zClass);
+                    continue;
                 }
                 if (zClass != typeClass) {//如果该type,已经添加了,则抛出异常
                     throw new IllegalStateException("该type映射了一个TreeItemClass,不能再映射其他TreeItemClass");

@@ -36,5 +36,6 @@ public class CartActivity extends Activity {
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(integers, CartGroupItem.class, null);
 
         treeRecyclerAdapter.getItemManager().replaceAllItem(treeItemList);
+
     }
 }

@@ -15,7 +15,6 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  * Created by baozi on 2017/4/30.
  * 该装饰请务必使用在最后一次
  */
-
 public class LoadingWrapper<T> extends BaseWrapper<T> {
     private static final int ITEM_TYPE_EMPTY = -3000;
     private static final int ITEM_TYPE_LOADING = -4000;

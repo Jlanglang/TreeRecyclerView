@@ -67,7 +67,6 @@ public class ItemHelperFactory {
         return treeItemClass;
     }
 
-    @Deprecated
     public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -98,7 +97,6 @@ public class ItemHelperFactory {
      * @param treeParentItem
      * @return
      */
-    @Deprecated
     public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -194,9 +192,6 @@ public class ItemHelperFactory {
 
     @NonNull
     public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> items, @NonNull TreeRecyclerType type) {
-//        if (type == TreeRecyclerType.SHOW_DEFAULT) {
-//            return (ArrayList<TreeItem>) items;
-//        }
         ArrayList<TreeItem> returnItems = new ArrayList<>();
         int childCount = items.size();
         for (int i = 0; i < childCount; i++) {
