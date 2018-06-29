@@ -191,8 +191,11 @@ public class ItemHelperFactory {
     }
 
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(@NonNull List<TreeItem> items, @NonNull TreeRecyclerType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(@Nullable List<TreeItem> items, @NonNull TreeRecyclerType type) {
         ArrayList<TreeItem> returnItems = new ArrayList<>();
+        if (items == null) {
+            return returnItems;
+        }
         int childCount = items.size();
         for (int i = 0; i < childCount; i++) {
             TreeItem childItem = items.get(i);//获取当前一级
@@ -202,12 +205,12 @@ public class ItemHelperFactory {
                 switch (type) {
                     case SHOW_ALL:
                         //调用下级的getAllChild遍历,相当于递归遍历
-                        list = getChildItemsWithType((TreeItemGroup) childItem,type);
+                        list = getChildItemsWithType((TreeItemGroup) childItem, type);
                         break;
                     case SHOW_EXPAND:
                         //根据isExpand,来决定是否展示
                         if (((TreeItemGroup) childItem).isExpand()) {
-                            list = getChildItemsWithType((TreeItemGroup) childItem,type);
+                            list = getChildItemsWithType((TreeItemGroup) childItem, type);
                         }
                         break;
                 }
