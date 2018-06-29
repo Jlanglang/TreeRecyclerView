@@ -12,7 +12,7 @@
 
 # 依赖方式
 ```
- implementation 'com.github.Jlanglang:TreeRecyclerView:v1.0.0'
+ implementation 'com.github.Jlanglang:TreeRecyclerView:'Latest release'
 ```
 根build.gradle里面添加
 ```
