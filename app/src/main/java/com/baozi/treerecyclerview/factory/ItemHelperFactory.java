@@ -67,6 +67,10 @@ public class ItemHelperFactory {
         return treeItemClass;
     }
 
+    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass) {
+        return createTreeItemList(list, iClass, null);
+    }
+
     public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -132,13 +136,13 @@ public class ItemHelperFactory {
         if (null == list) {
             return null;
         }
-        int size = list.size();
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
+
+        int size = list.size();
         for (int i = 0; i < size; i++) {
             try {
                 Object itemData = list.get(i);
-                Class<? extends TreeItem> iClass =
-                        getTypeClass(itemData);
+                Class<? extends TreeItem> iClass = getTypeClass(itemData);
                 if (iClass != null && iClass == TreeSortItem.class) {
                     TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
                     sortItem.setData(itemData);

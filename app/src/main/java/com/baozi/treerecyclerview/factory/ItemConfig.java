@@ -51,7 +51,7 @@ public class ItemConfig {
 
     /**
      * 注册classType
-     * 必须使用BindItemType的类才能背注册
+     * 类必须使用BindItemType注解，才能注册
      *
      * @param clazz
      */

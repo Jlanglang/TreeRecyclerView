@@ -23,11 +23,26 @@ public class CityListActivity extends AppCompatActivity {
         setContentView(R.layout.layout_rv_content);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
-
-        String string = getResources().getString(R.string.location);
-        List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
-        treeRecyclerAdapter.getItemManager().replaceAllItem(ItemHelperFactory.createItems(cityBeen, null));
         recyclerView.setAdapter(treeRecyclerAdapter);
 
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                String string = getResources().getString(R.string.location);
+                List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
+                refresh(cityBeen);
+            }
+        }.start();
+
+    }
+
+    private void refresh(final List<ProvinceBean> cityBeen) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                treeRecyclerAdapter.getItemManager().replaceAllItem(ItemHelperFactory.createItems(cityBeen, null));
+            }
+        });
     }
 }
