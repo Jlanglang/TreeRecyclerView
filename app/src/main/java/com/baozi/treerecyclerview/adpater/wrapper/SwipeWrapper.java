@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -44,8 +45,9 @@ public class SwipeWrapper<T> extends BaseWrapper<T> {
         this.mSwipeManger = mSwipeManger;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int i = swipeItemSparseArray.get(viewType, -1);
         if (i != -1) {
             SwipeLayout swipeLayout = new SwipeLayout(parent.getContext());
@@ -73,7 +75,7 @@ public class SwipeWrapper<T> extends BaseWrapper<T> {
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int checkPosition = checkPosition(position);
         Object data = getData(checkPosition);
         if (data instanceof SwipeItem) {

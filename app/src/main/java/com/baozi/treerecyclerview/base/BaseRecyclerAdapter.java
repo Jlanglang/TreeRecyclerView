@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.base;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,22 +21,23 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected OnItemLongClickListener mOnItemLongClickListener;
     private List<T> mDatas;
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ViewHolder holder = ViewHolder.createViewHolder(parent, viewType);
         onBindViewHolderClick(holder, holder.itemView);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         onBindViewHolder(holder, getDatas().get(position), position);
     }
 
     /**
      * 实现item的点击事件
      */
-    public void onBindViewHolderClick(final ViewHolder viewHolder, View view) {
+    public void onBindViewHolderClick(@NonNull final ViewHolder viewHolder, View view) {
         //判断当前holder是否已经设置了点击事件
         if (!view.hasOnClickListeners()) {
             view.setOnClickListener(new View.OnClickListener() {
@@ -130,11 +132,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public interface OnItemClickListener {
-        void onItemClick(ViewHolder viewHolder, int position);
+        void onItemClick(@NonNull ViewHolder viewHolder, int position);
     }
 
     public interface OnItemLongClickListener {
-        boolean onItemLongClick(ViewHolder viewHolder, int position);
+        boolean onItemLongClick(@NonNull ViewHolder viewHolder, int position);
     }
 
     /**
@@ -184,6 +186,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      * @param t
      * @param position
      */
-    public abstract void onBindViewHolder(ViewHolder holder, T t, int position);
+    public abstract void onBindViewHolder(@NonNull ViewHolder holder, T t, int position);
 
 }

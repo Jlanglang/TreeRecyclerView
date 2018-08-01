@@ -2,6 +2,7 @@ package com.baozi.demo.activity;
 
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -98,7 +99,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
         adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(ViewHolder viewHolder, int position) {
+            public void onItemClick(@NonNull ViewHolder viewHolder, int position) {
                 Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
             }
         });

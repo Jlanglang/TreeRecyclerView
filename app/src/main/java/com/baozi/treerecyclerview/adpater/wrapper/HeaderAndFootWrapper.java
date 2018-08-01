@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,9 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return mAdapter.getData(position);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
             return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
         } else if (mFootViews.get(viewType) != null) {
@@ -46,7 +48,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
-    public void onBindViewHolderClick(ViewHolder holder, View view) {
+    public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         int layoutPosition = holder.getLayoutPosition();
         if ((isHeaderViewPos(layoutPosition) || isFooterViewPos(layoutPosition))) {
             return;
@@ -55,7 +57,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (isHeaderViewPos(position) || isFooterViewPos(position)) {
             return;
         }

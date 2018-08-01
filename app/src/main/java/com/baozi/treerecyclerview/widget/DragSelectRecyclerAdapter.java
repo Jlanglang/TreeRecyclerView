@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.widget;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
@@ -34,7 +35,7 @@ public abstract class DragSelectRecyclerAdapter<T> extends BaseRecyclerAdapter<T
     }
 
     @Override
-    public void onBindViewHolderClick(ViewHolder holder, View view) {
+    public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         super.onBindViewHolderClick(holder, view);
         holder.itemView.setTag(holder);
     }

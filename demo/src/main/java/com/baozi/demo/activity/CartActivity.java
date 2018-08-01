@@ -19,8 +19,8 @@ import java.util.List;
 
 /**
  * Created by a123 on 2018/6/5.
+ * 购物车
  */
-
 public class CartActivity extends Activity {
     private TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
 

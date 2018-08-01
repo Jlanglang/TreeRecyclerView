@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater;
 
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -36,7 +37,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void onBindViewHolderClick(final ViewHolder holder, View view) {
+    public void onBindViewHolderClick(@NonNull final ViewHolder holder, View view) {
         if (!view.hasOnClickListeners()) {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -131,7 +132,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TreeItem t = getDatas().get(position);
         checkItemManage(t);
         t.onBindViewHolder(holder);
@@ -144,12 +145,12 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public final void onBindViewHolder(ViewHolder holder, TreeItem item, int position) {
+    public final void onBindViewHolder(@NonNull ViewHolder holder, TreeItem item, int position) {
 
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override

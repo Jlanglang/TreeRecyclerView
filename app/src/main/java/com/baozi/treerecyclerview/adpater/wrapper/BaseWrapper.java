@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +35,13 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onBindViewHolderClick(ViewHolder holder, View view) {
+    public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
 
@@ -59,7 +61,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         mAdapter.onBindViewHolder(holder, position);
     }
 
@@ -90,7 +92,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, T t, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
         mAdapter.onBindViewHolder(holder, t, position);
     }
 

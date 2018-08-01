@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -119,8 +120,9 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         this.loadMoreListener = loadMoreListener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == ITEM_TYPE_LOADING) {
             if (mLoadingLayoutId > 0) {
                 return ViewHolder.createViewHolder(parent, mLoadingLayoutId);
@@ -156,7 +158,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (isEmpty() || isLoading() || isLoadMoreViewPos(position)) {
             return;
         }

@@ -11,9 +11,14 @@ import com.baozi.demo.bean.ProvinceBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
+import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.List;
 
+/**
+ * 城市列表
+ */
 public class CityListActivity extends AppCompatActivity {
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
@@ -41,7 +46,16 @@ public class CityListActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                treeRecyclerAdapter.getItemManager().replaceAllItem(ItemHelperFactory.createItems(cityBeen, null));
+                //创建item
+                List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
+                //遍历设置展开状态
+                for (TreeItem item : items) {
+                    if (item instanceof TreeItemGroup) {
+                        ((TreeItemGroup) item).setExpand(true);
+                    }
+                }
+                //添加到adapter
+                treeRecyclerAdapter.getItemManager().replaceAllItem(items);
             }
         });
     }

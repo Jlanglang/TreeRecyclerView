@@ -27,6 +27,6 @@ public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
-        holder.setText(R.id.tv_content, getData().getCityName());
+        holder.setText(R.id.tv_content, data.getCityName());
     }
 }

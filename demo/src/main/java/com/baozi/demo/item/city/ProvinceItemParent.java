@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
 
+
     @Override
     public List<TreeItem> initChildList(ProvinceBean data) {
         return ItemHelperFactory.createItems(data.getCitys(), this);
@@ -27,8 +28,14 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder) {
+        first = false;
         holder.setText(R.id.tv_content, data.getProvinceName());
     }
 
+    private boolean first = true;
 
+    @Override
+    public boolean isExpand() {
+        return first || super.isExpand();
+    }
 }
