@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.base;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,10 +30,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return holder;
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        onBindViewHolder(holder, getDatas().get(position), position);
-    }
+//    @Override
+//    public abstract void onBindViewHolder(@NonNull ViewHolder holder, int position);
+//    {
+//        onBindViewHolder(holder, getDatas().get(position), position);
+//    }
 
     /**
      * 实现item的点击事件
@@ -100,6 +102,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         }
     }
 
+    @Nullable
     public T getData(int position) {
         if (position >= 0) {
             return getDatas().get(position);
@@ -179,13 +182,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      */
     public abstract int getLayoutId(int position);
 
-    /**
-     * view与数据绑定
-     *
-     * @param holder
-     * @param t
-     * @param position
-     */
-    public abstract void onBindViewHolder(@NonNull ViewHolder holder, T t, int position);
+//    /**
+//     * view与数据绑定
+//     *
+//     * @param holder
+//     * @param t
+//     * @param position
+//     */
+//    public abstract void onBindViewHolder(@NonNull ViewHolder holder, T t, int position);
 
 }

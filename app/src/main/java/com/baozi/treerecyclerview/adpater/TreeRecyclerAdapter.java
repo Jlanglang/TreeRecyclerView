@@ -129,12 +129,17 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     @Override
     public int getLayoutId(int position) {
-        return getDatas().get(position).getLayoutId();
+        TreeItem data = getData(position);
+        if (data != null) {
+            return data.getLayoutId();
+        }
+        return 0;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        TreeItem t = getDatas().get(position);
+        TreeItem t = getData(position);
+        if (t == null) return;
         checkItemManage(t);
         t.onBindViewHolder(holder);
     }
@@ -145,10 +150,10 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
     }
 
-    @Override
-    public final void onBindViewHolder(@NonNull ViewHolder holder, TreeItem item, int position) {
-
-    }
+//    @Override
+//    public final void onBindViewHolder(@NonNull ViewHolder holder, TreeItem item, int position) {
+//
+//    }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -167,7 +172,10 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 if (viewLayoutPosition < 0 || viewLayoutPosition >= i) {
                     return;
                 }
-                getData(viewLayoutPosition).getItemOffsets(outRect, layoutParams, viewLayoutPosition);
+                TreeItem data = getData(viewLayoutPosition);
+                if (data != null) {
+                    data.getItemOffsets(outRect, layoutParams, viewLayoutPosition);
+                }
             }
         });
         final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -196,7 +204,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     public int getItemSpanSize(int position) {
-        return getData(position).getSpanSize();
+        TreeItem data = getData(position);
+        if (data == null) {
+            return 0;
+        }
+        return data.getSpanSize();
     }
 
 

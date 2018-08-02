@@ -89,12 +89,9 @@ public class SwipeSortActivity extends AppCompatActivity {
         mTreeSortAdapter = new TreeSortAdapter();
 //        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
-        //添加头部View1
-        TextView headView1 = new TextView(this);
-        headView1.setText("headView");
-        headView1.setGravity(Gravity.CENTER);
-        headView1.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-        headerAndFootWrapper.addHeaderView(headView1);
+        addHeadView(headerAndFootWrapper, 5);
+        addFootView(headerAndFootWrapper, 5);
+        headerAndFootWrapper.setShowHeadView(false);
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
         adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -110,6 +107,27 @@ public class SwipeSortActivity extends AppCompatActivity {
         initData();
     }
 
+    private void addHeadView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
+        for (int i = 0; i < sum; i++) {
+            //添加头部View1
+            TextView headView = new TextView(this);
+            headView.setText("headView" + i);
+            headView.setGravity(Gravity.CENTER);
+            headView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+            headerAndFootWrapper.addHeaderView(headView);
+        }
+    }
+
+    private void addFootView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
+        for (int i = 0; i < sum; i++) {
+            //添加头部View1
+            TextView footView = new TextView(this);
+            footView.setText("footView" + i);
+            footView.setGravity(Gravity.CENTER);
+            footView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+            headerAndFootWrapper.addFootView(footView);
+        }
+    }
 
     private void initData() {
         final List<TreeItem> groupItems = new ArrayList<>();
@@ -131,7 +149,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         mWrapper.setType(LoadingWrapper.Type.REFRESH_OVER);
-                        mWrapper.getItemManager().replaceAllItem(new ArrayList());
+                        mWrapper.getItemManager().notifyDataChanged();
                     }
                 });
                 try {

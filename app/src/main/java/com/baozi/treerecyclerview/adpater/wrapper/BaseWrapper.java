@@ -23,16 +23,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter = adapter;
         mAdapter.getItemManager().setAdapter(this);
     }
-//
-//    @Override
-//    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
-//        mAdapter.addCheckItemInterfaces(itemInterface);
-//    }
-//
-//    @Override
-//    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
-//        mAdapter.removeCheckItemInterfaces(itemInterface);
-//    }
 
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
@@ -91,16 +81,10 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.setDatas(datas);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
-        mAdapter.onBindViewHolder(holder, t, position);
-    }
-
 //    @Override
-//    public int checkPosition(int position) {
-//        return mAdapter.checkPosition(position);
+//    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
+//        mAdapter.onBindViewHolder(holder, t, position);
 //    }
-
 
     @Override
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -110,6 +94,11 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     @Override
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         mAdapter.setOnItemLongClickListener(onItemLongClickListener);
+    }
+
+    @Override
+    public int getItemSpanSize(int position) {
+        return mAdapter.getItemSpanSize(position);
     }
 
     @Override
