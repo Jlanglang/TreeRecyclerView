@@ -90,7 +90,10 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                     if (loadMoreListener == null) return;
                     LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                     int itemCount = getDatas().size();
-                    int lastPosition = checkPosition(layoutManager.findLastVisibleItemPosition());
+                    int lastPosition = layoutManager.findLastVisibleItemPosition();
+
+//                            checkPosition(
+//                    );
                     //如果当前不是正在加载更多，并且到了该加载更多的位置，加载更多。
                     int lastVisibleIndex = mLoadMoreItem.getLastVisibleIndex() == 0 ? 1 : mLoadMoreItem.getLastVisibleIndex();
                     if (lastPosition >= (itemCount - lastVisibleIndex) && itemCount >= (mLoadMoreItem.getMinPageSize() - lastVisibleIndex)) {

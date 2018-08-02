@@ -1,6 +1,7 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +15,23 @@ import com.baozi.treerecyclerview.base.ViewHolder;
  */
 
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
-    private static final int HEAD_ITEM = 1000;
-    private static final int FOOT_ITEM = 2000;
-    private SparseArray<View> mHeaderViews = new SparseArray<>();
-    private SparseArray<View> mFootViews = new SparseArray<>();
+    //    private static final int HEAD_ITEM = 1000;
+//    private static final int FOOT_ITEM = 2000;
+//    private SparseArray<View> mHeaderViews = new SparseArray<>();
+//    private SparseArray<View> mFootViews = new SparseArray<>();
     private boolean headShow = true;
     private boolean footShow = true;
+    private int mHeaderSize;
+    private int mFootSize;
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-        addCheckItemInterfaces(new CheckItemInterface() {
-            @Override
-            public int checkPosition(int position) {
-                return position - getHeadersCount();
-            }
-        });
+//        addCheckItemInterfaces(new CheckItemInterface() {
+//            @Override
+//            public int checkPosition(int position) {
+//                return position - getHeadersCount();
+//            }
+//        });
     }
 
     @Override
@@ -36,16 +39,16 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return mAdapter.getData(position);
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (mHeaderViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
-        } else if (mFootViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder(mFootViews.get(viewType));
-        }
-        return mAdapter.onCreateViewHolder(parent, viewType);
-    }
+//    @NonNull
+//    @Override
+//    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        if (mHeaderViews.get(viewType) != null) {
+//            return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
+//        } else if (mFootViews.get(viewType) != null) {
+//            return ViewHolder.createViewHolder(mFootViews.get(viewType));
+//        }
+//        return mAdapter.onCreateViewHolder(parent, viewType);
+//    }
 
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
@@ -76,23 +79,25 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return mAdapter.getItemSpanSize(position);
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (isHeaderViewPos(position)) {
-            return mHeaderViews.keyAt(position);
-        } else if (isFooterViewPos(position)) {
-            return mFootViews.keyAt(position - getHeadersCount() - mAdapter.getItemCount());
-        }
-        return mAdapter.getItemViewType(position - getHeadersCount());
-    }
+//    @Override
+//    public int getItemViewType(int position) {
+//        if (isHeaderViewPos(position)) {
+//            return mHeaderViews.keyAt(position);
+//        } else if (isFooterViewPos(position)) {
+//            return mFootViews.keyAt(position - getHeadersCount() - mAdapter.getItemCount());
+//        }
+//        return mAdapter.getItemViewType(position - getHeadersCount());
+//    }
 
 
     public void addHeaderView(View view) {
-        mHeaderViews.put(HEAD_ITEM + mHeaderViews.size(), view);
+//        mHeaderViews.put(HEAD_ITEM + mHeaderViews.size(), view);
+//        mHeaderSize = mHeaderViews.size();
     }
 
     public void addFootView(View view) {
-        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
+//        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
+//        mFootSize = mFootViews.size();
     }
 
     protected boolean isHeaderViewPos(int position) {
@@ -105,22 +110,23 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public void setShowHeadView(boolean show) {
         this.headShow = show;
-        int size = mHeaderViews.size();
-        for (int i = 0; i < size; i++) {
-            View view = mHeaderViews.valueAt(i);
-            view.setVisibility(show ? View.VISIBLE : View.GONE);
-        }
+//        int size = mHeaderViews.size();
+//        for (int i = 0; i < size; i++) {
+//            View view = mHeaderViews.valueAt(i);
+//            view.setVisibility(show ? View.VISIBLE : View.GONE);
+//        }
     }
 
     public int getHeadersCount() {
         if (!headShow) {
             return 0;
         }
-        return mHeaderViews.size();
+        return mHeaderSize;
     }
 
     public int getFootersCount() {
-        return mFootViews.size();
+        return mFootSize;
+//        return mFootViews.size();
     }
 
 

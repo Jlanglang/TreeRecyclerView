@@ -1,5 +1,7 @@
 package com.baozi.demo.item.news;
 
+import android.support.annotation.NonNull;
+
 import com.baozi.demo.R;
 import com.baozi.demo.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -23,7 +25,7 @@ public class NewsImageItem extends TreeItem<NewsItemBean.NewsImageBean> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
 
     }
 }

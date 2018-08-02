@@ -21,12 +21,9 @@ android {
 
 dependencies {
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
-//    compile 'com.jakewharton:butterknife:8.8.1'
     implementation files('libs/fastjson-1.2.9.jar')
-//    compile files('libs/Msc.jar')
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation project(':app')
-//    implementation
 }

@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.item;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
@@ -41,6 +42,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (!isCanExpand()) {
             return;
         }
+        isExpand = expand;
         if (expand) {
             onExpand();
         } else {
@@ -60,13 +62,10 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * 展开
      */
     protected void onExpand() {
-        isExpand = true;
         ItemManager itemManager = getItemManager();
         if (itemManager != null) {
             int itemPosition = itemManager.getItemPosition(this);
-            List datas = itemManager.getAdapter().getDatas();
-            datas.addAll(itemPosition + 1, getExpandChild());
-            itemManager.notifyDataChanged();
+            itemManager.addItems(itemPosition + 1, getExpandChild());
         }
     }
 
@@ -74,12 +73,9 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * 折叠
      */
     protected void onCollapse() {
-        isExpand = false;
         ItemManager itemManager = getItemManager();
         if (itemManager != null) {
-            List datas = itemManager.getAdapter().getDatas();
-            datas.removeAll(getExpandChild());
-            itemManager.notifyDataChanged();
+            itemManager.removeItems(getExpandChild());
         }
     }
 
@@ -98,11 +94,8 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      *
      * @return
      */
-    @Nullable
-    private List<TreeItem> getExpandChild() {
-        if (getChild() == null) {
-            return null;
-        }
+    @NonNull
+    public List<TreeItem> getExpandChild() {
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_EXPAND);
     }
 
@@ -123,9 +116,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     @Nullable
     public List<TreeItem> getAllChilds() {
-        if (getChild() == null) {
-            return null;
-        }
         return ItemHelperFactory.getChildItemsWithType(this, TreeRecyclerType.SHOW_ALL);
     }
 

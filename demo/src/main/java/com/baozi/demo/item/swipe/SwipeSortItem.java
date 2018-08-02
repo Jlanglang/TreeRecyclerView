@@ -1,5 +1,6 @@
 package com.baozi.demo.item.swipe;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,7 +27,7 @@ public class SwipeSortItem extends SortChildItem implements SwipeItem {
     }
 
     @Override
-    public void onBindSwipeView(ViewHolder viewHolder, int position, final SwipeItemMangerInterface swipeManger) {
+    public void onBindSwipeView(@NonNull ViewHolder viewHolder, int position, final SwipeItemMangerInterface swipeManger) {
         viewHolder.setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
             @Override
             public void onClick(View v) {

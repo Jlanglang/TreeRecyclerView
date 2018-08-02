@@ -27,7 +27,7 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder) {
+    public void onBindViewHolder(@NonNull ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getAreaName());
     }
 

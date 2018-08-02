@@ -14,7 +14,7 @@ public enum TreeRecyclerType {
     SHOW_EXPAND,
 
     /**
-     * 默认显示,显示一级,点击展开,折叠不会影响子级展开折叠
+     * 默认只显示第一级,点击展开,折叠不会影响子级展开折叠
      * 适用场景,一级一级展开，保存展开状态
      */
     SHOW_DEFAULT

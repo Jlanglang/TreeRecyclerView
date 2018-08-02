@@ -2,7 +2,6 @@ package com.baozi.treerecyclerview.factory;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.baozi.treerecyclerview.annotation.TreeItemClass;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
@@ -190,7 +189,10 @@ public class ItemHelperFactory {
      * @return
      */
     @NonNull
-    public static ArrayList<TreeItem> getChildItemsWithType(@Nullable TreeItemGroup itemGroup, @Nullable TreeRecyclerType type) {
+    public static ArrayList<TreeItem> getChildItemsWithType(@Nullable TreeItemGroup itemGroup, @NonNull TreeRecyclerType type) {
+        if (itemGroup == null) {
+            return new ArrayList();
+        }
         return getChildItemsWithType(itemGroup.getChild(), type);
     }
 

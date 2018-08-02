@@ -11,6 +11,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
+import com.baozi.treerecyclerview.manager.ItemManageImpl;
 import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
                     //获得处理后的position
-                    layoutPosition = checkPosition(layoutPosition);
+//                    layoutPosition = checkPosition(layoutPosition);
                     //拿到BaseItem
                     TreeItem item = getDatas().get(layoutPosition);
                     TreeItemGroup itemParentItem = item.getParentItem();
@@ -74,9 +75,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 int layoutPosition = holder.getLayoutPosition();
                 //检查position是否可以点击
                 //检查并得到真实的position
-                int itemPosition = checkPosition(layoutPosition);
+//                int itemPosition = checkPosition(layoutPosition);
                 if (mOnItemLongClickListener != null) {
-                    return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
+                    return mOnItemLongClickListener.onItemLongClick(holder, layoutPosition);
                 }
                 return false;
             }
@@ -162,11 +163,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 if (getItemCount() == 0) {
                     return;
                 }
-                int checkPosition = checkPosition(viewLayoutPosition);
-                if (checkPosition < 0 || checkPosition >= i) {
+//                int checkPosition = checkPosition(viewLayoutPosition);
+                if (viewLayoutPosition < 0 || viewLayoutPosition >= i) {
                     return;
                 }
-                getData(checkPosition).getItemOffsets(outRect, layoutParams, checkPosition);
+                getData(viewLayoutPosition).getItemOffsets(outRect, layoutParams, viewLayoutPosition);
             }
         });
         final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -180,11 +181,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     if (i == 0) {
                         return spanCount;
                     }
-                    int checkPosition = checkPosition(position);
-                    if (checkPosition < 0 || checkPosition >= i) {
+//                    int checkPosition = checkPosition(position);
+                    if (position < 0 || position >= i) {
                         return spanCount;
                     }
-                    int itemSpanSize = getItemSpanSize(checkPosition);
+                    int itemSpanSize = getItemSpanSize(position);
                     if (itemSpanSize == 0) {
                         return spanCount;
                     }
@@ -209,7 +210,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         this.type = type;
     }
 
-    private class TreeItemManageImpl extends ItemManager<TreeItem> {
+    private class TreeItemManageImpl extends ItemManageImpl<TreeItem> {
 
         TreeItemManageImpl(BaseRecyclerAdapter<TreeItem> adapter) {
             super(adapter);
@@ -217,98 +218,44 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
         @Override
         public void addItem(TreeItem item) {
-            if (null == item) {
-                return;
-            }
             if (item instanceof TreeItemGroup) {
                 ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType((TreeItemGroup) item, type);
                 childItemsWithType.add(0, item);
-                getDatas().addAll(childItemsWithType);
+                super.addItems(childItemsWithType);
             } else {
-                getDatas().add(item);
+                super.addItem(item);
             }
-            notifyDataChanged();
-        }
-
-
-        @Override
-        public void addItem(int position, TreeItem item) {
-            getDatas().add(position, item);
-            notifyDataChanged();
         }
 
         @Override
         public void addItems(List<TreeItem> items) {
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
-            getDatas().addAll(childItemsWithType);
-            notifyDataChanged();
+            super.addItems(childItemsWithType);
         }
 
         @Override
         public void addItems(int position, List<TreeItem> items) {
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
-            getDatas().addAll(position, childItemsWithType);
-            notifyDataChanged();
+            super.addItems(position, childItemsWithType);
         }
 
         @Override
         public void removeItem(TreeItem item) {
-            if (null == item) {
-                return;
-            }
             if (item instanceof TreeItemGroup) {
                 ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType((TreeItemGroup) item, type);
                 childItemsWithType.add(0, item);
-                getDatas().removeAll(childItemsWithType);
+//                getDatas().removeAll(childItemsWithType);
+                super.removeItems(childItemsWithType);
             } else {
-                getDatas().remove(item);
+                super.removeItem(item);
             }
-            notifyDataChanged();
-        }
-
-        @Override
-        public void removeItem(int position) {
-            getDatas().remove(position);
-            notifyDataChanged();
         }
 
         @Override
         public void removeItems(List<TreeItem> items) {
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
-            getDatas().removeAll(childItemsWithType);
-            notifyDataChanged();
+            super.removeItems(childItemsWithType);
         }
-
-        @Override
-        public void replaceItem(int position, TreeItem item) {
-            getDatas().set(position, item);
-            notifyDataChanged();
-        }
-
-        @Override
-        public void replaceAllItem(List<TreeItem> items) {
-            if (items != null) {
-                setDatas(items);
-                notifyDataChanged();
-            }
-        }
-
-        @Override
-        public void clean() {
-            getDatas().clear();
-            notifyDataChanged();
-        }
-
-        @Override
-        public TreeItem getItem(int position) {
-            return getDatas().get(position);
-        }
-
-        @Override
-        public int getItemPosition(TreeItem item) {
-            return getDatas().indexOf(item);
-        }
-
     }
 
 }

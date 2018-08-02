@@ -2,6 +2,7 @@ package com.baozi.demo.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -26,15 +27,15 @@ public class CityListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_rv_content);
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
+        RecyclerView recyclerView = findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(treeRecyclerAdapter);
-
         new Thread() {
             @Override
             public void run() {
                 super.run();
-                String string = getResources().getString(R.string.location);
+                String string = getString(R.string.location);
                 List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
                 refresh(cityBeen);
             }

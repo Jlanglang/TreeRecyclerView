@@ -1,5 +1,7 @@
 package com.baozi.demo.item.sort;
 
+import android.support.annotation.NonNull;
+
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -15,7 +17,7 @@ public class SortChildItem extends TreeItem<String> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setText(R.id.tv_content, data);
     }
 }

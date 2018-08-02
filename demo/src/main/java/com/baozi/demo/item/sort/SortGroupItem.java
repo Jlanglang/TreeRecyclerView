@@ -1,5 +1,7 @@
 package com.baozi.demo.item.sort;
 
+import android.support.annotation.NonNull;
+
 import com.baozi.demo.R;
 import com.baozi.demo.item.swipe.SwipeSortItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -31,7 +33,7 @@ public class SortGroupItem extends TreeSortItem<Integer> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setText(R.id.tv_content, (String) getSortKey());
     }
 

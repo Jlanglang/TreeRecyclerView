@@ -47,9 +47,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
 //                    检查并得到真实的position
-                    int itemPosition = checkPosition(layoutPosition);
+//                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(viewHolder, itemPosition);
+                        mOnItemClickListener.onItemClick(viewHolder, layoutPosition);
                     }
                 }
             });
@@ -62,9 +62,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查position是否可以点击
                     //检查并得到真实的position
-                    int itemPosition = checkPosition(layoutPosition);
+//                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
-                        return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
+                        return mOnItemLongClickListener.onItemLongClick(viewHolder, layoutPosition);
                     }
                     return false;
                 }
@@ -139,36 +139,36 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         boolean onItemLongClick(@NonNull ViewHolder viewHolder, int position);
     }
 
-    /**
-     * 检查item属性
-     */
-    public interface CheckItemInterface {
-        int checkPosition(int position);
-    }
+//    /**
+//     * 检查item属性
+//     */
+//    public interface CheckItemInterface {
+//        int checkPosition(int position);
+//    }
+//
+//    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
+//        if (checkItemInterfaces == null) return;
+//        checkItemInterfaces.remove(itemInterface);
+//    }
+//
+//    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
+//        if (checkItemInterfaces == null) {
+//            checkItemInterfaces = new ArrayList<>();
+//        }
+//        checkItemInterfaces.add(itemInterface);
+//    }
 
-    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
-        if (checkItemInterfaces == null) return;
-        checkItemInterfaces.remove(itemInterface);
-    }
+//    private ArrayList<CheckItemInterface> checkItemInterfaces;
 
-    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
-        if (checkItemInterfaces == null) {
-            checkItemInterfaces = new ArrayList<>();
-        }
-        checkItemInterfaces.add(itemInterface);
-    }
-
-    private ArrayList<CheckItemInterface> checkItemInterfaces;
-
-    //检查当前position,获取原始角标
-    public int checkPosition(int position) {
-        if (checkItemInterfaces != null) {
-            for (CheckItemInterface itemInterface : checkItemInterfaces) {
-                position = itemInterface.checkPosition(position);
-            }
-        }
-        return position;
-    }
+//    //检查当前position,获取原始角标
+//    public int checkPosition(int position) {
+//        if (checkItemInterfaces != null) {
+//            for (CheckItemInterface itemInterface : checkItemInterfaces) {
+//                position = itemInterface.checkPosition(position);
+//            }
+//        }
+//        return position;
+//    }
 
 
     /**

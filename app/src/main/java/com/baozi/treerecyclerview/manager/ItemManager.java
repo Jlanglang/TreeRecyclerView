@@ -1,9 +1,17 @@
 package com.baozi.treerecyclerview.manager;
 
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 
 import java.util.List;
 
+/**
+ * 条目增删管理类
+ *
+ * @param <T>
+ */
 public abstract class ItemManager<T> {
 
     private BaseRecyclerAdapter<T> mAdapter;

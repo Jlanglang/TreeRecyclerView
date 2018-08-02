@@ -65,7 +65,7 @@ public class SwipeWrapper<T> extends BaseWrapper<T> {
     public int getItemViewType(int position) {
         int itemViewType = super.getItemViewType(position);
         if (swipeItemSparseArray.get(itemViewType, -1) == -1) {//说明该type不存在;
-            Object o = getData(checkPosition(position));
+            Object o = getData(position);
             if (o instanceof SwipeItem) {
                 swipeItemSparseArray.put(itemViewType, SWIPE_ITEM + swipeItemSparseArray.size());
             }
@@ -76,8 +76,8 @@ public class SwipeWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        int checkPosition = checkPosition(position);
-        Object data = getData(checkPosition);
+//        int checkPosition = checkPosition(position);
+        Object data = getData(position);
         if (data instanceof SwipeItem) {
             checkSwipeLayout(holder, (SwipeItem) data, position);
         }
