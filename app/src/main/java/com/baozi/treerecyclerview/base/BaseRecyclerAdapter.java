@@ -48,7 +48,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
 //                    检查并得到真实的position
-//                    int itemPosition = checkPosition(layoutPosition);
+                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(viewHolder, layoutPosition);
                     }
@@ -63,7 +63,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查position是否可以点击
                     //检查并得到真实的position
-//                    int itemPosition = checkPosition(layoutPosition);
+                    int itemPosition = checkPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
                         return mOnItemLongClickListener.onItemLongClick(viewHolder, layoutPosition);
                     }
@@ -164,7 +164,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 //    private ArrayList<CheckItemInterface> checkItemInterfaces;
 
     //检查当前position,获取原始角标
-    @Deprecated
     public int checkPosition(int position) {
 //        if (checkItemInterfaces != null) {
 //            for (CheckItemInterface itemInterface : checkItemInterfaces) {
