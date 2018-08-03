@@ -164,15 +164,16 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
 //    private ArrayList<CheckItemInterface> checkItemInterfaces;
 
-//    //检查当前position,获取原始角标
-//    public int checkPosition(int position) {
+    //检查当前position,获取原始角标
+    @Deprecated
+    public int checkPosition(int position) {
 //        if (checkItemInterfaces != null) {
 //            for (CheckItemInterface itemInterface : checkItemInterfaces) {
 //                position = itemInterface.checkPosition(position);
 //            }
 //        }
-//        return position;
-//    }
+        return position;
+    }
 
 
     /**
