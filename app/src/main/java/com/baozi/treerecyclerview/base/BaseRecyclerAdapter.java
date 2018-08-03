@@ -30,11 +30,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return holder;
     }
 
-//    @Override
-//    public abstract void onBindViewHolder(@NonNull ViewHolder holder, int position);
-//    {
-//        onBindViewHolder(holder, getDatas().get(position), position);
-//    }
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        onBindViewHolder(holder, getDatas().get(position), position);
+    }
 
     /**
      * 实现item的点击事件
@@ -184,14 +183,16 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
      */
     public abstract int getLayoutId(int position);
 
-//    /**
-//     * view与数据绑定
-//     *
-//     * @param holder
-//     * @param t
-//     * @param position
-//     */
-//    public abstract void onBindViewHolder(@NonNull ViewHolder holder, T t, int position);
+    /**
+     * view与数据绑定
+     *
+     * @param holder
+     * @param t
+     * @param position
+     */
+    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
+
+    }
 
     public void clear() {
         getDatas().clear();
