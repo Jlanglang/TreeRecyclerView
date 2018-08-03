@@ -90,7 +90,8 @@ public class SwipeSortActivity extends AppCompatActivity {
 //        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
         addHeadView(headerAndFootWrapper, 5);
-        addFootView(headerAndFootWrapper, 5);
+
+//        addFootView(headerAndFootWrapper, 5);
         headerAndFootWrapper.setShowHeadView(false);
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
@@ -118,16 +119,16 @@ public class SwipeSortActivity extends AppCompatActivity {
         }
     }
 
-    private void addFootView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
-        for (int i = 0; i < sum; i++) {
-            //添加头部View1
-            TextView footView = new TextView(this);
-            footView.setText("footView" + i);
-            footView.setGravity(Gravity.CENTER);
-            footView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-            headerAndFootWrapper.addFootView(footView);
-        }
-    }
+//    private void addFootView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
+//        for (int i = 0; i < sum; i++) {
+//            //添加头部View1
+//            TextView footView = new TextView(this);
+//            footView.setText("footView" + i);
+//            footView.setGravity(Gravity.CENTER);
+//            footView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
+//            headerAndFootWrapper.addFootView(footView);
+//        }
+//    }
 
     private void initData() {
         final List<TreeItem> groupItems = new ArrayList<>();

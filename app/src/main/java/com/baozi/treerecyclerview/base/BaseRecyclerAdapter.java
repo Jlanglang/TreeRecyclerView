@@ -134,6 +134,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         mOnItemLongClickListener = onItemLongClickListener;
     }
 
+
     public interface OnItemClickListener {
         void onItemClick(@NonNull ViewHolder viewHolder, int position);
     }
@@ -191,4 +192,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 //     */
 //    public abstract void onBindViewHolder(@NonNull ViewHolder holder, T t, int position);
 
+    public void clear() {
+        getDatas().clear();
+    }
 }

@@ -19,13 +19,13 @@ import java.util.List;
 
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     private static final int HEAD_ITEM = 1000;
-    private static final int FOOT_ITEM = 2000;
+    //    private static final int FOOT_ITEM = 2000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
-    private SparseArray<View> mFootViews = new SparseArray<>();
+    //    private SparseArray<View> mFootViews = new SparseArray<>();
     private boolean headShow = true;
-    private boolean footShow = true;
+    //    private boolean footShow = true;
     private int mHeaderSize;
-    private int mFootSize;
+    //    private int mFootSize;
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
@@ -41,8 +41,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (mHeaderViews.get(viewType) != null) {
             return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
-        } else if (mFootViews.get(viewType) != null) {
-            return ViewHolder.createViewHolder(mFootViews.get(viewType));
         }
         return mAdapter.onCreateViewHolder(parent, viewType);
     }
@@ -50,7 +48,9 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         int layoutPosition = holder.getLayoutPosition();
-        if ((isHeaderViewPos(layoutPosition) || isFooterViewPos(layoutPosition))) {
+        if ((isHeaderViewPos(layoutPosition)
+//                || isFooterViewPos(layoutPosition)
+        )) {
             return;
         }
         super.onBindViewHolderClick(holder, view);
@@ -58,10 +58,12 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (isHeaderViewPos(position) || isFooterViewPos(position)) {
+        if (isHeaderViewPos(position)
+//                || isFooterViewPos(position)
+                ) {
             return;
         }
-        mAdapter.onBindViewHolder(holder, position);
+        super.onBindViewHolder(holder, position);
     }
 
 
@@ -69,17 +71,18 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         if (isHeaderViewPos(position)) {
             return 0;
         }
-        return mAdapter.getItemSpanSize(position);
+        return super.getItemSpanSize(position);
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isHeaderViewPos(position)) {
             return mHeaderViews.keyAt(position);
-        } else if (isFooterViewPos(position)) {
-            return mFootViews.keyAt(position - mAdapter.getItemCount() + getFootCount());
         }
-        return mAdapter.getItemViewType(position);
+//        else if (isFooterViewPos(position)) {
+//            return mFootViews.keyAt(position - mAdapter.getItemCount() + getFootCount());
+//        }
+        return super.getItemViewType(position);
     }
 
 
@@ -89,20 +92,21 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         mHeaderSize = mHeaderViews.size();
     }
 
-    public void addFootView(View view) {
-        getDatas().add(null);//占位
-        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
-        mFootSize = mFootViews.size();
-    }
+//    public void addFootView(View view) {
+//        getDatas().add(null);//占位
+//        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
+//        mFootSize = mFootViews.size();
+//    }
 
     protected boolean isHeaderViewPos(int position) {
         return position < getHeadersCount();
     }
 
-    protected boolean isFooterViewPos(int position) {
-        int foot = mAdapter.getItemCount() - getFootCount();
-        return position >= foot;
-    }
+//    protected boolean isFooterViewPos(int position) {
+//        int foot = mAdapter.getItemCount() - getFootCount();
+//        return position >= foot;
+//    }
+
 
     public void setShowHeadView(boolean show) {
         this.headShow = show;
@@ -130,15 +134,16 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         for (int i = 0; i < headersCount; i++) {
             datas.add(0, null);
         }
-        int footCount = getFootCount();
-        for (int i = 0; i < footCount; i++) {
-            datas.add(null);
-        }
         super.setDatas(datas);
-
     }
 
-    public int getFootCount() {
-        return mFootSize;
+
+    @Override
+    public void clear() {
+        super.clear();
+        int headersCount = getHeadersCount();
+        for (int i = 0; i < headersCount; i++) {
+            getDatas().add(0, null);
+        }
     }
 }

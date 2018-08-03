@@ -110,4 +110,9 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     public void setItemManager(ItemManager<T> itemManager) {
         mAdapter.setItemManager(itemManager);
     }
+
+    @Override
+    public void clear() {
+        mAdapter.clear();
+    }
 }
