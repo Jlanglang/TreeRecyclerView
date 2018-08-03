@@ -92,20 +92,22 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         mHeaderSize = mHeaderViews.size();
     }
 
-//    public void addFootView(View view) {
+    @Deprecated
+    public void addFootView(View view) {
 //        getDatas().add(null);//占位
 //        mFootViews.put(FOOT_ITEM + mFootViews.size(), view);
 //        mFootSize = mFootViews.size();
-//    }
+    }
 
     protected boolean isHeaderViewPos(int position) {
         return position < getHeadersCount();
     }
-
-//    protected boolean isFooterViewPos(int position) {
+    @Deprecated
+    protected boolean isFooterViewPos(int position) {
 //        int foot = mAdapter.getItemCount() - getFootCount();
 //        return position >= foot;
-//    }
+        return false;
+    }
 
 
     public void setShowHeadView(boolean show) {
