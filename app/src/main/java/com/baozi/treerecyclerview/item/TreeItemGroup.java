@@ -63,10 +63,16 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     protected void onExpand() {
         ItemManager itemManager = getItemManager();
-        if (itemManager != null) {
-            int itemPosition = itemManager.getItemPosition(this);
-            itemManager.addItems(itemPosition + 1, getExpandChild());
+        if (itemManager == null) {
+            return;
         }
+
+        List<TreeItem> expandChild = getExpandChild();
+        if (expandChild.size() == 0) {
+            return;
+        }
+        int itemPosition = itemManager.getItemPosition(this);
+        itemManager.addItems(itemPosition + 1, expandChild);
     }
 
     /**
@@ -74,9 +80,14 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      */
     protected void onCollapse() {
         ItemManager itemManager = getItemManager();
-        if (itemManager != null) {
-            itemManager.removeItems(getExpandChild());
+        if (itemManager == null) {
+            return;
         }
+        List<TreeItem> expandChild = getExpandChild();
+        if (expandChild.size() == 0) {
+            return;
+        }
+        itemManager.removeItems(getExpandChild());
     }
 
     /**
