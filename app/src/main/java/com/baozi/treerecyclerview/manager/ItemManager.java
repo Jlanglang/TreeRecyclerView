@@ -28,6 +28,16 @@ public abstract class ItemManager<T> {
         mAdapter = adapter;
     }
 
+    private boolean isOpenAnim = true;
+
+    public boolean isOpenAnim() {
+        return isOpenAnim;
+    }
+
+    public void setOpenAnim(boolean openAnim) {
+        isOpenAnim = openAnim;
+    }
+
     //增
     public abstract void addItem(T item);
 

@@ -60,6 +60,16 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         }
 
         @Override
+        public void setOpenAnim(boolean openAnim) {
+            manager.setOpenAnim(openAnim);
+        }
+
+        @Override
+        public boolean isOpenAnim() {
+            return manager.isOpenAnim();
+        }
+
+        @Override
         public void addItem(TreeItem treeItem) {
             manager.addItem(treeItem);
             updateSort(manager.getItemPosition(treeItem), treeItem);

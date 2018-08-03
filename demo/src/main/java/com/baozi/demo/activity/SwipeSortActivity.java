@@ -87,6 +87,7 @@ public class SwipeSortActivity extends AppCompatActivity {
 //        //....wrapper,item的种类会逐渐丰富.只是设计合理.还怕需求和加功能吗
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
+        mTreeSortAdapter.getItemManager().setOpenAnim(false);
 //        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
         addHeadView(headerAndFootWrapper, 5);
