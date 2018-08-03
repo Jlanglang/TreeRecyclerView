@@ -45,9 +45,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 public void onClick(View v) {
                     int layoutPosition = holder.getLayoutPosition();
                     //获得处理后的position
-//                    layoutPosition = checkPosition(layoutPosition);
+                    layoutPosition = checkPosition(layoutPosition);
                     //拿到BaseItem
-                    TreeItem item = getDatas().get(layoutPosition);
+                    TreeItem item = getData(layoutPosition);
                     TreeItemGroup itemParentItem = item.getParentItem();
                     //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
                     if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
@@ -75,9 +75,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 int layoutPosition = holder.getLayoutPosition();
                 //检查position是否可以点击
                 //检查并得到真实的position
-//                int itemPosition = checkPosition(layoutPosition);
+                int itemPosition = checkPosition(layoutPosition);
                 if (mOnItemLongClickListener != null) {
-                    return mOnItemLongClickListener.onItemLongClick(holder, layoutPosition);
+                    return mOnItemLongClickListener.onItemLongClick(holder, itemPosition);
                 }
                 return false;
             }
@@ -150,10 +150,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
     }
 
-//    @Override
-//    public final void onBindViewHolder(@NonNull ViewHolder holder, TreeItem item, int position) {
-//
-//    }
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -168,13 +164,13 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                 if (getItemCount() == 0) {
                     return;
                 }
-//                int checkPosition = checkPosition(viewLayoutPosition);
-                if (viewLayoutPosition < 0 || viewLayoutPosition >= i) {
+                int checkPosition = checkPosition(viewLayoutPosition);
+                if (checkPosition < 0 || checkPosition >= i) {
                     return;
                 }
-                TreeItem data = getData(viewLayoutPosition);
+                TreeItem data = getData(checkPosition);
                 if (data != null) {
-                    data.getItemOffsets(outRect, layoutParams, viewLayoutPosition);
+                    data.getItemOffsets(outRect, layoutParams, checkPosition);
                 }
             }
         });
@@ -189,11 +185,11 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     if (i == 0) {
                         return spanCount;
                     }
-//                    int checkPosition = checkPosition(position);
-                    if (position < 0 || position >= i) {
+                    int itemToDataPosition = itemToDataPosition(position);
+                    if (itemToDataPosition < 0 || itemToDataPosition >= i) {
                         return spanCount;
                     }
-                    int itemSpanSize = getItemSpanSize(position);
+                    int itemSpanSize = getItemSpanSize(itemToDataPosition);
                     if (itemSpanSize == 0) {
                         return spanCount;
                     }

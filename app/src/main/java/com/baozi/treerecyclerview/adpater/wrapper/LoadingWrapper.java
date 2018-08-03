@@ -74,7 +74,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         if (mEmptyView == null && mEmptyLayoutId == 0) {
             mEmptyView = new View(recyclerView.getContext());
@@ -90,7 +90,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
                     if (loadMoreListener == null) return;
                     LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                     int itemCount = getDatas().size();
-                    int lastPosition = layoutManager.findLastVisibleItemPosition();
+                    int lastPosition = checkPosition(layoutManager.findLastVisibleItemPosition());
                     //如果当前不是正在加载更多，并且到了该加载更多的位置，加载更多。
                     int lastVisibleIndex = mLoadMoreItem.getLastVisibleIndex() == 0 ? 1 : mLoadMoreItem.getLastVisibleIndex();
                     if (lastPosition >= (itemCount - lastVisibleIndex) && itemCount >= (mLoadMoreItem.getMinPageSize() - lastVisibleIndex)) {

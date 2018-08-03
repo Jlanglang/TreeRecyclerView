@@ -28,7 +28,7 @@ public abstract class ItemManager<T> {
         mAdapter = adapter;
     }
 
-    private boolean isOpenAnim = true;
+    private boolean isOpenAnim;
 
     public boolean isOpenAnim() {
         return isOpenAnim;

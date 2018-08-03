@@ -33,8 +33,8 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        int itemPosition = getItemPosition(item);
-        getAdapter().notifyItemInserted(itemPosition);
+        position = getAdapter().dataToItemPosition(position);
+        getAdapter().notifyItemInserted(position);
     }
 
     @Override
@@ -54,7 +54,8 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemRangeInserted(position, items.size());
+        int itemPosition = getAdapter().dataToItemPosition(position);
+        getAdapter().notifyItemRangeInserted(itemPosition, items.size());
     }
 
     @Override
@@ -64,7 +65,9 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemRemoved(getItemPosition(item));
+        int itemPosition = getItemPosition(item);
+        itemPosition = getAdapter().dataToItemPosition(itemPosition);
+        getAdapter().notifyItemRemoved(itemPosition);
     }
 
     @Override
@@ -74,7 +77,8 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemRemoved(position);
+        int itemPosition = getAdapter().dataToItemPosition(position);
+        getAdapter().notifyItemRemoved(itemPosition);
     }
 
     @Override
@@ -90,7 +94,8 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemChanged(position);
+        int itemPosition = getAdapter().dataToItemPosition(position);
+        getAdapter().notifyItemChanged(itemPosition);
     }
 
     @Override
@@ -99,7 +104,6 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             return;
         }
         setDatas(items);
-
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;

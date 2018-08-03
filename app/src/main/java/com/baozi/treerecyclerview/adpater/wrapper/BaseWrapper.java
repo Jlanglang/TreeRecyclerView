@@ -23,7 +23,15 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter = adapter;
         mAdapter.getItemManager().setAdapter(this);
     }
+    @Override
+    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
+        mAdapter.addCheckItemInterfaces(itemInterface);
+    }
 
+    @Override
+    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
+        mAdapter.removeCheckItemInterfaces(itemInterface);
+    }
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
@@ -36,12 +44,12 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         mAdapter.onAttachedToRecyclerView(recyclerView);
     }
 
     @Override
-    public void onViewAttachedToWindow(ViewHolder holder) {
+    public void onViewAttachedToWindow(@NonNull ViewHolder holder) {
         mAdapter.onViewAttachedToWindow(holder);
     }
 
@@ -81,10 +89,16 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.setDatas(datas);
     }
 
-//    @Override
-//    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
-//        mAdapter.onBindViewHolder(holder, t, position);
-//    }
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
+        mAdapter.onBindViewHolder(holder, t, position);
+    }
+
+    @Override
+    public int checkPosition(int position) {
+        return mAdapter.checkPosition(position);
+    }
+
 
     @Override
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -94,6 +108,16 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     @Override
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         mAdapter.setOnItemLongClickListener(onItemLongClickListener);
+    }
+
+    @Override
+    public int itemToDataPosition(int position) {
+        return mAdapter.itemToDataPosition(position);
+    }
+
+    @Override
+    public int dataToItemPosition(int index) {
+        return mAdapter.dataToItemPosition(index);
     }
 
     @Override
