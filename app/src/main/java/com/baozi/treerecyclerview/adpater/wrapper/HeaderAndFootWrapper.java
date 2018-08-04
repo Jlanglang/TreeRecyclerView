@@ -101,16 +101,11 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return super.getItemViewType(position - getHeadersCount());
     }
 
-    @Override
-    public int itemToDataPosition(int position) {
-        position -= getHeadersCount();
-        return super.itemToDataPosition(position);
-    }
-
 
     public void addHeaderView(View view) {
-        mHeaderViews.put(HEAD_ITEM + mHeaderViews.size(), view);
-        mHeaderSize = mHeaderViews.size();
+        int size = mHeaderViews.size();
+        mHeaderViews.put(HEAD_ITEM + size, view);
+        mHeaderSize = size;
     }
 
     @Deprecated
