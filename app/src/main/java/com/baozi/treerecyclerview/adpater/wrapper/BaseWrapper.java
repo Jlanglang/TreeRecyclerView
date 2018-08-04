@@ -24,15 +24,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter.getItemManager().setAdapter(this);
     }
     @Override
-    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
-        mAdapter.addCheckItemInterfaces(itemInterface);
-    }
-
-    @Override
-    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
-        mAdapter.removeCheckItemInterfaces(itemInterface);
-    }
-    @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
     }
@@ -108,16 +99,6 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     @Override
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         mAdapter.setOnItemLongClickListener(onItemLongClickListener);
-    }
-
-    @Override
-    public int itemToDataPosition(int position) {
-        return mAdapter.itemToDataPosition(position);
-    }
-
-    @Override
-    public int dataToItemPosition(int index) {
-        return mAdapter.dataToItemPosition(index);
     }
 
     @Override

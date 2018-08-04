@@ -185,7 +185,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     if (i == 0) {
                         return spanCount;
                     }
-                    int itemToDataPosition = itemToDataPosition(position);
+                    int itemToDataPosition = getItemManager().itemToDataPosition(position);
                     if (itemToDataPosition < 0 || itemToDataPosition >= i) {
                         return spanCount;
                     }
