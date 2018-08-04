@@ -33,7 +33,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        position = getAdapter().dataToItemPosition(position);
+        position = dataToItemPosition(position);
         getAdapter().notifyItemInserted(position);
     }
 
@@ -54,7 +54,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        int itemPosition = getAdapter().dataToItemPosition(position);
+        int itemPosition = dataToItemPosition(position);
         getAdapter().notifyItemRangeInserted(itemPosition, items.size());
     }
 
@@ -66,7 +66,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             return;
         }
         int itemPosition = getItemPosition(item);
-        itemPosition = getAdapter().dataToItemPosition(itemPosition);
+        itemPosition = dataToItemPosition(itemPosition);
         getAdapter().notifyItemRemoved(itemPosition);
     }
 
@@ -77,7 +77,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        int itemPosition = getAdapter().dataToItemPosition(position);
+        int itemPosition = dataToItemPosition(position);
         getAdapter().notifyItemRemoved(itemPosition);
     }
 
@@ -94,7 +94,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
             notifyDataChanged();
             return;
         }
-        int itemPosition = getAdapter().dataToItemPosition(position);
+        int itemPosition = dataToItemPosition(position);
         getAdapter().notifyItemChanged(itemPosition);
     }
 

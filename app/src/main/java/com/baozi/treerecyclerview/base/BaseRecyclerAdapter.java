@@ -48,7 +48,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查item的position,是否可以点击.
 //                    检查并得到真实的position
-                    int itemPosition = itemToDataPosition(layoutPosition);
+                    int itemPosition = getItemManager().itemToDataPosition(layoutPosition);
                     if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(viewHolder, itemPosition);
                     }
@@ -63,7 +63,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
                     int layoutPosition = viewHolder.getLayoutPosition();
                     //检查position是否可以点击
                     //检查并得到真实的position
-                    int itemPosition = itemToDataPosition(layoutPosition);
+                    int itemPosition = getItemManager().itemToDataPosition(layoutPosition);
                     if (mOnItemLongClickListener != null) {
                         return mOnItemLongClickListener.onItemLongClick(viewHolder, itemPosition);
                     }
@@ -142,63 +142,11 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         boolean onItemLongClick(@NonNull ViewHolder viewHolder, int position);
     }
 
-    /**
-     * 检查item属性
-     */
-    public interface CheckItemInterface {
-        int itemToDataPosition(int position);
-
-        int dataToItemPosition(int index);
-    }
-
-    public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
-        if (checkItemInterfaces == null) return;
-        checkItemInterfaces.remove(itemInterface);
-    }
-
-    public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
-        if (checkItemInterfaces == null) {
-            checkItemInterfaces = new ArrayList<>();
-        }
-        checkItemInterfaces.add(itemInterface);
-    }
-
-    private ArrayList<CheckItemInterface> checkItemInterfaces;
-
     //检查当前position,获取原始角标
     public int checkPosition(int position) {
-        return itemToDataPosition(position);
+        return getItemManager().itemToDataPosition(position);
     }
 
-    /**
-     * 解决holder角标与data的角标不一致问题。
-     *
-     * @param position
-     * @return
-     */
-    public int itemToDataPosition(int position) {
-        if (checkItemInterfaces != null) {
-            for (CheckItemInterface itemInterface : checkItemInterfaces) {
-                position = itemInterface.itemToDataPosition(position);
-            }
-        }
-        return position;
-    }
-
-    /**
-     * 解决data的角标与holder角标不一致问题。
-     *
-     * @param index
-     * @return
-     */
-    public int dataToItemPosition(int index) {
-        if (checkItemInterfaces != null) {
-            for (CheckItemInterface itemInterface : checkItemInterfaces) {
-                index = itemInterface.dataToItemPosition(index);
-            }
-        }
-        return index;
-    }
 
     /**
      * 获取该position的item的layout

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.manager.ItemManager;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
-        addCheckItemInterfaces(new CheckItemInterface() {
+        getItemManager().addCheckItemInterfaces(new ItemManager.CheckItemInterface() {
             @Override
             public int itemToDataPosition(int position) {
                 return position - getHeadersCount();
@@ -133,7 +134,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             View view = mHeaderViews.valueAt(i);
             view.setVisibility(show ? View.VISIBLE : View.GONE);
         }
-        mHeaderSize = getHeadersCount();
+        mHeaderSize = size;
     }
 
     public int getHeadersCount() {
