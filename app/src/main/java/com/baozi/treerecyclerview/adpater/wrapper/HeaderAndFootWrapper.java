@@ -129,7 +129,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             View view = mHeaderViews.valueAt(i);
             view.setVisibility(show ? View.VISIBLE : View.GONE);
         }
-        mHeaderSize = size;
+//        mHeaderSize = size;
     }
 
     public int getHeadersCount() {
