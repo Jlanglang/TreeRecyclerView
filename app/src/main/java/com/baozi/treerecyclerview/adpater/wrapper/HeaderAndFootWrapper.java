@@ -105,7 +105,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     public void addHeaderView(View view) {
         int size = mHeaderViews.size();
         mHeaderViews.put(HEAD_ITEM + size, view);
-        mHeaderSize = size;
+        mHeaderSize++;
     }
 
     @Deprecated
