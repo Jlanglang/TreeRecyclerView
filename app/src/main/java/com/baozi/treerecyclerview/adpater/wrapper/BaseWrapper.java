@@ -120,4 +120,5 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     public void clear() {
         mAdapter.clear();
     }
+
 }

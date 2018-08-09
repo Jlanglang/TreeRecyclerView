@@ -195,6 +195,16 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     }
                     return itemSpanSize;
                 }
+
+                @Override
+                public int getSpanIndex(int position, int spanCount) {
+                    return super.getSpanIndex(position, spanCount);
+                }
+
+                @Override
+                public int getSpanGroupIndex(int adapterPosition, int spanCount) {
+                    return super.getSpanGroupIndex(adapterPosition, spanCount);
+                }
             });
         }
     }
@@ -264,6 +274,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType(items, type);
             super.removeItems(childItemsWithType);
         }
+
     }
 
 }

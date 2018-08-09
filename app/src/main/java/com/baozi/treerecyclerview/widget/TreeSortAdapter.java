@@ -182,8 +182,28 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
         }
 
         @Override
+        public int dataToItemPosition(int index) {
+            return manager.dataToItemPosition(index);
+        }
+
+        @Override
+        public int itemToDataPosition(int position) {
+            return manager.itemToDataPosition(position);
+        }
+
+        @Override
         public void notifyDataChanged() {
             manager.notifyDataChanged();
+        }
+
+        @Override
+        public void addCheckItemInterfaces(CheckItemInterface itemInterface) {
+            manager.addCheckItemInterfaces(itemInterface);
+        }
+
+        @Override
+        public void removeCheckItemInterfaces(CheckItemInterface itemInterface) {
+            manager.removeCheckItemInterfaces(itemInterface);
         }
     }
 }
