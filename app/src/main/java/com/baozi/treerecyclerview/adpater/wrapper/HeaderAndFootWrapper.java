@@ -20,13 +20,9 @@ import java.util.List;
 
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     private static final int HEAD_ITEM = 1000;
-    //    private static final int FOOT_ITEM = 2000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
-    //    private SparseArray<View> mFootViews = new SparseArray<>();
     private boolean headShow = true;
-    //    private boolean footShow = true;
     private int mHeaderSize;
-    //    private int mFootSize;
 
     public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
@@ -61,7 +57,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         int layoutPosition = holder.getLayoutPosition();
         if ((isHeaderViewPos(layoutPosition)
-//                || isFooterViewPos(layoutPosition)
         )) {
             return;
         }

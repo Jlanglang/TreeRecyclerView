@@ -22,21 +22,23 @@
 ```
 # 目录介绍
 + 1.Adapter
-  * Wapper------扩展Adapte的wapper目录
-     * EmptyWapper  --------当无数据时显示页面.
-     * HeaderAndFootWapper --------添加头部view和尾部view
-  - ItemManager --------接口,管理Adatper刷新,增删操作
+  * Wrapper------扩展Adapter的wrapper目录
+     * BaseWrapper  --------wrapper基类
+     * HeaderAndFootWrapper  --------添加头部的wrapper，foot废弃，实用性不强.
+     * LoadingWrapper  --------加载页wrapper，可配置空，加载中，加载更多等显示状态.
+     * SwipeWrapper --------支持侧滑删除的wrapper
+  - ItemManager --------接口,管理Adapter刷新,增删操作
   - TreeRecyclerAdapter ----多级列表,树形结构的adapter
   - TreeRecyclerViewType ----多级列表的显示样式,枚举
 
  + 2.base
      - BaseItemData-----item的数据要求.javabean需要继承该类.
-     - BaseRecyclerAdapter --------封装的Adatper基类
-     - ViewHolder----封装的通用viewHodler
+     - BaseRecyclerAdapter --------封装的Adapter基类
+     - ViewHolder----封装的通用viewHolder
 
  + 3.factory
-   - ItemConfig ----添加item的class,配置样式
-   - Itemfactory----通过class生成BaseItem的工厂类
+   - ItemConfig ----注册item的class,配置样式，通过
+   - ItemHelperFactory----通过class生成BaseItem的工厂类,查找子item等功能
  + 4.item
     - SwipeItem ----侧滑删除,需实现该接口
     - TreeItem  ----树形结构子item

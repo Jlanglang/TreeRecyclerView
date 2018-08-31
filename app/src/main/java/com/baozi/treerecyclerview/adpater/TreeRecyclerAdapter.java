@@ -150,62 +150,38 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
     }
 
+    RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
+        @Override
+        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+            super.getItemOffsets(outRect, view, parent, state);
+            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+            int viewLayoutPosition = layoutParams.getViewLayoutPosition();
+            int i = getItemCount();
+            if (getItemCount() == 0) {
+                return;
+            }
+            int checkPosition = checkPosition(viewLayoutPosition);
+            if (checkPosition < 0 || checkPosition >= i) {
+                return;
+            }
+            TreeItem data = getData(checkPosition);
+            if (data != null) {
+                data.getItemOffsets(outRect, layoutParams, checkPosition);
+            }
+        }
+    };
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-                int viewLayoutPosition = layoutParams.getViewLayoutPosition();
-                int i = getItemCount();
-                if (getItemCount() == 0) {
-                    return;
-                }
-                int checkPosition = checkPosition(viewLayoutPosition);
-                if (checkPosition < 0 || checkPosition >= i) {
-                    return;
-                }
-                TreeItem data = getData(checkPosition);
-                if (data != null) {
-                    data.getItemOffsets(outRect, layoutParams, checkPosition);
-                }
-            }
-        });
+        recyclerView.removeItemDecoration(treeItemDecoration);
+        recyclerView.addItemDecoration(treeItemDecoration);
         final RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
-            final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
-            final int spanCount = gridLayoutManager.getSpanCount();
-            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    int i = getItemCount();
-                    if (i == 0) {
-                        return spanCount;
-                    }
-                    int itemToDataPosition = getItemManager().itemToDataPosition(position);
-                    if (itemToDataPosition < 0 || itemToDataPosition >= i) {
-                        return spanCount;
-                    }
-                    int itemSpanSize = getItemSpanSize(itemToDataPosition);
-                    if (itemSpanSize == 0) {
-                        return spanCount;
-                    }
-                    return itemSpanSize;
-                }
-
-                @Override
-                public int getSpanIndex(int position, int spanCount) {
-                    return super.getSpanIndex(position, spanCount);
-                }
-
-                @Override
-                public int getSpanGroupIndex(int adapterPosition, int spanCount) {
-                    return super.getSpanGroupIndex(adapterPosition, spanCount);
-                }
-            });
+            GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+            int spanCount = gridLayoutManager.getSpanCount();
+            TreeSpanSizeLookup treeSpanSizeLookup = new TreeSpanSizeLookup(this, spanCount);
+            gridLayoutManager.setSpanSizeLookup(treeSpanSizeLookup);
         }
     }
 
@@ -277,4 +253,30 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     }
 
+    public final static class TreeSpanSizeLookup extends GridLayoutManager.SpanSizeLookup {
+        private final BaseRecyclerAdapter adapter;
+        private final int spanCount;
+
+        public TreeSpanSizeLookup(BaseRecyclerAdapter adapter, int spanCount) {
+            this.adapter = adapter;
+            this.spanCount = spanCount;
+        }
+
+        @Override
+        public int getSpanSize(int position) {
+            int i = adapter.getItemCount();
+            if (i == 0) {
+                return spanCount;
+            }
+            int itemToDataPosition = adapter.getItemManager().itemToDataPosition(position);
+            if (itemToDataPosition < 0 || itemToDataPosition >= i) {
+                return spanCount;
+            }
+            int itemSpanSize = adapter.getItemSpanSize(itemToDataPosition);
+            if (itemSpanSize == 0) {
+                return spanCount;
+            }
+            return itemSpanSize;
+        }
+    }
 }
