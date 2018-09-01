@@ -102,6 +102,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     }
 
     @Override
+    @Deprecated
     public int getItemSpanSize(int position) {
         if ((isEmpty() || isLoading()) && position == 0) {
             return 0;
@@ -110,6 +111,17 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
             return 0;
         }
         return super.getItemSpanSize(position);
+    }
+
+    @Override
+    public int getItemSpanSize(int position, int maxSpan) {
+        if ((isEmpty() || isLoading()) && position == 0) {
+            return maxSpan;
+        }
+        if (isLoadMoreViewPos(position)) {
+            return maxSpan;
+        }
+        return super.getItemSpanSize(position, maxSpan);
     }
 
     public LoadMoreListener getLoadMoreListener() {

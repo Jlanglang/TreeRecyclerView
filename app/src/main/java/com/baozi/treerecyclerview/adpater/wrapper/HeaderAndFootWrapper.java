@@ -78,11 +78,20 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         return getHeadersCount() + mAdapter.getItemCount();
     }
 
+    @Deprecated
     public int getItemSpanSize(int position) {
         if (isHeaderViewPos(position)) {
             return 0;
         }
         return super.getItemSpanSize(position);
+    }
+
+    @Override
+    public int getItemSpanSize(int position, int maxSpan) {
+        if (isHeaderViewPos(position)) {
+            return maxSpan;
+        }
+        return super.getItemSpanSize(position, maxSpan);
     }
 
     @Override

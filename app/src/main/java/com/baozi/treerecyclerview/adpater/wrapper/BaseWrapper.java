@@ -23,6 +23,7 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
         mAdapter = adapter;
         mAdapter.getItemManager().setAdapter(this);
     }
+
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         mAdapter.onBindViewHolderClick(holder, view);
@@ -102,8 +103,14 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
+    @Deprecated
     public int getItemSpanSize(int position) {
         return mAdapter.getItemSpanSize(position);
+    }
+
+    @Override
+    public int getItemSpanSize(int position, int maxSpan) {
+        return mAdapter.getItemSpanSize(position, maxSpan);
     }
 
     @Override

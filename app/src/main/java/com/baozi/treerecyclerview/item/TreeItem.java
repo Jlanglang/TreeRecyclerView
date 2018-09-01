@@ -66,9 +66,19 @@ public abstract class TreeItem<D> {
      *
      * @return , 如果设置的列数为6, 返回3, 则代表item占1半宽度
      */
+    @Deprecated
     public int getSpanSize() {
+        return 0;
+    }
+
+    /**
+     * @param maxSpan 总数
+     * @return
+     */
+    public int getSpanSize(int maxSpan) {
         return spanSize;
     }
+
 
     public void setSpanSize(int spanSize) {
         this.spanSize = spanSize;

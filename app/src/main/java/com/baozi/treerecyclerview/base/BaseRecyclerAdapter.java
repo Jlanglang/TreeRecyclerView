@@ -83,8 +83,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return getDatas().size();
     }
 
+    @Deprecated
     public int getItemSpanSize(int position) {
         return 0;
+    }
+
+    public int getItemSpanSize(int position, int maxSpan) {
+        return maxSpan;
     }
 
     public List<T> getDatas() {
