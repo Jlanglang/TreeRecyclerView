@@ -32,7 +32,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        onBindViewHolder(holder, getDatas().get(position), position);
+        onBindViewHolder(holder, getData(position), position);
     }
 
     /**

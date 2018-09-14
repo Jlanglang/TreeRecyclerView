@@ -62,7 +62,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                         mOnItemClickListener.onItemClick(holder, layoutPosition);
                     } else {
                         //拿到对应item,回调.
-                        getDatas().get(layoutPosition).onClick(holder);
+                        item.onClick(holder);
                     }
                 }
 //                }

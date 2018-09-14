@@ -9,16 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by baozi on 2017/4/30.
  * 该装饰请务必使用在最后一次
  */
-public class TreeLoadWrapper<T> extends BaseWrapper<T> {
+public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     private static final int ITEM_TYPE_EMPTY = -3000;
     private static final int ITEM_TYPE_LOADING = -4000;
     private static final int ITEM_LOAD_MORE = -5000;
@@ -33,7 +38,7 @@ public class TreeLoadWrapper<T> extends BaseWrapper<T> {
         EMPTY, REFRESH_OVER, @Deprecated SUCCESS, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
     }
 
-    public TreeLoadWrapper(BaseRecyclerAdapter<T> adapter) {
+    public TreeLoadWrapper(BaseRecyclerAdapter<TreeItem> adapter) {
         super(adapter);
     }
 
@@ -101,17 +106,6 @@ public class TreeLoadWrapper<T> extends BaseWrapper<T> {
         }
     }
 
-    @Override
-    @Deprecated
-    public int getItemSpanSize(int position) {
-        if ((isEmpty() || isLoading()) && position == 0) {
-            return 0;
-        }
-        if (isLoadMoreViewPos(position)) {
-            return 0;
-        }
-        return super.getItemSpanSize(position);
-    }
 
     @Override
     public int getItemSpanSize(int position, int maxSpan) {
@@ -135,12 +129,11 @@ public class TreeLoadWrapper<T> extends BaseWrapper<T> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        if (viewType == ITEM_TYPE_LOADING) {
-//            return ViewHolder.createViewHolder(parent, mLoadingView.getLayoutId());
-//        }
-//        if (viewType == ITEM_TYPE_EMPTY) {
-//            return ViewHolder.createViewHolder(parent, mEmptyView.getLayoutId());
-//        }
+        if (isLoading() || isEmpty()) {
+            ViewHolder viewHolder = ViewHolder.createViewHolder(parent, viewType);
+            onBindViewHolderClick(viewHolder, viewHolder.itemView);
+            return viewHolder;
+        }
         if (viewType == ITEM_LOAD_MORE) {
             return ViewHolder.createViewHolder(mLoadMoreItem.getLoadMoreView());
         }
@@ -163,10 +156,41 @@ public class TreeLoadWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (isEmpty() || isLoading() || isLoadMoreViewPos(position)) {
+        if (isLoading()) {
+            mLoadingView.onBindViewHolder(holder);
+            return;
+        }
+        if (isEmpty()) {
+            mEmptyView.onBindViewHolder(holder);
+            return;
+        }
+        if (isLoadMoreViewPos(position)) {
             return;
         }
         mAdapter.onBindViewHolder(holder, position);
+    }
+
+    @Override
+    public void onBindViewHolderClick(@NonNull final ViewHolder holder, View view) {
+        if (isLoading()) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mLoadingView.onClick(holder);
+                }
+            });
+            return;
+        }
+        if (isEmpty()) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mEmptyView.onClick(holder);
+                }
+            });
+            return;
+        }
+        super.onBindViewHolderClick(holder, view);
     }
 
     @Override

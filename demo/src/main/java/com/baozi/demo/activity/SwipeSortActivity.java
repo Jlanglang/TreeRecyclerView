@@ -20,8 +20,10 @@ import com.baozi.demo.item.sort.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
+import com.baozi.treerecyclerview.adpater.wrapper.TreeLoadWrapper;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
+import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -39,7 +41,7 @@ public class SwipeSortActivity extends AppCompatActivity {
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private TreeSortAdapter mTreeSortAdapter;
     private LinearLayoutManager mLinearLayoutManager;
-    private LoadingWrapper mWrapper;
+    private TreeLoadWrapper mWrapper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,8 +103,8 @@ public class SwipeSortActivity extends AppCompatActivity {
                 Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
             }
         });
-        mWrapper = new LoadingWrapper<>(adapter);
-        mWrapper.setEmptyView(R.layout.layout_empty);
+        mWrapper = new TreeLoadWrapper(adapter);
+        mWrapper.setEmptyView(new SimpleTreeItem(R.layout.layout_empty));
         mWrapper.setLoadingView(R.layout.layout_loading);
         rlcontent.setAdapter(mWrapper);
         initData();
@@ -149,7 +151,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mWrapper.setType(LoadingWrapper.Type.REFRESH_OVER);
+                        mWrapper.setType(TreeLoadWrapper.Type.REFRESH_OVER);
                         mWrapper.getItemManager().notifyDataChanged();
                     }
                 });
@@ -161,7 +163,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mWrapper.setType(LoadingWrapper.Type.LOADING);
+                        mWrapper.setType(TreeLoadWrapper.Type.LOADING);
                     }
                 });
                 try {
@@ -172,7 +174,7 @@ public class SwipeSortActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mWrapper.setType(LoadingWrapper.Type.REFRESH_OVER);
+                        mWrapper.setType(TreeLoadWrapper.Type.REFRESH_OVER);
                         mWrapper.getItemManager().replaceAllItem(groupItems);
                     }
                 });
