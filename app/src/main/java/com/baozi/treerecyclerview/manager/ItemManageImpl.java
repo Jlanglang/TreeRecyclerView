@@ -60,13 +60,13 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void removeItem(T item) {
+        int position = getItemPosition(item);
         getDatas().remove(item);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
         }
-        int itemPosition = getItemPosition(item);
-        itemPosition = dataToItemPosition(itemPosition);
+        int itemPosition = dataToItemPosition(position);
         getAdapter().notifyItemRemoved(itemPosition);
     }
 

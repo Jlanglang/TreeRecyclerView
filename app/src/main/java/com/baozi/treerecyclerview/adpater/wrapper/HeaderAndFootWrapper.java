@@ -17,7 +17,6 @@ import java.util.List;
  * Created by baozi on 2017/4/30.
  * 在最后一个，优先级高于loadwrapper,
  */
-
 public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     private static final int HEAD_ITEM = 1000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();

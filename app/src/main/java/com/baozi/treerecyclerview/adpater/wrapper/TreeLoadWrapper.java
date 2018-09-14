@@ -11,20 +11,19 @@ import android.widget.FrameLayout;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
+import com.baozi.treerecyclerview.item.SimpleTreeItem;
+import com.baozi.treerecyclerview.item.TreeItem;
 
 /**
  * Created by baozi on 2017/4/30.
  * 该装饰请务必使用在最后一次
  */
-@Deprecated
-public class LoadingWrapper<T> extends BaseWrapper<T> {
+public class TreeLoadWrapper<T> extends BaseWrapper<T> {
     private static final int ITEM_TYPE_EMPTY = -3000;
     private static final int ITEM_TYPE_LOADING = -4000;
     private static final int ITEM_LOAD_MORE = -5000;
-    private View mEmptyView;
-    private int mEmptyLayoutId;
-    private View mLoadingView;
-    private int mLoadingLayoutId;
+    private TreeItem mEmptyView;
+    private TreeItem mLoadingView;
     private LoadMoreItem mLoadMoreItem;
     private LoadMoreListener loadMoreListener;
     private boolean initLoadMore;
@@ -34,7 +33,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         EMPTY, REFRESH_OVER, @Deprecated SUCCESS, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
     }
 
-    public LoadingWrapper(BaseRecyclerAdapter<T> adapter) {
+    public TreeLoadWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
     }
 
@@ -58,7 +57,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
             case REFRESH_OVER:
                 break;
             case LOADING:
-                if (mLoadingView == null && mLoadingLayoutId == 0) {
+                if (mLoadingView == null) {
                     return;
                 }
                 notifyDataSetChanged();
@@ -77,11 +76,11 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        if (mEmptyView == null && mEmptyLayoutId == 0) {
-            mEmptyView = new View(recyclerView.getContext());
+        if (mEmptyView == null) {
+            mEmptyView = new SimpleTreeItem();
         }
-        if (mLoadingView == null && mLoadingLayoutId == 0) {
-            mLoadingView = new View(recyclerView.getContext());
+        if (mLoadingView == null) {
+            mLoadingView = new SimpleTreeItem();
         }
         setType(Type.LOADING);
         if (mLoadMoreItem != null) {
@@ -136,20 +135,12 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == ITEM_TYPE_LOADING) {
-            if (mLoadingLayoutId > 0) {
-                return ViewHolder.createViewHolder(parent, mLoadingLayoutId);
-            } else {
-                return ViewHolder.createViewHolder(mLoadingView);
-            }
-        }
-        if (viewType == ITEM_TYPE_EMPTY) {
-            if (mEmptyLayoutId > 0) {
-                return ViewHolder.createViewHolder(parent, mEmptyLayoutId);
-            } else {
-                return ViewHolder.createViewHolder(mEmptyView);
-            }
-        }
+//        if (viewType == ITEM_TYPE_LOADING) {
+//            return ViewHolder.createViewHolder(parent, mLoadingView.getLayoutId());
+//        }
+//        if (viewType == ITEM_TYPE_EMPTY) {
+//            return ViewHolder.createViewHolder(parent, mEmptyView.getLayoutId());
+//        }
         if (viewType == ITEM_LOAD_MORE) {
             return ViewHolder.createViewHolder(mLoadMoreItem.getLoadMoreView());
         }
@@ -159,10 +150,10 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     @Override
     public int getItemViewType(int position) {
         if (isLoading()) {
-            return ITEM_TYPE_LOADING;
+            return mLoadingView.getLayoutId();
         }
         if (isEmpty()) {
-            return ITEM_TYPE_EMPTY;
+            return mEmptyView.getLayoutId();
         }
         if (isLoadMoreViewPos(position)) {
             return ITEM_LOAD_MORE;
@@ -195,21 +186,20 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
         return mAdapter.getItemCount();
     }
 
-    public void setEmptyView(View emptyView) {
+    public void setEmptyView(TreeItem emptyView) {
         mEmptyView = emptyView;
-        mEmptyLayoutId = 0;
     }
 
     public void setEmptyView(int layoutId) {
-        mEmptyLayoutId = layoutId;
+        mEmptyView = new SimpleTreeItem(layoutId);
     }
 
-    public void setLoadingView(View loadingView) {
+    public void setLoadingView(TreeItem loadingView) {
         mLoadingView = loadingView;
     }
 
     public void setLoadingView(int layoutId) {
-        mLoadingLayoutId = layoutId;
+        mLoadingView = new SimpleTreeItem(layoutId);
     }
 
     public void setLoadMore(LoadMoreItem loadMoreItem) {
