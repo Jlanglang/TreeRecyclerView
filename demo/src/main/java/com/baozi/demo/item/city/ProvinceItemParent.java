@@ -20,7 +20,7 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
 
     @Override
     public List<TreeItem> initChildList(ProvinceBean data) {
-        return ItemHelperFactory.createItems(data.getCitys(), this);
+        return ItemHelperFactory.createTreeItemList(data.getCitys(),CountyItemParent.class, this);
     }
 
     @Override
