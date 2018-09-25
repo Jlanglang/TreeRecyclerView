@@ -12,8 +12,8 @@ import com.baozi.treerecyclerview.item.TreeItem;
  * @版本 2.0
  * @Change
  */
-
-public class NewsFootItem extends TreeItem<NewsItemBean.NewsFootBean> {
+@Deprecated
+public class NewsFootItem extends TreeItem<NewsItemBean> {
 
     @Override
     public int getLayoutId() {

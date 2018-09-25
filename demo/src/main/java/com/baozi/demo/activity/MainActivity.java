@@ -2,6 +2,7 @@ package com.baozi.demo.activity;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initData() {
         ArrayList<TreeItem> items = new ArrayList<>();
-        for (int i = 0; i < itemPairs.length; i++) {
+        for (Pair itemPair : itemPairs) {
             items.add(
                     new SimpleTreeItem(R.layout.item_mine)
                             .setTreeBind(new SimpleTreeItem.Consumer<ViewHolder>() {

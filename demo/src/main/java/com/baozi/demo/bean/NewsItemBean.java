@@ -16,22 +16,6 @@ import java.util.List;
 public class NewsItemBean {
     private String title;
 
-    public NewsFootBean getFootBean() {
-        return mFootBean;
-    }
-
-    public void setFootBean(NewsFootBean footBean) {
-        mFootBean = footBean;
-    }
-
-    public List<NewsImageBean> getImageBeanList() {
-        return mImageBeanList;
-    }
-
-    public void setImageBeanList(List<NewsImageBean> imageBeanList) {
-        mImageBeanList = imageBeanList;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -40,16 +24,18 @@ public class NewsItemBean {
         this.title = title;
     }
 
-    private NewsFootBean mFootBean;
-    private List<NewsImageBean> mImageBeanList;
+    public int getImages() {
+        return images;
+    }
+
+    public void setImages(int images) {
+        this.images = images;
+    }
+
+    private int images;
 
     @TreeItemClass(iClass = NewsImageItem.class)
     public static class NewsImageBean {
-
-    }
-
-    @TreeItemClass(iClass = NewsFootItem.class)
-    public static class NewsFootBean {
 
     }
 

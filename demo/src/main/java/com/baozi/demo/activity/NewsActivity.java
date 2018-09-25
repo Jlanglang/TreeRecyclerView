@@ -14,7 +14,10 @@ import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author jlanglang  2017/7/5 10:22
@@ -31,28 +34,16 @@ public class NewsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        ArrayList<NewsItemBean> newsItemBeans = new ArrayList<>();
+        ArrayList<NewsItemBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsItemBean newsItemBean = new NewsItemBean();
-            int size = 3;
-            if (i % 2 == 0) {
-                size = 5;
-            }
-            ArrayList<NewsItemBean.NewsImageBean> imageBeens = new ArrayList<>();
-            for (int j = 0; j < size; j++) {
-                NewsItemBean.NewsImageBean imageBean = new NewsItemBean.NewsImageBean();
-                imageBeens.add(imageBean);
-            }
-            newsItemBean.setImageBeanList(imageBeens);
-
-            NewsItemBean.NewsFootBean newsFootBean = new NewsItemBean.NewsFootBean();
-            newsItemBean.setFootBean(newsFootBean);
-            newsItemBeans.add(newsItemBean);
+            newsItemBean.setTitle("123");
+            newsItemBean.setImages(new Random().nextInt(10));
+            list.add(newsItemBean);
         }
         recyclerView.setAdapter(treeRecyclerAdapter);
 
-        List<TreeItem> itemList = ItemHelperFactory.createItems(newsItemBeans, null);
+        List<TreeItem> itemList = ItemHelperFactory.createItems(list, null);
         treeRecyclerAdapter.getItemManager().replaceAllItem(itemList);
     }
 }
