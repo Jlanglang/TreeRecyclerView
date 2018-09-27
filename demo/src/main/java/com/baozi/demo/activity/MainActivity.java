@@ -1,12 +1,11 @@
 package com.baozi.demo.activity;
 
-import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,18 +13,12 @@ import android.util.Pair;
 import android.view.View;
 
 import com.baozi.demo.R;
-import com.baozi.demo.item.mine.MineItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author jlanglang  2016/12/22 9:58
@@ -39,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
             new Pair("购物车列表", CartActivity.class),
             new Pair("新闻混合列表", NewsActivity.class),
             new Pair("索引列表", SortActivity.class),
-            new Pair("索引加侧滑删除列表", SwipeSortActivity.class)
+            new Pair("索引加侧滑删除列表", SwipeSortActivity.class),
+            new Pair("我的页面", MineFragment.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
@@ -69,7 +63,13 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void accept(ViewHolder viewHolder) {
                             Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
-                            startAt((Class) itemPair.second);
+                            Class<?> aClass = (Class<?>) itemPair.second;
+                            boolean assignableFrom = Fragment.class.isAssignableFrom(aClass);//判断是不是fragment的子类
+                            if (assignableFrom) {
+                                startFragment((Class<Fragment>) itemPair.second);
+                            } else {
+                                startAt((Class) itemPair.second);
+                            }
                         }
                     });
             items.add(simpleTreeItem);
@@ -98,7 +98,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startFragment(Fragment fragment) {
+    public void startFragment(Class<Fragment> zClass) {
+        try {
+            Fragment fragment = zClass.newInstance();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.add(android.R.id.content, fragment, null);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commitAllowingStateLoss();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
 
     }
 }

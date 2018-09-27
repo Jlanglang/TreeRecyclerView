@@ -1,5 +1,6 @@
 package com.baozi.demo.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ public class MineFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (view == null) {
             view = (RecyclerView) inflater.inflate(R.layout.layout_rv_content, container, false);
+            view.setBackgroundColor(Color.GRAY);
         }
         return view;
     }
