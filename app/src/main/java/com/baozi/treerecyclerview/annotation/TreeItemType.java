@@ -15,10 +15,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface TreeItemType {
-    /**
-     * @return -1代表不查找，请勿使用该值
-     */
-    int value() default -1;
+
 
     int type() default -1;
 }

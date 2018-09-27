@@ -10,11 +10,10 @@ import java.lang.annotation.Target;
 
 /**
  * Created by 125C01063144 on 2018/2/27.
- * itemClass与filedName冲突,只生效一个,
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface TreeItemClass {
+public @interface TreeDataType {
     /**
      * 直接绑定itemclass
      *
@@ -23,9 +22,7 @@ public @interface TreeItemClass {
     Class iClass() default Object.class;
 
     /**
-     * 参数名,用来获取对应的参数,解析值,获得type
-     *
-     * @return
+     * @return -1代表不查找，请勿使用该值
      */
-    String filedName() default "";
+    int value() default -1;
 }

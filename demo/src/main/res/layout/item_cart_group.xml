@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:paddingLeft="10dp"
+                android:paddingLeft="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="#e3ef13"
@@ -11,15 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_centerVertical="true"
+        style="@style/body_text"
         android:clickable="false"
         android:gravity="center"
-        android:paddingLeft="10dp"
-        android:text="店铺名称:"/>
+        android:paddingLeft="8dp"
+        android:text="店铺名称: 渣渣豆腐店"/>
 
-    <TextView
-        style="@style/body_text"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:text="渣渣豆腐店"/>
 </RelativeLayout>

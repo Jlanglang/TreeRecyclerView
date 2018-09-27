@@ -3,14 +3,14 @@ package com.baozi.demo.bean;
 import com.baozi.demo.item.city.AreaItem;
 import com.baozi.demo.item.city.CountyItemParent;
 import com.baozi.demo.item.city.ProvinceItemParent;
-import com.baozi.treerecyclerview.annotation.TreeItemClass;
+import com.baozi.treerecyclerview.annotation.TreeDataType;
 
 import java.util.List;
 
 /**
  * Created by baozi on 2016/12/8.
  */
-@TreeItemClass(iClass = ProvinceItemParent.class)
+@TreeDataType(iClass = ProvinceItemParent.class)
 public class ProvinceBean {
 
     /**
@@ -46,7 +46,7 @@ public class ProvinceBean {
         this.citys = citys;
     }
 
-    @TreeItemClass(iClass = CountyItemParent.class)
+    @TreeDataType(iClass = CountyItemParent.class)
     public static class CityBean {
         /**
          * areas : [{"areaId":2799,"areaName":"三环以内"},{"areaId":2819,"areaName":"三环到四环之间"},{"areaId":2839,"areaName":"四环到五环之间"},{"areaId":2840,"areaName":"五环到六环之间"},{"areaId":4137,"areaName":"管庄"},{"areaId":4139,"areaName":"北苑"},{"areaId":4211,"areaName":"定福庄"}]
@@ -82,7 +82,7 @@ public class ProvinceBean {
             this.areas = areas;
         }
 
-        @TreeItemClass(iClass = AreaItem.class)
+        @TreeDataType(iClass = AreaItem.class)
         public static class AreasBean{
             /**
              * areaId : 2799

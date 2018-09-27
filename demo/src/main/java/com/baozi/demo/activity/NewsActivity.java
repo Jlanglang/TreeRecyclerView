@@ -34,6 +34,8 @@ public class NewsActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));
+        recyclerView.setAdapter(treeRecyclerAdapter);
+
         ArrayList<NewsItemBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsItemBean newsItemBean = new NewsItemBean();
@@ -41,7 +43,6 @@ public class NewsActivity extends AppCompatActivity {
             newsItemBean.setImages(new Random().nextInt(10));
             list.add(newsItemBean);
         }
-        recyclerView.setAdapter(treeRecyclerAdapter);
 
         List<TreeItem> itemList = ItemHelperFactory.createItems(list, null);
         treeRecyclerAdapter.getItemManager().replaceAllItem(itemList);

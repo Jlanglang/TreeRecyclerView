@@ -12,6 +12,7 @@ import com.baozi.demo.R;
 import com.baozi.demo.item.sort.IndexBar;
 import com.baozi.demo.item.sort.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
+import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -26,14 +27,15 @@ public class SortActivity extends AppCompatActivity {
     private static final String[] LETTERS = new String[]{"A", "B", "C", "D",
             "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private TreeSortAdapter mTreeSortAdapter;
+    private TreeSortAdapter mTreeSortAdapter = new TreeSortAdapter();
+    ;
     private LinearLayoutManager mLinearLayoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        RecyclerView rv_content = (RecyclerView) findViewById(R.id.rv_content);
+        final RecyclerView rv_content = (RecyclerView) findViewById(R.id.rv_content);
         TextView tv_index = (TextView) findViewById(R.id.tv_index);
         IndexBar qb_sort = (IndexBar) findViewById(R.id.qb_sort);
         qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {
@@ -48,16 +50,6 @@ public class SortActivity extends AppCompatActivity {
 
         mLinearLayoutManager = new LinearLayoutManager(this);
         rv_content.setLayoutManager(mLinearLayoutManager);
-        rv_content.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.bottom = 2;
-            }
-        });
-        mTreeSortAdapter = new TreeSortAdapter();
-        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
-
         rv_content.setAdapter(mTreeSortAdapter);
         initData();
     }
@@ -65,10 +57,10 @@ public class SortActivity extends AppCompatActivity {
 
     private void initData() {
         List<TreeItem> groupItems = new ArrayList<>();
-        for (int i = 0; i < LETTERS.length; i++) {
+        for (String str : LETTERS) {
             SortGroupItem sortGroupItem = new SortGroupItem();
-            sortGroupItem.setSortKey(LETTERS[i]);
-            sortGroupItem.setData(5);
+            sortGroupItem.setSortKey(str);
+            sortGroupItem.setData(null);
             groupItems.add(sortGroupItem);
         }
         mTreeSortAdapter.getItemManager().replaceAllItem(groupItems);

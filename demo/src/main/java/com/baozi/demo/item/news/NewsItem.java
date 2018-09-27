@@ -1,6 +1,8 @@
 package com.baozi.demo.item.news;
 
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.bean.NewsItemBean;
@@ -38,7 +40,7 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
                     public void accept(ViewHolder viewHolder) {
                         //点击跳转
                     }
-                }));
+                }).setTreeBind(new Rect(0, 0, 0, 20)));
         return treeItemList;
     }
 
@@ -49,6 +51,7 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-
+        viewHolder.setText(R.id.tv_title, data.getTitle());
     }
+
 }

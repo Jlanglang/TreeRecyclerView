@@ -24,8 +24,6 @@ import java.util.List;
  * 该装饰请务必使用在最后一次
  */
 public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
-    private static final int ITEM_TYPE_EMPTY = -3000;
-    private static final int ITEM_TYPE_LOADING = -4000;
     private static final int ITEM_LOAD_MORE = -5000;
     private TreeItem mEmptyView;
     private TreeItem mLoadingView;
@@ -211,6 +209,10 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     }
 
     public void setEmptyView(TreeItem emptyView) {
+        if (emptyView == null) {
+            mEmptyView = new SimpleTreeItem(0);
+            return;
+        }
         mEmptyView = emptyView;
     }
 
@@ -219,6 +221,10 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     }
 
     public void setLoadingView(TreeItem loadingView) {
+        if (loadingView == null) {
+            mLoadingView = new SimpleTreeItem(0);
+            return;
+        }
         mLoadingView = loadingView;
     }
 

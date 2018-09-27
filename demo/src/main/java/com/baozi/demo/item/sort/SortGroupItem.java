@@ -1,6 +1,8 @@
 package com.baozi.demo.item.sort;
 
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.swipe.SwipeSortItem;
@@ -15,11 +17,11 @@ import java.util.List;
  * Created by baozi on 2017/8/19.
  */
 
-public class SortGroupItem extends TreeSortItem<Integer> {
+public class SortGroupItem extends TreeSortItem {
     @Override
-    protected List<TreeItem> initChildList(Integer childs) {
+    protected List<TreeItem> initChildList(Object childs) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
-        for (int i = 0; i < childs; i++) {
+        for (int i = 0; i < 5; i++) {
             SwipeSortItem sortChildItem = new SwipeSortItem();
             sortChildItem.setData(i + "");
             treeItems.add(sortChildItem);
@@ -40,5 +42,14 @@ public class SortGroupItem extends TreeSortItem<Integer> {
     @Override
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+        super.getItemOffsets(outRect, layoutParams, position);
+        outRect.top = 10;
+        if (position == 0) {
+            outRect.top = 0;
+        }
     }
 }

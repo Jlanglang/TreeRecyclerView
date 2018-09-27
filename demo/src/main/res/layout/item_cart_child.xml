@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:background="@color/colorPrimary"
@@ -8,32 +7,40 @@
 
     <CheckBox
         android:id="@+id/cb_ischeck"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="32dp"
-        android:clickable="false"
-        />
+        android:layout_marginLeft="8dp"
+        android:clickable="false" />
 
     <ImageView
+        android:id="@+id/iv_image"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="80dp"
-        android:background="@mipmap/ic_launcher"/>
+        android:layout_toRightOf="@id/cb_ischeck"
+        android:background="@mipmap/ic_launcher" />
 
     <TextView
-        style="@style/body_text"
-        android:layout_marginLeft="180dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:text="极品豆腐渣"/>
+        style="@style/body_text.white"
+        android:layout_alignTop="@id/iv_image"
+        android:layout_toRightOf="@id/iv_image"
+        android:paddingLeft="16dp"
+        android:text="极品豆腐渣" />
 
     <TextView
-        style="@style/body_text"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/tv_price"
+        style="@style/body_text.white"
+        android:layout_alignBottom="@id/iv_image"
+        android:layout_toRightOf="@id/iv_image"
+        android:paddingLeft="16dp"
+        android:text="￥ 16" />
+
+    <TextView
+        style="@style/body_text.white"
+        android:layout_alignBottom="@id/iv_image"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:text="豆腐渣,豆腐渣,豆腐渣,豆腐渣"/>
+        android:layout_marginRight="16dp"
+        android:paddingLeft="16dp"
+        android:text="x1" />
 </RelativeLayout>

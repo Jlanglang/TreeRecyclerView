@@ -32,10 +32,6 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
     }
 
 
-//    @Override
-//    public int getSpanSize() {
-//        return 1;
-//    }
 
     @Override
     public int getSpanSize(int maxSpan) {

@@ -3,9 +3,10 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.baozi.treerecyclerview.annotation.TreeItemClass;
+import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseItemData;
+import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeSortItem;
@@ -20,50 +21,7 @@ import java.util.List;
 public class ItemHelperFactory {
 
     public static List<TreeItem> createItems(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
-        if (null == list) {
-            return null;
-        }
-        ArrayList<TreeItem> treeItemList = new ArrayList<>();
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            try {
-                Object itemData = list.get(i);
-                Class<? extends TreeItem> treeItemClass = getTypeClass(itemData);
-                TreeItem treeItem;
-                //判断是否是TreeItem的子类
-                if (treeItemClass != null) {
-                    treeItem = treeItemClass.newInstance();
-                    treeItem.setData(itemData);
-                    treeItem.setParentItem(treeParentItem);
-                    treeItemList.add(treeItem);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return treeItemList;
-    }
-
-    /**
-     * 获取ItemClass
-     *
-     * @param itemData
-     * @return
-     */
-    private static Class<? extends TreeItem> getTypeClass(Object itemData) {
-        Class<? extends TreeItem> treeItemClass = null;
-        //先判断是否继承了ItemData,适用于跨模块获取
-        if (itemData instanceof BaseItemData) {
-            int viewItemType = ((BaseItemData) itemData).getViewItemType();
-            treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
-        } else {
-            //判断是否使用注解绑定了ItemClass,适用当前模块
-            TreeItemClass annotation = itemData.getClass().getAnnotation(TreeItemClass.class);
-            if (annotation != null) {
-                treeItemClass = annotation.iClass();
-            }
-        }
-        return treeItemClass;
+        return createTreeItemList(list, null, treeParentItem);
     }
 
     public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass) {
@@ -77,20 +35,75 @@ public class ItemHelperFactory {
         int size = list.size();
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            try {
-                Object itemData = list.get(i);
-                if (iClass != null) {
-                    TreeItem treeItem = iClass.newInstance();
-                    treeItem.setData(itemData);
-                    treeItem.setParentItem(treeParentItem);
-                    treeItemList.add(treeItem);
-                }
-            } catch (Exception e) {
-                //e.printStackTrace();
+            Object itemData = list.get(i);
+            TreeItem treeItem = createTreeItem(itemData, iClass, treeParentItem);
+            if (treeItem != null) {
+                treeItemList.add(treeItem);
             }
         }
         return treeItemList;
     }
+
+
+    /**
+     * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
+     *
+     * @return
+     */
+    public static TreeItem createTreeItem(Object d) {
+        return createTreeItem(d, null);
+    }
+
+    @Nullable
+    public static TreeItem createTreeItem(Object data, @Nullable TreeItemGroup treeParentItem) {
+        return createTreeItem(data, null, treeParentItem);
+    }
+
+    @Nullable
+    public static TreeItem createTreeItem(Object data, @Nullable Class zClass, @Nullable TreeItemGroup treeParentItem) {
+        TreeItem treeItem = null;
+        Class<? extends TreeItem> treeItemClass;
+        try {
+            if (zClass != null) {
+                treeItemClass = zClass;
+            } else {
+                treeItemClass = getTypeClass(data);
+                //判断是否是TreeItem的子类
+            }
+            if (treeItemClass != null) {
+                treeItem = treeItemClass.newInstance();
+                treeItem.setData(data);
+                treeItem.setParentItem(treeParentItem);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return treeItem;
+    }
+
+
+    /**
+     * 获取TreeItem的Class
+     *
+     * @param itemData
+     * @return
+     */
+    private static Class<? extends TreeItem> getTypeClass(Object itemData) {
+        Class<? extends TreeItem> treeItemClass = null;
+        //先判断是否继承了ItemData,适用于跨模块获取
+        if (itemData instanceof BaseItemData) {
+            int viewItemType = ((BaseItemData) itemData).getViewItemType();
+            treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
+        } else {
+            //判断是否使用注解绑定了ItemClass,适用当前模块
+            TreeDataType annotation = itemData.getClass().getAnnotation(TreeDataType.class);
+            if (annotation != null) {
+                treeItemClass = annotation.iClass();
+            }
+        }
+        return treeItemClass;
+    }
+
 
     /**
      * 创建排序List
@@ -100,6 +113,7 @@ public class ItemHelperFactory {
      * @param treeParentItem
      * @return
      */
+    @Deprecated
     public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -131,6 +145,7 @@ public class ItemHelperFactory {
      * @param treeParentItem
      * @return
      */
+    @Deprecated
     public static List<TreeItem> createTreeSortList(@Nullable List list, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
@@ -156,30 +171,6 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-
-    /**
-     * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
-     *
-     * @return
-     */
-    public static <D> TreeItem createTreeItem(D d) {
-        TreeItem treeItem = null;
-        try {
-            Class<? extends TreeItem> itemClass;
-            if (d instanceof BaseItemData) {
-                itemClass = ItemConfig.getTreeViewHolderType(((BaseItemData) d).getViewItemType());
-            } else {
-                itemClass = getTypeClass(d);
-            }
-            if (itemClass != null) {
-                treeItem = itemClass.newInstance();
-                treeItem.setData(d);
-            }
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
-        return treeItem;
-    }
 
     /**
      * 根据TreeRecyclerType获取子item集合,不包含TreeItemGroup自身

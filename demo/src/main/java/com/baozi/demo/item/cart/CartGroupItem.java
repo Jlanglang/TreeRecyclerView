@@ -26,11 +26,6 @@ public class CartGroupItem extends TreeSelectItemGroup<String> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setChecked(R.id.cb_ischeck, isChildCheck());
-        if (isExpand()){
-            //展开
-        }else{
-            //折叠
-        }
     }
 
     @Nullable

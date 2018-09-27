@@ -1,7 +1,9 @@
 package com.baozi.demo.item.cart;
 
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -33,5 +35,11 @@ public class CartItem extends TreeItem<String> {
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
         getItemManager().notifyDataChanged();
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+        super.getItemOffsets(outRect, layoutParams, position);
+        outRect.bottom = 1;
     }
 }

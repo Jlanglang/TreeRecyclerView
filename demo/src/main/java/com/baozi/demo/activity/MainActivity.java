@@ -57,23 +57,22 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         ArrayList<TreeItem> items = new ArrayList<>();
         for (Pair itemPair : itemPairs) {
-            items.add(
-                    new SimpleTreeItem(R.layout.item_mine)
-                            .setTreeBind(new SimpleTreeItem.Consumer<ViewHolder>() {
-                                @Override
-                                public void accept(ViewHolder viewHolder) {
-                                    Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
-                                    viewHolder.setText(R.id.tv_name, (String) itemPair.first);
-                                }
-                            })
-                            .setTreeClick(new SimpleTreeItem.Consumer<ViewHolder>() {
-                                @Override
-                                public void accept(ViewHolder viewHolder) {
-                                    Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
-                                    startAt((Class) itemPair.second);
-                                }
-                            })
-            );
+            SimpleTreeItem simpleTreeItem = new SimpleTreeItem(R.layout.item_mine)
+                    .setTreeBind(new SimpleTreeItem.Consumer<ViewHolder>() {
+                        @Override
+                        public void accept(ViewHolder viewHolder) {
+                            Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
+                            viewHolder.setText(R.id.tv_name, (String) itemPair.first);
+                        }
+                    })
+                    .setTreeClick(new SimpleTreeItem.Consumer<ViewHolder>() {
+                        @Override
+                        public void accept(ViewHolder viewHolder) {
+                            Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
+                            startAt((Class) itemPair.second);
+                        }
+                    });
+            items.add(simpleTreeItem);
         }
         adapter.getItemManager().replaceAllItem(items);
     }

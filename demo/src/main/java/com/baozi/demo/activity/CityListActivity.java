@@ -22,6 +22,7 @@ import java.util.List;
  * 城市列表
  */
 public class CityListActivity extends AppCompatActivity {
+    //根据item的状态展示,可折叠
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
     @Override
@@ -48,9 +49,7 @@ public class CityListActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class,null);
-
+                ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class, null);
                 //创建item
                 List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
                 //遍历设置展开状态

@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * Created by a123 on 2018/6/5.
- * 购物车
+ * 购物车列表
  */
 public class CartActivity extends Activity {
     private TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
@@ -29,12 +29,12 @@ public class CartActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_rv_content);
         RecyclerView rv_content = findViewById(R.id.rv_content);
+
         rv_content.setLayoutManager(new LinearLayoutManager(this));
         rv_content.setAdapter(treeRecyclerAdapter);
 
         List<String> integers = Arrays.asList("1", "1", "1", "1", "1");
         List<TreeItem> treeItemList = ItemHelperFactory.createTreeItemList(integers, CartGroupItem.class, null);
-
         treeRecyclerAdapter.getItemManager().replaceAllItem(treeItemList);
 
     }

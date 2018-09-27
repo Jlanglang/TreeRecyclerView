@@ -1,6 +1,8 @@
 package com.baozi.demo.item.news;
 
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.bean.NewsItemBean;
@@ -19,13 +21,20 @@ public class NewsImageItem extends TreeItem<NewsItemBean.NewsImageBean> {
         return R.layout.item_news_image;
     }
 
+
     @Override
-    public int getSpanSize() {
-        return 2;
+    public int getSpanSize(int maxSpan) {
+        return maxSpan/3;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
 
+    }
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+        super.getItemOffsets(outRect, layoutParams, position);
+        outRect.set(1, 1, 1, 1);
     }
 }

@@ -22,6 +22,5 @@
         <activity android:name=".activity.SortActivity" />
         <activity android:name=".activity.SwipeSortActivity" />
         <activity android:name=".activity.CartActivity" />
-        <activity android:name=".activity.ComplaintActivity" />
     </application>
 </manifest>

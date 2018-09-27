@@ -47,7 +47,7 @@ public class SwipeSortActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        RecyclerView rlcontent = (RecyclerView) findViewById(R.id.rv_content);
+        RecyclerView rv_content = (RecyclerView) findViewById(R.id.rv_content);
         TextView tv_index = (TextView) findViewById(R.id.tv_index);
         IndexBar qb_sort = (IndexBar) findViewById(R.id.qb_sort);
         qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {
@@ -61,14 +61,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         qb_sort.setSelectedIndexTextView(tv_index);
 
         mLinearLayoutManager = new GridLayoutManager(this, 2);
-        rlcontent.setLayoutManager(mLinearLayoutManager);
-        rlcontent.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                super.getItemOffsets(outRect, view, parent, state);
-                outRect.bottom = 2;
-            }
-        });
+        rv_content.setLayoutManager(mLinearLayoutManager);
         //需求初定:好友列表
 //        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
 //        treeRecyclerAdapter.setDatas(new ContentGroupItem());
@@ -90,11 +83,9 @@ public class SwipeSortActivity extends AppCompatActivity {
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.getItemManager().setOpenAnim(true);
-//        mTreeSortAdapter.setType(TreeRecyclerType.SHOW_ALL);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
         addHeadView(headerAndFootWrapper, 5);
 
-//        addFootView(headerAndFootWrapper, 5);
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
         adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -106,7 +97,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         mWrapper = new TreeLoadWrapper(adapter);
         mWrapper.setEmptyView(new SimpleTreeItem(R.layout.layout_empty));
         mWrapper.setLoadingView(R.layout.layout_loading);
-        rlcontent.setAdapter(mWrapper);
+        rv_content.setAdapter(mWrapper);
         initData();
     }
 
@@ -121,23 +112,12 @@ public class SwipeSortActivity extends AppCompatActivity {
         }
     }
 
-//    private void addFootView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
-//        for (int i = 0; i < sum; i++) {
-//            //添加头部View1
-//            TextView footView = new TextView(this);
-//            footView.setText("footView" + i);
-//            footView.setGravity(Gravity.CENTER);
-//            footView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-//            headerAndFootWrapper.addFootView(footView);
-//        }
-//    }
-
     private void initData() {
         final List<TreeItem> groupItems = new ArrayList<>();
         for (int i = 0; i < LETTERS.length; i++) {
             SortGroupItem sortGroupItem = new SortGroupItem();
             sortGroupItem.setSortKey(LETTERS[i]);
-            sortGroupItem.setData(5);
+            sortGroupItem.setData(i);
             groupItems.add(sortGroupItem);
         }
         new Thread(new Runnable() {

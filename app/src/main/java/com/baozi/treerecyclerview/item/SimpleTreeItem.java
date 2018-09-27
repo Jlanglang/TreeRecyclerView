@@ -14,6 +14,7 @@ public class SimpleTreeItem extends TreeItem {
     private int spanSize;
     private Consumer<ViewHolder> treeClick;
     private Consumer<ViewHolder> treeBind;
+    private Rect treeRect;
 
     public SimpleTreeItem() {
         this(0, 0);
@@ -49,7 +50,9 @@ public class SimpleTreeItem extends TreeItem {
 
     @Override
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
-
+        if (treeRect != null) {
+            outRect.set(treeRect);
+        }
     }
 
     @Override
@@ -72,4 +75,8 @@ public class SimpleTreeItem extends TreeItem {
         return this;
     }
 
+    public SimpleTreeItem setTreeBind(Rect outRect) {
+        this.treeRect = outRect;
+        return this;
+    }
 }

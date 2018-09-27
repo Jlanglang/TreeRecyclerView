@@ -15,4 +15,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="body_text.white" parent="body_text">
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>
