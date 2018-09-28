@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface TreeItemType {
 
-
     int type() default -1;
+
 }

@@ -31,8 +31,8 @@ public class CartGroupItem extends TreeSelectItemGroup<String> {
     @Nullable
     @Override
     protected List<TreeItem> initChildList(String data) {
-        String[] strings = {"1", "1", "1", "1"};//假数据
-        List<String> childs = Arrays.asList(strings);
+        Integer[] strings = {100, 200, 300, 400};//假数据
+        List<Integer> childs = Arrays.asList(strings);
         return ItemHelperFactory.createTreeItemList(childs, CartItem.class, this);
     }
 
@@ -40,6 +40,5 @@ public class CartGroupItem extends TreeSelectItemGroup<String> {
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
         selectAll(!isSelectAll());
-        getItemManager().notifyDataChanged();
     }
 }

@@ -31,8 +31,6 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
         holder.setText(R.id.tv_content, data.getAreaName());
     }
 
-
-
     @Override
     public int getSpanSize(int maxSpan) {
         return maxSpan / 6;

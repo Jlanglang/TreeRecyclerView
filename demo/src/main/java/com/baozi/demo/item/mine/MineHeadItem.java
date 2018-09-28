@@ -8,10 +8,10 @@ import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
-public class MineItem extends TreeItem<String> {
+public class MineHeadItem extends TreeItem<String> {
     @Override
     public int getLayoutId() {
-        return R.layout.item_mine;
+        return R.layout.item_mine_head;
     }
 
     @Override

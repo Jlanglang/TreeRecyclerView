@@ -22,7 +22,7 @@ public @interface TreeDataType {
     Class iClass() default Object.class;
 
     /**
-     * @return -1代表不查找，请勿使用该值
+     * @return -1代表不查找
      */
     int value() default -1;
 }
