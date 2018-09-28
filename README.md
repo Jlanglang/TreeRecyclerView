@@ -1,6 +1,6 @@
 # TreeRecyclerView
 
-#树形的reyclerView.示例图：
+# 树形的reyclerView.示例图：
 
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114623.png)
@@ -8,7 +8,7 @@
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120846.png)
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120934.png)
 
-#####以上示例都只使用了一个RecyclerView，没有嵌套
+##### 以上示例都只使用了一个RecyclerView，没有嵌套
 
 # 要点:
 1.可以通过后台控制Item的展示.
