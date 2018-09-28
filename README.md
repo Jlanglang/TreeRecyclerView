@@ -1,5 +1,8 @@
 # TreeRecyclerView
-树形的reyclerView.使用可以参考demo.
+树形的reyclerView.示例图：
+
+
+
 
 # 要点:
 1.可以通过后台控制Item的展示.
