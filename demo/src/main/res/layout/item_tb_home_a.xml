@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:clipChildren="false"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        style="@style/body_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="淘抢购" />
+
+    <TextView
+        style="@style/note_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="购买全攻略" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+</LinearLayout>

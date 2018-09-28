@@ -28,12 +28,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     //数据集合
     private Pair[] itemPairs = {
-            new Pair("城市列表", CityListActivity.class),
-            new Pair("购物车列表", CartActivity.class),
-            new Pair("新闻混合列表", NewsActivity.class),
-            new Pair("索引列表", SortActivity.class),
-            new Pair("索引加侧滑删除列表", SwipeSortActivity.class),
-            new Pair("我的页面", MineFragment.class)
+            new Pair("三级城市", CityListActivity.class),
+            new Pair("购物车", CartActivity.class),
+            new Pair("新闻", NewsActivity.class),
+            new Pair("索引", SortActivity.class),
+            new Pair("索引加侧滑删除", SwipeSortActivity.class),
+            new Pair("个人中心", MineFragment.class),
+            new Pair("淘宝首页", TBHomeListActivity.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 

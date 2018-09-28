@@ -15,7 +15,6 @@ public class ItemConfig {
         treeViewHolderTypes = new SparseArray<>();
     }
 
-    @Deprecated
     public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
         return treeViewHolderTypes.get(type);
     }

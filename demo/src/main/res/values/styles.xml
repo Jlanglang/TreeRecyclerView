@@ -18,4 +18,15 @@
     <style name="body_text.white" parent="body_text">
         <item name="android:textColor">#fff</item>
     </style>
+
+    <style name="note_text">
+        <item name="android:textColor">#999</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="note_text.white" parent="note_text">
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>

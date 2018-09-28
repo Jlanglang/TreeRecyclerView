@@ -22,6 +22,6 @@ public class MineItem extends TreeItem<String> {
     @Override
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
         super.getItemOffsets(outRect, layoutParams, position);
-        outRect.top = 1;
+        outRect.top = 2;
     }
 }

@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="left"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/body_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="美食美味" />
+
+        <TextView
+            style="@style/note_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:lines="1"
+            android:text="新疆特产" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_1"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_below="@id/ll_title"
+        android:layout_margin="1dp"
+        android:background="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/iv_2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignTop="@id/iv_1"
+        android:layout_margin="1dp"
+        android:layout_toRightOf="@id/iv_1"
+        android:background="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/iv_3"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@id/iv_1"
+        android:layout_margin="1dp"
+        android:layout_toRightOf="@id/iv_1"
+        android:background="@mipmap/ic_launcher" />
+</RelativeLayout>

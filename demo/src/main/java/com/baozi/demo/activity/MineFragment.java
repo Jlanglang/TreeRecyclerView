@@ -66,14 +66,14 @@ public class MineFragment extends Fragment {
         //添加头部
         treeRecyclerAdapter.getItemManager().addItem(
                 new SimpleTreeItem(R.layout.item_mine_head)
-                        .setTreeOffset(new Rect(0, 20, 0, 1))
+                        .setTreeOffset(new Rect(0, 0, 0, 2))
         );
-        //添加头部分类
+        //添加头部分类item
         treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(heads, null));
-        //添加分类
+        //添加分类item
         treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(category, null));
 
-        //添加横条条目
+        //添加横条item
         List<TreeItem> items = ItemHelperFactory.createTreeItemList(item, MineItem.class, null);
 
         treeRecyclerAdapter.getItemManager().addItems(items);
