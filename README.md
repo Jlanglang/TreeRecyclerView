@@ -1,6 +1,6 @@
 # TreeRecyclerView
 树形的reyclerView.示例图：
-![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/QQ%E5%9B%BE%E7%89%8720180928114547.png)
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)
 
 
 
