@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class TreeSortAdapter extends TreeRecyclerAdapter {
-    private final HashMap<Object, Integer> sortMap = new HashMap<>();
+    private final HashMap<Object, TreeItem> sortMap = new HashMap<>();
     private TreeSortManageWrapper manageWrapper;
 
     public TreeSortAdapter() {
@@ -35,12 +35,19 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
     }
 
 
-    public int getSortIndex(Object o) {
+    public TreeItem getSortItem(Object o) {
         if (o == null) {
+            return null;
+        }
+        return sortMap.get(o);
+    }
+
+    public int getSortIndex(Object o) {
+        TreeItem sortItem = getSortItem(o);
+        if (sortItem == null) {
             return -1;
         }
-        Integer integer = sortMap.get(o);
-        return integer == null ? -1 : integer;
+        return getItemManager().getItemPosition(sortItem);
     }
 
     @Override
@@ -164,20 +171,20 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
             for (int i = 0; i < size; i++) {
                 TreeItem treeItem = treeItems.get(i);
                 if (treeItem instanceof TreeSortItem) {
-                    sortMap.put(((TreeSortItem) treeItem).getSortKey(), getItemPosition(treeItem));
+                    sortMap.put(((TreeSortItem) treeItem).getSortKey(), treeItem);
                 }
             }
         }
 
         public void updateSort(TreeItem treeItem) {
             if (treeItem instanceof TreeSortItem) {
-                sortMap.put(((TreeSortItem) treeItem).getSortKey(), getItemPosition(treeItem));
+                sortMap.put(((TreeSortItem) treeItem).getSortKey(), treeItem);
             }
         }
 
         public void updateSort(int position, TreeItem treeItem) {
             if (treeItem instanceof TreeSortItem) {
-                sortMap.put(((TreeSortItem) treeItem).getSortKey(), position);
+                sortMap.put(((TreeSortItem) treeItem).getSortKey(), treeItem);
             }
         }
 

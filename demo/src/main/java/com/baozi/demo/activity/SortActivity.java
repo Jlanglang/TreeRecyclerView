@@ -1,18 +1,14 @@
 package com.baozi.demo.activity;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.sort.IndexBar;
 import com.baozi.demo.item.sort.SortGroupItem;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
-import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
 
@@ -35,9 +31,9 @@ public class SortActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        final RecyclerView rv_content = (RecyclerView) findViewById(R.id.rv_content);
-        TextView tv_index = (TextView) findViewById(R.id.tv_index);
-        IndexBar qb_sort = (IndexBar) findViewById(R.id.qb_sort);
+        final RecyclerView rv_content = findViewById(R.id.rv_content);
+        TextView tv_index = findViewById(R.id.tv_index);
+        IndexBar qb_sort = findViewById(R.id.qb_sort);
         qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {
             @Override
             public void onIndexChanged(String letter) {

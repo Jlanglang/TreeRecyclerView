@@ -1,6 +1,5 @@
 package com.baozi.demo.activity;
 
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +8,6 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +16,6 @@ import com.baozi.demo.R;
 import com.baozi.demo.item.sort.IndexBar;
 import com.baozi.demo.item.sort.SortGroupItem;
 import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
-import com.baozi.treerecyclerview.adpater.wrapper.LoadingWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.TreeLoadWrapper;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
