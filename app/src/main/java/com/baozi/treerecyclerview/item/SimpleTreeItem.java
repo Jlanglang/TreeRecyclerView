@@ -75,7 +75,7 @@ public class SimpleTreeItem extends TreeItem {
         return this;
     }
 
-    public SimpleTreeItem setTreeBind(Rect outRect) {
+    public SimpleTreeItem setTreeOffset(Rect outRect) {
         this.treeRect = outRect;
         return this;
     }
