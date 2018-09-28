@@ -7,7 +7,7 @@
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114648.png)
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120846.png)
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120934.png)
-
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928145931.png)
 ##### 以上示例都只使用了一个RecyclerView，没有嵌套
 
 # 要点:

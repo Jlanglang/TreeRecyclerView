@@ -29,7 +29,6 @@ public class MineFragment extends Fragment {
 
     private RecyclerView view;
     private TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
-    private List<String> name = Arrays.asList("条目1", "条目2", "条目3", "条目4", "条目5", "条目6");
     private List<MineCategoryBean> heads = Arrays.asList(
             new MineCategoryBean("公开文章", null, "39", true),
             new MineCategoryBean("关注", null, "57", true),
@@ -46,6 +45,7 @@ public class MineFragment extends Fragment {
             new MineCategoryBean("关注内容", "1", null, true),
             new MineCategoryBean("我的钱包", "1", null, true)
     );
+    private List<String> item = Arrays.asList("条目1", "条目2", "条目3", "条目4", "条目5", "条目6");
 
     @Nullable
     @Override
@@ -66,13 +66,16 @@ public class MineFragment extends Fragment {
         //添加头部
         treeRecyclerAdapter.getItemManager().addItem(
                 new SimpleTreeItem(R.layout.item_mine_head)
-                .setTreeOffset(new Rect(0,20,0,1))
+                        .setTreeOffset(new Rect(0, 20, 0, 1))
         );
+        //添加头部分类
         treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(heads, null));
         //添加分类
         treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(category, null));
-        //添加条目
-        List<TreeItem> items = ItemHelperFactory.createTreeItemList(name, MineItem.class, null);
+
+        //添加横条条目
+        List<TreeItem> items = ItemHelperFactory.createTreeItemList(item, MineItem.class, null);
+
         treeRecyclerAdapter.getItemManager().addItems(items);
     }
 }
