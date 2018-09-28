@@ -1,7 +1,11 @@
 # TreeRecyclerView
 树形的reyclerView.示例图：
-![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)
 
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114623.png)
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114648.png)
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120846.png)
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928120934.png)
 
 
 # 要点:
