@@ -29,7 +29,7 @@ import java.util.List;
  * 购物车列表
  */
 public class CartActivity extends Activity {
-    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
+    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
     private List<TreeItem> groupItem;
     private boolean isSelectAll;
 

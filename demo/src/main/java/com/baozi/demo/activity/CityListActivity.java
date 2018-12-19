@@ -25,6 +25,7 @@ public class CityListActivity extends AppCompatActivity {
     //根据item的状态展示,可折叠
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,5 +63,8 @@ public class CityListActivity extends AppCompatActivity {
                 treeRecyclerAdapter.getItemManager().replaceAllItem(items);
             }
         });
+
     }
+
+
 }

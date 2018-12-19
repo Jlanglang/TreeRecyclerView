@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                     });
+            simpleTreeItem.setData(itemPair);
             items.add(simpleTreeItem);
 
         }

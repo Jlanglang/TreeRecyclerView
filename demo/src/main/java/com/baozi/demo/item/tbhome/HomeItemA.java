@@ -7,7 +7,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 /**
- * 模板A
+ * 模板B
  */
 public class HomeItemA extends TreeItem {
     @Override
@@ -22,6 +22,6 @@ public class HomeItemA extends TreeItem {
 
     @Override
     public int getSpanSize(int maxSpan) {
-        return super.getSpanSize(maxSpan) / 2;
+        return maxSpan / 2;
     }
 }

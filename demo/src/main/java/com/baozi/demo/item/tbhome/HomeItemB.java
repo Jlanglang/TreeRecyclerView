@@ -22,6 +22,6 @@ public class HomeItemB extends TreeItem {
 
     @Override
     public int getSpanSize(int maxSpan) {
-        return super.getSpanSize(maxSpan) / 3 * 2;
+        return maxSpan/ 3 * 2;
     }
 }

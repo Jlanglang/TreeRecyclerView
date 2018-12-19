@@ -12,7 +12,6 @@
         android:layout_height="48dp"
         android:layout_centerVertical="true"
         style="@style/body_text"
-        android:clickable="false"
         android:gravity="center"
         android:paddingLeft="8dp"
         android:text="店铺名称: 渣渣豆腐店"/>

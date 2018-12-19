@@ -59,7 +59,9 @@ public abstract class TreeItem<D> {
      *
      * @return 布局id
      */
-    public abstract int getLayoutId();
+    public int getLayoutId() {
+        return 0;
+    }
 
     /**
      * 觉得item的所占比例
@@ -68,7 +70,7 @@ public abstract class TreeItem<D> {
      */
     @Deprecated
     public int getSpanSize() {
-        return 0;
+        return spanSize;
     }
 
     /**
@@ -76,7 +78,7 @@ public abstract class TreeItem<D> {
      * @return
      */
     public int getSpanSize(int maxSpan) {
-        return spanSize;
+        return spanSize == 0 ? maxSpan : spanSize;
     }
 
 

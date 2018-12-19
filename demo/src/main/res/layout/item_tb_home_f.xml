@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    android:gravity="left"
+    android:gravity="start"
     android:orientation="vertical"
     android:padding="10dp">
 

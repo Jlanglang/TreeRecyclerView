@@ -18,6 +18,7 @@ import com.baozi.treerecyclerview.R;
 
 
 /**
+ * 长按多选
  */
 public class DragSelectRecyclerView extends RecyclerView {
 

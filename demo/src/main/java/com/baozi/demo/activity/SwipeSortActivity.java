@@ -59,30 +59,11 @@ public class SwipeSortActivity extends AppCompatActivity {
 
         mLinearLayoutManager = new GridLayoutManager(this, 2);
         rv_content.setLayoutManager(mLinearLayoutManager);
-        //需求初定:好友列表
-//        TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
-//        treeRecyclerAdapter.setDatas(new ContentGroupItem());
-        //第一次修改:添加索引
-        //ContentGroupItem换成继承TreeSortItem
-        //TreeSortAdapter继承TreeRecyclerAdapter.因为索引的item,一般是group类型.父容器
-//        TreeSortAdapter sortAdapter = new TreeSortAdapter();
-//        sortAdapter.setDatas(new ContentGroupItem());
-//        //第二次修改:添加下拉刷新,上啦加载
-//        //加载wapper
-//        //需和网络请求绑定
-//        LoadingWrapper<TreeItem> loadingWrapper = new LoadingWrapper<>(sortAdapter);
-//        //第三次修改:添加侧滑菜单删除
-//        //需要侧滑删除的item,实现SwipeItem接口.
-//        SwipeWrapper swipeWrapper = new SwipeWrapper(loadingWrapper);
-//        //还有其他的,也可以封装一个headItem,或者footItem,
-//        HeaderAndFootWrapper<TreeItem> headerAndFootWrapper = new HeaderAndFootWrapper(swipeWrapper);
-//        //....wrapper,item的种类会逐渐丰富.只是设计合理.还怕需求和加功能吗
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.getItemManager().setOpenAnim(true);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
         addHeadView(headerAndFootWrapper, 5);
-
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
         adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -94,7 +75,9 @@ public class SwipeSortActivity extends AppCompatActivity {
         mWrapper = new TreeLoadWrapper(adapter);
         mWrapper.setEmptyView(new SimpleTreeItem(R.layout.layout_empty));
         mWrapper.setLoadingView(R.layout.layout_loading);
+
         rv_content.setAdapter(mWrapper);
+
         initData();
     }
 

@@ -9,8 +9,7 @@ import com.baozi.treerecyclerview.base.ViewHolder;
 
 import java.util.ArrayList;
 
-/**
- */
+
 public abstract class DragSelectRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
 
     public interface SelectionListener {
