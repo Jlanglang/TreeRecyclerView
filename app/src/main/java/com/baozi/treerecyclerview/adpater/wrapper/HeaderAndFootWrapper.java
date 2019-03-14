@@ -64,9 +64,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (isHeaderViewPos(position)
-//                || isFooterViewPos(position)
-                ) {
+        if (isHeaderViewPos(position)) {
             return;
         }
         super.onBindViewHolder(holder, position - getHeadersCount());
@@ -98,9 +96,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
         if (isHeaderViewPos(position)) {
             return mHeaderViews.keyAt(position);
         }
-//        else if (isFooterViewPos(position)) {
-//            return mFootViews.keyAt(position - mAdapter.getItemCount() + getFootCount());
-//        }
         return super.getItemViewType(position - getHeadersCount());
     }
 
@@ -132,7 +127,6 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
             View view = mHeaderViews.valueAt(i);
             view.setVisibility(show ? View.VISIBLE : View.GONE);
         }
-//        mHeaderSize = size;
     }
 
     public int getHeadersCount() {

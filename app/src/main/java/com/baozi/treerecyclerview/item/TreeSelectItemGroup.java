@@ -51,6 +51,11 @@ public abstract class TreeSelectItemGroup<D>
      *
      * @return
      */
+    public boolean isChildSelect() {
+        return !getSelectItems().isEmpty();
+    }
+
+    @Deprecated
     public boolean isChildCheck() {
         return !getSelectItems().isEmpty();
     }

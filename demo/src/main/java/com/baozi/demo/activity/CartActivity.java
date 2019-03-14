@@ -2,19 +2,23 @@ package com.baozi.demo.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.cart.CartGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
@@ -45,16 +49,13 @@ public class CartActivity extends Activity {
         groupItem = ItemHelperFactory.createTreeItemList(integers, CartGroupItem.class, null);
         adapter.getItemManager().replaceAllItem(groupItem);
 
-        adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull ViewHolder viewHolder, int position) {
-                //因为外部和内部会冲突
-                TreeItem item = adapter.getData(position);
-                if (item instanceof CartGroupItem) {
-                    item.onClick(viewHolder);
-                }
-                notifyPrice();
+        adapter.setOnItemClickListener((viewHolder, position) -> {
+            //因为外部和内部会冲突
+            TreeItem item = adapter.getData(position);
+            if (item instanceof CartGroupItem) {
+                item.onClick(viewHolder);
             }
+            notifyPrice();
         });
         initView();
         notifyPrice();
@@ -69,7 +70,7 @@ public class CartActivity extends Activity {
         for (TreeItem item : groupItem) {
             if (item instanceof TreeSelectItemGroup) {
                 TreeSelectItemGroup group = (TreeSelectItemGroup) item;
-                if (!group.isChildCheck()) {//是否有选择的子类
+                if (!group.isChildSelect()) {//是否有选择的子类
                     //有一个没选则不是全选
                     isSelectAll = false;
                     continue;
@@ -92,18 +93,15 @@ public class CartActivity extends Activity {
     }
 
     public void initView() {
-        final CheckBox checkBox = findViewById(R.id.cb_all_check);
-        checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (TreeItem item : groupItem) {
-                    if (item instanceof TreeSelectItemGroup) {
-                        TreeSelectItemGroup group = (TreeSelectItemGroup) item;
-                        group.selectAll(checkBox.isChecked());
-                    }
+        CheckBox checkBox = findViewById(R.id.cb_all_check);
+        checkBox.setOnClickListener(v -> {
+            for (TreeItem item : groupItem) {
+                if (item instanceof TreeSelectItemGroup) {
+                    TreeSelectItemGroup group = (TreeSelectItemGroup) item;
+                    group.selectAll(((CheckBox) v).isChecked());
                 }
-                notifyPrice();
             }
+            notifyPrice();
         });
     }
 }

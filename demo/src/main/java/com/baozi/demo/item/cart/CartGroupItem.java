@@ -3,11 +3,9 @@ package com.baozi.demo.item.cart;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
 import com.baozi.demo.R;
 import com.baozi.demo.activity.CartActivity;
-import com.baozi.demo.activity.CityListActivity;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -29,9 +27,9 @@ public class CartGroupItem extends TreeSelectItemGroup<String> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setChecked(R.id.cb_ischeck, isChildCheck());
-        viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnCheckedChangeListener((v, isChecked) -> {
-            selectAll(isChecked);
+        viewHolder.setChecked(R.id.cb_ischeck, isChildSelect());
+        viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
+            selectAll(!isSelectAll());
             ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
         });
     }

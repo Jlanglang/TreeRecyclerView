@@ -35,4 +35,9 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
     public int getSpanSize(int maxSpan) {
         return maxSpan / 6;
     }
+
+    @Override
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
+    }
 }

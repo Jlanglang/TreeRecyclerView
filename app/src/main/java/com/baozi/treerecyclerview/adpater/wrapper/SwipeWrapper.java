@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 侧滑
  * Created by Administrator on 2017/8/18 0018.
  */
 

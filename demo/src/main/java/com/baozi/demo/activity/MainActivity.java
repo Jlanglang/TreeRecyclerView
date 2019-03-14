@@ -53,29 +53,22 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<TreeItem> items = new ArrayList<>();
         for (Pair itemPair : itemPairs) {
             SimpleTreeItem simpleTreeItem = new SimpleTreeItem(R.layout.item_mine)
-                    .setTreeBind(new SimpleTreeItem.Consumer<ViewHolder>() {
-                        @Override
-                        public void accept(ViewHolder viewHolder) {
-                            Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
-                            viewHolder.setText(R.id.tv_name, (String) itemPair.first);
-                        }
+                    .setTreeBind(viewHolder -> {
+                        Pair itemPair1 = itemPairs[viewHolder.getLayoutPosition()];
+                        viewHolder.setText(R.id.tv_name, (String) itemPair1.first);
                     })
-                    .setTreeClick(new SimpleTreeItem.Consumer<ViewHolder>() {
-                        @Override
-                        public void accept(ViewHolder viewHolder) {
-                            Pair itemPair = itemPairs[viewHolder.getLayoutPosition()];
-                            Class<?> aClass = (Class<?>) itemPair.second;
-                            boolean assignableFrom = Fragment.class.isAssignableFrom(aClass);//判断是不是fragment的子类
-                            if (assignableFrom) {
-                                startFragment((Class<Fragment>) itemPair.second);
-                            } else {
-                                startAt((Class) itemPair.second);
-                            }
+                    .setTreeClick(viewHolder -> {
+                        Pair itemPair12 = itemPairs[viewHolder.getLayoutPosition()];
+                        Class<?> aClass = (Class<?>) itemPair12.second;
+                        boolean assignableFrom = Fragment.class.isAssignableFrom(aClass);//判断是不是fragment的子类
+                        if (assignableFrom) {
+                            startFragment((Class<Fragment>) itemPair12.second);
+                        } else {
+                            startAt((Class) itemPair12.second);
                         }
                     });
             simpleTreeItem.setData(itemPair);
             items.add(simpleTreeItem);
-
         }
         adapter.getItemManager().replaceAllItem(items);
     }

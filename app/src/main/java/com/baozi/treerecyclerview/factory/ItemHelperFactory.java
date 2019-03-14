@@ -21,14 +21,10 @@ import java.util.List;
 public class ItemHelperFactory {
 
     public static List<TreeItem> createItems(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
-        return createTreeItemList(list, null, treeParentItem);
+        return createItems(list, null, treeParentItem);
     }
 
-    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass) {
-        return createTreeItemList(list, iClass, null);
-    }
-
-    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
+    public static List<TreeItem> createItems(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
         if (null == list) {
             return null;
         }
@@ -42,6 +38,16 @@ public class ItemHelperFactory {
             }
         }
         return treeItemList;
+    }
+
+    @Deprecated
+    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass) {
+        return createItems(list, iClass, null);
+    }
+
+    @Deprecated
+    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
+        return createItems(list, iClass, treeParentItem);
     }
 
 
