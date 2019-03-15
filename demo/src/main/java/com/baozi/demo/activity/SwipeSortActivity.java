@@ -63,7 +63,7 @@ public class SwipeSortActivity extends AppCompatActivity {
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.getItemManager().setOpenAnim(true);
         HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
-        addHeadView(headerAndFootWrapper, 5);
+        addHeadView(headerAndFootWrapper);
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
 //        adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -81,8 +81,8 @@ public class SwipeSortActivity extends AppCompatActivity {
         initData();
     }
 
-    private void addHeadView(HeaderAndFootWrapper headerAndFootWrapper, int sum) {
-        for (int i = 0; i < sum; i++) {
+    private void addHeadView(HeaderAndFootWrapper headerAndFootWrapper) {
+        for (int i = 0; i < 5; i++) {
             //添加头部View1
             TextView headView = new TextView(this);
             headView.setText("headView" + i);

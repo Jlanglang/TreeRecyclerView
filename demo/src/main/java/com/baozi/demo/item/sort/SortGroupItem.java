@@ -29,6 +29,7 @@ public class SortGroupItem extends TreeSortItem {
         return treeItems;
     }
 
+
     @Override
     public int getLayoutId() {
         return R.layout.item_sort_group;

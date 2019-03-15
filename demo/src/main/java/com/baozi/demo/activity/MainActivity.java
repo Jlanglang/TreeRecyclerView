@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
             new Pair("索引", SortActivity.class),
             new Pair("索引加侧滑删除", SwipeSortActivity.class),
             new Pair("个人中心", MineFragment.class),
-            new Pair("淘宝首页", TBHomeListActivity.class)
+            new Pair("淘宝首页", TBHomeListActivity.class),
+            new Pair("点击懒加载", ClickLoadFragment.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 

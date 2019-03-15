@@ -53,4 +53,14 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
         viewHolder.setText(R.id.tv_title, data.getTitle());
     }
 
+
+//    @Override
+//    public void setData(NewsItemBean data) {
+//        if (getData() != null) {
+//            super.setData(data);
+//            setExpand(true);
+//            return;
+//        }
+//        super.setData(data);
+//    }
 }
