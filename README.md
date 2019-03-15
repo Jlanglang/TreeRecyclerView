@@ -10,14 +10,6 @@
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928145931.png)
 ##### 以上示例都只使用了一个RecyclerView，没有嵌套
 
-# 要点:
-1.可以通过后台控制Item的展示.
-
-2.TreeRecyclerAdapter,可以展开,折叠.多级展示
-
-3.支持Empty,LoadMore,可以添加headview和footview,侧滑删除,分类索引
-
-4.item的样式可以实现复用,与baseItemData的type对应,实现复用
 
 # 依赖方式
 ```

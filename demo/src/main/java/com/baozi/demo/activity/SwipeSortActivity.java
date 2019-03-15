@@ -66,12 +66,12 @@ public class SwipeSortActivity extends AppCompatActivity {
         addHeadView(headerAndFootWrapper, 5);
         //包装成侧滑删除列表
         SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
-        adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull ViewHolder viewHolder, int position) {
-                Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(@NonNull ViewHolder viewHolder, int position) {
+//                Toast.makeText(viewHolder.itemView.getContext(), position + "", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         mWrapper = new TreeLoadWrapper(adapter);
         mWrapper.setEmptyView(new SimpleTreeItem(R.layout.layout_empty));
         mWrapper.setLoadingView(R.layout.layout_loading);
