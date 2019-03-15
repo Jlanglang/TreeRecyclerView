@@ -36,6 +36,11 @@ public class SortGroupItem extends TreeSortItem {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
+        if (isExpand()) {
+            viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_down_black_24dp);
+        } else {
+            viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_right_black_24dp);
+        }
         viewHolder.setText(R.id.tv_content, (String) getSortKey());
     }
 
