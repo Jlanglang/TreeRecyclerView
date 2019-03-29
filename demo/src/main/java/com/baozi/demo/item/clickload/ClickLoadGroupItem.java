@@ -28,9 +28,4 @@ public class ClickLoadGroupItem extends TreeItemGroup<String[]> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
 
     }
-
-    @Override
-    public void setData(String[] data) {
-        super.setData(data);
-    }
 }

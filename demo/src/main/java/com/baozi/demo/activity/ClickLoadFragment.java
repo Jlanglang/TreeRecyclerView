@@ -18,6 +18,7 @@ import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,14 +50,20 @@ public class ClickLoadFragment extends Fragment {
         TreeItem treeItem = ItemHelperFactory.createTreeItem(new String[]{}, ClickLoadGroupItem.class, null);
         adapter.getItemManager().replaceAllItem(Arrays.asList(treeItem));
         adapter.setOnItemClickListener((viewHolder, position) -> {
-            ClickLoadGroupItem data = (ClickLoadGroupItem) adapter.getData(position);
-            if (data == null || data.getData() == null) {
+            ClickLoadGroupItem item = (ClickLoadGroupItem) adapter.getData(position);
+            if (item == null || item.getData() == null) {
                 return;
             }
-            if (data.getChild() == null || data.getChild().isEmpty()) {
-                data.setData(new String[]{"1", "2", "3"});
-                data.setExpand(true);
+            if (item.getChild() == null || item.getChild().isEmpty()) {
+                item.setData(new String[]{"1", "2", "3"});
+                item.setExpand(true);
             }
+            TreeItemGroup data = (TreeItemGroup) adapter.getData(position);
+            data.setExpand(false);
+            data.setChild(new ArrayList<>());
+            data.setExpand(true);
+//            int itemPosition = adapter.getItemManager().getItemPosition(data);
+//            adapter.getItemManager().replaceItem(itemPosition,new ArrayList());
         });
     }
 }

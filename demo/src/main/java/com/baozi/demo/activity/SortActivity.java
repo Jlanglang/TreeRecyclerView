@@ -33,12 +33,9 @@ public class SortActivity extends AppCompatActivity {
         final RecyclerView rv_content = findViewById(R.id.rv_content);
         TextView tv_index = findViewById(R.id.tv_index);
         IndexBar qb_sort = findViewById(R.id.qb_sort);
-        qb_sort.setOnIndexChangedListener(new IndexBar.OnIndexChangedListener() {
-            @Override
-            public void onIndexChanged(String letter) {
-                int sortIndex = mTreeSortAdapter.getSortIndex(letter);
-                mLinearLayoutManager.scrollToPositionWithOffset(sortIndex, 0);
-            }
+        qb_sort.setOnIndexChangedListener(letter -> {
+            int sortIndex = mTreeSortAdapter.getSortIndex(letter);
+            mLinearLayoutManager.scrollToPositionWithOffset(sortIndex, 0);
         });
         qb_sort.setIndexs(LETTERS);
         qb_sort.setSelectedIndexTextView(tv_index);

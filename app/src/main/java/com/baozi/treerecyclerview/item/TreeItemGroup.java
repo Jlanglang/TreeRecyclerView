@@ -117,7 +117,11 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     }
 
     public void setChild(List<TreeItem> child) {
+        onCollapse();
         this.child = child;
+        if (isExpand) {
+            onExpand();
+        }
     }
 
     /**
