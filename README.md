@@ -1,5 +1,11 @@
 # TreeRecyclerView
 
+<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
+
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
+---
+
 # 示例图：
 
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)

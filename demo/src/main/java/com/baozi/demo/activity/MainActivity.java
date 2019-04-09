@@ -2,6 +2,7 @@ package com.baozi.demo.activity;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
