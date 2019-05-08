@@ -65,12 +65,12 @@ public class SimpleTreeItem extends TreeItem {
     }
 
 
-    public SimpleTreeItem setTreeClick(Consumer<ViewHolder> treeClick) {
+    public SimpleTreeItem onItemClick(Consumer<ViewHolder> treeClick) {
         this.treeClick = treeClick;
         return this;
     }
 
-    public SimpleTreeItem setTreeBind(Consumer<ViewHolder> treeOnBind) {
+    public SimpleTreeItem onItemBind(Consumer<ViewHolder> treeOnBind) {
         this.treeBind = treeOnBind;
         return this;
     }

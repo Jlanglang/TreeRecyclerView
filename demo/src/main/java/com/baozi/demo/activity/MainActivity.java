@@ -2,7 +2,6 @@ package com.baozi.demo.activity;
 
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +14,6 @@ import android.view.View;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -55,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<TreeItem> items = new ArrayList<>();
         for (Pair itemPair : itemPairs) {
             SimpleTreeItem simpleTreeItem = new SimpleTreeItem(R.layout.item_mine)
-                    .setTreeBind(viewHolder -> {
+                    .onItemBind(viewHolder -> {
                         Pair itemPair1 = itemPairs[viewHolder.getLayoutPosition()];
                         viewHolder.setText(R.id.tv_name, (String) itemPair1.first);
                     })
-                    .setTreeClick(viewHolder -> {
+                    .onItemClick(viewHolder -> {
                         Pair itemPair12 = itemPairs[viewHolder.getLayoutPosition()];
                         Class<?> aClass = (Class<?>) itemPair12.second;
                         boolean assignableFrom = Fragment.class.isAssignableFrom(aClass);//判断是不是fragment的子类

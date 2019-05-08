@@ -34,7 +34,7 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
 
         //添加尾部
         treeItemList.add(new SimpleTreeItem(R.layout.item_news_foot)
-                .setTreeClick(new SimpleTreeItem.Consumer<ViewHolder>() {
+                .onItemClick(new SimpleTreeItem.Consumer<ViewHolder>() {
                     @Override
                     public void accept(ViewHolder viewHolder) {
                         //点击跳转

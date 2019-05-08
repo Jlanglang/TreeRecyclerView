@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
@@ -16,6 +17,9 @@ import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 
 /**
@@ -38,12 +42,28 @@ public class CityListActivity extends AppCompatActivity {
             @Override
             public void run() {
                 super.run();
-                String string = getString(R.string.location);
+                String string = getFromAssets("city.txt");
+                Log.i("json", string);
                 List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
                 refresh(cityBeen);
             }
         }.start();
 
+    }
+
+    public String getFromAssets(String fileName) {
+        StringBuilder result = new StringBuilder();
+        try {
+            InputStreamReader inputReader = new InputStreamReader(getResources().getAssets().open(fileName));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line;
+            while ((line = bufReader.readLine()) != null)
+                result.append(line);
+            return result.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 
     private void refresh(final List<ProvinceBean> cityBeen) {
