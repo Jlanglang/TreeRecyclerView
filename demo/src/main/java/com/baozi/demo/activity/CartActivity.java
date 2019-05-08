@@ -46,7 +46,7 @@ public class CartActivity extends Activity {
         rv_content.setAdapter(adapter);
 
         List<String> integers = Arrays.asList("1", "1", "1", "1", "1");
-        groupItem = ItemHelperFactory.createTreeItemList(integers, CartGroupItem.class, null);
+        groupItem = ItemHelperFactory.createItems(integers, CartGroupItem.class, null);
         adapter.getItemManager().replaceAllItem(groupItem);
         adapter.setOnItemClickListener((viewHolder, position) -> {
             //因为外部和内部会冲突
