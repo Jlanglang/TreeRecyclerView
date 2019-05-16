@@ -94,6 +94,7 @@ public class ItemHelperFactory {
      * @param itemData
      * @return
      */
+    @Nullable
     private static Class<? extends TreeItem> getTypeClass(Object itemData) {
         Class<? extends TreeItem> treeItemClass = null;
         //先判断是否继承了ItemData,适用于跨模块获取
@@ -163,7 +164,7 @@ public class ItemHelperFactory {
             try {
                 Object itemData = list.get(i);
                 Class<? extends TreeItem> iClass = getTypeClass(itemData);
-                if (iClass != null && iClass == TreeSortItem.class) {
+                if (iClass == TreeSortItem.class) {
                     TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
                     sortItem.setData(itemData);
                     sortItem.setSortKey(sortKey);

@@ -70,8 +70,10 @@ public class CityListActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class, null);
                 //创建item
+                //老的
+                //ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class, null);
+                //新的
                 List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
                 //遍历设置展开状态
                 for (TreeItem item : items) {
