@@ -95,7 +95,6 @@ public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {//�
 }
 ```
 
----
 
 #### 子级示例:
 ```
