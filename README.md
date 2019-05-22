@@ -127,20 +127,23 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 
 有两种方法:
 
-#### 第一种.在javabean上使用注解:
+#### 第一种:
+
+在javabean上使用注解,
 ``` 
  @TreeDataType(iClass = AreaItem.class)
   public class AreasBean{
   ...
   }
 ```
-调用`ItemHelperFactory.createItems()`,直接传入bean对象集合生成
-
+然后传入bean对象
 ```
  ItemHelperFactory.createItems(data.getAreas(),  this);
 ```
 
-#### 第二种.自己传入item的class,创建item
+#### 第二种:
+
+直接传入bean对象和item的class,
 ```
  ItemHelperFactory.createItems(cityBeen, ProvinceItemParent.class, null);
 ```
