@@ -195,6 +195,9 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
 
 
+# wapper
+更多效果.见demo.哈哈
+
 
 ### 欢迎大家留言,提出问题. QQ交流群:493180098
 
