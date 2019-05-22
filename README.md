@@ -28,12 +28,17 @@
  }
 ```
 
-# 如何使用,这里只列出折叠的使用方法:
+---
+
+
+# 如何使用:
+
 ## 一.你需要创建一个adapter:
 ```
- //根据item的状态展示,可折叠
-    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
+ //可折叠
+ TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 ```
+
 ## 二.你需要选择一种展开方式
 ```
 public enum TreeRecyclerType {
@@ -56,11 +61,14 @@ public enum TreeRecyclerType {
     SHOW_DEFAULT
 }
 ```
+
 构造函数传入,不传默认则使用`SHOW_DEFAULT`.
 
-## 三.写具体展示的item
-`注意! 使用这个,没有写ViewHolder的概念,只有TreeItem和TreeItemGroup` 子和父级.
-##### 父级示例:
+# 三.怎么写Item
+
+注意! 使用这个,没有写`ViewHolder`的概念,只有`TreeItem`和`TreeItemGroup`.子级和父级.
+
+#### 父级示例:
 ```
 /**
 * 城市
@@ -88,7 +96,8 @@ public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {//�
 ```
 
 ---
-##### 子级示例:
+
+#### 子级示例:
 ```
 /**
 * 县
@@ -114,9 +123,11 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 
 ```
  
-##### 怎么创建Item呢?
+# 怎么创建Item:
+
 有两种方法:
-###### 第一种.在javabean上使用注解:
+
+#### 第一种.在javabean上使用注解:
 ``` 
  @TreeDataType(iClass = AreaItem.class)
   public class AreasBean{
@@ -124,26 +135,29 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
   }
 ```
 调用`ItemHelperFactory.createItems()`,直接传入bean对象集合生成
+
 ```
  ItemHelperFactory.createItems(data.getAreas(),  this);
 ```
 
-###### 第二种.自己传入item的class,创建item
-
+#### 第二种.自己传入item的class,创建item
 ```
  ItemHelperFactory.createItems(cityBeen, ProvinceItemParent.class, null);
 ```
 
-
 ---
-## 四.如何更新adapter:
+
+# 四.如何更新adapter:
 ```
-treeRecyclerAdapter.getItemManager().replaceAllItem(items);// 替换全部
-treeRecyclerAdapter.getItemManager().addItems(items);// 添加一组
+treeRecyclerAdapter.getItemManager().replaceAllItem(items);// 替换全部Item
+treeRecyclerAdapter.getItemManager().addItems(items);// 添加一组Item
+treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
 
-## 五,如何设置Item点击:
- 1.重写`TreeItem`的`onClick()`
+# 五,如何设置Item点击:
+
+1.重写`TreeItem`的`onClick()`
+
 2.`adapter`设置`setOnItemClickListener`
 ```
  adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
@@ -178,6 +192,7 @@ treeRecyclerAdapter.getItemManager().addItems(items);// 添加一组
 ```
 
 
-### QQ交流群:493180098
+
+### 欢迎大家留言,提出问题. QQ交流群:493180098
 
 
