@@ -151,10 +151,23 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 ---
 
 # 四.如何更新adapter:
+
+增删该查都有.
+
 ```
 treeRecyclerAdapter.getItemManager().replaceAllItem(items);// 替换全部Item
 treeRecyclerAdapter.getItemManager().addItems(items);// 添加一组Item
 treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
+```
+
+#### 在item里面也是可以更新的:
+
+```
+    @Override
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
+        getItemManager().notifyDataChanged();
+    }
 ```
 
 # 五,如何设置Item点击:
@@ -193,7 +206,15 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
         }
  adapter.getItemManager().replaceAllItem(items);
 ```
+# 最后
 
+直接设置就行了.adapter可以不先setData
+可以直接setAdapter.然后`adapter.getItemManager().replaceAllItem(items);`
+
+
+```
+ recyclerView.setAdapter(adapter);
+```
 
 # wapper
 更多效果.见demo.哈哈
