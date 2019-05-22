@@ -111,72 +111,72 @@ public class ItemHelperFactory {
         return treeItemClass;
     }
 
-
-    /**
-     * 创建排序List
-     *
-     * @param list
-     * @param sortKey
-     * @param treeParentItem
-     * @return
-     */
-    @Deprecated
-    public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
-        if (null == list) {
-            return null;
-        }
-        int size = list.size();
-        ArrayList<TreeItem> treeItemList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            try {
-                Object itemData = list.get(i);
-                if (iClass != null) {
-                    TreeSortItem sortItem = iClass.newInstance();
-                    sortItem.setData(itemData);
-                    sortItem.setSortKey(sortKey);
-                    sortItem.setParentItem(treeParentItem);
-                    treeItemList.add(sortItem);
-                }
-            } catch (Exception e) {
-                //e.printStackTrace();
-            }
-        }
-        return treeItemList;
-    }
-
-    /**
-     * 创建排序List
-     *
-     * @param list
-     * @param sortKey
-     * @param treeParentItem
-     * @return
-     */
-    @Deprecated
-    public static List<TreeItem> createTreeSortList(@Nullable List list, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
-        if (null == list) {
-            return null;
-        }
-        ArrayList<TreeItem> treeItemList = new ArrayList<>();
-
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            try {
-                Object itemData = list.get(i);
-                Class<? extends TreeItem> iClass = getTypeClass(itemData);
-                if (iClass == TreeSortItem.class) {
-                    TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
-                    sortItem.setData(itemData);
-                    sortItem.setSortKey(sortKey);
-                    sortItem.setParentItem(treeParentItem);
-                    treeItemList.add(sortItem);
-                }
-            } catch (Exception e) {
-                //e.printStackTrace();
-            }
-        }
-        return treeItemList;
-    }
+//
+//    /**
+//     * 创建排序List
+//     *
+//     * @param list
+//     * @param sortKey
+//     * @param treeParentItem
+//     * @return
+//     */
+//    @Deprecated
+//    public static List<TreeItem> createTreeSortList(@Nullable List list, Class<? extends TreeSortItem> iClass, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
+//        if (null == list) {
+//            return null;
+//        }
+//        int size = list.size();
+//        ArrayList<TreeItem> treeItemList = new ArrayList<>();
+//        for (int i = 0; i < size; i++) {
+//            try {
+//                Object itemData = list.get(i);
+//                if (iClass != null) {
+//                    TreeSortItem sortItem = iClass.newInstance();
+//                    sortItem.setData(itemData);
+//                    sortItem.setSortKey(sortKey);
+//                    sortItem.setParentItem(treeParentItem);
+//                    treeItemList.add(sortItem);
+//                }
+//            } catch (Exception e) {
+//                //e.printStackTrace();
+//            }
+//        }
+//        return treeItemList;
+//    }
+//
+//    /**
+//     * 创建排序List
+//     *
+//     * @param list
+//     * @param sortKey
+//     * @param treeParentItem
+//     * @return
+//     */
+//    @Deprecated
+//    public static List<TreeItem> createTreeSortList(@Nullable List list, Object sortKey, @Nullable TreeItemGroup treeParentItem) {
+//        if (null == list) {
+//            return null;
+//        }
+//        ArrayList<TreeItem> treeItemList = new ArrayList<>();
+//
+//        int size = list.size();
+//        for (int i = 0; i < size; i++) {
+//            try {
+//                Object itemData = list.get(i);
+//                Class<? extends TreeItem> iClass = getTypeClass(itemData);
+//                if (iClass == TreeSortItem.class) {
+//                    TreeSortItem sortItem = (TreeSortItem) iClass.newInstance();
+//                    sortItem.setData(itemData);
+//                    sortItem.setSortKey(sortKey);
+//                    sortItem.setParentItem(treeParentItem);
+//                    treeItemList.add(sortItem);
+//                }
+//            } catch (Exception e) {
+//                //e.printStackTrace();
+//            }
+//        }
+//        return treeItemList;
+//    }
 
 
     /**

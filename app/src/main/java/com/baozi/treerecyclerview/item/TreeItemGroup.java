@@ -42,6 +42,9 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (!isCanExpand()) {
             return;
         }
+        if (expand == isExpand) {//防止重复展开
+            return;
+        }
         isExpand = expand;
         if (expand) {
             onExpand();
@@ -66,9 +69,9 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (itemManager == null) {
             return;
         }
-
         List<TreeItem> expandChild = getExpandChild();
         if (expandChild.size() == 0) {
+            isExpand = false;
             return;
         }
         int itemPosition = itemManager.getItemPosition(this);
@@ -85,6 +88,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         }
         List<TreeItem> expandChild = getExpandChild();
         if (expandChild.size() == 0) {
+            isExpand = false;
             return;
         }
         itemManager.removeItems(getExpandChild());

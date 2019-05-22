@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.baozi.demo.R;
 import com.baozi.demo.bean.ProvinceBean;
@@ -39,5 +40,6 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
     @Override
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
+
     }
 }

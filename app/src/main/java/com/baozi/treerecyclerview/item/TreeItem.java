@@ -20,8 +20,6 @@ public abstract class TreeItem<D> {
     /**
      * item在每行中的spansize
      * 默认为0,如果为0则占满一行
-     *
-     * @return 所占值, 比如recyclerview的列数为6, item需要占一半宽度, 就设置3
      */
     private int spanSize;
     private ItemManager mItemManager;
@@ -61,16 +59,6 @@ public abstract class TreeItem<D> {
      */
     public int getLayoutId() {
         return 0;
-    }
-
-    /**
-     * 觉得item的所占比例
-     *
-     * @return , 如果设置的列数为6, 返回3, 则代表item占1半宽度
-     */
-    @Deprecated
-    public int getSpanSize() {
-        return spanSize;
     }
 
     /**

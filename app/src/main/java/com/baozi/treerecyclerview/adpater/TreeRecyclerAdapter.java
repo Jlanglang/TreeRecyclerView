@@ -153,7 +153,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     /**
      * 分割器
      */
-    RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
+    final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
@@ -188,14 +188,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
     }
 
-    @Deprecated
-    public int getItemSpanSize(int position) {
-        TreeItem data = getData(position);
-        if (data == null) {
-            return 0;
-        }
-        return data.getSpanSize();
-    }
 
     @Override
     public int getItemSpanSize(int position, int maxSpan) {
@@ -284,12 +276,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             if (itemToDataPosition < 0 || itemToDataPosition >= i) {
                 return spanCount;
             }
-            int itemSpanSize = adapter.getItemSpanSize(itemToDataPosition);//旧版本逻辑
-            if (itemSpanSize != 0) {
-                return itemSpanSize;
-            }
-
-            itemSpanSize = adapter.getItemSpanSize(itemToDataPosition, spanCount);//新版本传入总数
+            int itemSpanSize = adapter.getItemSpanSize(itemToDataPosition, spanCount);//新版本传入总数
             if (itemSpanSize == 0) {
                 return spanCount;
             }

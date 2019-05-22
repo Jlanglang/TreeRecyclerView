@@ -57,13 +57,8 @@ public class ClickLoadFragment extends Fragment {
             if (item.getChild() == null || item.getChild().isEmpty()) {
                 item.setData(new String[]{"1", "2", "3"});
                 item.setExpand(true);
+//                item.setExpand(true);
             }
-            TreeItemGroup data = (TreeItemGroup) adapter.getData(position);
-            data.setExpand(false);
-            data.setChild(new ArrayList<>());
-            data.setExpand(true);
-//            int itemPosition = adapter.getItemManager().getItemPosition(data);
-//            adapter.getItemManager().replaceItem(itemPosition,new ArrayList());
         });
     }
 }
