@@ -187,7 +187,7 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 `ItemClickListener`优先级高于`TreeItem`的`onClick`.
 
 
-# 如果不想写上面的Item类怎么办? 写一次性的.不想复用的.
+# 如果不想写上面的Item类怎么办?
 
 使用`SimpleTreeItem`
 
