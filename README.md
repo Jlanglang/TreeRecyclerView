@@ -215,7 +215,7 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
  recyclerView.setAdapter(adapter);
 ```
 
-# wapper
+
 更多效果.见demo.哈哈
 
 
