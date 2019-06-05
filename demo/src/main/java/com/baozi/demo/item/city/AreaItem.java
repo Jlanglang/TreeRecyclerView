@@ -40,6 +40,5 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
     @Override
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
-
     }
 }
