@@ -137,14 +137,14 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 ```
 然后传入bean对象
 ```
- ItemHelperFactory.createItems(data.getAreas(),  this);
+ ItemHelperFactory.createItems(list,  treeItemGroup);
 ```
 
 #### 第二种:
 
 直接传入bean对象和item的class,
 ```
- ItemHelperFactory.createItems(cityBeen, ProvinceItemParent.class, null);
+ ItemHelperFactory.createItems(list, Item.class, treeItemGroup);
 ```
 
 ---
