@@ -50,14 +50,16 @@ public class ClickLoadFragment extends Fragment {
         TreeItem treeItem = ItemHelperFactory.createTreeItem(new String[]{}, ClickLoadGroupItem.class, null);
         adapter.getItemManager().replaceAllItem(Arrays.asList(treeItem));
         adapter.setOnItemClickListener((viewHolder, position) -> {
-            ClickLoadGroupItem item = (ClickLoadGroupItem) adapter.getData(position);
-            if (item == null || item.getData() == null) {
+            TreeItem item = adapter.getData(position);
+            if (item.getData() == null) {
                 return;
             }
-            if (item.getChild() == null || item.getChild().isEmpty()) {
-                item.setData(new String[]{"1", "2", "3"});
-                item.setExpand(true);
-//                item.setExpand(true);
+            if (item instanceof ClickLoadGroupItem) {
+                ClickLoadGroupItem clickLoadGroupItem = (ClickLoadGroupItem) item;
+                if (clickLoadGroupItem.getChild() == null || clickLoadGroupItem.getChild().isEmpty()) {
+                    clickLoadGroupItem.setData(new String[]{"1", "2", "3"});
+                    clickLoadGroupItem.setExpand(true);
+                }
             }
         });
     }
