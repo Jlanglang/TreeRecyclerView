@@ -51,7 +51,7 @@ public class ClickLoadFragment extends Fragment {
         adapter.getItemManager().replaceAllItem(Arrays.asList(treeItem));
         adapter.setOnItemClickListener((viewHolder, position) -> {
             TreeItem item = adapter.getData(position);
-            if (item.getData() == null) {
+            if (item == null || item.getData() == null) {
                 return;
             }
             if (item instanceof ClickLoadGroupItem) {
