@@ -60,6 +60,12 @@ public abstract class TreeSelectItemGroup<D>
         }
     }
 
+    /**
+     * 选择全部，取消全部
+     * 向下递归
+     *
+     * @param b 是否全部选中
+     */
     public void selectAll(boolean b) {
         this.selectAll(b, false);
     }
