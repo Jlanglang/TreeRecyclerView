@@ -56,7 +56,7 @@ public abstract class TreeSelectItemGroup<D>
             }
         }
         if (isMultistage) {
-            parentCheckSelect();
+            updateParentSelect();
         }
     }
 
@@ -118,7 +118,7 @@ public abstract class TreeSelectItemGroup<D>
                 getSelectItems().remove(index);
             }
             if (isMultistage) {
-                parentCheckSelect();
+                updateParentSelect();
             }
         }
     }
@@ -127,13 +127,13 @@ public abstract class TreeSelectItemGroup<D>
         this.selectItem(child, false);
     }
 
-    public void parentCheckSelect() {
+    public void updateParentSelect() {
         TreeItemGroup parentItem = getParentItem();
         if (parentItem instanceof TreeSelectItemGroup) {
             // 如果当前选中了,但是父类没有选中,则更新
             if (isSelect() != ((TreeSelectItemGroup) parentItem).isSelect(this)) {
                 ((TreeSelectItemGroup) parentItem).selectItem(this, true);
-                ((TreeSelectItemGroup) parentItem).parentCheckSelect();
+                ((TreeSelectItemGroup) parentItem).updateParentSelect();
             }
         }
     }
