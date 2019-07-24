@@ -27,8 +27,6 @@ public abstract class TreeSelectItemGroup<D>
 
     /**
      * 是否全选选中
-     *
-     * @return
      */
     public boolean isSelectAll() {
         return getSelectItems().containsAll(getChild());
@@ -41,30 +39,34 @@ public abstract class TreeSelectItemGroup<D>
      *
      * @param b
      */
-    public void selectAll(boolean b) {
+    public void selectAll(boolean b, boolean isMultistage) {
         List<TreeItem> child = getChild();
         if (child == null) {
             return;
         }
         getSelectItems().clear();
         for (int i = 0; i < child.size(); i++) {
-            TreeItem treeItem = child.get(i);
-            if (child.get(i) instanceof TreeSelectItemGroup) {
-                ((TreeSelectItemGroup) child.get(i)).selectAll(b);
+            TreeItem item = child.get(i);
+            if (item instanceof TreeSelectItemGroup) {
+                ((TreeSelectItemGroup) item).selectAll(b);
             }
-            if (b && !isChildSelect(treeItem)) {
-                getSelectItems().add(child.get(i));
+            if (b && !isSelect(item)) {
+                getSelectItems().add(item);
             }
         }
-        parentCheckSelect();
+        if (isMultistage){
+            parentCheckSelect();
+        }
+    }
+
+    public void selectAll(boolean b) {
+        this.selectAll(b, false);
     }
 
     /**
-     * 子级是否有选中
-     *
-     * @return
+     * 包含的子级是否有选中
      */
-    public boolean isChildSelect() {
+    public boolean isSelect() {
         return !getSelectItems().isEmpty();
     }
 
@@ -73,13 +75,12 @@ public abstract class TreeSelectItemGroup<D>
      *
      * @return
      */
-    public boolean isChildSelect(TreeItem item) {
+    public boolean isSelect(TreeItem item) {
         return getSelectItems().contains(item);
     }
 
     @Override
     public boolean onInterceptClick(TreeItem child) {
-        selectItem(child);
         if (getParentItem() != null) {
             boolean b = getParentItem().onInterceptClick(this);
             if (b) {
@@ -95,7 +96,7 @@ public abstract class TreeSelectItemGroup<D>
      * 如果onInterceptClick()生效,还主动调用该方法添加item,将无法添加.
      * 向上递归
      */
-    protected void selectItem(@NonNull TreeItem child) {
+    protected void selectItem(@NonNull TreeItem child, boolean isMultistage) {
         if (selectFlag() == SelectFlag.SINGLE_CHOICE) {
             if (getSelectItems().size() != 0) {
                 getSelectItems().set(0, child);
@@ -108,21 +109,28 @@ public abstract class TreeSelectItemGroup<D>
                 getSelectItems().add(child);
             } else {//存在则删除
                 if (child instanceof TreeSelectItemGroup) {
-                    if (((TreeSelectItemGroup) child).isChildSelect()) {
+                    if (((TreeSelectItemGroup) child).isSelect()) {
                         return;
                     }
                 }
                 getSelectItems().remove(index);
             }
+            if (isMultistage) {
+                parentCheckSelect();
+            }
         }
+    }
+
+    protected void selectItem(@NonNull TreeItem child) {
+        this.selectItem(child, false);
     }
 
     public void parentCheckSelect() {
         TreeItemGroup parentItem = getParentItem();
         if (parentItem instanceof TreeSelectItemGroup) {
             // 如果当前选中了,但是父类没有选中,则更新添加
-            if (isChildSelect()!= ((TreeSelectItemGroup) parentItem).isChildSelect(this)) {
-                ((TreeSelectItemGroup) parentItem).selectItem(this);
+            if (isSelect() != ((TreeSelectItemGroup) parentItem).isSelect(this)) {
+                ((TreeSelectItemGroup) parentItem).selectItem(this, true);
                 ((TreeSelectItemGroup) parentItem).parentCheckSelect();
             }
         }

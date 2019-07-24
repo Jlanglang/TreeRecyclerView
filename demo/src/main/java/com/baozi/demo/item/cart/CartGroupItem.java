@@ -9,13 +9,10 @@ import com.baozi.demo.activity.CartActivity;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
-import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by a123 on 2018/6/5.
@@ -40,15 +37,10 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setText(R.id.cb_ischeck, "我是一级");
-        viewHolder.setChecked(R.id.cb_ischeck, isChildSelect());
+        viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
-            selectAll(!isSelectAll());
+            selectAll(!isSelectAll(),true);
             ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
         });
-    }
-
-    @Override
-    public boolean onInterceptClick(TreeItem child) {
-        return super.onInterceptClick(child);
     }
 }

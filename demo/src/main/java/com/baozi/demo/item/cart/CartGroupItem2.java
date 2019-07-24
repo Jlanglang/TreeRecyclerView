@@ -12,9 +12,7 @@ import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by a123 on 2018/6/5.
@@ -39,15 +37,11 @@ public class CartGroupItem2 extends TreeSelectItemGroup<CartBean2> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         viewHolder.setText(R.id.cb_ischeck, "我是二级");
-        viewHolder.setChecked(R.id.cb_ischeck, isChildSelect());
+        viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
-            selectAll(!isSelectAll());
+            selectAll(!isSelectAll(),true);
             ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
         });
     }
 
-    @Override
-    public void onClick(ViewHolder viewHolder) {
-        selectAll(!isSelectAll());
-    }
 }

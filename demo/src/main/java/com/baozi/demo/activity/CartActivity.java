@@ -2,34 +2,21 @@ package com.baozi.demo.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.UiThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.cart.CartBean;
-import com.baozi.demo.item.cart.CartGroupItem;
 import com.baozi.demo.item.cart.CartItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,7 +24,7 @@ import java.util.List;
  * 购物车列表
  */
 public class CartActivity extends Activity {
-    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
+    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
     private boolean isSelectAll;
 
     @Override
@@ -74,7 +61,7 @@ public class CartActivity extends Activity {
         for (TreeItem item : adapter.getDatas()) {
             if (item instanceof TreeSelectItemGroup) {
                 TreeSelectItemGroup group = (TreeSelectItemGroup) item;
-                if (!group.isChildSelect()) {//是否有选择的子类
+                if (!group.isSelect()) {//是否有选择的子类
                     //有一个没选则不是全选
                     isSelectAll = false;
                     continue;

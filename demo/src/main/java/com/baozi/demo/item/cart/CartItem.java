@@ -25,7 +25,7 @@ public class CartItem extends TreeItem<Integer> {
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
         TreeItemGroup parentItem = getParentItem();
         if (parentItem instanceof CartGroupItem3) {
-            viewHolder.setChecked(R.id.cb_ischeck, ((CartGroupItem3) parentItem).isChildSelect(this));
+            viewHolder.setChecked(R.id.cb_ischeck, ((CartGroupItem3) parentItem).isSelect(this));
         }
         viewHolder.setText(R.id.tv_price, data + "");
     }
@@ -36,4 +36,5 @@ public class CartItem extends TreeItem<Integer> {
         super.getItemOffsets(outRect, layoutParams, position);
         outRect.bottom = 1;
     }
+
 }
