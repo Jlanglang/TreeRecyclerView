@@ -130,7 +130,7 @@ public abstract class TreeSelectItemGroup<D>
     public void parentCheckSelect() {
         TreeItemGroup parentItem = getParentItem();
         if (parentItem instanceof TreeSelectItemGroup) {
-            // 如果当前选中了,但是父类没有选中,则更新添加
+            // 如果当前选中了,但是父类没有选中,则更新
             if (isSelect() != ((TreeSelectItemGroup) parentItem).isSelect(this)) {
                 ((TreeSelectItemGroup) parentItem).selectItem(this, true);
                 ((TreeSelectItemGroup) parentItem).parentCheckSelect();
