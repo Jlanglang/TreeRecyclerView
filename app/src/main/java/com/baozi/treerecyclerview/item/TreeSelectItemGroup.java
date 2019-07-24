@@ -37,7 +37,8 @@ public abstract class TreeSelectItemGroup<D>
      * 选择全部，取消全部
      * 向下递归
      *
-     * @param b
+     * @param b            是否全部选中
+     * @param isMultistage 是否多级关联
      */
     public void selectAll(boolean b, boolean isMultistage) {
         List<TreeItem> child = getChild();
@@ -54,7 +55,7 @@ public abstract class TreeSelectItemGroup<D>
                 getSelectItems().add(item);
             }
         }
-        if (isMultistage){
+        if (isMultistage) {
             parentCheckSelect();
         }
     }
@@ -72,8 +73,6 @@ public abstract class TreeSelectItemGroup<D>
 
     /**
      * 是否选中
-     *
-     * @return
      */
     public boolean isSelect(TreeItem item) {
         return getSelectItems().contains(item);
@@ -95,6 +94,9 @@ public abstract class TreeSelectItemGroup<D>
      * 当不需要用onInterceptClick()的时候,可以主动调用添加Item.
      * 如果onInterceptClick()生效,还主动调用该方法添加item,将无法添加.
      * 向上递归
+     *
+     * @param child        要添加选中的item
+     * @param isMultistage 是否多级关联
      */
     protected void selectItem(@NonNull TreeItem child, boolean isMultistage) {
         if (selectFlag() == SelectFlag.SINGLE_CHOICE) {
