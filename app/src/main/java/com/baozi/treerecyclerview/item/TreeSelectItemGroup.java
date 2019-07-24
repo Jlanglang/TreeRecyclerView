@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class TreeSelectItemGroup<D>
         extends TreeItemGroup<D> {
     /**
-     * 选中的子item.只支持下一级,不支持下下级
+     * 选中的子item.只保存当前的子级
      */
     private List<TreeItem> selectItems;
 
