@@ -9,7 +9,6 @@ import com.baozi.demo.activity.CartActivity;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
-import com.baozi.treerecyclerview.item.TreeItemGroup;
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 
 import java.util.ArrayList;
@@ -20,16 +19,16 @@ import java.util.Random;
 /**
  * Created by a123 on 2018/6/5.
  */
-public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
+public class CartGroupItem2 extends TreeSelectItemGroup<CartBean2> {
 
     @Nullable
     @Override
-    protected List<TreeItem> initChildList(CartBean data) {
-        ArrayList<CartBean2> list = new ArrayList<>();
+    protected List<TreeItem> initChildList(CartBean2 data) {
+        ArrayList<CartBean3> list = new ArrayList<>();
         for (int i = 0; i < data.childSum; i++) {
-            list.add(new CartBean2(2));
+            list.add(new CartBean3(3));
         }
-        return ItemHelperFactory.createItems(list, this);
+        return ItemHelperFactory.createItems(list,  this);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setText(R.id.cb_ischeck, "我是一级");
+        viewHolder.setText(R.id.cb_ischeck, "我是二级");
         viewHolder.setChecked(R.id.cb_ischeck, isChildSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
             selectAll(!isSelectAll());
@@ -48,7 +47,7 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
     }
 
     @Override
-    public boolean onInterceptClick(TreeItem child) {
-        return super.onInterceptClick(child);
+    public void onClick(ViewHolder viewHolder) {
+        selectAll(!isSelectAll());
     }
 }

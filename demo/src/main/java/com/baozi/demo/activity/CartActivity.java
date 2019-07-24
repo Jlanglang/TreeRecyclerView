@@ -17,14 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baozi.demo.R;
+import com.baozi.demo.item.cart.CartBean;
 import com.baozi.demo.item.cart.CartGroupItem;
+import com.baozi.demo.item.cart.CartItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,8 +37,7 @@ import java.util.List;
  * 购物车列表
  */
 public class CartActivity extends Activity {
-    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
-    private List<TreeItem> groupItem;
+    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
     private boolean isSelectAll;
 
     @Override
@@ -45,13 +48,15 @@ public class CartActivity extends Activity {
         rv_content.setLayoutManager(new LinearLayoutManager(this));
         rv_content.setAdapter(adapter);
 
-        List<String> integers = Arrays.asList("1", "1", "1", "1", "1");
-        groupItem = ItemHelperFactory.createItems(integers, CartGroupItem.class, null);
+        List<CartBean> beans = new ArrayList<>();
+        beans.add(new CartBean(3));
+
+        List<TreeItem> groupItem = ItemHelperFactory.createItems(beans, null);
         adapter.getItemManager().replaceAllItem(groupItem);
         adapter.setOnItemClickListener((viewHolder, position) -> {
             //因为外部和内部会冲突
             TreeItem item = adapter.getData(position);
-            if (item instanceof CartGroupItem) {
+            if (item != null) {
                 item.onClick(viewHolder);
             }
             notifyPrice();
@@ -66,7 +71,7 @@ public class CartActivity extends Activity {
     public void notifyPrice() {
         isSelectAll = true;//默认全选
         int price = 0;
-        for (TreeItem item : groupItem) {
+        for (TreeItem item : adapter.getDatas()) {
             if (item instanceof TreeSelectItemGroup) {
                 TreeSelectItemGroup group = (TreeSelectItemGroup) item;
                 if (!group.isChildSelect()) {//是否有选择的子类
@@ -80,12 +85,15 @@ public class CartActivity extends Activity {
                 }
                 List<TreeItem> selectItems = group.getSelectItems();
                 for (TreeItem child : selectItems) {
-                    Integer data = (Integer) child.getData();
-                    price += data;
+                    if (child instanceof CartItem) {
+                        Integer data = (Integer) child.getData();
+                        price += data;
+                    }
                 }
             }
         }
         adapter.notifyDataSetChanged();
+
         ((TextView) findViewById(R.id.tv_all_price)).setText("￥" + price);
         CheckBox checkBox = findViewById(R.id.cb_all_check);
         checkBox.setChecked(isSelectAll);
@@ -94,7 +102,7 @@ public class CartActivity extends Activity {
     public void initView() {
         CheckBox checkBox = findViewById(R.id.cb_all_check);
         checkBox.setOnClickListener(v -> {
-            for (TreeItem item : groupItem) {
+            for (TreeItem item : adapter.getDatas()) {
                 if (item instanceof TreeSelectItemGroup) {
                     TreeSelectItemGroup group = (TreeSelectItemGroup) item;
                     group.selectAll(((CheckBox) v).isChecked());

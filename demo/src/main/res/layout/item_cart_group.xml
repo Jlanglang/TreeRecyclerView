@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:paddingLeft="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#e3ef13"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="#ccc"
+    android:orientation="vertical"
+    android:paddingLeft="8dp">
 
     <CheckBox
         android:id="@+id/cb_ischeck"
+        style="@style/body_text"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_centerVertical="true"
-        style="@style/body_text"
         android:gravity="center"
         android:paddingLeft="8dp"
-        android:text="店铺名称: 渣渣豆腐店"/>
+        android:text="级数:" />
 
 </RelativeLayout>
