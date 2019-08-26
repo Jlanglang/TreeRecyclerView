@@ -19,6 +19,9 @@ import java.util.List;
  */
 
 public class ItemHelperFactory {
+    public static List<TreeItem> createItems(@Nullable List list) {
+        return createItems(list, null);
+    }
 
     public static List<TreeItem> createItems(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
         return createItems(list, null, treeParentItem);

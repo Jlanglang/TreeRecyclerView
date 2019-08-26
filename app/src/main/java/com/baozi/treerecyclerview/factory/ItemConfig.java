@@ -9,11 +9,11 @@ import java.lang.annotation.Annotation;
 
 public class ItemConfig {
 
-    private static SparseArray<Class<? extends TreeItem>> treeViewHolderTypes;
+    private static final SparseArray<Class<? extends TreeItem>> treeViewHolderTypes = new SparseArray<>();
 
-    static {
-        treeViewHolderTypes = new SparseArray<>();
-    }
+//    static {
+//        treeViewHolderTypes = new SparseArray<>();
+//    }
 
     public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
         return treeViewHolderTypes.get(type);

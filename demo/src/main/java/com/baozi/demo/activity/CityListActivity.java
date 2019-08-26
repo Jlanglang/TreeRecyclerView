@@ -83,6 +83,7 @@ public class CityListActivity extends AppCompatActivity {
                 }
                 //添加到adapter
                 treeRecyclerAdapter.getItemManager().replaceAllItem(items);
+                treeRecyclerAdapter.getItemManager().clean();
             }
         });
 

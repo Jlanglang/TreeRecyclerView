@@ -55,8 +55,7 @@ public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
     @Override
     public void onBindViewHolderClick(@NonNull ViewHolder holder, View view) {
         int layoutPosition = holder.getLayoutPosition();
-        if ((isHeaderViewPos(layoutPosition)
-        )) {
+        if (isHeaderViewPos(layoutPosition)) {
             return;
         }
         super.onBindViewHolderClick(holder, view);
