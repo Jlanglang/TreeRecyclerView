@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.CheckBox;
 
+import com.baozi.demo.BuildConfig;
 import com.baozi.demo.R;
 import com.baozi.demo.activity.CartActivity;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -36,7 +37,7 @@ public class CartGroupItem2 extends TreeSelectItemGroup<CartBean2> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setText(R.id.cb_ischeck, "我是二级");
+        viewHolder.setText(R.id.cb_ischeck, "台式机");
         viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
             selectAll(!isSelectAll(),true);

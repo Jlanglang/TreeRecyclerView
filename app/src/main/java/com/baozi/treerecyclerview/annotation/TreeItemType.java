@@ -1,6 +1,5 @@
 package com.baozi.treerecyclerview.annotation;
 
-import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

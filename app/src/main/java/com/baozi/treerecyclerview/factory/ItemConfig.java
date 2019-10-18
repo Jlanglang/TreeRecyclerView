@@ -11,24 +11,18 @@ public class ItemConfig {
 
     private static final SparseArray<Class<? extends TreeItem>> treeViewHolderTypes = new SparseArray<>();
 
-//    static {
-//        treeViewHolderTypes = new SparseArray<>();
-//    }
-
     public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
         return treeViewHolderTypes.get(type);
     }
 
-    @Deprecated
-    public static void addTreeHolderType(int type, Class<? extends TreeItem> clazz) {
+    public static void registerTreeItem(int type, Class<? extends TreeItem> clazz) {
         if (null == clazz) {
             return;
         }
         treeViewHolderTypes.put(type, clazz);
     }
 
-    @Deprecated
-    public static void addTreeHolderType(Class<? extends TreeItem>... clazz) {
+    public static void registerTreeItem(Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
             Annotation annotation = zClass.getAnnotation(TreeItemType.class);
             if (annotation != null) {
@@ -48,13 +42,4 @@ public class ItemConfig {
         }
     }
 
-    /**
-     * 注册classType
-     * 类必须使用BindItemType注解，才能注册
-     *
-     * @param clazz
-     */
-    public static void registerTreeItem(Class<? extends TreeItem>... clazz) {
-        addTreeHolderType(clazz);
-    }
 }

@@ -36,10 +36,10 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setText(R.id.cb_ischeck, "我是一级");
+        viewHolder.setText(R.id.cb_ischeck, "电脑");
         viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
-            selectAll(!isSelectAll(),true);
+            selectAll(!isSelectAll(), true);
             ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
         });
     }

@@ -25,7 +25,6 @@ import java.util.List;
  */
 public class CartActivity extends Activity {
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
-    private boolean isSelectAll;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class CartActivity extends Activity {
      * 更新价格
      */
     public void notifyPrice() {
-        isSelectAll = true;//默认全选
+        boolean isSelectAll = true;//默认全选
         int price = 0;
         for (TreeItem item : adapter.getDatas()) {
             if (item instanceof TreeSelectItemGroup) {
