@@ -40,17 +40,6 @@ public class ItemHelperFactory {
         return treeItemList;
     }
 
-    @Deprecated
-    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass) {
-        return createItems(list, iClass, null);
-    }
-
-    @Deprecated
-    public static List<TreeItem> createTreeItemList(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
-        return createItems(list, iClass, treeParentItem);
-    }
-
-
     /**
      * 确定item的class类型,并且添加到了itemConfig,用该方法创建TreeItem
      *

@@ -30,7 +30,7 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     private Type mType;
 
     public enum Type {
-        EMPTY, REFRESH_OVER, @Deprecated SUCCESS, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
+        EMPTY, REFRESH_OVER, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
     }
 
     public LoadingWrapper(BaseRecyclerAdapter<T> adapter) {
@@ -52,7 +52,6 @@ public class LoadingWrapper<T> extends BaseWrapper<T> {
     public void setType(Type type) {
         switch (type) {
             case EMPTY:
-            case SUCCESS:
             case REFRESH_OVER:
                 break;
             case LOADING:

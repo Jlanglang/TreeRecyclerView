@@ -98,19 +98,9 @@ public class HeaderWrapper<T> extends BaseWrapper<T> {
         mHeaderSize++;
     }
 
-    @Deprecated
-    public void addFootView(View view) {
-    }
-
     protected boolean isHeaderViewPos(int position) {
         return position < getHeadersCount();
     }
-
-    @Deprecated
-    protected boolean isFooterViewPos(int position) {
-        return false;
-    }
-
 
     public void setShowHeadView(boolean show) {
         this.headShow = show;

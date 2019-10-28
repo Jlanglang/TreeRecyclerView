@@ -28,7 +28,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     private Type mType;
 
     public enum Type {
-        EMPTY, REFRESH_OVER, @Deprecated SUCCESS, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
+        EMPTY, REFRESH_OVER, LOADING, LOAD_MORE, LOAD_ERROR, LOAD_OVER
     }
 
     public TreeLoadWrapper(BaseRecyclerAdapter<TreeItem> adapter) {
@@ -50,8 +50,6 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     public void setType(Type type) {
         switch (type) {
             case EMPTY:
-                break;
-            case SUCCESS:
             case REFRESH_OVER:
                 break;
             case LOADING:

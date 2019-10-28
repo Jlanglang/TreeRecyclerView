@@ -147,17 +147,6 @@ public class DragSelectRecyclerView extends RecyclerView {
         return true;
     }
 
-    /**
-     * Use {@link #setAdapter(DragSelectRecyclerAdapter)} instead.
-     */
-    @Override
-    @Deprecated
-    public void setAdapter(Adapter adapter) {
-        if (!(adapter instanceof DragSelectRecyclerAdapter<?>))
-            throw new IllegalArgumentException("Adapter must be a DragSelectRecyclerAdapter.");
-        setAdapter((DragSelectRecyclerAdapter<?>) adapter);
-    }
-
     public void setAdapter(DragSelectRecyclerAdapter<?> adapter) {
         super.setAdapter(adapter);
         mAdapter = adapter;

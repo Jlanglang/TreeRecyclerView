@@ -30,8 +30,6 @@ import static com.baozi.treerecyclerview.widget.swipe.SwipeLayout.ShowMode.LayDo
 import static com.baozi.treerecyclerview.widget.swipe.SwipeLayout.ShowMode.PullOut;
 
 public class SwipeLayout extends FrameLayout {
-    @Deprecated
-    public static final int EMPTY_LAYOUT = -1;
     private static final int DRAG_LEFT = 1;
     private static final int DRAG_RIGHT = 2;
     private static final int DRAG_TOP = 4;
