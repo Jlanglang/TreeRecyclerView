@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.widget.CheckBox;
 
 import com.baozi.demo.R;
-import com.baozi.demo.activity.CartActivity;
+import com.baozi.demo.activity.CartAt;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -40,7 +40,7 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
         viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
             selectAll(!isSelectAll(), true);
-            ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
+            ((CartAt) viewHolder.itemView.getContext()).notifyPrice();
         });
         viewHolder.itemView.setPadding(0, 0, 0, 0);
     }

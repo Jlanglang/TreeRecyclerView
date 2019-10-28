@@ -24,7 +24,7 @@ import java.util.Random;
  * @版本 2017-8-19;有点勉强,不建议这样使用- -
  */
 
-public class NewsActivity extends AppCompatActivity {
+public class NewsAt extends AppCompatActivity {
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
 
     @Override

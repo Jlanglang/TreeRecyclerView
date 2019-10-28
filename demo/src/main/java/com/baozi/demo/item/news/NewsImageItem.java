@@ -21,10 +21,9 @@ public class NewsImageItem extends TreeItem<NewsItemBean.NewsImageBean> {
         return R.layout.item_news_image;
     }
 
-
     @Override
     public int getSpanSize(int maxSpan) {
-        return maxSpan/3;
+        return maxSpan / 3;
     }
 
     @Override

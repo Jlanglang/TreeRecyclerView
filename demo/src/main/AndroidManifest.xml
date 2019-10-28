@@ -17,11 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.CityListActivity" />
-        <activity android:name=".activity.NewsActivity" />
-        <activity android:name=".activity.SortActivity" />
-        <activity android:name=".activity.SwipeSortActivity" />
-        <activity android:name=".activity.CartActivity" />
+        <activity android:name=".activity.CityAt" />
+        <activity android:name=".activity.NewsAt" />
+        <activity android:name=".activity.SortAt" />
+        <activity android:name=".activity.SwipeSortAt" />
+        <activity android:name=".activity.CartAt" />
         <activity android:name=".activity.TBHomeListActivity" />
     </application>
 </manifest>

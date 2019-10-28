@@ -1,4 +1,4 @@
-package com.baozi.demo.activity;
+package com.baozi.demo.fragment;
 
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 //RecyclerView实现首页我的页面
-public class MineFragment extends Fragment {
+public class MineFg extends Fragment {
 
     private RecyclerView view;
     private TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();

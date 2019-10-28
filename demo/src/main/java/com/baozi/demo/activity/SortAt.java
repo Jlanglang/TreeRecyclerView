@@ -17,9 +17,10 @@ import java.util.List;
 
 /**
  * Created by baozi on 2017/8/19.
+ * 侧滑+索引
  */
 
-public class SortActivity extends AppCompatActivity {
+public class SortAt extends AppCompatActivity {
     private static final String[] LETTERS = new String[]{"A", "B", "C", "D",
             "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};

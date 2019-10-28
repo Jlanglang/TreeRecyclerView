@@ -28,7 +28,7 @@ import java.util.List;
  * 在SortActivity的代码逻辑上,加少部分代码实现
  */
 
-public class SwipeSortActivity extends AppCompatActivity {
+public class SwipeSortAt extends AppCompatActivity {
     private static final String[] LETTERS = new String[]{"A", "B", "C", "D",
             "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q",
             "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};

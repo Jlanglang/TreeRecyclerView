@@ -18,7 +18,12 @@ import java.util.List;
 public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
     @Override
     public List<TreeItem> initChild(ProvinceBean data) {
-        return ItemHelperFactory.createItems(data.getCitys(), CountyItemParent.class, this);
+        List<TreeItem> items = ItemHelperFactory.createItems(data.getCitys(), this);
+        for (int i = 0; i < items.size(); i++) {
+            TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
+            treeItem.setExpand(true);
+        }
+        return items;
     }
 
     @Override

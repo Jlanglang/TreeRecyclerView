@@ -25,20 +25,17 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
     protected List<TreeItem> initChild(NewsItemBean data) {
         //添加图片
         int images = data.getImages();
-        ArrayList<NewsItemBean.NewsImageBean> childs = new ArrayList<>();
+        ArrayList<NewsItemBean.NewsImageBean> child = new ArrayList<>();
         for (int i = 0; i < images; i++) {
             NewsItemBean.NewsImageBean newsImageItem = new NewsItemBean.NewsImageBean();
-            childs.add(newsImageItem);
+            child.add(newsImageItem);
         }
-        List<TreeItem> treeItemList = ItemHelperFactory.createItems(childs, this);
+        List<TreeItem> treeItemList = ItemHelperFactory.createItems(child, this);
 
         //添加尾部
         treeItemList.add(new SimpleTreeItem(R.layout.item_news_foot)
-                .onItemClick(new SimpleTreeItem.Consumer<ViewHolder>() {
-                    @Override
-                    public void accept(ViewHolder viewHolder) {
-                        //点击跳转
-                    }
+                .onItemClick(viewHolder -> {
+                    //点击跳转
                 }).setTreeOffset(new Rect(0, 0, 0, 20)));
         return treeItemList;
     }

@@ -3,7 +3,10 @@ package com.baozi.treerecyclerview.item;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
+import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
+import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.manager.ItemManager;
 
@@ -51,14 +54,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         } else {
             onCollapse();
         }
-    }
-
-    /**
-     * 刷新Item的展开状态
-     */
-    @Deprecated
-    public void notifyExpand() {
-        setExpand(isExpand);
     }
 
     /**
@@ -164,4 +159,15 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         return false;
     }
 
+    @Override
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
+        //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
+        BaseRecyclerAdapter adapter = getItemManager().getAdapter();
+        if (adapter instanceof TreeRecyclerAdapter
+                && ((TreeRecyclerAdapter) adapter).getType() != TreeRecyclerType.SHOW_ALL
+        ) {
+            setExpand(!isExpand());
+        }
+    }
 }

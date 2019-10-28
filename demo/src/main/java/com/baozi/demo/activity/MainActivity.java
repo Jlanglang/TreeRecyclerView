@@ -13,6 +13,8 @@ import android.util.Pair;
 import android.view.View;
 
 import com.baozi.demo.R;
+import com.baozi.demo.fragment.ClickLoadFg;
+import com.baozi.demo.fragment.MineFg;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
@@ -27,14 +29,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     //数据集合
     private Pair[] itemPairs = {
-            new Pair("三级城市", CityListActivity.class),
-            new Pair("购物车", CartActivity.class),
-            new Pair("新闻", NewsActivity.class),
-            new Pair("索引", SortActivity.class),
-            new Pair("索引加侧滑删除", SwipeSortActivity.class),
-            new Pair("个人中心", MineFragment.class),
+            new Pair("三级城市", CityAt.class),
+            new Pair("购物车", CartAt.class),
+            new Pair("新闻", NewsAt.class),
+            new Pair("索引", SortAt.class),
+            new Pair("索引加侧滑删除", SwipeSortAt.class),
+            new Pair("个人中心", MineFg.class),
             new Pair("淘宝首页", TBHomeListActivity.class),
-            new Pair("点击懒加载", ClickLoadFragment.class)
+            new Pair("点击懒加载", ClickLoadFg.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 

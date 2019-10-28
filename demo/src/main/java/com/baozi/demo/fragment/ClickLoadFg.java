@@ -1,4 +1,4 @@
-package com.baozi.demo.activity;
+package com.baozi.demo.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * 点击懒加载的demo
  */
-public class ClickLoadFragment extends Fragment {
+public class ClickLoadFg extends Fragment {
     RecyclerView view;
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 

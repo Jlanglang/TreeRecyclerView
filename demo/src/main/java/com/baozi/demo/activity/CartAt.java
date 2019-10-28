@@ -23,7 +23,7 @@ import java.util.List;
  * Created by a123 on 2018/6/5.
  * 购物车列表
  */
-public class CartActivity extends Activity {
+public class CartAt extends Activity {
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
     @Override

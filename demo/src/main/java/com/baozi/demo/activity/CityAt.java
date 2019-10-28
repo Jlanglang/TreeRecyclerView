@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * 城市列表
  */
-public class CityListActivity extends AppCompatActivity {
+public class CityAt extends AppCompatActivity {
     //根据item的状态展示,可折叠
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
