@@ -57,7 +57,7 @@ public class CartActivity extends Activity {
     public void notifyPrice() {
         boolean isSelectAll = true;//默认全选
         int price = 0;
-        for (TreeItem item : adapter.getDatas()) {
+        for (TreeItem item : adapter.getData()) {
             if (item instanceof TreeSelectItemGroup) {
                 TreeSelectItemGroup group = (TreeSelectItemGroup) item;
                 if (!group.isSelect()) {//是否有选择的子类
@@ -88,7 +88,7 @@ public class CartActivity extends Activity {
     public void initView() {
         CheckBox checkBox = findViewById(R.id.cb_all_check);
         checkBox.setOnClickListener(v -> {
-            for (TreeItem item : adapter.getDatas()) {
+            for (TreeItem item : adapter.getData()) {
                 if (item instanceof TreeSelectItemGroup) {
                     TreeSelectItemGroup group = (TreeSelectItemGroup) item;
                     group.selectAll(((CheckBox) v).isChecked());

@@ -1,8 +1,5 @@
 package com.baozi.treerecyclerview.annotation;
 
-import com.baozi.treerecyclerview.item.TreeItem;
-
-import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,14 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface TreeDataType {
     /**
-     * 直接绑定itemclass
-     *
-     * @return
+     * 要绑定的item
      */
     Class iClass() default Object.class;
-
-    /**
-     * @return -1代表不查找
-     */
-    int value() default -1;
 }

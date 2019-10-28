@@ -21,7 +21,7 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
 
     @Nullable
     @Override
-    protected List<TreeItem> initChildList(CartBean data) {
+    protected List<TreeItem> initChild(CartBean data) {
         ArrayList<CartBean2> list = new ArrayList<>();
         for (int i = 0; i < data.childSum; i++) {
             list.add(new CartBean2(2));
@@ -36,11 +36,12 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setText(R.id.cb_ischeck, "电脑");
+        viewHolder.setText(R.id.cb_ischeck, "电脑(一级)");
         viewHolder.setChecked(R.id.cb_ischeck, isSelect());
         viewHolder.<CheckBox>getView(R.id.cb_ischeck).setOnClickListener((v) -> {
             selectAll(!isSelectAll(), true);
             ((CartActivity) viewHolder.itemView.getContext()).notifyPrice();
         });
+        viewHolder.itemView.setPadding(0, 0, 0, 0);
     }
 }

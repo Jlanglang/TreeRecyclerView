@@ -20,7 +20,7 @@ public class ClickLoadGroupItem extends TreeItemGroup<String[]> {
 
     @Nullable
     @Override
-    protected List<TreeItem> initChildList(String[] data) {
+    protected List<TreeItem> initChild(String[] data) {
         return ItemHelperFactory.createItems(Arrays.asList(data), ClickLoadChildItem.class, this);
     }
 

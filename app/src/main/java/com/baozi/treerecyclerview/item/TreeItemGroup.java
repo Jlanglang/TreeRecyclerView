@@ -117,15 +117,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
 
     public void setData(D data) {
         super.setData(data);
-        child = initChildList(data);
-    }
-
-    public void setChild(List<TreeItem> child) {
-        onCollapse();
-        this.child = child;
-        if (isExpand) {
-            onExpand();
-        }
+        child = initChild(data);
     }
 
     /**
@@ -160,7 +152,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @return
      */
     @Nullable
-    protected abstract List<TreeItem> initChildList(D data);
+    protected abstract List<TreeItem> initChild(D data);
 
     /**
      * 是否消费child的click事件

@@ -9,15 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by baozi on 2017/4/30.
@@ -41,7 +36,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     }
 
     private boolean isEmpty() {
-        return getDatas().size() == 0;
+        return getData().size() == 0;
     }
 
     private boolean isLoading() {
@@ -92,7 +87,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     if (loadMoreListener == null) return;
                     LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                    int itemCount = getDatas().size();
+                    int itemCount = getData().size();
                     int lastPosition = checkPosition(layoutManager.findLastVisibleItemPosition());
                     //如果当前不是正在加载更多，并且到了该加载更多的位置，加载更多。
                     int lastVisibleIndex = mLoadMoreItem.getLastVisibleIndex() == 0 ? 1 : mLoadMoreItem.getLastVisibleIndex();

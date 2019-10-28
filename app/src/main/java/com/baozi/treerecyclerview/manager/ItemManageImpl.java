@@ -17,7 +17,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void addItem(T item) {
-        getDatas().add(item);
+        getData().add(item);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -28,7 +28,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void addItem(int position, T item) {
-        getDatas().add(position, item);
+        getData().add(position, item);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -39,17 +39,17 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void addItems(List<T> items) {
-        getDatas().addAll(items);
+        getData().addAll(items);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemRangeInserted(getDatas().size(), items.size());
+        getAdapter().notifyItemRangeInserted(getData().size(), items.size());
     }
 
     @Override
     public void addItems(int position, List<T> items) {
-        getDatas().addAll(position, items);
+        getData().addAll(position, items);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -61,7 +61,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
     @Override
     public void removeItem(T item) {
         int position = getItemPosition(item);
-        getDatas().remove(item);
+        getData().remove(item);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -72,7 +72,7 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void removeItem(int position) {
-        getDatas().remove(position);
+        getData().remove(position);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -83,13 +83,13 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void removeItems(List<T> items) {
-        getDatas().removeAll(items);
+        getData().removeAll(items);
         notifyDataChanged();
     }
 
     @Override
     public void replaceItem(int position, T item) {
-        getDatas().set(position, item);
+        getData().set(position, item);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
@@ -100,33 +100,30 @@ public class ItemManageImpl<T> extends ItemManager<T> {
 
     @Override
     public void replaceAllItem(List<T> items) {
-        if (items == null) {
-            return;
-        }
-        setDatas(items);
+        setData(items);
         if (!isOpenAnim()) {
             notifyDataChanged();
             return;
         }
-        getAdapter().notifyItemRangeChanged(0, getDatas().size());
+        getAdapter().notifyItemRangeChanged(0, getData().size());
     }
 
-    protected void setDatas(List<T> items) {
-        getAdapter().setDatas(items);
+    protected void setData(List<T> items) {
+        getAdapter().setData(items);
     }
 
-    protected List<T> getDatas() {
-        return getAdapter().getDatas();
+    protected List<T> getData() {
+        return getAdapter().getData();
     }
 
     @Override
     public T getItem(int position) {
-        return getDatas().get(position);
+        return getData().get(position);
     }
 
     @Override
     public int getItemPosition(T item) {
-        return getDatas().indexOf(item);
+        return getData().indexOf(item);
     }
 
     @Override

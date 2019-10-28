@@ -19,7 +19,7 @@ import java.util.List;
 
 public class SortGroupItem extends TreeSortItem {
     @Override
-    protected List<TreeItem> initChildList(Object childs) {
+    protected List<TreeItem> initChild(Object childs) {
         ArrayList<TreeItem> treeItems = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             SwipeSortItem sortChildItem = new SwipeSortItem();

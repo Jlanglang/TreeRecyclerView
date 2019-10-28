@@ -67,23 +67,18 @@ public class CityListActivity extends AppCompatActivity {
     }
 
     private void refresh(final List<ProvinceBean> cityBeen) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                //创建item
-                //老的
-                //ItemHelperFactory.createTreeItemList(cityBeen, ProvinceItemParent.class, null);
-                //新的
-                List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
-                //遍历设置展开状态
-                for (TreeItem item : items) {
-                    if (item instanceof TreeItemGroup) {
-                        ((TreeItemGroup) item).setExpand(true);
-                    }
+        runOnUiThread(() -> {
+            //创建item
+            //新的
+            List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
+            //遍历设置展开状态
+            for (TreeItem item : items) {
+                if (item instanceof TreeItemGroup) {
+                    ((TreeItemGroup) item).setExpand(true);
                 }
-                //添加到adapter
-                treeRecyclerAdapter.getItemManager().replaceAllItem(items);
             }
+            //添加到adapter
+            treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });
 
     }

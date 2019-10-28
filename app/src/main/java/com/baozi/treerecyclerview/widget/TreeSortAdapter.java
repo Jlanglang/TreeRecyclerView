@@ -29,9 +29,9 @@ public class TreeSortAdapter extends TreeRecyclerAdapter {
     }
 
     @Override
-    public void setDatas(List<TreeItem> datas) {
-        super.setDatas(datas);
-        getItemManager().updateSorts(getDatas());
+    public void setData(List<TreeItem> data) {
+        super.setData(data);
+        getItemManager().updateSorts(getData());
     }
 
 

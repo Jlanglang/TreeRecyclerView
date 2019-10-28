@@ -28,6 +28,8 @@ public class CartItem extends TreeItem<Integer> {
             viewHolder.setChecked(R.id.cb_ischeck, ((CartGroupItem3) parentItem).isSelect(this));
         }
         viewHolder.setText(R.id.tv_price, data + "");
+        viewHolder.itemView.setPadding(50, 0, 0, 0);
+
     }
 
 

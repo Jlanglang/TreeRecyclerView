@@ -64,7 +64,6 @@ public class SimpleTreeItem extends TreeItem {
         void accept(T t);
     }
 
-
     public SimpleTreeItem onItemClick(Consumer<ViewHolder> treeClick) {
         this.treeClick = treeClick;
         return this;

@@ -21,9 +21,6 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
-    productFlavors.each { t ->
-        println('11111',t)
-    }
 }
 dependencies {
     implementation files('libs/fastjson-1.2.9.jar')
@@ -31,5 +28,4 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation project(':app')
-//    implementation 'com.github.Jlanglang:TreeRecyclerView:1.2.8.4'
 }

@@ -20,7 +20,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     protected ItemManager<T> mItemManager;
     protected OnItemClickListener mOnItemClickListener;
     protected OnItemLongClickListener mOnItemLongClickListener;
-    private List<T> mDatas;
+    private List<T> data;
 
     @NonNull
     @Override
@@ -80,7 +80,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
 
     @Override
     public int getItemCount() {
-        return getDatas().size();
+        return getData().size();
     }
 
 
@@ -88,24 +88,24 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
         return maxSpan;
     }
 
-    public List<T> getDatas() {
-        if (mDatas == null) {
-            mDatas = new ArrayList<>();
+    public List<T> getData() {
+        if (data == null) {
+            data = new ArrayList<>();
         }
-        return mDatas;
+        return data;
     }
 
-    public void setDatas(List<T> datas) {
-        if (datas != null && !datas.isEmpty()) {
-            getDatas().clear();
-            getDatas().addAll(datas);
+    public void setData(List<T> data) {
+        if (data != null) {
+            getData().clear();
+            getData().addAll(data);
         }
     }
 
     @Nullable
     public T getData(int position) {
         if (position >= 0) {
-            return getDatas().get(position);
+            return getData().get(position);
         }
         return null;
     }
@@ -169,6 +169,6 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     public void clear() {
-        getDatas().clear();
+        getData().clear();
     }
 }

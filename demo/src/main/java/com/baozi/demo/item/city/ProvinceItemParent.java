@@ -14,14 +14,11 @@ import java.util.List;
 
 /**
  * Created by baozi on 2016/12/8.
- *
  */
 public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
-
-
     @Override
-    public List<TreeItem> initChildList(ProvinceBean data) {
-        return ItemHelperFactory.createTreeItemList(data.getCitys(),CountyItemParent.class, this);
+    public List<TreeItem> initChild(ProvinceBean data) {
+        return ItemHelperFactory.createItems(data.getCitys(), CountyItemParent.class, this);
     }
 
     @Override
@@ -34,7 +31,7 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
         ItemManager itemManager = getItemManager();
         if (itemManager != null) {
             int itemPosition = itemManager.getItemPosition(this);
-            List datas = itemManager.getAdapter().getDatas();
+            List datas = itemManager.getAdapter().getData();
             datas.addAll(itemPosition + 1, getExpandChild());
             itemManager.getAdapter().notifyItemRangeInserted(itemPosition + 1, getExpandChild().size());
         }

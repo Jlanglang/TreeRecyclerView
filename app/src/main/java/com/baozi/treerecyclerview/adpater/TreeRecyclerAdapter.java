@@ -85,12 +85,12 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void setDatas(List<TreeItem> items) {
-        if (null == items || items.isEmpty()) {
+    public void setData(List<TreeItem> data) {
+        if (null == data || data.isEmpty()) {
             return;
         }
-        getDatas().clear();
-        assembleItems(items);
+        getData().clear();
+        assembleItems(data);
     }
 
     public void setDatas(TreeItemGroup treeItemGroup) {
@@ -99,7 +99,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         }
         ArrayList<TreeItem> arrayList = new ArrayList<>();
         arrayList.add(treeItemGroup);
-        setDatas(arrayList);
+        setData(arrayList);
     }
 
     /**
@@ -109,10 +109,10 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      */
     private void assembleItems(List<TreeItem> items) {
         if (type != null) {
-            List<TreeItem> datas = getDatas();
+            List<TreeItem> datas = getData();
             datas.addAll(ItemHelperFactory.getChildItemsWithType(items, type));
         } else {
-            super.setDatas(items);
+            super.setData(items);
         }
     }
 
@@ -242,7 +242,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
             if (item instanceof TreeItemGroup) {
                 ArrayList<TreeItem> childItemsWithType = ItemHelperFactory.getChildItemsWithType((TreeItemGroup) item, type);
                 childItemsWithType.add(0, item);
-//                getDatas().removeAll(childItemsWithType);
                 super.removeItems(childItemsWithType);
             } else {
                 super.removeItem(item);

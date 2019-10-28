@@ -15,14 +15,14 @@ public class ItemConfig {
         return treeViewHolderTypes.get(type);
     }
 
-    public static void registerTreeItem(int type, Class<? extends TreeItem> clazz) {
+    public static void register(int type, Class<? extends TreeItem> clazz) {
         if (null == clazz) {
             return;
         }
         treeViewHolderTypes.put(type, clazz);
     }
 
-    public static void registerTreeItem(Class<? extends TreeItem>... clazz) {
+    public static void register(Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
             Annotation annotation = zClass.getAnnotation(TreeItemType.class);
             if (annotation != null) {

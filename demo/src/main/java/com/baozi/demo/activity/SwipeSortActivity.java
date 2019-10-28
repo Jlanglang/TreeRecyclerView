@@ -1,7 +1,6 @@
 package com.baozi.demo.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutCompat;
@@ -10,16 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.sort.IndexBar;
 import com.baozi.demo.item.sort.SortGroupItem;
-import com.baozi.treerecyclerview.adpater.wrapper.HeaderAndFootWrapper;
+import com.baozi.treerecyclerview.adpater.wrapper.HeaderWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.SwipeWrapper;
 import com.baozi.treerecyclerview.adpater.wrapper.TreeLoadWrapper;
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.widget.TreeSortAdapter;
@@ -29,7 +25,7 @@ import java.util.List;
 
 /**
  * Created by baozi on 2017/8/19.
- * 在SortAcitivity的代码逻辑上,加少部分代码实现
+ * 在SortActivity的代码逻辑上,加少部分代码实现
  */
 
 public class SwipeSortActivity extends AppCompatActivity {
@@ -62,10 +58,10 @@ public class SwipeSortActivity extends AppCompatActivity {
         //创建索引adapter
         mTreeSortAdapter = new TreeSortAdapter();
         mTreeSortAdapter.getItemManager().setOpenAnim(true);
-        HeaderAndFootWrapper headerAndFootWrapper = new HeaderAndFootWrapper<>(mTreeSortAdapter);
-        addHeadView(headerAndFootWrapper);
+        HeaderWrapper headerWrapper = new HeaderWrapper<>(mTreeSortAdapter);
+        addHeadView(headerWrapper);
         //包装成侧滑删除列表
-        SwipeWrapper adapter = new SwipeWrapper(headerAndFootWrapper);
+        SwipeWrapper adapter = new SwipeWrapper(headerWrapper);
         mWrapper = new TreeLoadWrapper(adapter);
         mWrapper.setEmptyView(new SimpleTreeItem(R.layout.layout_empty));
         mWrapper.setLoadingView(R.layout.layout_loading);
@@ -75,14 +71,14 @@ public class SwipeSortActivity extends AppCompatActivity {
         initData();
     }
 
-    private void addHeadView(HeaderAndFootWrapper headerAndFootWrapper) {
+    private void addHeadView(HeaderWrapper headerWrapper) {
         for (int i = 0; i < 5; i++) {
             //添加头部View1
             TextView headView = new TextView(this);
             headView.setText("headView" + i);
             headView.setGravity(Gravity.CENTER);
             headView.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 320));
-            headerAndFootWrapper.addHeaderView(headView);
+            headerWrapper.addHeaderView(headView);
         }
     }
 

@@ -17,13 +17,13 @@ import java.util.List;
  * Created by baozi on 2017/4/30.
  * 在最后一个，优先级高于loadwrapper,
  */
-public class HeaderAndFootWrapper<T> extends BaseWrapper<T> {
+public class HeaderWrapper<T> extends BaseWrapper<T> {
     private static final int HEAD_ITEM = 1000;
     private SparseArray<View> mHeaderViews = new SparseArray<>();
     private boolean headShow = true;
     private int mHeaderSize;
 
-    public HeaderAndFootWrapper(BaseRecyclerAdapter<T> adapter) {
+    public HeaderWrapper(BaseRecyclerAdapter<T> adapter) {
         super(adapter);
         getItemManager().addCheckItemInterfaces(new ItemManager.CheckItemInterface() {
             @Override

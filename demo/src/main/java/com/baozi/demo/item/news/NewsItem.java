@@ -22,7 +22,7 @@ import java.util.List;
 //新闻列表,一级父
 public class NewsItem extends TreeItemGroup<NewsItemBean> {
     @Override
-    protected List<TreeItem> initChildList(NewsItemBean data) {
+    protected List<TreeItem> initChild(NewsItemBean data) {
         //添加图片
         int images = data.getImages();
         ArrayList<NewsItemBean.NewsImageBean> childs = new ArrayList<>();

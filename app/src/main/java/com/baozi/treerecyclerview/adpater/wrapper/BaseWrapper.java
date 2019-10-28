@@ -72,13 +72,13 @@ public class BaseWrapper<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public List<T> getDatas() {
-        return mAdapter.getDatas();
+    public List<T> getData() {
+        return mAdapter.getData();
     }
 
     @Override
-    public void setDatas(List<T> datas) {
-        mAdapter.setDatas(datas);
+    public void setData(List<T> data) {
+        mAdapter.setData(data);
     }
 
     @Override

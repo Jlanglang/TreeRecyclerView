@@ -3,13 +3,10 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
-import com.baozi.treerecyclerview.base.BaseItemData;
-import com.baozi.treerecyclerview.item.SimpleTreeItem;
+import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
-import com.baozi.treerecyclerview.item.TreeSortItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,18 +98,14 @@ public class ItemHelperFactory {
     private static Class<? extends TreeItem> getTypeClass(Object itemData) {
         Class<? extends TreeItem> treeItemClass = null;
         //先判断是否继承了ItemData,适用于跨模块获取
-        if (itemData instanceof BaseItemData) {
-            int viewItemType = ((BaseItemData) itemData).getViewItemType();
-            treeItemClass = ItemConfig.getTreeViewHolderType(viewItemType);
-        } else {
-            //判断是否使用注解绑定了ItemClass,适用当前模块
-            TreeDataType annotation = itemData.getClass().getAnnotation(TreeDataType.class);
-            if (annotation != null) {
-                treeItemClass = annotation.iClass();
-            }
+        //判断是否使用注解绑定了ItemClass,适用当前模块
+        TreeDataType annotation = itemData.getClass().getAnnotation(TreeDataType.class);
+        if (annotation != null) {
+            treeItemClass = annotation.iClass();
         }
         return treeItemClass;
     }
+
     /**
      * 根据TreeRecyclerType获取子item集合,不包含TreeItemGroup自身
      *
