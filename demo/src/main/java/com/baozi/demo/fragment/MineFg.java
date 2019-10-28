@@ -74,7 +74,7 @@ public class MineFg extends Fragment {
         treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(category, null));
 
         //添加横条item
-        List<TreeItem> items = ItemHelperFactory.createTreeItemList(item, MineItem.class, null);
+        List<TreeItem> items = ItemHelperFactory.createItems(item, MineItem.class, null);
 
         treeRecyclerAdapter.getItemManager().addItems(items);
     }
