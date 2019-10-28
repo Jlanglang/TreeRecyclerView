@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.factory;
 
+import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
 import com.baozi.treerecyclerview.annotation.TreeItemType;
@@ -22,11 +23,23 @@ public class ItemConfig {
         treeViewHolderTypes.put(type, clazz);
     }
 
-    public static void register(Class<? extends TreeItem>... clazz) {
+    public static void register(Class<? extends TreeItem> zClass) {
+        if (null == zClass) {
+            return;
+        }
+        TreeItemType annotation = zClass.getAnnotation(TreeItemType.class);
+        if (annotation != null) {
+            int type = annotation.type();
+            treeViewHolderTypes.put(type, zClass);
+        }
+    }
+
+    @SafeVarargs
+    public static void register(@NonNull Class<? extends TreeItem>... clazz) {
         for (Class<? extends TreeItem> zClass : clazz) {
-            Annotation annotation = zClass.getAnnotation(TreeItemType.class);
+            TreeItemType annotation = zClass.getAnnotation(TreeItemType.class);
             if (annotation != null) {
-                int type = ((TreeItemType) annotation).type();
+                int type = annotation.type();
                 if (type == -1) {
                     continue;
                 }
