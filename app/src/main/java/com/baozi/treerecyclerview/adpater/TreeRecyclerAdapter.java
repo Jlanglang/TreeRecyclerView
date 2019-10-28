@@ -86,7 +86,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
 
     @Override
     public void setData(List<TreeItem> data) {
-        if (null == data || data.isEmpty()) {
+        if (null == data) {
             return;
         }
         getData().clear();
