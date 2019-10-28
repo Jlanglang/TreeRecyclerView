@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class CityAt extends AppCompatActivity {
     //根据item的状态展示,可折叠
-    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
+    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
 
 
     @Override
@@ -71,12 +71,6 @@ public class CityAt extends AppCompatActivity {
             //创建item
             //新的
             List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
-            //遍历设置展开状态
-            for (TreeItem item : items) {
-                if (item instanceof TreeItemGroup) {
-                    ((TreeItemGroup) item).setExpand(true);
-                }
-            }
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });

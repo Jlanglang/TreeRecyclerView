@@ -34,7 +34,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     public TreeRecyclerAdapter(TreeRecyclerType treeRecyclerType) {
-        type = treeRecyclerType == null ? TreeRecyclerType.SHOW_DEFAULT : treeRecyclerType;
+        type = treeRecyclerType == null ? TreeRecyclerType.SHOW_EXPAND : treeRecyclerType;
     }
 
     @Override

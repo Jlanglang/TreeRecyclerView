@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 
-public class TBHomeListActivity extends AppCompatActivity {
+public class TBAtivity extends AppCompatActivity {
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
     @Override

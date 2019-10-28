@@ -8,14 +8,9 @@ public enum TreeRecyclerType {
     SHOW_ALL,
 
     /**
+     * 默认只显示第一级,点击展开,折叠不会影响子级展开折叠
      * 根据isExpand的状态显示展开与折叠,
      * 适用场景,多级的data数据展示,保存展开状态
      */
     SHOW_EXPAND,
-
-    /**
-     * 默认只显示第一级,点击展开,折叠不会影响子级展开折叠
-     * 适用场景,一级一级展开，保存展开状态
-     */
-    SHOW_DEFAULT
 }

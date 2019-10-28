@@ -26,9 +26,13 @@ public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {
         return R.layout.item_two;
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {
         holder.setText(R.id.tv_content, data.getCityName());
+    }
+
+    @Override
+    public void onClick(ViewHolder viewHolder) {
+        super.onClick(viewHolder);
     }
 }

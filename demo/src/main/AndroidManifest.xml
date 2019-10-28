@@ -22,6 +22,6 @@
         <activity android:name=".activity.SortAt" />
         <activity android:name=".activity.SwipeSortAt" />
         <activity android:name=".activity.CartAt" />
-        <activity android:name=".activity.TBHomeListActivity" />
+        <activity android:name=".activity.TBAtivity" />
     </application>
 </manifest>
