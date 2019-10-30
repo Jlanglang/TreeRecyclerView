@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
+import com.baozi.treerecyclerview.adpater.wrapper.BaseWrapper;
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
@@ -30,7 +31,23 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * 是否展开
      */
     private boolean isExpand;
+    /**
+     * 是否能展开
+     */
+    private boolean isCanExpand;
 
+    /**
+     * 能否展开折叠
+     *
+     * @return
+     */
+    public boolean isCanExpand() {
+        return isCanExpand;
+    }
+
+    public void setCanExpand(boolean canExpand) {
+        isCanExpand = canExpand;
+    }
 
     public boolean isExpand() {
         return isExpand;
@@ -87,15 +104,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
             return;
         }
         itemManager.removeItems(getExpandChild());
-    }
-
-    /**
-     * 能否展开折叠
-     *
-     * @return
-     */
-    public boolean isCanExpand() {
-        return true;
     }
 
 
@@ -163,11 +171,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     public void onClick(ViewHolder viewHolder) {
         super.onClick(viewHolder);
         //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-        BaseRecyclerAdapter adapter = getItemManager().getAdapter();
-        if (adapter instanceof TreeRecyclerAdapter
-                && ((TreeRecyclerAdapter) adapter).getType() != TreeRecyclerType.SHOW_ALL
-        ) {
-            setExpand(!isExpand());
-        }
+        setExpand(!isExpand());
     }
 }

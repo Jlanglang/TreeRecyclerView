@@ -141,9 +141,12 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public final void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TreeItem t = getData(position);
         if (t == null) return;
+        if (t instanceof TreeItemGroup) {
+            ((TreeItemGroup) t).setCanExpand(type != TreeRecyclerType.SHOW_ALL);
+        }
         checkItemManage(t);
         t.onBindViewHolder(holder);
     }
