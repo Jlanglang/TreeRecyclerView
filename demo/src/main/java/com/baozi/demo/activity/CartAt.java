@@ -3,9 +3,12 @@ package com.baozi.demo.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
@@ -23,7 +26,7 @@ import java.util.List;
  * Created by a123 on 2018/6/5.
  * 购物车列表
  */
-public class CartAt extends Activity {
+public class CartAt extends AppCompatActivity {
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
     @Override
@@ -33,11 +36,10 @@ public class CartAt extends Activity {
         RecyclerView rv_content = findViewById(R.id.rv_content);
         rv_content.setLayoutManager(new LinearLayoutManager(this));
         rv_content.setAdapter(adapter);
-
         List<CartBean> beans = new ArrayList<>();
         beans.add(new CartBean(3));
 
-        List<TreeItem> groupItem = ItemHelperFactory.createItems(beans, null);
+        List<TreeItem> groupItem = ItemHelperFactory.createItems(beans);
         adapter.getItemManager().replaceAllItem(groupItem);
         adapter.setOnItemClickListener((viewHolder, position) -> {
             //因为外部和内部会冲突

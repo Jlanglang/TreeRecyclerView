@@ -14,15 +14,10 @@ import android.view.ViewGroup;
 import com.baozi.demo.R;
 import com.baozi.demo.item.clickload.ClickLoadGroupItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
-import com.baozi.treerecyclerview.item.TreeItemGroup;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 点击懒加载的demo
@@ -47,7 +42,7 @@ public class ClickLoadFg extends Fragment {
         //初始化recyclerView
         view.setLayoutManager(new GridLayoutManager(view.getContext(), 4));
         view.setAdapter(adapter);
-        TreeItem treeItem = ItemHelperFactory.createTreeItem(new String[]{}, ClickLoadGroupItem.class, null);
+        TreeItem treeItem = ItemHelperFactory.createItem(new String[]{}, ClickLoadGroupItem.class, null);
         adapter.getItemManager().replaceAllItem(Arrays.asList(treeItem));
         adapter.setOnItemClickListener((viewHolder, position) -> {
             TreeItem item = adapter.getData(position);

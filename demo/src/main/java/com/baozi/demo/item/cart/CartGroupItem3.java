@@ -18,11 +18,11 @@ import java.util.Random;
 /**
  * Created by a123 on 2018/6/5.
  */
-public class CartGroupItem3 extends TreeSelectItemGroup<CartBean3> {
+public class CartGroupItem3 extends TreeSelectItemGroup<CartBean.CartBean2.CartBean3> {
 
     @Nullable
     @Override
-    protected List<TreeItem> initChild(CartBean3 data) {
+    protected List<TreeItem> initChild(CartBean.CartBean2.CartBean3 data) {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < data.childSum; i++) {
             list.add(new Random().nextInt(300));

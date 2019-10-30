@@ -17,14 +17,14 @@ import java.util.List;
 /**
  * Created by a123 on 2018/6/5.
  */
-public class CartGroupItem2 extends TreeSelectItemGroup<CartBean2> {
+public class CartGroupItem2 extends TreeSelectItemGroup<CartBean.CartBean2> {
 
     @Nullable
     @Override
-    protected List<TreeItem> initChild(CartBean2 data) {
-        ArrayList<CartBean3> list = new ArrayList<>();
+    protected List<TreeItem> initChild(CartBean.CartBean2 data) {
+        ArrayList<CartBean.CartBean2.CartBean3> list = new ArrayList<>();
         for (int i = 0; i < data.childSum; i++) {
-            list.add(new CartBean3(3));
+            list.add(new CartBean.CartBean2.CartBean3(3));
         }
         return ItemHelperFactory.createItems(list, this);
     }

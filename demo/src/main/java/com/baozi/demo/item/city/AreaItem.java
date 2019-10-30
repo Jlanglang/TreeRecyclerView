@@ -3,7 +3,6 @@ package com.baozi.demo.item.city;
 import android.support.annotation.NonNull;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.ProvinceBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -18,7 +17,7 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {
-        holder.setText(R.id.tv_content, data.getAreaName());
+        holder.setText(R.id.tv_content, data.areaName);
     }
 
     @Override

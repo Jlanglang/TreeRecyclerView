@@ -17,11 +17,15 @@ import java.util.List;
 
 public class ItemHelperFactory {
     public static List<TreeItem> createItems(@Nullable List list) {
-        return createItems(list, null);
+        return createItems(list, null, null);
     }
 
     public static List<TreeItem> createItems(@Nullable List list, @Nullable TreeItemGroup treeParentItem) {
         return createItems(list, null, treeParentItem);
+    }
+
+    public static List<TreeItem> createItems(@Nullable List list, Class<? extends TreeItem> iClass) {
+        return createItems(list, iClass, null);
     }
 
     public static List<TreeItem> createItems(@Nullable List list, Class<? extends TreeItem> iClass, @Nullable TreeItemGroup treeParentItem) {
@@ -32,7 +36,7 @@ public class ItemHelperFactory {
         ArrayList<TreeItem> treeItemList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             Object itemData = list.get(i);
-            TreeItem treeItem = createTreeItem(itemData, iClass, treeParentItem);
+            TreeItem treeItem = createItem(itemData, iClass, treeParentItem);
             if (treeItem != null) {
                 treeItemList.add(treeItem);
             }
@@ -45,17 +49,22 @@ public class ItemHelperFactory {
      *
      * @return
      */
-    public static TreeItem createTreeItem(Object d) {
-        return createTreeItem(d, null);
+    public static TreeItem createItem(Object d) {
+        return createItem(d, null, null);
     }
 
     @Nullable
-    public static TreeItem createTreeItem(Object data, @Nullable TreeItemGroup treeParentItem) {
-        return createTreeItem(data, null, treeParentItem);
+    public static TreeItem createItem(Object data, @Nullable TreeItemGroup treeParentItem) {
+        return createItem(data, null, treeParentItem);
     }
 
     @Nullable
-    public static TreeItem createTreeItem(Object data, @Nullable Class zClass, @Nullable TreeItemGroup treeParentItem) {
+    public static TreeItem createItem(Object data, @Nullable Class zClass) {
+        return createItem(data, zClass, null);
+    }
+
+    @Nullable
+    public static TreeItem createItem(Object data, @Nullable Class zClass, @Nullable TreeItemGroup treeParentItem) {
         TreeItem treeItem = null;
         Class<? extends TreeItem> treeItemClass;
         try {

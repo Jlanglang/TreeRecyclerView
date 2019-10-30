@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -15,7 +14,7 @@ import com.baozi.treerecyclerview.item.TreeItem;
  * @Change
  */
 
-public class NewsImageItem extends TreeItem<NewsItemBean.NewsImageBean> {
+public class NewsImageItem extends TreeItem<String> {
     @Override
     public int getLayoutId() {
         return R.layout.item_news_image;

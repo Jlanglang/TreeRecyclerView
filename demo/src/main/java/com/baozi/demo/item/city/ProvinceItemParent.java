@@ -3,7 +3,6 @@ package com.baozi.demo.item.city;
 import android.support.annotation.NonNull;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.ProvinceBean;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.base.ViewHolder;
@@ -19,7 +18,7 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
 
     @Override
     public List<TreeItem> initChild(ProvinceBean data) {
-        List<TreeItem> items = ItemHelperFactory.createItems(data.getCitys(), this);
+        List<TreeItem> items = ItemHelperFactory.createItems(data.citys, this);
         for (int i = 0; i < items.size(); i++) {
             TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
             treeItem.setExpand(true);
@@ -45,7 +44,7 @@ public class ProvinceItemParent extends TreeItemGroup<ProvinceBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {
-        holder.setText(R.id.tv_content, data.getProvinceName());
+        holder.setText(R.id.tv_content, data.provinceName);
     }
 
 }

@@ -22,9 +22,9 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
     @Nullable
     @Override
     protected List<TreeItem> initChild(CartBean data) {
-        ArrayList<CartBean2> list = new ArrayList<>();
+        ArrayList<CartBean.CartBean2> list = new ArrayList<>();
         for (int i = 0; i < data.childSum; i++) {
-            list.add(new CartBean2(2));
+            list.add(new CartBean.CartBean2(2));
         }
         return ItemHelperFactory.createItems(list, this);
     }

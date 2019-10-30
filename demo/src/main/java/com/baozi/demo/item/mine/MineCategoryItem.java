@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.mine.MineCategoryBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.TreeItem;
 

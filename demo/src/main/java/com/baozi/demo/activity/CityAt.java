@@ -9,17 +9,13 @@ import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
-import com.baozi.demo.bean.ProvinceBean;
-import com.baozi.demo.item.city.ProvinceItemParent;
+import com.baozi.demo.item.city.ProvinceBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
-import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.List;
 
 /**
@@ -70,7 +66,7 @@ public class CityAt extends AppCompatActivity {
         runOnUiThread(() -> {
             //创建item
             //新的
-            List<TreeItem> items = ItemHelperFactory.createItems(cityBeen, null);
+            List<TreeItem> items = ItemHelperFactory.createItems(cityBeen);
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });

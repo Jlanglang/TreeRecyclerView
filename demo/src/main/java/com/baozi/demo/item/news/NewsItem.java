@@ -4,7 +4,6 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.NewsItemBean;
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
@@ -24,13 +23,12 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
     @Override
     protected List<TreeItem> initChild(NewsItemBean data) {
         //添加图片
-        int images = data.getImages();
-        ArrayList<NewsItemBean.NewsImageBean> child = new ArrayList<>();
+        int images = data.images;
+        ArrayList<String> child = new ArrayList<>();
         for (int i = 0; i < images; i++) {
-            NewsItemBean.NewsImageBean newsImageItem = new NewsItemBean.NewsImageBean();
-            child.add(newsImageItem);
+            child.add("");
         }
-        List<TreeItem> treeItemList = ItemHelperFactory.createItems(child, this);
+        List<TreeItem> treeItemList = ItemHelperFactory.createItems(child, NewsImageItem.class, this);
 
         //添加尾部
         treeItemList.add(new SimpleTreeItem(R.layout.item_news_foot)
@@ -47,17 +45,7 @@ public class NewsItem extends TreeItemGroup<NewsItemBean> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder) {
-        viewHolder.setText(R.id.tv_title, data.getTitle());
+        viewHolder.setText(R.id.tv_title, data.title);
     }
 
-
-//    @Override
-//    public void setData(NewsItemBean data) {
-//        if (getData() != null) {
-//            super.setData(data);
-//            setExpand(true);
-//            return;
-//        }
-//        super.setData(data);
-//    }
 }

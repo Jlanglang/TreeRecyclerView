@@ -2,20 +2,17 @@ package com.baozi.demo.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.NewsItemBean;
+import com.baozi.demo.item.news.NewsItemBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -39,12 +36,12 @@ public class NewsAt extends AppCompatActivity {
         ArrayList<NewsItemBean> list = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             NewsItemBean newsItemBean = new NewsItemBean();
-            newsItemBean.setTitle("123");
-            newsItemBean.setImages(new Random().nextInt(10));
+            newsItemBean.title="123";
+            newsItemBean.images=new Random().nextInt(10);
             list.add(newsItemBean);
         }
 
-        List<TreeItem> itemList = ItemHelperFactory.createItems(list, null);
+        List<TreeItem> itemList = ItemHelperFactory.createItems(list);
         treeRecyclerAdapter.getItemManager().replaceAllItem(itemList);
     }
 }

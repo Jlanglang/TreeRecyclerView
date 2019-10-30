@@ -7,14 +7,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.demo.R;
-import com.baozi.demo.bean.mine.MineCategoryBean;
+import com.baozi.demo.item.mine.MineCategoryBean;
 import com.baozi.demo.item.mine.MineItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
@@ -28,7 +27,7 @@ import java.util.List;
 public class MineFg extends Fragment {
 
     private RecyclerView view;
-    private TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+    private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
     private List<MineCategoryBean> heads = Arrays.asList(
             new MineCategoryBean("公开文章", null, "39", true),
             new MineCategoryBean("关注", null, "57", true),
@@ -62,20 +61,17 @@ public class MineFg extends Fragment {
         super.onActivityCreated(savedInstanceState);
         //初始化recyclerView
         view.setLayoutManager(new GridLayoutManager(view.getContext(), 4));
-        view.setAdapter(treeRecyclerAdapter);
+        view.setAdapter(adapter);
         //添加头部
-        treeRecyclerAdapter.getItemManager().addItem(
+        adapter.getItemManager().addItem(
                 new SimpleTreeItem(R.layout.item_mine_head)
                         .setTreeOffset(new Rect(0, 0, 0, 2))
         );
         //添加头部分类item
-        treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(heads, null));
+        adapter.getItemManager().addItems(ItemHelperFactory.createItems(heads));
         //添加分类item
-        treeRecyclerAdapter.getItemManager().addItems(ItemHelperFactory.createItems(category, null));
-
+        adapter.getItemManager().addItems(ItemHelperFactory.createItems(category));
         //添加横条item
-        List<TreeItem> items = ItemHelperFactory.createItems(item, MineItem.class, null);
-
-        treeRecyclerAdapter.getItemManager().addItems(items);
+        adapter.getItemManager().addItems(ItemHelperFactory.createItems(item, MineItem.class));
     }
 }
