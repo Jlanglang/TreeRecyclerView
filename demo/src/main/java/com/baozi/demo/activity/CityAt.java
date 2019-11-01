@@ -25,7 +25,6 @@ public class CityAt extends AppCompatActivity {
     //根据item的状态展示,可折叠
     TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

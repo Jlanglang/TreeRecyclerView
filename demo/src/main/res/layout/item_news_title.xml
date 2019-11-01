@@ -5,21 +5,20 @@
     android:background="#fff"
     android:gravity="center_vertical"
     android:orientation="horizontal">
-
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:padding="10dp"
-        android:text="标题标题标题标题标题"
+        android:text="标题"
         android:textSize="15sp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:gravity="center_vertical"
+        android:gravity="right|center_vertical"
         android:paddingLeft="10dp"
         android:text="All"
         android:textSize="13sp" />

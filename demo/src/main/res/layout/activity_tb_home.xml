@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_content"
+    <WebView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

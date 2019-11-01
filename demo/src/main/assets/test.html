@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜翼213</title>
+</head>
+<body>
+<div style="display: flex">
+    <video id="video" style="width: 320px;height: 320px;"></video>
+</div>
+<script>
+    navigator.getUserMedia({video: {width: 2560, height: 2560}},
+        function (stream) {
+            const video = document.querySelector('video');
+            video.srcObject = stream;
+                video.play();
+        },
+        function (err) {
+            alert(err);
+            // console.log("The following error occurred: " + err.name);
+        }
+    );
+
+</script>
+</body>
+</html>

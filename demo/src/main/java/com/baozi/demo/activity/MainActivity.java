@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.baozi.demo.R;
 import com.baozi.demo.fragment.ClickLoadFg;
+import com.baozi.demo.fragment.GalleryFg;
 import com.baozi.demo.fragment.MineFg;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
             new Pair("索引加侧滑删除", SwipeSortAt.class),
             new Pair("个人中心", MineFg.class),
             new Pair("淘宝首页", TBAtivity.class),
-            new Pair("点击懒加载", ClickLoadFg.class)
+            new Pair("点击懒加载", ClickLoadFg.class),
+            new Pair("画廊", GalleryFg.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
