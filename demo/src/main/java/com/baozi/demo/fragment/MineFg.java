@@ -62,6 +62,7 @@ public class MineFg extends Fragment {
         //初始化recyclerView
         view.setLayoutManager(new GridLayoutManager(view.getContext(), 4));
         view.setAdapter(adapter);
+        adapter.getItemManager().clean();
         //添加头部
         adapter.getItemManager().addItem(
                 new SimpleTreeItem(R.layout.item_mine_head)

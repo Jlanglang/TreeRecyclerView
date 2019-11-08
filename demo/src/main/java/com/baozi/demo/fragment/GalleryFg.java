@@ -12,11 +12,11 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
-import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -30,6 +30,7 @@ public class GalleryFg extends SimpleRecyclerViewFg<TreeRecyclerAdapter> {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         linearLayoutManager = new LinearLayoutManager(context, 0, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         snapHelper.attachToRecyclerView(recyclerView);
@@ -68,13 +69,10 @@ public class GalleryFg extends SimpleRecyclerViewFg<TreeRecyclerAdapter> {
             list.add(
                     new SimpleTreeItem(R.layout.item_grallery)
                             .setTreeOffset(new Rect(20, 20, 20, 20))
-                            .onItemBind(new SimpleTreeItem.Consumer<ViewHolder>() {
-                                @Override
-                                public void accept(ViewHolder viewHolder) {
-                                    TextView itemView = (TextView) viewHolder.itemView;
-                                    itemView.setText(viewHolder.getLayoutPosition() + "");
-                                    viewHolder.itemView.setScaleY(1);
-                                }
+                            .onItemBind(viewHolder -> {
+                                TextView itemView = (TextView) viewHolder.itemView;
+                                itemView.setText(viewHolder.getLayoutPosition() + "");
+                                viewHolder.itemView.setScaleY(1);
                             })
             );
         }

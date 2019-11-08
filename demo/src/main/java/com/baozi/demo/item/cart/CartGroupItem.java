@@ -2,6 +2,7 @@ package com.baozi.demo.item.cart;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.CheckBox;
 
 import com.baozi.demo.R;
@@ -43,5 +44,18 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
             ((CartAt) viewHolder.itemView.getContext()).notifyPrice();
         });
         viewHolder.itemView.setPadding(0, 0, 0, 0);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data.childSum = 1;
+
+            }
+        });
+    }
+
+    @Override
+    public int getSpanSize(int maxSpan) {
+        return super.getSpanSize(maxSpan);
     }
 }
