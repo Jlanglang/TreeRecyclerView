@@ -53,11 +53,6 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
                         return;
                     }
-//                    //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-//                    if (item instanceof TreeItemGroup && type != TreeRecyclerType.SHOW_ALL) {
-//                        TreeItemGroup treeItemGroup = (TreeItemGroup) item;
-//                        treeItemGroup.setExpand(!treeItemGroup.isExpand());
-//                    }
                     if (mOnItemClickListener != null) {
                         mOnItemClickListener.onItemClick(holder, layoutPosition);
                     } else {

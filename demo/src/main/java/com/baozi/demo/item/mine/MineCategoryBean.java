@@ -1,6 +1,5 @@
 package com.baozi.demo.item.mine;
 
-import com.baozi.demo.item.mine.MineCategoryItem;
 import com.baozi.treerecyclerview.annotation.TreeDataType;
 
 @TreeDataType(iClass = MineCategoryItem.class)

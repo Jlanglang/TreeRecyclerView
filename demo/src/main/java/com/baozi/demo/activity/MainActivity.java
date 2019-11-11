@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             new Pair("索引", SortAt.class),
             new Pair("索引加侧滑删除", SwipeSortAt.class),
             new Pair("个人中心", MineFg.class),
-            new Pair("淘宝首页", TBAtivity.class),
+            new Pair("淘宝首页", TBActivity.class),
             new Pair("点击懒加载", ClickLoadFg.class),
             new Pair("画廊", GalleryFg.class)
     };

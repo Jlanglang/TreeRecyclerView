@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  */
-public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {
+public class CountyItem extends TreeItemGroup<ProvinceBean.CityBean> {
 
     @Override
     public List<TreeItem> initChild(ProvinceBean.CityBean data) {
@@ -28,10 +28,5 @@ public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {
         holder.setText(R.id.tv_content, data.cityName);
-    }
-
-    @Override
-    public void onClick(ViewHolder viewHolder) {
-        super.onClick(viewHolder);
     }
 }

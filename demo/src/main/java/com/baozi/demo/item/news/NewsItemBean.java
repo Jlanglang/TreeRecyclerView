@@ -1,7 +1,5 @@
 package com.baozi.demo.item.news;
 
-import com.baozi.demo.item.news.NewsImageItem;
-import com.baozi.demo.item.news.NewsItem;
 import com.baozi.treerecyclerview.annotation.TreeDataType;
 
 /**
