@@ -16,16 +16,16 @@
     <TextView
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@android:color/holo_red_dark"
+        android:background="@color/colorAccent"
         android:gravity="center"
-        android:text="删除"
+        android:text="分享"
         android:textColor="#fff"/>
 
     <TextView
         android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@android:color/holo_red_dark"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         android:gravity="center"
-        android:text="删除"
-        android:textColor="#fff"/>
+        android:text="收藏"
+        android:textColor="#fff" />
 </LinearLayout>
