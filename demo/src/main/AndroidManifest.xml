@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.CityAt" />
-        <activity android:name=".activity.NewsAt" />
         <activity android:name=".activity.SortAt" />
         <activity android:name=".activity.SwipeSortAt" />
         <activity android:name=".activity.CartAt" />
