@@ -104,9 +104,8 @@ public class ItemHelperFactory {
         if (annotation != null) {
             String key = annotation.bindField();
             if (!TextUtils.isEmpty(key)) {
-                Field field;
                 try {
-                    field = aClass.getField(key);
+                    Field field = aClass.getField(key);
                     int type = field.getInt(itemData);
                     return ItemConfig.getTreeViewHolderType(type);
                 } catch (NoSuchFieldException e) {
