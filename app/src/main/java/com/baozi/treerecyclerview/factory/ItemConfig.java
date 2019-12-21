@@ -3,6 +3,7 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
+import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.annotation.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -24,25 +25,10 @@ public class ItemConfig {
     }
 
     public static void register(Class<? extends TreeItem> zClass) {
-        if (null == zClass) {
-            return;
-        }
         TreeItemType annotation = zClass.getAnnotation(TreeItemType.class);
         if (annotation != null) {
-            int type = annotation.type();
-            treeViewHolderTypes.put(type, zClass);
-        }
-    }
-
-    @SafeVarargs
-    public static void register(@NonNull Class<? extends TreeItem>... clazz) {
-        for (Class<? extends TreeItem> zClass : clazz) {
-            TreeItemType annotation = zClass.getAnnotation(TreeItemType.class);
-            if (annotation != null) {
-                int type = annotation.type();
-                if (type == -1) {
-                    continue;
-                }
+            int[] typeList = annotation.type();
+            for (Integer type : typeList) {
                 Class<? extends TreeItem> typeClass = treeViewHolderTypes.get(type);
                 if (typeClass == null) {
                     treeViewHolderTypes.put(type, zClass);
@@ -52,6 +38,13 @@ public class ItemConfig {
                     throw new IllegalStateException("该type映射了一个TreeItemClass,不能再映射其他TreeItemClass");
                 }
             }
+        }
+    }
+
+    @SafeVarargs
+    public static void register(@NonNull Class<? extends TreeItem>... clazz) {
+        for (Class<? extends TreeItem> zClass : clazz) {
+            register(zClass);
         }
     }
 

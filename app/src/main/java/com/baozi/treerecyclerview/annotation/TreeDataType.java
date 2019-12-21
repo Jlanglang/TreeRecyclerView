@@ -15,4 +15,6 @@ public @interface TreeDataType {
      * 要绑定的item
      */
     Class iClass() default Object.class;
+
+    String bindField() default "";
 }

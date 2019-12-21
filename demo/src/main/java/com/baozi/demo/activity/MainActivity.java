@@ -18,7 +18,10 @@ import com.baozi.demo.fragment.ClickLoadFg;
 import com.baozi.demo.fragment.GalleryFg;
 import com.baozi.demo.fragment.MineFg;
 import com.baozi.demo.fragment.NewsFg;
+import com.baozi.demo.item.cart.CartGroupItem;
+import com.baozi.demo.item.city.AreaItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.layout_rv_content);
         initRecyclerVIew();
         initData();
+        ItemConfig.register(CartGroupItem.class);
 
     }
 

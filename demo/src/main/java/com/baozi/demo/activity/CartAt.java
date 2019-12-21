@@ -41,6 +41,7 @@ public class CartAt extends AppCompatActivity {
         beans.add(new CartBean(3));
 
         List<TreeItem> groupItem = ItemHelperFactory.createItems(beans);
+
         adapter.getItemManager().replaceAllItem(groupItem);
         adapter.setOnItemClickListener((viewHolder, position) -> {
             //因为外部和内部会冲突

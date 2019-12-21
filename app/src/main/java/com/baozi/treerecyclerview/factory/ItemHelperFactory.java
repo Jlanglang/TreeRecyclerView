@@ -2,12 +2,14 @@ package com.baozi.treerecyclerview.factory;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,8 +99,22 @@ public class ItemHelperFactory {
         Class<? extends TreeItem> treeItemClass = null;
         //先判断是否继承了ItemData,适用于跨模块获取
         //判断是否使用注解绑定了ItemClass,适用当前模块
-        TreeDataType annotation = itemData.getClass().getAnnotation(TreeDataType.class);
+        Class<?> aClass = itemData.getClass();
+        TreeDataType annotation = aClass.getAnnotation(TreeDataType.class);
         if (annotation != null) {
+            String key = annotation.bindField();
+            if (!TextUtils.isEmpty(key)) {
+                Field field;
+                try {
+                    field = aClass.getField(key);
+                    int type = field.getInt(itemData);
+                    return ItemConfig.getTreeViewHolderType(type);
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
             treeItemClass = annotation.iClass();
         }
         return treeItemClass;

@@ -3,9 +3,10 @@ package com.baozi.demo.item.cart;
 import com.baozi.treerecyclerview.annotation.TreeDataType;
 
 
-@TreeDataType(iClass = CartGroupItem.class)
+@TreeDataType(bindField = "type")
 public class CartBean {
     int childSum; //子条目数量
+    public int type = 1;
 
     public CartBean(int childSum) {
         this.childSum = childSum;
