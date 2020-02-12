@@ -81,13 +81,13 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (itemManager == null) {
             return;
         }
-        List<TreeItem> expandChild = getExpandChild();
-        if (expandChild.size() == 0) {
+        List<TreeItem> child = this.getChild();
+        if (child == null || child.size() == 0) {
             isExpand = false;
             return;
         }
         int itemPosition = itemManager.getItemPosition(this);
-        itemManager.addItems(itemPosition + 1, this.getChild());
+        itemManager.addItems(itemPosition + 1, child);
     }
 
     /**
@@ -98,12 +98,12 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
         if (itemManager == null) {
             return;
         }
-        List<TreeItem> expandChild = getExpandChild();
-        if (expandChild.size() == 0) {
+        List<TreeItem> child = this.getChild();
+        if (child == null || child.size() == 0) {
             isExpand = false;
             return;
         }
-        itemManager.removeItems(this.getChild());
+        itemManager.removeItems(child);
     }
 
 
