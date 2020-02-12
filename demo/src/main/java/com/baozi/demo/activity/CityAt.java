@@ -16,6 +16,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
+import com.baozi.treerecyclerview.item.TreeItemGroup;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -71,7 +72,10 @@ public class CityAt extends AppCompatActivity {
             //创建item
             //新的
             List<TreeItem> items = ItemHelperFactory.createItems(cityBeen);
-
+            for (int i = 0; i < items.size(); i++) {
+                TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
+                treeItem.setExpand(true);
+            }
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });
