@@ -162,8 +162,7 @@ public class ItemHelperFactory {
                     returnItems.addAll(list);
                 }
             }
-
         }
-        return returnItems;
+            return returnItems;
     }
 }

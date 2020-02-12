@@ -33,6 +33,10 @@ public class ProvinceItem extends TreeItemGroup<ProvinceBean> {
         return R.layout.itme_one;
     }
 
+    @Override
+    public boolean isCanExpand() {
+        return true;
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {

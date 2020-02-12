@@ -87,7 +87,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
             return;
         }
         int itemPosition = itemManager.getItemPosition(this);
-        itemManager.addItems(itemPosition + 1, expandChild);
+        itemManager.addItems(itemPosition + 1, this.getChild());
     }
 
     /**
@@ -103,7 +103,7 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
             isExpand = false;
             return;
         }
-        itemManager.removeItems(getExpandChild());
+        itemManager.removeItems(this.getChild());
     }
 
 
