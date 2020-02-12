@@ -33,16 +33,6 @@ public class ProvinceItem extends TreeItemGroup<ProvinceBean> {
         return R.layout.itme_one;
     }
 
-    @Override
-    protected void onExpand() {
-        ItemManager itemManager = getItemManager();
-        if (itemManager != null) {
-            int itemPosition = itemManager.getItemPosition(this);
-            List datas = itemManager.getAdapter().getData();
-            datas.addAll(itemPosition + 1, getExpandChild());
-            itemManager.getAdapter().notifyItemRangeInserted(itemPosition + 1, getExpandChild().size());
-        }
-    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder) {

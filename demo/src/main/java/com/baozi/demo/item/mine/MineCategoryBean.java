@@ -2,8 +2,8 @@ package com.baozi.demo.item.mine;
 
 import com.baozi.treerecyclerview.annotation.TreeDataType;
 
-@TreeDataType(iClass = MineCategoryItem.class)
-public class MineCategoryBean {
+    @TreeDataType(iClass = MineCategoryItem.class)
+    public class MineCategoryBean {
     public String title;
     public String url;//
     public String content;

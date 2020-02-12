@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.baozi.demo.R;
 import com.baozi.demo.item.city.ProvinceBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
+import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.factory.ItemHelperFactory;
 import com.baozi.treerecyclerview.item.TreeItem;
 
@@ -26,7 +27,7 @@ import java.util.List;
  */
 public class CityAt extends AppCompatActivity {
     //根据item的状态展示,可折叠
-    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter();
+    TreeRecyclerAdapter treeRecyclerAdapter = new TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class CityAt extends AppCompatActivity {
             //创建item
             //新的
             List<TreeItem> items = ItemHelperFactory.createItems(cityBeen);
+
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });
