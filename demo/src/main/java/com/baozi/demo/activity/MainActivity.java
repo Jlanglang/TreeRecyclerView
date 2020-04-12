@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             new Pair("个人中心", MineFg.class),
             new Pair("淘宝首页", TBActivity.class),
             new Pair("点击懒加载", ClickLoadFg.class),
-            new Pair("画廊", GalleryFg.class)
+            new Pair("画廊", TestActivity.class)
     };
     private TreeRecyclerAdapter adapter = new TreeRecyclerAdapter();
 
