@@ -1,7 +1,7 @@
 package com.baozi.demo.item.clickload;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;

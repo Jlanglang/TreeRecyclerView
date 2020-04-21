@@ -1,14 +1,10 @@
 package com.baozi.demo.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.baozi.demo.R;
-import com.baozi.demo.fragment.SimpleRecyclerViewFg;
 import com.baozi.demo.item.news.NewsItemBean;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;

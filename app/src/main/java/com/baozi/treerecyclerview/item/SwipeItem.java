@@ -1,6 +1,6 @@
 package com.baozi.treerecyclerview.item;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.widget.swipe.SwipeItemMangerInterface;

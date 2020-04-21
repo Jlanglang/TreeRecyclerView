@@ -2,13 +2,13 @@ package com.baozi.demo.activity
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ import com.baozi.treerecyclerview.item.TreeItem
 import kotlinx.android.synthetic.main.at_test.*
 import java.util.*
 
-class TestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+class TestActivity : AppCompatActivity(), androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener {
     val adapter = LoadingWrapper(TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL))
     override fun onRefresh() {
         loadData()
@@ -48,15 +48,15 @@ class TestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.at_test)
-        val sw_refresh = findViewById<SwipeRefreshLayout>(R.id.sw_refresh);
+        val sw_refresh = findViewById<androidx.swiperefreshlayout.widget.SwipeRefreshLayout>(R.id.sw_refresh);
         sw_refresh.setOnRefreshListener(this)
         initRv()
         onRefresh()
     }
 
     private fun initRv() {
-        val rv_content = findViewById<RecyclerView>(R.id.rv_content);
-        rv_content.layoutManager = LinearLayoutManager(this)
+        val rv_content = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.rv_content);
+        rv_content.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         rv_content.adapter = adapter
         adapter.setLoadMore(object : LoadingWrapper.LoadMoreItem(this) {
             override fun getLoadMoreLayout(): Int = 0
@@ -79,12 +79,12 @@ data class TestGroup(
 
 class TestItemGroup : TreeItem<String>() {
     val adapter = TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
-    val pagerAdapter = object : PagerAdapter() {
+    val pagerAdapter = object : androidx.viewpager.widget.PagerAdapter() {
         // 当要显示的图片可以进行缓存的时候，会调用这个方法进行显示图片的初始化，我们将要显示的ImageView加入到ViewGroup中，然后作为返回值返回即可
         override fun instantiateItem(view: ViewGroup, position: Int): Any {
             val inflate = LayoutInflater.from(view.context).inflate(R.layout.item_image, view, false)
-            inflate.layoutParams.width = ViewPager.LayoutParams.MATCH_PARENT
-            inflate.layoutParams.width = ViewPager.LayoutParams.WRAP_CONTENT
+            inflate.layoutParams.width = androidx.viewpager.widget.ViewPager.LayoutParams.MATCH_PARENT
+            inflate.layoutParams.width = androidx.viewpager.widget.ViewPager.LayoutParams.WRAP_CONTENT
             view.addView(inflate);
             return inflate
         }
@@ -109,10 +109,10 @@ class TestItemGroup : TreeItem<String>() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder) {
-        val view = viewHolder.getView<RecyclerView>(R.id.rv_images)
-        val vp_content = viewHolder.getView<ViewPager>(R.id.vp_content)
+        val view = viewHolder.getView<androidx.recyclerview.widget.RecyclerView>(R.id.rv_images)
+        val vp_content = viewHolder.getView<androidx.viewpager.widget.ViewPager>(R.id.vp_content)
 
-        view.layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+        view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(view.context, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         if (view.adapter == null) {
             view.adapter = adapter;
         }
@@ -130,7 +130,7 @@ class TestItemGroup : TreeItem<String>() {
             vp_content.currentItem = position
         }
         vp_content.adapter = pagerAdapter;
-        vp_content.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        vp_content.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(p0: Int) {
             }
 
@@ -171,7 +171,7 @@ class ImageItem : TreeItem<ImageBean>() {
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams?, position: Int) {
+    override fun getItemOffsets(outRect: Rect, layoutParams: androidx.recyclerview.widget.RecyclerView.LayoutParams?, position: Int) {
         super.getItemOffsets(outRect, layoutParams, position)
         outRect.left = 10;
         outRect.right = 10;

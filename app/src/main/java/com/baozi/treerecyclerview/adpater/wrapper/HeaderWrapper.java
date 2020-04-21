@@ -1,17 +1,14 @@
 package com.baozi.treerecyclerview.adpater.wrapper;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
 import com.baozi.treerecyclerview.base.ViewHolder;
-import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.manager.ItemManager;
-
-import java.util.List;
 
 /**
  * Created by baozi on 2017/4/30.

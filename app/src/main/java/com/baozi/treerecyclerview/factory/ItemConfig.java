@@ -1,13 +1,10 @@
 package com.baozi.treerecyclerview.factory;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.SparseArray;
 
-import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.annotation.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
-
-import java.lang.annotation.Annotation;
 
 public class ItemConfig {
 

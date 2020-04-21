@@ -1,8 +1,8 @@
 package com.baozi.demo.item.sort;
 
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.demo.item.swipe.SwipeSortItem;

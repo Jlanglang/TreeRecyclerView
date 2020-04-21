@@ -3,31 +3,27 @@ package com.baozi.demo.activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Pair;
 import android.view.View;
 
 import com.baozi.demo.R;
 import com.baozi.demo.fragment.ClickLoadFg;
-import com.baozi.demo.fragment.GalleryFg;
 import com.baozi.demo.fragment.MineFg;
 import com.baozi.demo.fragment.NewsFg;
 import com.baozi.demo.item.cart.CartGroupItem;
-import com.baozi.demo.item.city.AreaItem;
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter;
 import com.baozi.treerecyclerview.factory.ItemConfig;
 import com.baozi.treerecyclerview.item.SimpleTreeItem;
 import com.baozi.treerecyclerview.item.TreeItem;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author jlanglang  2016/12/22 9:58

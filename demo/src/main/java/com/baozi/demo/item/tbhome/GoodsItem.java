@@ -1,6 +1,6 @@
 package com.baozi.demo.item.tbhome;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.base.ViewHolder;
