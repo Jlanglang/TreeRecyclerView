@@ -1,9 +1,11 @@
 package com.baozi.treerecyclerview.adpater;
 
 import android.graphics.Rect;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 
 import com.baozi.treerecyclerview.base.BaseRecyclerAdapter;
@@ -48,6 +50,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     layoutPosition = checkPosition(layoutPosition);
                     //拿到BaseItem
                     TreeItem item = getData(layoutPosition);
+                    if (item == null) {
+                        return;
+                    }
                     TreeItemGroup itemParentItem = item.getParentItem();
                     //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
                     if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
@@ -108,8 +113,8 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
      */
     private void assembleItems(List<TreeItem> items) {
         if (type != null) {
-            List<TreeItem> datas = getData();
-            datas.addAll(ItemHelperFactory.getChildItemsWithType(items, type));
+            List<TreeItem> dataList = getData();
+            dataList.addAll(ItemHelperFactory.getChildItemsWithType(items, type));
         } else {
             super.setData(items);
         }
@@ -155,7 +160,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     /**
      * 分割器
      */
-   private final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
+    private final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
         @Override
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent,
                                    @NonNull RecyclerView.State state) {
