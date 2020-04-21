@@ -155,9 +155,10 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     /**
      * 分割器
      */
-    final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
+   private final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
         @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent,
+                                   @NonNull RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
             int viewLayoutPosition = layoutParams.getViewLayoutPosition();
