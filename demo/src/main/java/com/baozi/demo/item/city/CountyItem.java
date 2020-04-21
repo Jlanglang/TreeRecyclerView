@@ -22,7 +22,6 @@ public class CountyItem extends TreeItemGroup<ProvinceBean.CityBean> {
         return ItemHelperFactory.createItems(data.areas, this);
     }
 
-
     @Override
     public int getLayoutId() {
         return R.layout.item_two;

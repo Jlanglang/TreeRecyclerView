@@ -3,14 +3,18 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType;
 import com.baozi.treerecyclerview.annotation.TreeDataType;
+import com.baozi.treerecyclerview.annotation.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 import com.baozi.treerecyclerview.item.TreeItemGroup;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ import java.util.List;
  */
 
 public class ItemHelperFactory {
+    private static final HashMap<Class, Class<? extends TreeItem>> classCacheMap = new HashMap<>();
+
     public static List<TreeItem> createItems(@Nullable List list) {
         return createItems(list, null, null);
     }
@@ -80,7 +86,14 @@ public class ItemHelperFactory {
                 treeItem = treeItemClass.newInstance();
                 treeItem.setData(data);
                 treeItem.setParentItem(treeParentItem);
+                TreeItemType annotation = treeItemClass.getAnnotation(TreeItemType.class);
+                if (annotation != null) {
+                    int spanSize = annotation.spanSize();
+                    treeItem.setSpanSize(spanSize);
+                }
             }
+        } catch (ClassCastException e) {
+            Log.w("ClassCastException", "传入的data与item定义的data泛型不一致");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -106,8 +119,9 @@ public class ItemHelperFactory {
             if (!TextUtils.isEmpty(key)) {
                 try {
                     Field field = aClass.getField(key);
-                    int type = field.getInt(itemData);
-                    return ItemConfig.getTreeViewHolderType(type);
+                    int type = Integer.valueOf(field.get(itemData).toString());
+                    Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(type);
+                    return itemClass;
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -163,6 +177,6 @@ public class ItemHelperFactory {
                 }
             }
         }
-            return returnItems;
+        return returnItems;
     }
 }

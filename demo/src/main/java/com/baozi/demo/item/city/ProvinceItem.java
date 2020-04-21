@@ -23,7 +23,7 @@ public class ProvinceItem extends TreeItemGroup<ProvinceBean> {
         List<TreeItem> items = ItemHelperFactory.createItems(data.citys, this);
         for (int i = 0; i < items.size(); i++) {
             TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
-            treeItem.setExpand(true);
+            treeItem.setExpand(false);
         }
         return items;
     }

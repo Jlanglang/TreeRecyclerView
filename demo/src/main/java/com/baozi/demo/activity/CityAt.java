@@ -74,7 +74,7 @@ public class CityAt extends AppCompatActivity {
             List<TreeItem> items = ItemHelperFactory.createItems(cityBeen);
             for (int i = 0; i < items.size(); i++) {
                 TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
-                treeItem.setExpand(true);
+                treeItem.setExpand(false);
             }
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);

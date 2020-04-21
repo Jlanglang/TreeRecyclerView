@@ -1,6 +1,8 @@
 package com.baozi.treerecyclerview.annotation;
 
 
+import android.support.annotation.LayoutRes;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,5 +15,17 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.TYPE})
 public @interface TreeItemType {
-    int[] type() ;
+    /**
+     * 映射的type值
+     *
+     * @return [type1, type2]
+     */
+    int[] type();
+
+    /**
+     * item的列占比
+     *
+     * @return 默认返回0, 也就是不设置
+     */
+    int spanSize() default 0;
 }

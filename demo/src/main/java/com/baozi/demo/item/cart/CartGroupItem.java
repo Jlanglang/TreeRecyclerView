@@ -48,9 +48,4 @@ public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
         viewHolder.itemView.setPadding(0, 0, 0, 0);
     }
 
-    @Override
-    public int getSpanSize(int maxSpan) {
-        return super.getSpanSize(maxSpan);
-    }
-
 }

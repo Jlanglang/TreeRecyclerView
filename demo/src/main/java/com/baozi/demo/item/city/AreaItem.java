@@ -1,6 +1,8 @@
 package com.baozi.demo.item.city;
 
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 
 import com.baozi.demo.R;
 import com.baozi.treerecyclerview.annotation.TreeItemType;
@@ -27,5 +29,8 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
         return maxSpan / 3;
     }
 
-
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
+        super.getItemOffsets(outRect, layoutParams, position);
+    }
 }
