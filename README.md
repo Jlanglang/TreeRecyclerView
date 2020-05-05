@@ -1,9 +1,10 @@
-# TreeRecyclerView
+# 更新
+新增androidx分支.转换支持androidX
+
+版本号:v1.3.1-androidx
+
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
-
-[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 # 示例图：
@@ -216,9 +217,10 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
 
 
-更多效果.见demo.哈哈
+更多效果.见demo
 
+生活不易,觉得不错就点个star,打个赏吧.
+![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/wx.jpg)
 
 ### 欢迎大家留言,提出问题. QQ交流群:493180098
-
 
