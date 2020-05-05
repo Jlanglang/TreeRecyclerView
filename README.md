@@ -1,9 +1,10 @@
-# TreeRecyclerView
+# 更新
+新增androidx分支.转换支持androidX
+
+版本号:v1.3.1-androidx
+
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
-
-[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 # 示例图：
@@ -74,7 +75,7 @@ public enum TreeRecyclerType {
 * 城市
  */
 public class CountyItemParent extends TreeItemGroup<ProvinceBean.CityBean> {//泛型代表绑定的javabean
-    
+
     //创建子TreeItem.
     @Override
     public List<TreeItem> initChildList(ProvinceBean.CityBean data) {
@@ -121,7 +122,7 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 }
 
 ```
- 
+
 # 怎么创建Item:
 
 有两种方法:
@@ -129,7 +130,7 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {//泛�
 #### 第一种:
 
 在javabean上使用注解,
-``` 
+```
  @TreeDataType(iClass = AreaItem.class)
   public class AreasBean{
   ...
@@ -178,7 +179,7 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
  adapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(@NonNull ViewHolder viewHolder, int position) {
-       
+
             }
         });
 ```
@@ -195,10 +196,10 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
         for (Pair itemPair : itemPairs) {
             SimpleTreeItem simpleTreeItem = new SimpleTreeItem(R.layout.item_mine)//传入布局id.
                     .onItemBind(viewHolder -> {
-                      
+
                     })
                     .onItemClick(viewHolder -> {
-                       
+
                     });
             simpleTreeItem.setData(itemPair);
             items.add(simpleTreeItem);
@@ -216,9 +217,10 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
 
 
-更多效果.见demo.哈哈
+更多效果.见demo
 
+生活不易,觉得不错就点个star,打个赏吧.
+<img src="https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/wx.jpg" width = "320" height = "430" div align=left />
 
 ### 欢迎大家留言,提出问题. QQ交流群:493180098
-
 
