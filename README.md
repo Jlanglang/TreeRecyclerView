@@ -218,9 +218,10 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 
 
 更多效果.见demo
+### 欢迎大家留言,提出问题. QQ交流群:493180098
 
 生活不易,觉得不错就点个star,打个赏吧.
+
 <img src="https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/wx.jpg" width = "320" height = "430" div align=left />
 
-### 欢迎大家留言,提出问题. QQ交流群:493180098
 
