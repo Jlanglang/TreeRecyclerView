@@ -1,4 +1,7 @@
-# TreeRecyclerView
+#更新-v1.3.1-androidx
+新增androidx分支.转换支持androidX
+
+
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 
@@ -216,7 +219,8 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
 
 
-更多效果.见demo.哈哈
+更多效果.见demo
+
 
 
 ### 欢迎大家留言,提出问题. QQ交流群:493180098
