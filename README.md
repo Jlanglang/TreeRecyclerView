@@ -1,6 +1,7 @@
-#更新-v1.3.1-androidx
-新增androidx分支.转换支持androidX
+# 更新
 
+新增androidx分支.转换支持androidX
+版本号:v1.3.1-androidx
 
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
