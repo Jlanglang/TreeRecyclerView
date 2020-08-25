@@ -39,7 +39,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
     /**
      * 能否展开折叠
      *
-     * @return
      */
     public boolean isCanExpand() {
         return isCanExpand;
@@ -155,7 +154,9 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
      * @return
      */
     @Nullable
-    protected abstract List<TreeItem> initChild(D data);
+    protected List<TreeItem> initChild(D data) {
+        return null;
+    }
 
     /**
      * 是否消费child的click事件

@@ -119,12 +119,14 @@ public class ItemHelperFactory {
             if (!TextUtils.isEmpty(key)) {
                 try {
                     Field field = aClass.getField(key);
-                    int type = Integer.valueOf(field.get(itemData).toString());
+                    String type = field.get(itemData).toString();
                     Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(type);
                     return itemClass;
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

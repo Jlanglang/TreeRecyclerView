@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by a123 on 2018/6/5.
  */
-@TreeItemType(type = {1})
+@TreeItemType(type = {"1"})
 public class CartGroupItem extends TreeSelectItemGroup<CartBean> {
 
     @Nullable

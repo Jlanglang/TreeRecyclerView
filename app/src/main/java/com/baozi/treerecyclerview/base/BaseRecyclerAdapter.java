@@ -111,6 +111,22 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     }
 
     /**
+     * 直接强转为指定类型,可以能null
+     *
+     * @param position
+     * @param <D>
+     * @return
+     */
+    public <D> D getCastData(int position) {
+        try {
+            return (D) getData(position);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * 操作adapter
      *
      * @return
@@ -160,9 +176,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<ViewHo
     /**
      * view与数据绑定
      *
-     * @param holder
-     * @param t
-     * @param position
+     * @param holder   ViewHolder
+     * @param t        数据类型
+     * @param position position
      */
     public void onBindViewHolder(@NonNull ViewHolder holder, T t, int position) {
 

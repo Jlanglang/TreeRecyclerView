@@ -48,6 +48,9 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
                     layoutPosition = checkPosition(layoutPosition);
                     //拿到BaseItem
                     TreeItem item = getData(layoutPosition);
+                    if (item == null) {
+                        return;
+                    }
                     TreeItemGroup itemParentItem = item.getParentItem();
                     //判断上一级是否需要拦截这次事件，只处理当前item的上级，不关心上上级如何处理.
                     if (itemParentItem != null && itemParentItem.onInterceptClick(item)) {
@@ -155,7 +158,7 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
     /**
      * 分割器
      */
-   private final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
+    private final RecyclerView.ItemDecoration treeItemDecoration = new RecyclerView.ItemDecoration() {
         @Override
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent,
                                    @NonNull RecyclerView.State state) {

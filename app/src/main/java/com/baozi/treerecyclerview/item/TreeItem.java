@@ -31,7 +31,6 @@ public abstract class TreeItem<D> {
     /**
      * 获取当前item的父级
      *
-     * @return
      */
     @Nullable
     public TreeItemGroup getParentItem() {
@@ -42,7 +41,6 @@ public abstract class TreeItem<D> {
      * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
      * 如果要使用,可能为null,请加判断.
      *
-     * @return
      */
     public ItemManager getItemManager() {
         return mItemManager;
@@ -63,7 +61,6 @@ public abstract class TreeItem<D> {
 
     /**
      * @param maxSpan 总数
-     * @return
      */
     public int getSpanSize(int maxSpan) {
         return spanSize == 0 ? maxSpan : spanSize;
@@ -77,9 +74,6 @@ public abstract class TreeItem<D> {
     /**
      * 设置当前条目间隔
      *
-     * @param outRect
-     * @param layoutParams
-     * @param position
      */
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
 

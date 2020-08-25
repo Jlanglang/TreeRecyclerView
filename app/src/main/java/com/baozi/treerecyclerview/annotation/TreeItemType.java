@@ -20,7 +20,7 @@ public @interface TreeItemType {
      *
      * @return [type1, type2]
      */
-    int[] type();
+    String[] type();
 
     /**
      * item的列占比

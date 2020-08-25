@@ -19,7 +19,7 @@ import java.util.Random;
 /**
  * Created by a123 on 2018/6/5.
  */
-@TreeItemType(type = 1)
+@TreeItemType(type = "1")
 public class CartGroupItem3 extends TreeSelectItemGroup<CartBean.CartBean2.CartBean3> {
 
     @Nullable

@@ -3,21 +3,21 @@ package com.baozi.treerecyclerview.factory;
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 
-import com.baozi.treerecyclerview.annotation.TreeDataType;
 import com.baozi.treerecyclerview.annotation.TreeItemType;
 import com.baozi.treerecyclerview.item.TreeItem;
 
-import java.lang.annotation.Annotation;
+import java.util.HashMap;
+
 
 public class ItemConfig {
 
-    private static final SparseArray<Class<? extends TreeItem>> treeViewHolderTypes = new SparseArray<>();
+    private static final HashMap<String, Class<? extends TreeItem>> treeViewHolderTypes = new HashMap<>();
 
-    public static Class<? extends TreeItem> getTreeViewHolderType(int type) {
+    public static Class<? extends TreeItem> getTreeViewHolderType(String type) {
         return treeViewHolderTypes.get(type);
     }
 
-    public static void register(int type, Class<? extends TreeItem> clazz) {
+    public static void register(String type, Class<? extends TreeItem> clazz) {
         if (null == clazz) {
             return;
         }
@@ -27,8 +27,8 @@ public class ItemConfig {
     public static void register(Class<? extends TreeItem> zClass) {
         TreeItemType annotation = zClass.getAnnotation(TreeItemType.class);
         if (annotation != null) {
-            int[] typeList = annotation.type();
-            for (Integer type : typeList) {
+            String[] typeList = annotation.type();
+            for (String type : typeList) {
                 Class<? extends TreeItem> typeClass = treeViewHolderTypes.get(type);
                 if (typeClass == null) {
                     treeViewHolderTypes.put(type, zClass);
