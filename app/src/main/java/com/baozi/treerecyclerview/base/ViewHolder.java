@@ -59,27 +59,8 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
-     * 用的挺多,所以写个方法.
-     *
-     * @param id
-     * @return
-     */
-    public ImageView getImageView(int id) {
-        return getView(id);
-    }
-
-    public TextView getTextView(int id) {
-        return getView(id);
-    }
-
-    /****以下为辅助方法*****/
-
-    /**
      * 设置TextView的值
      *
-     * @param viewId
-     * @param text
-     * @return
      */
     public ViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
@@ -89,10 +70,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * 设置TextView的值
-     *
-     * @param viewId
-     * @param text
-     * @return
      */
     public ViewHolder setText(int viewId, int text) {
         TextView tv = getView(viewId);
@@ -162,11 +139,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
-    public ViewHolder linkify(int viewId) {
-        TextView view = getView(viewId);
-        Linkify.addLinks(view, Linkify.ALL);
-        return this;
-    }
 
     public ViewHolder setTypeface(Typeface typeface, int... viewIds) {
         for (int viewId : viewIds) {
@@ -250,6 +222,5 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         view.setOnLongClickListener(listener);
         return this;
     }
-
 
 }
