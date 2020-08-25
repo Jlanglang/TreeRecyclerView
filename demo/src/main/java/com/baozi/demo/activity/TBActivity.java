@@ -14,7 +14,7 @@ import com.baozi.demo.fragment.MineFg;
 public class TBActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) throws NullPointerException{
+    protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tb_home);
         ViewPager content = findViewById(R.id.content);

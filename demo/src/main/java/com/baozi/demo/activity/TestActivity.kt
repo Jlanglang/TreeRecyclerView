@@ -79,7 +79,7 @@ data class TestGroup(
 
 class TestItemGroup : TreeItem<String>() {
     val adapter = TreeRecyclerAdapter(TreeRecyclerType.SHOW_ALL);
-    val pagerAdapter = object : PagerAdapter() {
+    private val pagerAdapter = object : PagerAdapter() {
         // 当要显示的图片可以进行缓存的时候，会调用这个方法进行显示图片的初始化，我们将要显示的ImageView加入到ViewGroup中，然后作为返回值返回即可
         override fun instantiateItem(view: ViewGroup, position: Int): Any {
             val inflate = LayoutInflater.from(view.context).inflate(R.layout.item_image, view, false)
