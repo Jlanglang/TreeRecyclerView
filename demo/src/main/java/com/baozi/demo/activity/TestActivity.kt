@@ -140,7 +140,7 @@ class TestItemGroup : TreeItem<String>() {
             override fun onPageSelected(p0: Int) {
                 adapter.getData().forEach {
                     (it as? ImageItem)?.apply {
-                        data.isSelect = it == adapter.getData(p0)
+                        data?.isSelect = it == adapter.getData(p0)
                     }
                 }
                 adapter.notifyDataSetChanged()
@@ -164,14 +164,14 @@ class ImageItem : TreeItem<ImageBean>() {
 
     override fun onBindViewHolder(viewHolder: ViewHolder) {
         val context = viewHolder.itemView.context
-        if (data.isSelect) {
+        if (data?.isSelect==true) {
             viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimary))
         } else {
             viewHolder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
         }
     }
 
-    override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams?, position: Int) {
+    override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {
         super.getItemOffsets(outRect, layoutParams, position)
         outRect.left = 10;
         outRect.right = 10;
@@ -179,7 +179,7 @@ class ImageItem : TreeItem<ImageBean>() {
         outRect.bottom = 10;
     }
 
-    override fun onClick(viewHolder: ViewHolder?) {
+    override fun onClick(viewHolder: ViewHolder) {
         super.onClick(viewHolder)
     }
 }

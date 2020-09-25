@@ -17,12 +17,12 @@ class MineCategoryItem : TreeItem<MineCategoryBean>() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder) {
-        viewHolder.setText(R.id.tv_content, data.content)
+        viewHolder.setText(R.id.tv_content, data?.content)
 
-        viewHolder.setVisible(R.id.tv_title, !TextUtils.isEmpty(data.title))
-        viewHolder.setText(R.id.tv_title, data.title)
+        viewHolder.setVisible(R.id.tv_title, !TextUtils.isEmpty(data?.title))
+        viewHolder.setText(R.id.tv_title, data?.title)
 
-        viewHolder.setVisible(R.id.iv_content, !TextUtils.isEmpty(data.url))
+        viewHolder.setVisible(R.id.iv_content, !TextUtils.isEmpty(data?.url))
 
     }
 
@@ -32,7 +32,7 @@ class MineCategoryItem : TreeItem<MineCategoryBean>() {
 
     override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {
         super.getItemOffsets(outRect, layoutParams, position)
-        if (data.isEnd) {
+        if (data?.isEnd==true) {
             outRect.bottom = 20
         } else {
             outRect.bottom = 0

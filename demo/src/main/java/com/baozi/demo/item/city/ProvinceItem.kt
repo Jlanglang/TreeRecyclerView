@@ -35,7 +35,7 @@ class ProvinceItem : TreeItemGroup<ProvinceBean>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder) {
-        holder.setText(R.id.tv_content, data.provinceName)
+        holder.setText(R.id.tv_content, data?.provinceName)
     }
 
     override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {

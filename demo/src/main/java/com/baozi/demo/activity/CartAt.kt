@@ -36,12 +36,12 @@ class CartAt : AppCompatActivity() {
         val groupItem = ItemHelperFactory.createItems(beans)
 
         adapter.itemManager.replaceAllItem(groupItem)
-        adapter.setOnItemClickListener({ viewHolder, position ->
+        adapter.setOnItemClickListener { viewHolder, position ->
             //因为外部和内部会冲突
             val item = adapter.getData(position)
             item?.onClick(viewHolder)
             notifyPrice()
-        })
+        }
         initView()
         notifyPrice()
     }

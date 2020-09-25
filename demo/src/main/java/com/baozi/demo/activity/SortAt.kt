@@ -48,7 +48,7 @@ class SortAt : AppCompatActivity() {
         for (str in LETTERS) {
             val sortGroupItem = SortGroupItem()
             sortGroupItem.sortKey = str
-            sortGroupItem.setData(null)
+            sortGroupItem.data = null
             groupItems.add(sortGroupItem)
         }
         mTreeSortAdapter.itemManager.replaceAllItem(groupItems)

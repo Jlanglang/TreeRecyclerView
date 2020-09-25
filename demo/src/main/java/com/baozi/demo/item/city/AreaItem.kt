@@ -18,7 +18,7 @@ class AreaItem : TreeItem<ProvinceBean.CityBean.AreasBean>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder) {
-        holder.setText(R.id.tv_content, data.areaName)
+        holder.setText(R.id.tv_content, data?.areaName)
     }
 
     override fun getSpanSize(maxSpan: Int): Int {

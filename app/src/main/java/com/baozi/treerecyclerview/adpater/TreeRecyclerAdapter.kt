@@ -108,7 +108,7 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
 
     override fun getLayoutId(position: Int): Int {
         val data = getData(position)
-        return data?.layoutId ?: 0
+        return data?.getLayoutId() ?: 0
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

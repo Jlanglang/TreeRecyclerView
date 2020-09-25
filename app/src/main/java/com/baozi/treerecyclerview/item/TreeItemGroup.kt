@@ -108,12 +108,15 @@ abstract class TreeItemGroup<D> : TreeItem<D>() {
         itemManager.removeItems(child)
     }
 
-
-    override fun setData(data: D?) {
-        super.setData(data)
-        data ?: return
-        child = initChild(data)
-    }
+    override var data: D? = null
+        set(value) {
+            field = value
+            value ?: return
+            child = initChild(value)
+        }
+//    override fun setData(data: D?) {
+//
+//    }
 
     /**
      * 初始化子集

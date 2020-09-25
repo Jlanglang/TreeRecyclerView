@@ -23,7 +23,7 @@ class CountyItem : TreeItemGroup<ProvinceBean.CityBean>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder) {
-        holder.setText(R.id.tv_content, data.cityName)
+        holder.setText(R.id.tv_content, data?.cityName)
     }
 
     override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {

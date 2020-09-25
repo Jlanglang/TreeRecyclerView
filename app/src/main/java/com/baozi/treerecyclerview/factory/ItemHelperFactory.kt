@@ -41,13 +41,13 @@ object ItemHelperFactory {
     }
 
     fun createItem(data: Any?, zClass: Class<out TreeItem<*>>? = null, treeParentItem: TreeItemGroup<*>? = null): TreeItem<*>? {
-        var treeItem: TreeItem<*>? = null
+        var treeItem: TreeItem<Any>? = null
         val treeItemClass: Class<out TreeItem<*>>?
         try {
             treeItemClass = zClass ?: getTypeClass(data)
             //判断是否是TreeItem的子类
             if (treeItemClass != null) {
-                treeItem = treeItemClass.newInstance()
+                treeItem = treeItemClass.newInstance() as? TreeItem<Any>
                 treeItem ?: return null
                 treeItem.data = data
                 treeItem.parentItem = treeParentItem

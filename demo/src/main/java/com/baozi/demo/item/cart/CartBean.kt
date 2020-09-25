@@ -6,6 +6,7 @@ import com.baozi.treerecyclerview.annotation.TreeDataType
 @TreeDataType(bindField = "type")
 class CartBean(internal var childSum: Int //子条目数量
 ) {
+    @JvmField
     var type = 1
 
     @TreeDataType(iClass = CartGroupItem2::class)

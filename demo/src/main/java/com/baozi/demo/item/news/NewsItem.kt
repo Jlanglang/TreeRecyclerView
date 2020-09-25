@@ -40,7 +40,7 @@ class NewsItem : TreeItemGroup<NewsItemBean>() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder) {
-        viewHolder.setText(R.id.tv_title, data.title)
+        viewHolder.setText(R.id.tv_title, data?.title)
     }
 
 }
