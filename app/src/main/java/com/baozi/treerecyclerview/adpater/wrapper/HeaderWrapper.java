@@ -40,7 +40,7 @@ public class HeaderWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public T getData(int position) {
-        return mAdapter.getData(position);
+        return getMAdapter().getData(position);
     }
 
     @NonNull
@@ -49,7 +49,7 @@ public class HeaderWrapper<T> extends BaseWrapper<T> {
         if (mHeaderViews.get(viewType) != null) {
             return ViewHolder.createViewHolder(mHeaderViews.get(viewType));
         }
-        return mAdapter.onCreateViewHolder(parent, viewType);
+        return getMAdapter().onCreateViewHolder(parent, viewType);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class HeaderWrapper<T> extends BaseWrapper<T> {
 
     @Override
     public int getItemCount() {
-        return getHeadersCount() + mAdapter.getItemCount();
+        return getHeadersCount() + getMAdapter().getItemCount();
     }
 
 

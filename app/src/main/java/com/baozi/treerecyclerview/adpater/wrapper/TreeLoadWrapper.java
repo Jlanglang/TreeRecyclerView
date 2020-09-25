@@ -44,7 +44,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
     }
 
     private boolean isLoadMoreViewPos(int position) {
-        return position >= mAdapter.getItemCount();
+        return position >= getMAdapter().getItemCount();
     }
 
     public void setType(Type type) {
@@ -128,7 +128,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
         if (viewType == ITEM_LOAD_MORE) {
             return ViewHolder.createViewHolder(mLoadMoreItem.getLoadMoreView());
         }
-        return mAdapter.onCreateViewHolder(parent, viewType);
+        return getMAdapter().onCreateViewHolder(parent, viewType);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
         if (isLoadMoreViewPos(position)) {
             return ITEM_LOAD_MORE;
         }
-        return mAdapter.getItemViewType(position);
+        return getMAdapter().getItemViewType(position);
     }
 
     @Override
@@ -158,7 +158,7 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
         if (isLoadMoreViewPos(position)) {
             return;
         }
-        mAdapter.onBindViewHolder(holder, position);
+        getMAdapter().onBindViewHolder(holder, position);
     }
 
     @Override
@@ -190,15 +190,15 @@ public class TreeLoadWrapper extends BaseWrapper<TreeItem> {
             return 1;
         }
         if (!initLoadMore) {//没有初始化load moreItem
-            return mAdapter.getItemCount();
+            return getMAdapter().getItemCount();
         }
         if (mType == Type.LOAD_ERROR || mType == Type.LOAD_OVER) {//支持手动设置状态。但不支持直接显示loadmore
-            return mAdapter.getItemCount() + 1;
+            return getMAdapter().getItemCount() + 1;
         }
-        if (mAdapter.getItemCount() >= mLoadMoreItem.getMinPageSize()) {//当符合最小加载更多条目数时
-            return mAdapter.getItemCount() + 1;
+        if (getMAdapter().getItemCount() >= mLoadMoreItem.getMinPageSize()) {//当符合最小加载更多条目数时
+            return getMAdapter().getItemCount() + 1;
         }
-        return mAdapter.getItemCount();
+        return getMAdapter().getItemCount();
     }
 
     public void setEmptyView(TreeItem emptyView) {

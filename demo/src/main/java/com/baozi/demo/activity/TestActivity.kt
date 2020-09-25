@@ -138,7 +138,7 @@ class TestItemGroup : TreeItem<String>() {
             }
 
             override fun onPageSelected(p0: Int) {
-                adapter.data.forEach {
+                adapter.getData().forEach {
                     (it as? ImageItem)?.apply {
                         data.isSelect = it == adapter.getData(p0)
                     }
