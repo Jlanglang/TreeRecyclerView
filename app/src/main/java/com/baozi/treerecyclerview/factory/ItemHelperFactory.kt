@@ -94,7 +94,7 @@ object ItemHelperFactory {
                 e.printStackTrace()
             }
         }
-        treeItemClass = annotation.iClass as? Class<out TreeItem<*>> ?: return null
+        treeItemClass = annotation.iClass.java as? Class<out TreeItem<*>>
         return treeItemClass
     }
 
