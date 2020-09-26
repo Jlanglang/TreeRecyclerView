@@ -21,6 +21,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerType
 import com.baozi.treerecyclerview.factory.ItemHelperFactory
 import com.baozi.treerecyclerview.item.TreeItem
 import com.baozi.treerecyclerview.item.TreeItemGroup
+import kotlinx.android.synthetic.main.layout_rv_content.*
 
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -32,39 +33,30 @@ import java.util.ArrayList
  */
 class CityAt : AppCompatActivity() {
     //根据item的状态展示,可折叠
-    internal var treeRecyclerAdapter = TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND)
-    private var recyclerView: RecyclerView? = null
+    var treeRecyclerAdapter = TreeRecyclerAdapter(TreeRecyclerType.SHOW_EXPAND)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.layout_rv_content)
-        recyclerView = findViewById(R.id.rv_content)
-        recyclerView!!.layoutManager = GridLayoutManager(this, 6)
-        recyclerView!!.itemAnimator = DefaultItemAnimator()
-        recyclerView!!.adapter = treeRecyclerAdapter
+        rv_content?.apply {
+            layoutManager = GridLayoutManager(context, 6)
+            itemAnimator = DefaultItemAnimator()
+            adapter = treeRecyclerAdapter
+        }
         treeRecyclerAdapter.itemManager.isOpenAnim = true//优化掉
-        object : Thread() {
-            override fun run() {
-                super.run()
-                val string = getFromAssets("city.txt")
-                Log.i("json", string)
-                val cityBeen = JSON.parseArray(string, ProvinceBean::class.java)
-                refresh(cityBeen)
-            }
+        Thread {
+            val string = getFromAssets("city.txt")
+            Log.i("json", string)
+            val cityBeen = JSON.parseArray(string, ProvinceBean::class.java)
+            refresh(cityBeen)
         }.start()
-
     }
 
-    fun getFromAssets(fileName: String): String {
+    private fun getFromAssets(fileName: String): String {
         val result = StringBuilder()
         try {
             val inputReader = InputStreamReader(resources.assets.open(fileName))
-            val bufReader = BufferedReader(inputReader)
-            bufReader.readLines().forEach { t ->
-                result.append(t)
-            }
-            return result.toString()
+            return inputReader.readText()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -79,36 +71,10 @@ class CityAt : AppCompatActivity() {
             val items = ItemHelperFactory.createItems(cityBeen)
             for (i in items.indices) {
                 val treeItem = items[i] as TreeItemGroup<*>
-                treeItem.isExpand=false
+                treeItem.isExpand = false
             }
             //添加到adapter
             treeRecyclerAdapter.itemManager.replaceAllItem(items)
         }
     }
-
-    fun getLastVisiblePosition(layoutManager: RecyclerView.LayoutManager): Int {
-        if (layoutManager is LinearLayoutManager) {
-            return layoutManager.findLastVisibleItemPosition()
-
-        }
-
-        if (layoutManager is GridLayoutManager) {
-            return layoutManager.findLastVisibleItemPosition()
-
-        }
-
-        if (layoutManager is StaggeredGridLayoutManager) {
-            val first = IntArray(layoutManager.spanCount)
-            layoutManager.findLastVisibleItemPositions(first)
-
-            val list = ArrayList<Int>(first.size)
-            return if (list == null || list.size == 0) {
-                -1
-            } else list[list.size - 1]
-        }
-
-        return -1
-
-    }
-
 }

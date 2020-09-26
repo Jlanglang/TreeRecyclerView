@@ -12,8 +12,8 @@ import com.baozi.demo.item.cart.CartBean
 import com.baozi.demo.item.cart.CartItem
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter
 import com.baozi.treerecyclerview.factory.ItemHelperFactory
-import com.baozi.treerecyclerview.item.TreeItem
 import com.baozi.treerecyclerview.item.TreeSelectItemGroup
+import kotlinx.android.synthetic.main.activity_shopping_cart.*
 
 import java.util.ArrayList
 
@@ -27,7 +27,6 @@ class CartAt : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shopping_cart)
-        val rv_content = findViewById<RecyclerView>(R.id.rv_content)
         rv_content.layoutManager = LinearLayoutManager(this)
         rv_content.adapter = adapter
         val beans = ArrayList<CartBean>()

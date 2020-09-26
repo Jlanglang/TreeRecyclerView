@@ -141,7 +141,6 @@ abstract class TreeItemGroup<D> : TreeItem<D>() {
     override fun onClick(viewHolder: ViewHolder) {
         super.onClick(viewHolder)
         //必须是TreeItemGroup才能展开折叠,并且type不能为 TreeRecyclerType.SHOW_ALL
-//        setExpand(!isExpand())
         isExpand =!isExpand
     }
 }

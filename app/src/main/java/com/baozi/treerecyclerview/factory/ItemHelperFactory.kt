@@ -1,6 +1,5 @@
 package com.baozi.treerecyclerview.factory
 
-import android.text.TextUtils
 import android.util.Log
 
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType
@@ -119,6 +118,9 @@ object ItemHelperFactory {
                         if (childItem.isExpand) {
                             list = getChildItemsWithType(childItem, type)
                         }
+                    else -> {
+
+                    }
                 }
                 if (!list.isNullOrEmpty()) {
                     returnItems.addAll(list)

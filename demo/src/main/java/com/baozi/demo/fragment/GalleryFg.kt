@@ -29,7 +29,7 @@ class GalleryFg : SimpleRecyclerViewFg<TreeRecyclerAdapter>() {
                                     treeOffset = Rect(20, 20, 20, 20)
                                     itemBind = { viewHolder ->
                                         val itemView = viewHolder.itemView as TextView
-                                        itemView.text = viewHolder.layoutPosition.toString() + ""
+                                        itemView.text = viewHolder.layoutPosition.toString()
                                         viewHolder.itemView.scaleY = 1f
                                     }
                                 }

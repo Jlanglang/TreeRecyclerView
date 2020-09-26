@@ -8,7 +8,7 @@ import com.baozi.treerecyclerview.base.ViewHolder
 /**
  * 简单样式的item
  */
-class SimpleTreeItem @JvmOverloads constructor(private val layout: Int = 0, spanSize: Int = 0) : TreeItem<Any>() {
+class SimpleTreeItem @JvmOverloads constructor(val layout: Int = 0, spanSize: Int = 0) : TreeItem<Any>() {
     var itemClick: ((view: ViewHolder) -> Unit)? = null
     var itemBind: ((view: ViewHolder) -> Unit)? = null
     var treeOffset: Rect? = null
@@ -36,5 +36,9 @@ class SimpleTreeItem @JvmOverloads constructor(private val layout: Int = 0, span
 
     override fun getSpanSize(maxSpan: Int): Int {
         return if (spanSize == 0) spanSize else maxSpan / spanSize
+    }
+
+    fun <T> getCastData(): T? {
+        return data as? T
     }
 }

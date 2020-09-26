@@ -20,6 +20,7 @@ import com.baozi.treerecyclerview.adpater.wrapper.TreeLoadWrapper
 import com.baozi.treerecyclerview.item.SimpleTreeItem
 import com.baozi.treerecyclerview.item.TreeItem
 import com.baozi.treerecyclerview.widget.TreeSortAdapter
+import kotlinx.android.synthetic.main.activity_sort.*
 
 import java.util.ArrayList
 
@@ -36,9 +37,6 @@ class SwipeSortAt : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sort)
-        val rv_content = findViewById<View>(R.id.rv_content) as RecyclerView
-        val tv_index = findViewById<View>(R.id.tv_index) as TextView
-        val qb_sort = findViewById<View>(R.id.qb_sort) as IndexBar
         qb_sort.setOnIndexChangedListener { letter ->
             val sortIndex = mTreeSortAdapter!!.getSortIndex(letter)
             mLinearLayoutManager!!.scrollToPositionWithOffset(sortIndex, 0)
@@ -56,8 +54,8 @@ class SwipeSortAt : AppCompatActivity() {
         //包装成侧滑删除列表
         val adapter = SwipeWrapper(headerWrapper)
         mWrapper = TreeLoadWrapper(adapter)
-        mWrapper!!.setEmptyView(SimpleTreeItem(R.layout.layout_empty))
-        mWrapper!!.setLoadingView(R.layout.layout_loading)
+        mWrapper?.setEmptyView(SimpleTreeItem(R.layout.layout_empty, spanSize = 0))
+        mWrapper?.setLoadingView(R.layout.layout_loading)
 
         rv_content.adapter = mWrapper
 
@@ -92,7 +90,7 @@ class SwipeSortAt : AppCompatActivity() {
 
             runOnUiThread {
                 mWrapper!!.setType(TreeLoadWrapper.Type.REFRESH_OVER)
-                mWrapper!!.itemManager!!.notifyDataChanged()
+                mWrapper!!.itemManager.notifyDataChanged()
             }
             try {
                 Thread.sleep(1000)

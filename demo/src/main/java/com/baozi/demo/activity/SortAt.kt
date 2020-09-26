@@ -11,6 +11,7 @@ import com.baozi.demo.item.sort.IndexBar
 import com.baozi.demo.item.sort.SortGroupItem
 import com.baozi.treerecyclerview.item.TreeItem
 import com.baozi.treerecyclerview.widget.TreeSortAdapter
+import kotlinx.android.synthetic.main.activity_sort.*
 
 import java.util.ArrayList
 
@@ -26,9 +27,6 @@ class SortAt : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sort)
-        val rv_content = findViewById<RecyclerView>(R.id.rv_content)
-        val tv_index = findViewById<TextView>(R.id.tv_index)
-        val qb_sort = findViewById<IndexBar>(R.id.qb_sort)
         qb_sort.setOnIndexChangedListener { letter ->
             val sortIndex = mTreeSortAdapter.getSortIndex(letter)
             mLinearLayoutManager!!.scrollToPositionWithOffset(sortIndex, 0)

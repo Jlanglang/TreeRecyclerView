@@ -48,14 +48,12 @@ class TestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.at_test)
-        val sw_refresh = findViewById<SwipeRefreshLayout>(R.id.sw_refresh);
         sw_refresh.setOnRefreshListener(this)
         initRv()
         onRefresh()
     }
 
     private fun initRv() {
-        val rv_content = findViewById<RecyclerView>(R.id.rv_content);
         rv_content.layoutManager = LinearLayoutManager(this)
         rv_content.adapter = adapter
         adapter.setLoadMore(object : LoadingWrapper.LoadMoreItem(this) {
@@ -66,7 +64,6 @@ class TestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             override fun getMinPageSize(): Int = 5
         })
         adapter.setLoadMoreListener {
-            val it1 = it;
         }
     }
 }
@@ -116,7 +113,7 @@ class TestItemGroup : TreeItem<String>() {
         if (view.adapter == null) {
             view.adapter = adapter;
         }
-        val imageList = Arrays.asList(
+        val imageList = listOf(
                 ImageBean("1", true),
                 ImageBean("1"),
                 ImageBean("1"),

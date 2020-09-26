@@ -1,6 +1,5 @@
 package com.baozi.demo.item.cart
 
-import android.view.View
 import android.widget.CheckBox
 
 import com.baozi.demo.R

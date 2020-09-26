@@ -19,6 +19,7 @@ import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter
 import com.baozi.treerecyclerview.factory.ItemConfig
 import com.baozi.treerecyclerview.item.SimpleTreeItem
 import com.baozi.treerecyclerview.item.TreeItem
+import kotlinx.android.synthetic.main.layout_rv_content.*
 
 import java.util.ArrayList
 
@@ -29,8 +30,17 @@ import java.util.ArrayList
  */
 class MainActivity : AppCompatActivity() {
     //数据集合
-    private val itemPairs = arrayOf<Pair<*, *>>(Pair("三级城市", CityAt::class.java), Pair("购物车", CartAt::class.java), Pair("新闻", NewsFg::class.java), Pair("索引", SortAt::class.java), Pair("索引加侧滑删除", SwipeSortAt::class.java), Pair("个人中心", MineFg::class.java), Pair("淘宝首页", TBActivity::class.java), Pair("点击懒加载", ClickLoadFg::class.java), Pair("画廊", TestActivity::class.java))
-    private val adapter = TreeRecyclerAdapter()
+    private val itemPairs = mapOf<String, Class<*>>(
+            "三级城市" to CityAt::class.java,
+            "购物车" to CartAt::class.java,
+            "新闻" to NewsFg::class.java,
+            "索引" to SortAt::class.java,
+            "索引加侧滑删除" to SwipeSortAt::class.java,
+            "个人中心" to MineFg::class.java,
+            "淘宝首页" to TBActivity::class.java,
+            "点击懒加载" to ClickLoadFg::class.java,
+            "画廊" to TestActivity::class.java)
+    private val _adapter = TreeRecyclerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,39 +60,40 @@ class MainActivity : AppCompatActivity() {
             val simpleTreeItem = SimpleTreeItem(R.layout.item_mine)
                     .apply {
                         itemBind = { viewHolder ->
-                            val itemPair1 = itemPairs[viewHolder.layoutPosition]
-                            viewHolder.setText(R.id.tv_name, itemPair1.first as String)
+                            val map = getCastData<Map.Entry<String, Class<*>>>()
+                            viewHolder.setText(R.id.tv_name, map?.key)
                         }
-                        itemClick = { viewHolder ->
-                            val itemPair12 = itemPairs[viewHolder.layoutPosition]
-                            val aClass = itemPair12.second as Class<*>
-                            val isFragment = Fragment::class.java.isAssignableFrom(aClass)//判断是不是fragment的子类
-                            if (isFragment) {
-                                startFragment(itemPair12.second as Class<Fragment>)
-                            } else {
-                                startAt(itemPair12.second as Class<*>)
+                        itemClick = { _ ->
+                            getCastData<Map.Entry<String, Class<*>>>()?.apply {
+                                val isFragment = Fragment::class.java.isAssignableFrom(value)//判断是不是fragment的子类
+                                if (isFragment) {
+                                    startFragment(value as? Class<Fragment>)
+                                } else {
+                                    startAt(value)
+                                }
                             }
                         }
                     }
             simpleTreeItem.data = itemPair
             items.add(simpleTreeItem)
         }
-        adapter.itemManager.replaceAllItem(items)
+        _adapter.itemManager.replaceAllItem(items)
     }
 
     /**
      * 初始化列表
      */
     private fun initRecyclerVIew() {
-        val rv_content = findViewById<RecyclerView>(R.id.rv_content)
-        rv_content.layoutManager = LinearLayoutManager(this)
-        rv_content.adapter = adapter
-        rv_content.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                super.getItemOffsets(outRect, view, parent, state)
-                outRect.top = 10
-            }
-        })
+        rv_content?.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = _adapter
+            addItemDecoration(object : RecyclerView.ItemDecoration() {
+                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                    super.getItemOffsets(outRect, view, parent, state)
+                    outRect.top = 10
+                }
+            })
+        }
     }
 
     fun startAt(zClass: Class<*>) {
@@ -90,7 +101,8 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun startFragment(zClass: Class<Fragment>) {
+    fun startFragment(zClass: Class<out Fragment>?) {
+        zClass ?: return
         try {
             val fragment = zClass.newInstance()
             val fragmentTransaction = supportFragmentManager.beginTransaction()

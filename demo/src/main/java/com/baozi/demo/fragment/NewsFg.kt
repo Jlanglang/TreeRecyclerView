@@ -27,8 +27,8 @@ class NewsFg : SimpleRecyclerViewFg<TreeRecyclerAdapter>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        recyclerView!!.layoutManager = GridLayoutManager(context, 6)
-        recyclerView!!.adapter = adapter
+        recyclerView?.layoutManager = GridLayoutManager(context, 6)
+        recyclerView?.adapter = adapter
         val list = ArrayList<NewsItemBean>()
         for (i in 0..4) {
             val newsItemBean = NewsItemBean()
