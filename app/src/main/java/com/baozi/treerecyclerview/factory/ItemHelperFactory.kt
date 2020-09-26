@@ -32,14 +32,6 @@ object ItemHelperFactory {
      *
      * @return
      */
-    fun createItem(d: Any): TreeItem<*>? {
-        return createItem(d, null, null)
-    }
-
-    fun createItem(data: Any, treeParentItem: TreeItemGroup<*>?): TreeItem<*>? {
-        return createItem(data, null, treeParentItem)
-    }
-
     fun createItem(data: Any?, zClass: Class<out TreeItem<*>>? = null, treeParentItem: TreeItemGroup<*>? = null): TreeItem<*>? {
         var treeItem: TreeItem<Any>? = null
         val treeItemClass: Class<out TreeItem<*>>?

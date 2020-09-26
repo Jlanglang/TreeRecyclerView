@@ -132,10 +132,9 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
         recyclerView.addItemDecoration(treeItemDecoration)
         val layoutManager = recyclerView.layoutManager
         if (layoutManager is GridLayoutManager) {
-            val gridLayoutManager = layoutManager as GridLayoutManager?
-            val spanCount = gridLayoutManager!!.spanCount
+            val spanCount = layoutManager.spanCount
             val treeSpanSizeLookup = TreeSpanSizeLookup(this, spanCount)
-            gridLayoutManager.spanSizeLookup = treeSpanSizeLookup
+            layoutManager.spanSizeLookup = treeSpanSizeLookup
         }
     }
 

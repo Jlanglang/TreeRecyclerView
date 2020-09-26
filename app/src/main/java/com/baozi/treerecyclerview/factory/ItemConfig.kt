@@ -16,9 +16,7 @@ object ItemConfig {
     }
 
     fun register(type: String, clazz: Class<out TreeItem<*>>?) {
-        if (null == clazz) {
-            return
-        }
+        clazz ?: return
         treeViewHolderTypes[type] = clazz
     }
 
