@@ -1,7 +1,7 @@
 # kotlin分支
-版本v1.0.0-kt
+版本v1.3.1-kt
 
-会有很多java没有的特性API,可能会有一些BUG,欢迎提iss
+会有很多java版本没有的特性API,后期以该版本为主,可能会有一些BUG,欢迎提iss
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
