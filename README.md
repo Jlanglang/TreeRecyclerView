@@ -1,8 +1,9 @@
 # 更新
 新增androidx分支.转换支持androidX
-
 版本号:v1.3.1-androidx
 
+新增Kotlin分支.
+版本号v1.0.0-kt
 
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
