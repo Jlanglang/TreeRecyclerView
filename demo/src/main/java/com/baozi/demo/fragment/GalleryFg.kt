@@ -25,11 +25,13 @@ class GalleryFg : SimpleRecyclerViewFg<TreeRecyclerAdapter>() {
             for (i in 0..19) {
                 list.add(
                         SimpleTreeItem(R.layout.item_grallery)
-                                .setTreeOffset(Rect(20, 20, 20, 20))
-                                .onItemBind { viewHolder ->
-                                    val itemView = viewHolder.itemView as TextView
-                                    itemView.text = viewHolder.layoutPosition.toString() + ""
-                                    viewHolder.itemView.scaleY = 1f
+                                .apply {
+                                    treeOffset = Rect(20, 20, 20, 20)
+                                    itemBind = { viewHolder ->
+                                        val itemView = viewHolder.itemView as TextView
+                                        itemView.text = viewHolder.layoutPosition.toString() + ""
+                                        viewHolder.itemView.scaleY = 1f
+                                    }
                                 }
                 )
             }

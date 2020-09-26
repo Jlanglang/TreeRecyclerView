@@ -45,8 +45,7 @@ object ItemHelperFactory {
                 treeItem.parentItem = treeParentItem
                 val annotation = treeItemClass.getAnnotation<TreeItemType>(TreeItemType::class.java)
                 if (annotation != null) {
-                    val spanSize = annotation.spanSize
-                    treeItem.setSpanSize(spanSize)
+                    treeItem.spanSize = annotation.spanSize
                 }
             }
         } catch (e: ClassCastException) {
@@ -117,7 +116,7 @@ object ItemHelperFactory {
                         list = getChildItemsWithType(childItem, type)
                     TreeRecyclerType.SHOW_EXPAND ->
                         //根据isExpand,来决定是否展示
-                        if (childItem.isExpand()) {
+                        if (childItem.isExpand) {
                             list = getChildItemsWithType(childItem, type)
                         }
                 }

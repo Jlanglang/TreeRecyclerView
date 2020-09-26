@@ -25,7 +25,7 @@ class ProvinceItem : TreeItemGroup<ProvinceBean>() {
         val items = ItemHelperFactory.createItems(data.citys, treeParentItem = this)
         for (i in items.indices) {
             val treeItem = items[i] as TreeItemGroup<*>
-            treeItem.setExpand(false)
+            treeItem.isExpand=false
         }
         return items
     }

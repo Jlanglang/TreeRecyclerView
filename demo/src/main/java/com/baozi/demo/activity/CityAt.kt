@@ -79,7 +79,7 @@ class CityAt : AppCompatActivity() {
             val items = ItemHelperFactory.createItems(cityBeen)
             for (i in items.indices) {
                 val treeItem = items[i] as TreeItemGroup<*>
-                treeItem.setExpand(false)
+                treeItem.isExpand=false
             }
             //添加到adapter
             treeRecyclerAdapter.itemManager.replaceAllItem(items)

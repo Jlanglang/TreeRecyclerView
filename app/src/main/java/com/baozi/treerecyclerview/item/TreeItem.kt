@@ -23,7 +23,7 @@ abstract class TreeItem<D> {
      * item在每行中的spansize
      * 默认为0,如果为0则占满一行
      */
-    private var spanSize: Int = 0
+    var spanSize: Int = 0
     /**
      * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
      * 如果要使用,可能为null,请加判断.
@@ -31,15 +31,13 @@ abstract class TreeItem<D> {
      */
     var itemManager: ItemManager<TreeItem<*>>? = null
 
-//    /**
-//     * 该条目的布局id
-//     *
-//     * @return 布局id
-//     */
-//    open val layoutId: Int
-
+    /**
+     * 该条目的布局id
+     *
+     * @return 布局id
+     */
     open fun getLayoutId(): Int {
-        return 0;
+        return 0
     }
 
     /**
@@ -49,10 +47,6 @@ abstract class TreeItem<D> {
         return if (spanSize == 0) maxSpan else spanSize
     }
 
-
-    fun setSpanSize(spanSize: Int) {
-        this.spanSize = spanSize
-    }
 
     /**
      * 设置当前条目间隔

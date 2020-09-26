@@ -103,11 +103,11 @@ abstract class BaseRecyclerAdapter<T> : RecyclerView.Adapter<ViewHolder>() {
      * @return
     </D> */
     fun <D> getCastData(position: Int): D? {
-        try {
-            return getData(position) as D?
+        return try {
+            getData(position) as D?
         } catch (e: Exception) {
             e.printStackTrace()
-            return null
+            null
         }
 
     }

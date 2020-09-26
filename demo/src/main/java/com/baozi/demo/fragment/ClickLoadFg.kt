@@ -48,7 +48,7 @@ class ClickLoadFg : Fragment() {
                 val clickLoadGroupItem = item as ClickLoadGroupItem?
                 if (clickLoadGroupItem!!.child == null || clickLoadGroupItem.child!!.isEmpty()) {
                     clickLoadGroupItem.data = arrayOf("1", "2", "3")
-                    clickLoadGroupItem.setExpand(true)
+                    clickLoadGroupItem.isExpand=true
                 }
             }
         }

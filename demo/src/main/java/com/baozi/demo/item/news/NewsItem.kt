@@ -29,9 +29,9 @@ class NewsItem : TreeItemGroup<NewsItemBean>() {
 
         //添加尾部
         treeItemList.add(SimpleTreeItem(R.layout.item_news_foot)
-                .onItemClick { viewHolder ->
-                    //点击跳转
-                }.setTreeOffset(Rect(0, 0, 0, 20)))
+                .apply {
+                    treeOffset = Rect(0, 0, 0, 20)
+                })
         return treeItemList
     }
 

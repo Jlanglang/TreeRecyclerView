@@ -16,7 +16,6 @@ import com.baozi.demo.item.mine.MineItem
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter
 import com.baozi.treerecyclerview.factory.ItemHelperFactory
 import com.baozi.treerecyclerview.item.SimpleTreeItem
-import com.baozi.treerecyclerview.item.TreeItem
 
 import java.util.Arrays
 
@@ -59,8 +58,9 @@ class MineFg : Fragment() {
         adapter.itemManager.clean()
         //添加头部
         adapter.itemManager.addItem(
-                SimpleTreeItem(R.layout.item_mine_head)
-                        .setTreeOffset(Rect(0, 0, 0, 2))
+                SimpleTreeItem(R.layout.item_mine_head).apply {
+                    treeOffset = Rect(0, 0, 0, 2)
+                }
         )
         //添加头部分类item
         adapter.itemManager.addItems(ItemHelperFactory.createItems(heads))

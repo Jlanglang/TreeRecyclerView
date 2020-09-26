@@ -32,7 +32,7 @@ class SortGroupItem : TreeSortItem<Any>() {
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder) {
-        if (isExpand()) {
+        if (isExpand) {
             viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_down_black_24dp)
         } else {
             viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_right_black_24dp)
@@ -42,7 +42,7 @@ class SortGroupItem : TreeSortItem<Any>() {
 
     override fun onClick(viewHolder: ViewHolder) {
         super.onClick(viewHolder)
-        if (isExpand()) {
+        if (isExpand) {
             viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_down_black_24dp)
         } else {
             viewHolder.setImageResource(R.id.iv_right, R.drawable.ic_keyboard_arrow_right_black_24dp)

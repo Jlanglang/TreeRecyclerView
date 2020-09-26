@@ -20,6 +20,11 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.baozi.treerecyclerview.item.SimpleTreeItem;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
+
 public class ViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
 

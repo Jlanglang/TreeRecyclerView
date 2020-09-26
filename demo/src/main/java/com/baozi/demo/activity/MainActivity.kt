@@ -4,28 +4,23 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.util.Pair
 import android.view.View
 
 import com.baozi.demo.R
 import com.baozi.demo.fragment.ClickLoadFg
-import com.baozi.demo.fragment.GalleryFg
 import com.baozi.demo.fragment.MineFg
 import com.baozi.demo.fragment.NewsFg
 import com.baozi.demo.item.cart.CartGroupItem
-import com.baozi.demo.item.city.AreaItem
 import com.baozi.treerecyclerview.adpater.TreeRecyclerAdapter
 import com.baozi.treerecyclerview.factory.ItemConfig
 import com.baozi.treerecyclerview.item.SimpleTreeItem
 import com.baozi.treerecyclerview.item.TreeItem
 
 import java.util.ArrayList
-import java.util.Arrays
 
 /**
  * @author jlanglang  2016/12/22 9:58
@@ -53,18 +48,20 @@ class MainActivity : AppCompatActivity() {
         val items = ArrayList<TreeItem<*>>()
         for (itemPair in itemPairs) {
             val simpleTreeItem = SimpleTreeItem(R.layout.item_mine)
-                    .onItemBind { viewHolder ->
-                        val itemPair1 = itemPairs[viewHolder.layoutPosition]
-                        viewHolder.setText(R.id.tv_name, itemPair1.first as String)
-                    }
-                    .onItemClick { viewHolder ->
-                        val itemPair12 = itemPairs[viewHolder.layoutPosition]
-                        val aClass = itemPair12.second as Class<*>
-                        val isFragment = Fragment::class.java.isAssignableFrom(aClass)//判断是不是fragment的子类
-                        if (isFragment) {
-                            startFragment(itemPair12.second as Class<Fragment>)
-                        } else {
-                            startAt(itemPair12.second as Class<*>)
+                    .apply {
+                        itemBind = { viewHolder ->
+                            val itemPair1 = itemPairs[viewHolder.layoutPosition]
+                            viewHolder.setText(R.id.tv_name, itemPair1.first as String)
+                        }
+                        itemClick = { viewHolder ->
+                            val itemPair12 = itemPairs[viewHolder.layoutPosition]
+                            val aClass = itemPair12.second as Class<*>
+                            val isFragment = Fragment::class.java.isAssignableFrom(aClass)//判断是不是fragment的子类
+                            if (isFragment) {
+                                startFragment(itemPair12.second as Class<Fragment>)
+                            } else {
+                                startAt(itemPair12.second as Class<*>)
+                            }
                         }
                     }
             simpleTreeItem.data = itemPair
