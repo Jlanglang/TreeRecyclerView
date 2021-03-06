@@ -207,6 +207,14 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
         }
  adapter.getItemManager().replaceAllItem(items);
 ```
+
+# 混淆
+```
+-keep public class * extends  com.baozi.treerecyclerview.item.TreeItem {}
+-keep public class * extends android.support.annotation.**
+
+```
+
 # 最后
 
 直接设置就行了.adapter可以不先setData
@@ -216,6 +224,7 @@ treeRecyclerAdapter.getItemManager().removeItems(items);// 添加一组Item
 ```
  recyclerView.setAdapter(adapter);
 ```
+
 
 
 更多效果.见demo
