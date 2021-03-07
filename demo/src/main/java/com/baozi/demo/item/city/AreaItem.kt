@@ -24,8 +24,4 @@ class AreaItem : TreeItem<ProvinceBean.CityBean.AreasBean>() {
     override fun getSpanSize(maxSpan: Int): Int {
         return maxSpan / 3
     }
-
-    override fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {
-        super.getItemOffsets(outRect, layoutParams, position)
-    }
 }

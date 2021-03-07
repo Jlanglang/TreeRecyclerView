@@ -35,18 +35,19 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
         override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
                                     state: RecyclerView.State) {
             super.getItemOffsets(outRect, view, parent, state)
-            val layoutParams = view.layoutParams as RecyclerView.LayoutParams
-            val viewLayoutPosition = layoutParams.viewLayoutPosition
             val i = itemCount
             if (itemCount == 0) {
                 return
             }
+            val layoutParams = view.layoutParams as RecyclerView.LayoutParams
+            val viewLayoutPosition = layoutParams.viewLayoutPosition
+
             val checkPosition = checkPosition(viewLayoutPosition)
             if (checkPosition < 0 || checkPosition >= i) {
                 return
             }
             val data = getData(checkPosition)
-            data?.getItemOffsets(outRect, layoutParams, checkPosition)
+            data?.getItemOffsets(outRect, view, parent, state, checkPosition)
         }
     }
 

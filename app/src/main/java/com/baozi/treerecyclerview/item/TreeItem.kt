@@ -2,6 +2,7 @@ package com.baozi.treerecyclerview.item
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
+import android.view.View
 
 import com.baozi.treerecyclerview.base.ViewHolder
 import com.baozi.treerecyclerview.manager.ItemManager
@@ -55,8 +56,20 @@ abstract class TreeItem<D> {
      * 设置当前条目间隔
      *
      */
+    @Deprecated("2个版本后删除")
     open fun getItemOffsets(outRect: Rect, layoutParams: RecyclerView.LayoutParams, position: Int) {
 
+    }
+
+    /**
+     * 设置当前条目间隔等
+     */
+    open fun getItemOffsets(outRect: Rect?,
+                            view: View,
+                            parent: RecyclerView?,
+                            state: RecyclerView.State?,
+                            checkPosition: Int) {
+        getItemOffsets(outRect!!, (view.layoutParams as RecyclerView.LayoutParams), checkPosition)
     }
 
     /**

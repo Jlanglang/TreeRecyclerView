@@ -41,8 +41,7 @@ object ItemHelperFactory {
             }
             //判断是否是TreeItem的子类
             if (treeItemClass != null) {
-                treeItem = treeItemClass.newInstance() as? TreeItem<Any>
-                treeItem ?: return null
+                treeItem = treeItemClass.newInstance() as? TreeItem<Any> ?: return null
                 treeItem.data = data
                 treeItem.parentItem = treeParentItem
                 val annotation = treeItemClass.getAnnotation<TreeItemType>(TreeItemType::class.java)
