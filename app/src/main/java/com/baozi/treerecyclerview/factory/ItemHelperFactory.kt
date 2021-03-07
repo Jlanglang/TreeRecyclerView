@@ -1,14 +1,11 @@
 package com.baozi.treerecyclerview.factory
 
 import android.util.Log
-
 import com.baozi.treerecyclerview.adpater.TreeRecyclerType
-import com.baozi.treerecyclerview.annotation.TreeDataType
 import com.baozi.treerecyclerview.annotation.TreeItemType
 import com.baozi.treerecyclerview.item.TreeItem
 import com.baozi.treerecyclerview.item.TreeItemGroup
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 /**
  * Created by baozi on 2017/4/29.
@@ -16,6 +13,7 @@ import java.util.HashMap
 
 object ItemHelperFactory {
     private val classCacheMap = HashMap<Class<*>, Class<out TreeItem<*>>>()
+
     /**
      * 创建Item
      */
@@ -35,7 +33,12 @@ object ItemHelperFactory {
         var treeItem: TreeItem<Any>? = null
         val treeItemClass: Class<out TreeItem<*>>?
         try {
-            treeItemClass = zClass ?: getTypeClass(data)
+            treeItemClass = if (zClass != null) {
+                ItemConfig.register(zClass)
+                zClass
+            } else {
+                ItemConfig.getTypeClass(data)
+            }
             //判断是否是TreeItem的子类
             if (treeItemClass != null) {
                 treeItem = treeItemClass.newInstance() as? TreeItem<Any>
@@ -55,38 +58,6 @@ object ItemHelperFactory {
         return treeItem
     }
 
-
-    /**
-     * 获取TreeItem的Class
-     *
-     * @param itemData
-     * @return
-     */
-    private fun getTypeClass(itemData: Any?): Class<out TreeItem<*>>? {
-        var treeItemClass: Class<out TreeItem<*>>? = null
-        //先判断是否继承了ItemData,适用于跨模块获取
-        //判断是否使用注解绑定了ItemClass,适用当前模块
-        itemData ?: return null
-        val aClass = itemData.javaClass
-        val annotation = aClass.getAnnotation(TreeDataType::class.java)
-        annotation ?: return treeItemClass
-        val key = annotation.bindField
-        if (key.isNotEmpty()) {
-            try {
-                val field = aClass.getField(key)
-                val type = field.get(itemData).toString()
-                return ItemConfig.getTreeViewHolderType(type)
-            } catch (e: NoSuchFieldException) {
-                e.printStackTrace()
-            } catch (e: IllegalAccessException) {
-                e.printStackTrace()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        treeItemClass = annotation.iClass.java as? Class<out TreeItem<*>>
-        return treeItemClass
-    }
 
     /**
      * 根据TreeRecyclerType获取子item集合,不包含TreeItemGroup自身

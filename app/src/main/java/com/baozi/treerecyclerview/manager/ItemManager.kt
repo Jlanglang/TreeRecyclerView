@@ -13,6 +13,7 @@ import java.util.ArrayList
 abstract class ItemManager<T>(var adapter: BaseRecyclerAdapter<T>) {
     open var isOpenAnim: Boolean = false
     private var checkItemInterfaces: ArrayList<CheckItemInterface>? = null
+    var tag: Any? = null
 
     //增
     abstract fun addItem(item: T)

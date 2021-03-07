@@ -13,4 +13,7 @@ annotation class TreeDataType(
         /**
          * 要绑定的item
          */
-        val iClass: KClass<*> = Any::class, val bindField: String = "")
+        val iClass: KClass<*> = Any::class,
+        val bindField: String = ""
+)
+

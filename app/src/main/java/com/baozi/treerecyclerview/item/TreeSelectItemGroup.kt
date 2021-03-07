@@ -13,6 +13,7 @@ abstract class TreeSelectItemGroup<D> : TreeItemGroup<D>() {
      * 选中的子item.只保存当前的子级
      */
     val selectItems: MutableList<TreeItem<*>> = ArrayList()
+
     /**
      * 是否全选选中
      */
@@ -69,9 +70,7 @@ abstract class TreeSelectItemGroup<D> : TreeItemGroup<D>() {
 
     override fun onInterceptClick(child: TreeItem<*>): Boolean {
         parentItem?.apply {
-            if (onInterceptClick(this)) {
-                return true
-            }
+            return onInterceptClick(this)
         }
         return super.onInterceptClick(child)
     }
@@ -142,6 +141,7 @@ abstract class TreeSelectItemGroup<D> : TreeItemGroup<D>() {
          * 单选
          */
         SINGLE_CHOICE,
+
         /**
          * 多选
          */

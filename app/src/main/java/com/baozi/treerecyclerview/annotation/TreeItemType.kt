@@ -23,4 +23,5 @@ annotation class TreeItemType(
          *
          * @return 默认返回0, 也就是不设置
          */
-        val spanSize: Int = 0)
+        val spanSize: Int = 0
+)

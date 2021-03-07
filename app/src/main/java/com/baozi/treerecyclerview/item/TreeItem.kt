@@ -14,16 +14,19 @@ abstract class TreeItem<D> {
      * 当前item的数据
      */
     open var data: D? = null
+
     /**
      * 获取当前item的父级
      *
      */
     var parentItem: TreeItemGroup<*>? = null
+
     /**
      * item在每行中的spansize
      * 默认为0,如果为0则占满一行
      */
     var spanSize: Int = 0
+
     /**
      * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
      * 如果要使用,可能为null,请加判断.
