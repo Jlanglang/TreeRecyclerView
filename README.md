@@ -8,6 +8,17 @@
 <a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
+# 特点
+
+```
+1.支持实现树形结构列表及大部分列表样式
+2.每一种条目的逻辑独立,充分解耦,支持复用
+3.支持组件化
+4.支持服务器动态下发,动态组合
+5.侵入性低,不修改RecyclerView原有特性
+```
+
+
 # 示例图：
 
 ![image](https://github.com/Jlanglang/TreeRecyclerView/blob/master/image/20180928114547.png)
