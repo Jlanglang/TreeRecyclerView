@@ -29,8 +29,4 @@ public class AreaItem extends TreeItem<ProvinceBean.CityBean.AreasBean> {
         return maxSpan / 3;
     }
 
-    @Override
-    public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
-        super.getItemOffsets(outRect, layoutParams, position);
-    }
 }

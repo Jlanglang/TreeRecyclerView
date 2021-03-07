@@ -33,7 +33,6 @@ public class CityAt extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.layout_rv_content);
         RecyclerView recyclerView = findViewById(R.id.rv_content);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 6));

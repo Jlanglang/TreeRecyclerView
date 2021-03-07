@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.baozi.treerecyclerview.base.ViewHolder;
 import com.baozi.treerecyclerview.manager.ItemManager;
@@ -78,9 +79,22 @@ public abstract class TreeItem<D> {
 
     /**
      * 设置当前条目间隔
+     * 废弃,2个版本后删除
      */
+    @Deprecated
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
 
+    }
+
+    /**
+     * 设置当前条目间隔等
+     */
+    public void getItemOffsets(Rect outRect,
+                               View view,
+                               RecyclerView parent,
+                               RecyclerView.State state,
+                               int checkPosition) {
+        getItemOffsets(outRect, (RecyclerView.LayoutParams) view.getLayoutParams(), checkPosition);
     }
 
     public D getData() {

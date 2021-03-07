@@ -163,19 +163,19 @@ public class TreeRecyclerAdapter extends BaseRecyclerAdapter<TreeItem> {
         public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent,
                                    @NonNull RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
-            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
-            int viewLayoutPosition = layoutParams.getViewLayoutPosition();
             int i = getItemCount();
             if (getItemCount() == 0) {
                 return;
             }
+            RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
+            int viewLayoutPosition = layoutParams.getViewLayoutPosition();
             int checkPosition = checkPosition(viewLayoutPosition);
             if (checkPosition < 0 || checkPosition >= i) {
                 return;
             }
             TreeItem data = getData(checkPosition);
             if (data != null) {
-                data.getItemOffsets(outRect, layoutParams, checkPosition);
+                data.getItemOffsets(outRect, view, parent, state, checkPosition);
             }
         }
     };
