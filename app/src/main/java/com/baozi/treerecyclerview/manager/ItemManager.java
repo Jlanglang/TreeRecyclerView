@@ -14,6 +14,7 @@ import java.util.List;
 public abstract class ItemManager<T> {
 
     private BaseRecyclerAdapter<T> mAdapter;
+    private Object tag;
 
     public ItemManager(BaseRecyclerAdapter<T> adapter) {
         mAdapter = adapter;
@@ -71,7 +72,13 @@ public abstract class ItemManager<T> {
         mAdapter.notifyDataSetChanged();
     }
 
+    public void setTag(Object tag) {
+        this.tag = tag;
+    }
 
+    public Object getTag() {
+        return this.tag;
+    }
 
     /**
      * 检查item属性
