@@ -87,10 +87,7 @@ public abstract class TreeSelectItemGroup<D>
     @Override
     public boolean onInterceptClick(TreeItem child) {
         if (getParentItem() != null) {
-            boolean b = getParentItem().onInterceptClick(this);
-            if (b) {
-                return true;
-            }
+            return getParentItem().onInterceptClick(this);
         }
         return super.onInterceptClick(child);
     }

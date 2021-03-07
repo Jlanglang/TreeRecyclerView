@@ -78,8 +78,9 @@ public class ItemHelperFactory {
         try {
             if (zClass != null) {
                 treeItemClass = zClass;
+                ItemConfig.register(zClass);
             } else {
-                treeItemClass = getTypeClass(data);
+                treeItemClass = ItemConfig.getTypeClass(data);
                 //判断是否是TreeItem的子类
             }
             if (treeItemClass != null) {
@@ -100,38 +101,6 @@ public class ItemHelperFactory {
         return treeItem;
     }
 
-
-    /**
-     * 获取TreeItem的Class
-     *
-     * @param itemData
-     * @return
-     */
-    @Nullable
-    private static Class<? extends TreeItem> getTypeClass(Object itemData) {
-        Class<? extends TreeItem> treeItemClass = null;
-        //先判断是否继承了ItemData,适用于跨模块获取
-        //判断是否使用注解绑定了ItemClass,适用当前模块
-        Class<?> aClass = itemData.getClass();
-        TreeDataType annotation = aClass.getAnnotation(TreeDataType.class);
-        if (annotation != null) {
-            String key = annotation.bindField();
-            if (!TextUtils.isEmpty(key)) {
-                try {
-                    Field field = aClass.getField(key);
-                    int type = Integer.valueOf(field.get(itemData).toString());
-                    Class<? extends TreeItem> itemClass = ItemConfig.getTreeViewHolderType(type);
-                    return itemClass;
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            treeItemClass = annotation.iClass();
-        }
-        return treeItemClass;
-    }
 
     /**
      * 根据TreeRecyclerType获取子item集合,不包含TreeItemGroup自身
