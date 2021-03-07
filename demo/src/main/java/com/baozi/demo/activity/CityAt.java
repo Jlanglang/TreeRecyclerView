@@ -44,7 +44,6 @@ public class CityAt extends AppCompatActivity {
             public void run() {
                 super.run();
                 String string = getFromAssets("city.txt");
-                Log.i("json", string);
                 List<ProvinceBean> cityBeen = JSON.parseArray(string, ProvinceBean.class);
                 refresh(cityBeen);
             }
@@ -72,15 +71,9 @@ public class CityAt extends AppCompatActivity {
             //创建item
             //新的
             List<TreeItem> items = ItemHelperFactory.createItems(cityBeen);
-            for (int i = 0; i < items.size(); i++) {
-                TreeItemGroup treeItem = (TreeItemGroup) items.get(i);
-                treeItem.setExpand(false);
-            }
             //添加到adapter
             treeRecyclerAdapter.getItemManager().replaceAllItem(items);
         });
 
     }
-
-
 }

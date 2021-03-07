@@ -24,13 +24,19 @@ public abstract class TreeItem<D> {
     private int spanSize;
     private ItemManager mItemManager;
 
+    public TreeItem() {
+        init();
+    }
+
+    protected void init() {
+    }
+
     public void setParentItem(TreeItemGroup parentItem) {
         this.parentItem = parentItem;
     }
 
     /**
      * 获取当前item的父级
-     *
      */
     @Nullable
     public TreeItemGroup getParentItem() {
@@ -40,7 +46,6 @@ public abstract class TreeItem<D> {
     /**
      * 应该在void onBindViewHolder(ViewHolder viewHolder)的地方使用.
      * 如果要使用,可能为null,请加判断.
-     *
      */
     public ItemManager getItemManager() {
         return mItemManager;
@@ -73,7 +78,6 @@ public abstract class TreeItem<D> {
 
     /**
      * 设置当前条目间隔
-     *
      */
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
 

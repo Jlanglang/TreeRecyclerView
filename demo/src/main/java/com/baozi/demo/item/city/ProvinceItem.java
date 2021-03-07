@@ -17,6 +17,11 @@ import java.util.List;
  * Created by baozi on 2016/12/8.
  */
 public class ProvinceItem extends TreeItemGroup<ProvinceBean> {
+    @Override
+    protected void init() {
+        super.init();
+        setExpand(false);
+    }
 
     @Override
     public List<TreeItem> initChild(ProvinceBean data) {
@@ -42,6 +47,7 @@ public class ProvinceItem extends TreeItemGroup<ProvinceBean> {
     public void onBindViewHolder(@NonNull ViewHolder holder) {
         holder.setText(R.id.tv_content, data.provinceName);
     }
+
     @Override
     public void getItemOffsets(@NonNull Rect outRect, RecyclerView.LayoutParams layoutParams, int position) {
         super.getItemOffsets(outRect, layoutParams, position);

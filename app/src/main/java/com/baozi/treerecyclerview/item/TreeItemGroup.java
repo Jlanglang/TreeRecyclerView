@@ -38,7 +38,6 @@ public abstract class TreeItemGroup<D> extends TreeItem<D> {
 
     /**
      * 能否展开折叠
-     *
      */
     public boolean isCanExpand() {
         return isCanExpand;
