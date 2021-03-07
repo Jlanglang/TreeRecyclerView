@@ -2,7 +2,7 @@
 
 1.优化了获取注解的逻辑,减少了读取class的注解的次数
 
-2.ItemManager新增了setTag.getTag方法,可以通过该方法绑定Activity或者Fragment等对象.然后在TreeItem获取该对象(会耦合,其实不是很建议这么用)
+2.ItemManager新增了setTag.getTag方法,可以通过该方法绑定Activity或者Fragment等对象.在TreeItem可以获取该对象
 
 3.TreeItem新增了init方法,可以做一些初始化设置,比如默认是否展开等等
 
