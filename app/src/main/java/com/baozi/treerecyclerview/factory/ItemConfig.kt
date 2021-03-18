@@ -39,7 +39,7 @@ object ItemConfig {
     }
 
     fun register(zClass: Class<out TreeItem<*>>) {
-        treeItemTypeMap[zClass] ?: return
+        treeItemTypeMap[zClass]?.run { return }
         val annotation = zClass.getAnnotation(TreeItemType::class.java)
         if (annotation != null) {
             treeItemTypeMap[zClass] = annotation
@@ -86,8 +86,7 @@ object ItemConfig {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-            return treeDataType.iClass.java as Class<out TreeItem<*>>?
         }
-        return null
+        return treeDataType.iClass.java as Class<out TreeItem<*>>?
     }
 }
