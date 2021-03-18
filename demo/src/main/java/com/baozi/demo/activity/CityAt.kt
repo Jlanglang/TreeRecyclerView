@@ -44,7 +44,6 @@ class CityAt : AppCompatActivity() {
             itemAnimator = DefaultItemAnimator()
             adapter = treeRecyclerAdapter
         }
-//        treeRecyclerAdapter.itemManager.isOpenAnim = true//优化掉
         treeRecyclerAdapter.itemManager.tag = this
         Thread {
             val string = getFromAssets("city.txt")
@@ -71,10 +70,6 @@ class CityAt : AppCompatActivity() {
             //创建item
             //新的
             val items = ItemHelperFactory.createItems(cityBeen)
-            for (i in items.indices) {
-                val treeItem = items[i] as TreeItemGroup<*>
-                treeItem.isExpand = false
-            }
             //添加到adapter
             treeRecyclerAdapter.itemManager.replaceAllItem(items)
         }

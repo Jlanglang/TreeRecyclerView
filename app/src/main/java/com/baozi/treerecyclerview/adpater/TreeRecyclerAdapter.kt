@@ -1,5 +1,6 @@
 package com.baozi.treerecyclerview.adpater
 
+import android.graphics.Canvas
 import android.graphics.Rect
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -48,6 +49,24 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
             }
             val data = getData(checkPosition)
             data?.getItemOffsets(outRect, view, parent, state, checkPosition)
+        }
+
+        override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+            super.onDraw(c, parent, state)
+            getData().forEach {
+                if (it is RecyclerView.ItemDecoration) {
+                    it.onDraw(c, parent, state)
+                }
+            }
+        }
+
+        override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+            super.onDrawOver(c, parent, state)
+            getData().forEach {
+                if (it is RecyclerView.ItemDecoration) {
+                    it.onDrawOver(c, parent, state)
+                }
+            }
         }
     }
 
@@ -145,7 +164,8 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
         return data.getSpanSize(maxSpan)
     }
 
-    private inner class TreeItemManageImpl internal constructor(adapter: BaseRecyclerAdapter<TreeItem<*>>) : ItemManageImpl<TreeItem<*>>(adapter) {
+    private inner class TreeItemManageImpl(adapter: BaseRecyclerAdapter<TreeItem<*>>)
+        : ItemManageImpl<TreeItem<*>>(adapter) {
 
         override fun addItem(t: TreeItem<*>) {
             if (t is TreeItemGroup<*>) {

@@ -17,7 +17,7 @@ import java.util.ArrayList
  */
 @TreeItemType(type = ["1"])
 class CartGroupItem : TreeSelectItemGroup<CartBean>() {
-
+    
     override fun initChild(data: CartBean): List<TreeItem<*>>? {
         val list = ArrayList<CartBean.CartBean2>()
         for (i in 0 until data.childSum) {
@@ -38,9 +38,5 @@ class CartGroupItem : TreeSelectItemGroup<CartBean>() {
             (viewHolder.itemView.context as CartAt).notifyPrice()
         }
         viewHolder.itemView.setPadding(0, 0, 0, 0)
-    }
-
-    init {
-        isExpand = true
     }
 }
