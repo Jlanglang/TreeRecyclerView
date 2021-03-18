@@ -40,4 +40,7 @@ class CartGroupItem : TreeSelectItemGroup<CartBean>() {
         viewHolder.itemView.setPadding(0, 0, 0, 0)
     }
 
+    init {
+        isExpand = true
+    }
 }

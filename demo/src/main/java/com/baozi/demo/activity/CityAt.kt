@@ -12,6 +12,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.Toast
 
 import com.alibaba.fastjson.JSON
 import com.baozi.demo.R
@@ -43,7 +44,8 @@ class CityAt : AppCompatActivity() {
             itemAnimator = DefaultItemAnimator()
             adapter = treeRecyclerAdapter
         }
-        treeRecyclerAdapter.itemManager.isOpenAnim = true//优化掉
+//        treeRecyclerAdapter.itemManager.isOpenAnim = true//优化掉
+        treeRecyclerAdapter.itemManager.tag = this
         Thread {
             val string = getFromAssets("city.txt")
             Log.i("json", string)
@@ -76,5 +78,9 @@ class CityAt : AppCompatActivity() {
             //添加到adapter
             treeRecyclerAdapter.itemManager.replaceAllItem(items)
         }
+    }
+
+    fun show() {
+        Toast.makeText(this, "哈哈", Toast.LENGTH_SHORT).show()
     }
 }

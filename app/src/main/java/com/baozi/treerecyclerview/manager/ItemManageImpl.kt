@@ -15,62 +15,50 @@ open class ItemManageImpl<T>(adapter: BaseRecyclerAdapter<T>) : ItemManager<T>(a
 
     override fun addItem(item: T) {
         data.add(item)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            val itemPosition = getItemPosition(item)
+            adapter.notifyItemInserted(itemPosition)
         }
-        val itemPosition = getItemPosition(item)
-        adapter.notifyItemInserted(itemPosition)
     }
 
     override fun addItem(position: Int, item: T) {
         data.add(position, item)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            adapter.notifyItemInserted(dataToItemPosition(position))
         }
-        adapter.notifyItemInserted(dataToItemPosition(position))
     }
-
 
     override fun addItems(items: List<T>) {
         data.addAll(items)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            adapter.notifyItemRangeInserted(data.size, items.size)
         }
-        adapter.notifyItemRangeInserted(data.size, items.size)
     }
 
     override fun addItems(position: Int, items: List<T>) {
         data.addAll(position, items)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            val itemPosition = dataToItemPosition(position)
+            adapter.notifyItemRangeInserted(itemPosition, items.size)
         }
-        val itemPosition = dataToItemPosition(position)
-        adapter.notifyItemRangeInserted(itemPosition, items.size)
+
     }
 
     override fun removeItem(item: T) {
         val position = getItemPosition(item)
         data.remove(item)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            val itemPosition = dataToItemPosition(position)
+            adapter.notifyItemRemoved(itemPosition)
         }
-        val itemPosition = dataToItemPosition(position)
-        adapter.notifyItemRemoved(itemPosition)
     }
 
     override fun removeItem(position: Int) {
         data.removeAt(position)
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            val itemPosition = dataToItemPosition(position)
+            adapter.notifyItemRemoved(itemPosition)
         }
-        val itemPosition = dataToItemPosition(position)
-        adapter.notifyItemRemoved(itemPosition)
     }
 
     override fun removeItems(items: List<T>) {
@@ -80,21 +68,17 @@ open class ItemManageImpl<T>(adapter: BaseRecyclerAdapter<T>) : ItemManager<T>(a
 
     override fun replaceItem(position: Int, item: T) {
         data[position] = item
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            val itemPosition = dataToItemPosition(position)
+            adapter.notifyItemChanged(itemPosition)
         }
-        val itemPosition = dataToItemPosition(position)
-        adapter.notifyItemChanged(itemPosition)
     }
 
     override fun replaceAllItem(items: List<T>) {
         data = items.toMutableList()
-        if (!isOpenAnim) {
-            notifyDataChanged()
-            return
+        checkAnim {
+            adapter.notifyItemRangeChanged(0, items.size)
         }
-        adapter.notifyItemRangeChanged(0, items.size)
     }
 
     override fun getItem(position: Int): T {
@@ -107,6 +91,14 @@ open class ItemManageImpl<T>(adapter: BaseRecyclerAdapter<T>) : ItemManager<T>(a
 
     override fun clean() {
         adapter.clear()
+        notifyDataChanged()
+    }
+
+    private inline fun checkAnim(block: () -> Unit) {
+        if (isOpenAnim) {
+            block()
+            return
+        }
         notifyDataChanged()
     }
 }

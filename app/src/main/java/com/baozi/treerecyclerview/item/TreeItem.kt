@@ -40,9 +40,7 @@ abstract class TreeItem<D> {
      *
      * @return 布局id
      */
-    open fun getLayoutId(): Int {
-        return 0
-    }
+    open fun getLayoutId(): Int = 0
 
     /**
      * @param maxSpan 总数

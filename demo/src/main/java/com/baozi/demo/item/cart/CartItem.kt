@@ -34,5 +34,4 @@ class CartItem : TreeItem<Int>() {
         super.getItemOffsets(outRect, layoutParams, position)
         outRect.bottom = 1
     }
-
 }

@@ -17,7 +17,6 @@ import java.util.HashMap
 
 class TreeSortAdapter(type: TreeRecyclerType = TreeRecyclerType.SHOW_EXPAND) : TreeRecyclerAdapter(type) {
     private val sortMap = HashMap<Any?, TreeItem<*>?>()
-    private var manageWrapper: TreeSortManageWrapper? = null
 
     override val itemManager: TreeSortManageWrapper by lazy {
         TreeSortManageWrapper(this, super.itemManager)
@@ -37,7 +36,7 @@ class TreeSortAdapter(type: TreeRecyclerType = TreeRecyclerType.SHOW_EXPAND) : T
 
     fun getSortIndex(o: Any): Int {
         val sortItem = getSortItem(o) ?: return -1
-        return itemManager!!.getItemPosition(sortItem)
+        return itemManager.getItemPosition(sortItem)
     }
 
     inner class TreeSortManageWrapper(adapter: BaseRecyclerAdapter<TreeItem<*>>, private var manager: ItemManager<TreeItem<*>>)
@@ -68,13 +67,6 @@ class TreeSortAdapter(type: TreeRecyclerType = TreeRecyclerType.SHOW_EXPAND) : T
             manager.addItems(position, items)
             updateSorts(items)
         }
-//        override fun setAdapter(adapter: BaseRecyclerAdapter<TreeItem<*>>) {
-//            manager.setAdapter(adapter)
-//        }
-//
-//        override fun getAdapter(): BaseRecyclerAdapter<*> {
-//            return manager.adapter
-//        }
 
         override fun removeItem(item: TreeItem<*>) {
             manager.removeItem(item)
@@ -161,4 +153,5 @@ class TreeSortAdapter(type: TreeRecyclerType = TreeRecyclerType.SHOW_EXPAND) : T
             manager.addCheckItemInterfaces(itemInterface)
         }
     }
+
 }

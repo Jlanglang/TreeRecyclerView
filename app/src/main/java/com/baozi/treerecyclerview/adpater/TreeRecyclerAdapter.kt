@@ -147,13 +147,13 @@ open class TreeRecyclerAdapter(var type: TreeRecyclerType = TreeRecyclerType.SHO
 
     private inner class TreeItemManageImpl internal constructor(adapter: BaseRecyclerAdapter<TreeItem<*>>) : ItemManageImpl<TreeItem<*>>(adapter) {
 
-        override fun addItem(item: TreeItem<*>) {
-            if (item is TreeItemGroup<*>) {
-                val childItemsWithType = ItemHelperFactory.getChildItemsWithType(item, type)
-                childItemsWithType.add(0, item)
+        override fun addItem(t: TreeItem<*>) {
+            if (t is TreeItemGroup<*>) {
+                val childItemsWithType = ItemHelperFactory.getChildItemsWithType(t, type)
+                childItemsWithType.add(0, t)
                 super.addItems(childItemsWithType)
             } else {
-                super.addItem(item)
+                super.addItem(t)
             }
         }
 

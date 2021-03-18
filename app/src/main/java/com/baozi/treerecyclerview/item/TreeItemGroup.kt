@@ -90,7 +90,7 @@ abstract class TreeItemGroup<D> : TreeItem<D>() {
     open fun onExpand() {
         val itemManager = itemManager ?: return
         val child = this.child
-        if (child == null || child.size == 0) {
+        if (child == null || child.isEmpty()) {
             isExpand = false
             return
         }

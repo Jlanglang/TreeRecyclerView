@@ -5,6 +5,7 @@ import com.baozi.treerecyclerview.annotation.TreeDataType
 import com.baozi.treerecyclerview.annotation.TreeItemType
 import com.baozi.treerecyclerview.item.TreeItem
 import java.util.*
+import kotlin.reflect.KClass
 
 
 object ItemConfig {
@@ -38,6 +39,7 @@ object ItemConfig {
         }
     }
 
+
     fun register(zClass: Class<out TreeItem<*>>) {
         treeItemTypeMap[zClass]?.run { return }
         val annotation = zClass.getAnnotation(TreeItemType::class.java)
@@ -52,8 +54,15 @@ object ItemConfig {
 
     @SafeVarargs
     fun register(vararg clazz: Class<out TreeItem<*>>) {
-        for (zClass in clazz) {
-            register(zClass)
+        clazz.forEach { t ->
+            register(t)
+        }
+    }
+
+    @SafeVarargs
+    fun register(vararg clazz: KClass<out TreeItem<*>>) {
+        clazz.forEach { t ->
+            register(t.java)
         }
     }
 
